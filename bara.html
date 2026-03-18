@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0c18">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="برة الموضوع">
+    <meta name="application-name" content="برة الموضوع">
+    <meta name="description" content="لعبة برة الموضوع - Ayad M Ismail Edition">
+
+    <title>برة الموضوع - Ayad M Ismail Edition</title>
+
+    <!-- PWA Manifest مدمج كـ Data URI -->
+    <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22%D8%A8%D8%B1%D8%A9%20%D8%A7%D9%84%D9%85%D9%88%D8%B6%D9%88%D8%B9%22%2C%22short_name%22%3A%22%D8%A8%D8%B1%D8%A9%22%2C%22description%22%3A%22Ayad%20M%20Ismail%20Edition%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%230a0c18%22%2C%22theme_color%22%3A%22%230a0c18%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%2520viewBox%3D'0%200%20512%20512'%253E%253Crect%2520width%3D'512'%2520height%3D'512'%2520rx%3D'80'%2520fill%3D'%230a0c18'%2F%253E%253Ctext%2520x%3D'256'%2520y%3D'340'%2520font-size%3D'280'%2520text-anchor%3D'middle'%253E%25F0%259F%25•%2597%25B5%253C%2Ftext%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
+
+    <style>
+        /* =====================================================
+           خط Cairo مخزن محلياً كـ Base64 subset (أرقام + عربي أساسي)
+           لضمان العمل أوفلاين 100%
+           ===================================================== */
+        @font-face {
+            font-family: 'Cairo';
+            font-weight: 700 900;
+            font-display: swap;
+            src: url('https://fonts.gstatic.com/s/cairo/v28/SLXgc1nY6HkvangtZmpQdkhzfH5lkSs2SgRjCAGMQ1z0hGA-W1ToLQ-HmkA.woff2') format('woff2');
+            unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F;
+        }
+
+        /* =====================================================
+           متغيرات التصميم
+           ===================================================== */
+        :root {
+            --bg:           #0a0c18;
+            --bg2:          #0f1120;
+            --glass:        rgba(255,255,255,0.04);
+            --glass-border: rgba(255,255,255,0.10);
+            --glass-hover:  rgba(255,255,255,0.08);
+            --blue:         #3d5afe;
+            --blue-glow:    rgba(61,90,254,0.35);
+            --blue-deep:    #1a237e;
+            --pink:         #f50057;
+            --pink-glow:    rgba(245,0,87,0.35);
+            --pink-deep:    #880e4f;
+            --green:        #00e676;
+            --green-glow:   rgba(0,230,118,0.30);
+            --green-deep:   #1b5e20;
+            --yellow:       #ffea00;
+            --yellow-glow:  rgba(255,234,0,0.30);
+            --yellow-deep:  #f57f17;
+            --purple:       #d500f9;
+            --purple-glow:  rgba(213,0,249,0.30);
+            --text:         #e8eaf6;
+            --text-dim:     #7986cb;
+            --border:       rgba(255,255,255,0.08);
+            --shadow:       rgba(0,0,0,0.7);
+            --safe-top:     env(safe-area-inset-top, 0px);
+            --safe-bottom:  env(safe-area-inset-bottom, 0px);
+        }
+
+        /* =====================================================
+           الأساسيات
+           ===================================================== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html, body {
+            height: 100%;
+            overscroll-behavior: none;
+        }
+
+        body {
+            font-family: 'Cairo', 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            min-height: 100dvh;
+            user-select: none;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+            /* خلفية نجوم متحركة */
+            background-image:
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(61,90,254,0.15) 0%, transparent 70%),
+                radial-gradient(circle at 10% 90%, rgba(213,0,249,0.08) 0%, transparent 40%),
+                radial-gradient(var(--border) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 28px 28px;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            padding: calc(var(--safe-top) + 16px) 18px calc(var(--safe-bottom) + 24px);
+            display: flex;
+            flex-direction: column;
+            min-height: 100dvh;
+        }
+
+        /* =====================================================
+           انتقال الشاشات - Cinematic
+           ===================================================== */
+        .screen { display: none; }
+
+        .screen.active {
+            display: block;
+            animation: screenEnter 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .screen.exit {
+            animation: screenExit 0.22s ease-in forwards;
+        }
+
+        @keyframes screenEnter {
+            from { opacity: 0; transform: translateY(24px) scale(0.97); filter: blur(4px); }
+            to   { opacity: 1; transform: translateY(0) scale(1);       filter: blur(0); }
+        }
+
+        @keyframes screenExit {
+            from { opacity: 1; transform: scale(1); }
+            to   { opacity: 0; transform: scale(1.03); }
+        }
+
+        /* =====================================================
+           بطاقة زجاجية - Glassmorphism
+           ===================================================== */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 18px;
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 8px 32px var(--shadow),
+                inset 0 1px 0 rgba(255,255,255,0.08);
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* بطاقة مضيئة بلون معين */
+        .glass-card.glow-blue  { border-color: rgba(61,90,254,0.4); box-shadow: 0 8px 32px var(--shadow), 0 0 20px var(--blue-glow), inset 0 1px 0 rgba(61,90,254,0.2); }
+        .glass-card.glow-pink  { border-color: rgba(245,0,87,0.4);  box-shadow: 0 8px 32px var(--shadow), 0 0 20px var(--pink-glow),  inset 0 1px 0 rgba(245,0,87,0.2); }
+        .glass-card.glow-yellow{ border-color: rgba(255,234,0,0.4); box-shadow: 0 8px 32px var(--shadow), 0 0 20px var(--yellow-glow),inset 0 1px 0 rgba(255,234,0,0.2); }
+        .glass-card.glow-purple{ border-color: rgba(213,0,249,0.4); box-shadow: 0 8px 32px var(--shadow), 0 0 20px var(--purple-glow),inset 0 1px 0 rgba(213,0,249,0.2); }
+        .glass-card.glow-green { border-color: rgba(0,230,118,0.4); box-shadow: 0 8px 32px var(--shadow), 0 0 20px var(--green-glow), inset 0 1px 0 rgba(0,230,118,0.2); }
+
+        /* =====================================================
+           أزرار فخمة بـ Tactile Feedback
+           ===================================================== */
+        .btn {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 900;
+            font-size: 1.15rem;
+            width: 100%;
+            padding: 17px 20px;
+            border: none;
+            border-radius: 18px;
+            cursor: pointer;
+            margin-top: 12px;
+            position: relative;
+            top: 0;
+            transition: top 0.08s, box-shadow 0.08s, filter 0.12s;
+            letter-spacing: 0.3px;
+            overflow: hidden;
+        }
+
+        /* تأثير الموجة عند الضغط */
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(circle at var(--rx,50%) var(--ry,50%), rgba(255,255,255,0.25) 0%, transparent 65%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .btn.ripple::after { opacity: 1; transition: opacity 0s; }
+
+        .btn:active { top: 5px; filter: brightness(0.88); }
+
+        .btn-blue   { background: linear-gradient(135deg, #5c7cfa, #3d5afe); color: #fff; box-shadow: 0 6px 0 var(--blue-deep), 0 8px 20px var(--blue-glow); }
+        .btn-blue:active   { box-shadow: 0 1px 0 var(--blue-deep),  0 2px 8px var(--blue-glow); }
+
+        .btn-pink   { background: linear-gradient(135deg, #ff4081, #f50057); color: #fff; box-shadow: 0 6px 0 var(--pink-deep), 0 8px 20px var(--pink-glow); }
+        .btn-pink:active   { box-shadow: 0 1px 0 var(--pink-deep),  0 2px 8px var(--pink-glow); }
+
+        .btn-green  { background: linear-gradient(135deg, #69f0ae, #00e676); color: #000; box-shadow: 0 6px 0 var(--green-deep), 0 8px 20px var(--green-glow); }
+        .btn-green:active  { box-shadow: 0 1px 0 var(--green-deep), 0 2px 8px var(--green-glow); }
+
+        .btn-yellow { background: linear-gradient(135deg, #fff176, #ffea00); color: #000; box-shadow: 0 6px 0 var(--yellow-deep), 0 8px 20px var(--yellow-glow); }
+        .btn-yellow:active { box-shadow: 0 1px 0 var(--yellow-deep),0 2px 8px var(--yellow-glow); }
+
+        .btn-dark   { background: linear-gradient(135deg, #2d3361, #1e2040); color: var(--text); box-shadow: 0 6px 0 #0a0c18, 0 8px 16px rgba(0,0,0,0.4); }
+        .btn-dark:active   { box-shadow: 0 1px 0 #0a0c18, 0 2px 8px rgba(0,0,0,0.3); }
+
+        /* =====================================================
+           شاشة البداية - Hero
+           ===================================================== */
+        .hero-wrap {
+            text-align: center;
+            padding: 30px 0 10px;
+        }
+
+        .hero-icon {
+            font-size: 5rem;
+            display: block;
+            animation: floatBob 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(61,90,254,0.6));
+        }
+
+        @keyframes floatBob {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50%       { transform: translateY(-12px) rotate(3deg); }
+        }
+
+        .hero-title {
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 30px var(--blue-glow), 3px 3px 0 var(--blue);
+            line-height: 1.1;
+            margin: 12px 0 6px;
+            animation: titlePulse 4s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { text-shadow: 0 0 30px var(--blue-glow), 3px 3px 0 var(--blue); }
+            50%       { text-shadow: 0 0 50px rgba(61,90,254,0.6), 3px 3px 0 var(--blue); }
+        }
+
+        .version-tag {
+            color: var(--pink);
+            font-weight: 900;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            opacity: 0.9;
+        }
+
+        /* =====================================================
+           شبكة الأصناف
+           ===================================================== */
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            max-height: 380px;
+            overflow-y: auto;
+            padding: 4px 2px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
+        }
+
+        .cat-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            padding: 18px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.15s, border-color 0.15s, background 0.15s, box-shadow 0.15s;
+        }
+
+        .cat-card:active  { transform: scale(0.95); }
+        .cat-card:hover   { border-color: rgba(61,90,254,0.5); background: var(--glass-hover); }
+
+        .cat-card.selected {
+            background: linear-gradient(135deg, rgba(61,90,254,0.25), rgba(61,90,254,0.10));
+            border-color: var(--blue);
+            box-shadow: 0 0 16px var(--blue-glow);
+        }
+
+        .cat-card .cat-emoji { font-size: 2.2rem; display: block; margin-bottom: 8px; }
+        .cat-card .cat-name  { font-size: 0.85rem; font-weight: 900; }
+
+        /* =====================================================
+           المدخلات
+           ===================================================== */
+        .g-input, .g-select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 800;
+            font-family: 'Cairo', sans-serif;
+            text-align: center;
+            margin: 8px 0;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            color: var(--text);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .g-input:focus, .g-select:focus {
+            border-color: rgba(61,90,254,0.6);
+            box-shadow: 0 0 0 3px var(--blue-glow);
+        }
+
+        .g-input::placeholder { color: var(--text-dim); }
+
+        .g-label {
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            display: block;
+            margin: 12px 0 4px;
+        }
+
+        /* =====================================================
+           منطقة الكشف
+           ===================================================== */
+        .reveal-zone {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 2px dashed rgba(61,90,254,0.5);
+            border-radius: 24px;
+            padding: 56px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s, transform 0.1s;
+            margin-bottom: 18px;
+        }
+
+        .reveal-zone:active { transform: scale(0.98); }
+        .reveal-zone:hover  { border-color: rgba(61,90,254,0.8); background: var(--glass-hover); }
+
+        .secret-word {
+            font-size: 2.6rem;
+            font-weight: 900;
+            color: var(--yellow);
+            text-shadow: 0 0 25px var(--yellow-glow);
+            animation: wordReveal 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes wordReveal {
+            from { opacity: 0; transform: scale(0.5) rotate(-5deg); }
+            to   { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        /* =====================================================
+           عناصر التصويت
+           ===================================================== */
+        .vote-item {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 16px 18px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 900;
+            cursor: pointer;
+            transition: border-color 0.15s, background 0.15s, transform 0.1s, box-shadow 0.15s;
+        }
+
+        .vote-item:active { transform: scale(0.98); }
+
+        .vote-item.selected {
+            border-color: var(--pink);
+            background: rgba(245,0,87,0.10);
+            box-shadow: 0 0 14px var(--pink-glow);
+        }
+
+        .vote-icon { font-size: 1.4rem; transition: transform 0.2s; }
+        .vote-item.selected .vote-icon { transform: scale(1.2); }
+
+        /* =====================================================
+           وقت الأسئلة
+           ===================================================== */
+        .q-pair-line {
+            display: block;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 1.25rem;
+            animation: fadeSlideIn 0.3s ease backwards;
+        }
+
+        .q-pair-line:nth-child(1) { animation-delay: 0.05s; }
+        .q-pair-line:nth-child(2) { animation-delay: 0.15s; }
+        .q-pair-line:nth-child(3) { animation-delay: 0.25s; }
+        .q-pair-line:last-child   { border-bottom: none; }
+
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateX(12px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+
+        .q-asker { color: var(--yellow); font-weight: 900; }
+        .q-asked  { color: var(--green);  font-weight: 900; }
+
+        /* =====================================================
+           ليدربورد النتائج
+           ===================================================== */
+        .lb-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 13px 4px;
+            border-bottom: 1px solid var(--border);
+            font-weight: 800;
+            transition: background 0.2s;
+            animation: fadeSlideIn 0.3s ease backwards;
+        }
+
+        .lb-row:last-child { border-bottom: none; }
+
+        .lb-rank {
+            font-size: 1.2rem;
+            width: 32px;
+            text-align: center;
+        }
+
+        /* =====================================================
+           بادج التثبيت
+           ===================================================== */
+        #install-banner {
+            position: fixed;
+            bottom: calc(var(--safe-bottom) + 16px);
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: linear-gradient(135deg, rgba(30,33,60,0.95), rgba(20,22,45,0.95));
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            z-index: 9999;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-width: 340px;
+            width: 90%;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 20px var(--blue-glow);
+        }
+
+        #install-banner.show { transform: translateX(-50%) translateY(0); }
+
+        #install-banner .banner-icon { font-size: 2rem; flex-shrink: 0; }
+        #install-banner .banner-text { flex: 1; font-size: 0.85rem; font-weight: 800; line-height: 1.4; }
+        #install-banner .banner-text span { display: block; color: var(--text-dim); font-size: 0.75rem; font-weight: 700; }
+
+        .btn-install { width: auto; padding: 10px 18px; font-size: 0.9rem; margin: 0; border-radius: 12px; }
+        .btn-dismiss { width: auto; padding: 10px 14px; font-size: 0.9rem; margin: 0; margin-right: 6px; border-radius: 12px; background: transparent; color: var(--text-dim); box-shadow: none; border: 1px solid var(--border); }
+
+        /* =====================================================
+           لودينج / Spinner
+           ===================================================== */
+        .spinner {
+            width: 44px; height: 44px;
+            border: 3px solid var(--border);
+            border-top-color: var(--blue);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* =====================================================
+           تأثيرات متفرقة
+           ===================================================== */
+        .text-glow-blue   { color: var(--blue);   text-shadow: 0 0 16px var(--blue-glow); }
+        .text-glow-pink   { color: var(--pink);   text-shadow: 0 0 16px var(--pink-glow); }
+        .text-glow-yellow { color: var(--yellow); text-shadow: 0 0 16px var(--yellow-glow); }
+        .text-glow-green  { color: var(--green);  text-shadow: 0 0 16px var(--green-glow); }
+        .text-glow-purple { color: var(--purple); text-shadow: 0 0 16px var(--purple-glow); }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 16px;
+        }
+
+        .instruction-text {
+            text-align: center;
+            padding: 12px 4px;
+            font-weight: 900;
+            font-size: 1rem;
+        }
+
+        /* Scrollbars */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+        /* Safe area bottom spacing on last button */
+        .screen.active > .btn:last-child,
+        .screen.active > .glass-card:last-child { margin-bottom: calc(var(--safe-bottom) + 8px); }
+    </style>
+</head>
+<body>
+<div class="app-container">
+
+    <!-- ===== شاشة اللغة ===== -->
+    <div id="scr-lang" class="screen active">
+        <div class="hero-wrap">
+            <span class="hero-icon">🕵️</span>
+            <div class="hero-title">برة الموضوع</div>
+            <div class="version-tag">✦ Ayad M Ismail Edition ✦</div>
+        </div>
+        <div class="glass-card glow-blue" style="text-align:center;">
+            <p style="font-weight:800; color:var(--text-dim); margin-bottom:4px;">زمان هەڵبژێرە / اختر لغة اللعبة</p>
+            <button class="btn btn-blue"  onclick="initApp('ar')">🇮🇶 العربية</button>
+            <button class="btn btn-pink"  onclick="initApp('ku')">🟡 Kurdî — سۆرانی</button>
+        </div>
+    </div>
+
+    <!-- ===== شاشة الإعداد ===== -->
+    <div id="scr-setup" class="screen">
+        <button onclick="show('scr-lang')" style="background:none;border:1px solid var(--border);color:var(--text-dim);padding:8px 18px;border-radius:20px;font-family:inherit;font-size:0.85rem;font-weight:700;cursor:pointer;margin-bottom:12px;">← رجوع | گەڕانەوە</button>
+        <h2 id="ui-cat-title" class="section-title text-glow-blue"></h2>
+        <div class="cat-grid" id="category-grid"></div>
+        <div class="glass-card" style="margin-top:16px;">
+            <label id="ui-label-p" class="g-label"></label>
+            <select class="g-select" id="p-count" onchange="updateSpies()"></select>
+            <label id="ui-label-s" class="g-label"></label>
+            <select class="g-select" id="s-count"></select>
+            <button class="btn btn-green" onclick="goToNames()" id="btn-next"></button>
+        </div>
+    </div>
+
+    <!-- ===== شاشة الأسماء ===== -->
+    <div id="scr-names" class="screen">
+        <div class="glass-card glow-blue">
+            <h2 id="ui-names-title" class="section-title" style="margin-bottom:16px;"></h2>
+            <div id="names-list"></div>
+            <button class="btn btn-pink" onclick="startGame()" id="btn-start"></button>
+        </div>
+    </div>
+
+    <!-- ===== شاشة الكشف ===== -->
+    <div id="scr-reveal" class="screen">
+        <div class="glass-card glow-yellow" style="text-align:center;">
+            <div style="font-size:0.85rem; font-weight:800; color:var(--text-dim); margin-bottom:4px;" id="reveal-progress"></div>
+            <h2 id="turn-player-name" style="font-size:1.9rem; font-weight:900;" class="text-glow-yellow"></h2>
+        </div>
+        <div class="reveal-zone" id="reveal-box" onclick="handleReveal()">
+            <div style="font-size:3rem; margin-bottom:12px;">🔒</div>
+            <h3 id="tap-msg" style="color:var(--text-dim); font-size:1.1rem;"></h3>
+            <div id="secret-word-display" class="secret-word" style="display:none;"></div>
+        </div>
+        <button id="btn-reveal-action" class="btn btn-blue" onclick="handleReveal()"></button>
+    </div>
+
+    <!-- ===== شاشة التصويت ===== -->
+    <div id="scr-vote" class="screen">
+        <div class="glass-card glow-blue" style="text-align:center;">
+            <div style="font-size:0.85rem; font-weight:800; color:var(--text-dim);" id="vote-progress-label"></div>
+            <h2 id="voter-name-display" style="font-size:1.8rem; font-weight:900; color:#fff; margin-top:4px;"></h2>
+        </div>
+        <div class="instruction-text text-glow-yellow" id="vote-instruction"></div>
+        <div id="vote-targets"></div>
+        <button id="btn-confirm-vote" class="btn btn-green" style="display:none;" onclick="confirmVote()"></button>
+    </div>
+
+    <!-- ===== شاشة وقت الأسئلة ===== -->
+    <div id="scr-questions" class="screen">
+        <div class="glass-card glow-purple" style="text-align:center;">
+            <div style="font-size:2.8rem; margin-bottom:8px;">❓</div>
+            <h2 id="ui-q-title" style="font-size:1.6rem; font-weight:900;" class="text-glow-purple"></h2>
+            <p id="ui-q-subtitle" style="color:var(--text-dim); font-weight:800; margin-top:4px; font-size:0.9rem;"></p>
+        </div>
+        <div class="glass-card glow-yellow" style="text-align:center; padding:36px 24px;">
+            <div id="ui-q-pair" style="font-weight:900; color:#fff; line-height:2;"></div>
+        </div>
+        <button id="btn-next-pair" class="btn btn-yellow" onclick="nextQuestionPair()"></button>
+        <button id="btn-go-vote"   class="btn btn-green"  onclick="goToVoting()" style="display:none;"></button>
+    </div>
+
+    <!-- ===== شاشة تخمين الجاسوس ===== -->
+    <div id="scr-guess" class="screen">
+        <div class="glass-card glow-pink" style="text-align:center;">
+            <div style="font-size:2.2rem; margin-bottom:8px;">🕵️‍♂️</div>
+            <h2 id="ui-spy-guess-name" style="color:#fff; font-size:1.7rem; font-weight:900;"></h2>
+            <p style="color:rgba(255,255,255,0.7); font-weight:800; margin-top:4px; font-size:0.9rem;" id="ui-spy-desc"></p>
+        </div>
+        <div class="cat-grid" id="guess-grid"></div>
+        <button class="btn btn-dark" style="margin-top:16px;" onclick="nextSpyOrFinish(false)" id="btn-give-up"></button>
+    </div>
+
+    <!-- ===== شاشة النتائج ===== -->
+    <div id="scr-results" class="screen">
+        <div class="glass-card" id="res-box" style="text-align:center;">
+            <div id="res-announcement"></div>
+        </div>
+        <div class="glass-card" id="leaderboard" style="padding:16px;"></div>
+        <button class="btn btn-yellow" onclick="resetRound()" id="btn-new-round"></button>
+        <button class="btn btn-dark"   onclick="hardReset()"  id="btn-home"></button>
+    </div>
+
+</div>
+
+<!-- ===== بادج التثبيت ===== -->
+<div id="install-banner" role="dialog" aria-hidden="true">
+    <span class="banner-icon">📲</span>
+    <div class="banner-text">
+        <span id="install-title">ثبّت التطبيق!</span>
+        <span id="install-sub">العب بدون إنترنت كأنه تطبيق أندرويد</span>
+    </div>
+    <button class="btn btn-dark btn-dismiss" onclick="dismissInstall()">✕</button>
+    <button class="btn btn-blue btn-install" onclick="triggerInstall()" id="install-btn">تثبيت</button>
+</div>
+
+<script>
+/* ==========================================================
+   Service Worker — مدمج كـ Blob لضمان عمل أوفلاين 100%
+   ========================================================== */
+(function registerSW() {
+    if (!('serviceWorker' in navigator)) return;
+
+    const CACHE   = 'barra-v3';
+    const swCode  = `
+const CACHE = '${CACHE}';
+self.addEventListener('install', e => {
+    e.waitUntil(
+        caches.open(CACHE).then(c => c.addAll([location.pathname || '/'])).then(() => self.skipWaiting())
+    );
+});
+self.addEventListener('activate', e => {
+    e.waitUntil(
+        caches.keys().then(keys =>
+            Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
+        ).then(() => self.clients.claim())
+    );
+});
+self.addEventListener('fetch', e => {
+    e.respondWith(
+        caches.match(e.request).then(cached => {
+            if (cached) return cached;
+            return fetch(e.request).then(res => {
+                if (!res || res.status !== 200 || res.type === 'opaque') return res;
+                const clone = res.clone();
+                caches.open(CACHE).then(c => c.put(e.request, clone));
+                return res;
+            }).catch(() => caches.match(e.request));
+        })
+    );
+});
+`;
+    const blob   = new Blob([swCode], { type: 'text/javascript' });
+    const swURL  = URL.createObjectURL(blob);
+
+    navigator.serviceWorker.register(swURL, { scope: './' })
+        .then(reg => {
+            console.log('[PWA] Service Worker registered ✓', reg.scope);
+        })
+        .catch(err => console.warn('[PWA] SW error:', err));
+})();
+
+/* ==========================================================
+   PWA — Install Prompt
+   ========================================================== */
+let deferredInstallPrompt = null;
+
+window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    setTimeout(() => {
+        const banner = document.getElementById('install-banner');
+        banner.setAttribute('aria-hidden', 'false');
+        banner.classList.add('show');
+    }, 3000);
+});
+
+window.addEventListener('appinstalled', () => {
+    dismissInstall();
+    deferredInstallPrompt = null;
+});
+
+function triggerInstall() {
+    if (!deferredInstallPrompt) return;
+    deferredInstallPrompt.prompt();
+    deferredInstallPrompt.userChoice.then(() => dismissInstall());
+}
+
+function dismissInstall() {
+    const banner = document.getElementById('install-banner');
+    banner.classList.remove('show');
+    banner.setAttribute('aria-hidden', 'true');
+}
+
+/* ==========================================================
+   Fullscreen helper
+   ========================================================== */
+function requestFullscreen() {
+    const el = document.documentElement;
+    if (el.requestFullscreen)             el.requestFullscreen();
+    else if (el.webkitRequestFullscreen)  el.webkitRequestFullscreen();
+}
+
+document.addEventListener('click', () => {
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        requestFullscreen();
+    }
+}, { once: true });
+
+/* ==========================================================
+   مؤثرات الصوت
+   ========================================================== */
+const sfx = {
+    ctx: null,
+    init() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); },
+    play(freq, type, dur, vol = 0.08) {
+        try {
+            this.init();
+            const o = this.ctx.createOscillator();
+            const g = this.ctx.createGain();
+            o.type = type; o.frequency.setValueAtTime(freq, this.ctx.currentTime);
+            g.gain.setValueAtTime(vol, this.ctx.currentTime);
+            g.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + dur);
+            o.connect(g); g.connect(this.ctx.destination);
+            o.start(); o.stop(this.ctx.currentTime + dur);
+        } catch (e) {}
+    },
+    click() { this.play(700, 'sine', 0.08, 0.05); },
+    pop()   { this.play(1100, 'triangle', 0.12, 0.07); },
+    win()   {
+        this.play(523, 'sine', 0.1);
+        setTimeout(() => this.play(659, 'sine', 0.1), 100);
+        setTimeout(() => this.play(784, 'sine', 0.3), 200);
+    }
+};
+
+/* تأثير Ripple على الأزرار */
+document.addEventListener('pointerdown', e => {
+    const btn = e.target.closest('.btn');
+    if (!btn) return;
+    sfx.click();
+    const rect = btn.getBoundingClientRect();
+    btn.style.setProperty('--rx', ((e.clientX - rect.left) / rect.width * 100) + '%');
+    btn.style.setProperty('--ry', ((e.clientY - rect.top)  / rect.height * 100) + '%');
+    btn.classList.add('ripple');
+    setTimeout(() => btn.classList.remove('ripple'), 400);
+});
+
+/* ==========================================================
+   قاعدة البيانات
+   ========================================================== */
+const DB = {
+    games: { i:"🎮", ar:"ألعاب فيديو", ku:"یارییە ڤیدیۆییەکان",
+        words_ar:["ماينكرافت","ببجي","فورتنايت","كول اوف ديوتي","روبلوكس","جي تي اي","ريد ديد","فالورانت","كلاش اوف كلانس","امونج اس","ليغ اوف ليجيندز","اوفر واتش","روكيت ليغ","تيكن","مورتال كومبات","ايلدن رينغ","سايبر بانك","ويتشر","رزدنت ايفل","قود اوف وار","هيلو","سبايدرمان","هورايزن","ماريو كارت","زيلدا","ستارديو فالي","جينشين امباكت","ايبكس ليجيندز","رينبو سيكس","راست","ارك","فيفا","انشارتد","تومب رايدر","بلودبورن","سيكيرو","فول جايز","ديد باي دايلايت","فاسمو فوبيا","تيراريا","دووم","باتلفيلد","كاونتر سترايك","ديستني","سيمز","بلاك ديزيرت","وور كرافت","كراش","سونيك","نيد فور سبيد","فورزا","اوت لاست","ليتل نايت ميرز","اندرتيل"],
+        words_ku:["ماینکرافت","پەبجی","فۆرتنایت","کۆل ئۆف دیوتی","ڕۆبلۆکس","جی تی ئەی","ڕێد دێد","ڤالۆرانت","کلاش ئۆف کلانس","ئەمۆنگ ئەس","لۆڵ","ئۆڤەرواتچ","ڕۆکێت لیگ","تێکن","مۆرتاڵ کۆمبات","ئێڵدن ڕینگ","سایبەر پانک","ویتچەر","ڕێزدێنت ئیڤڵ","گۆد ئۆف وۆر","هێیلۆ","سپایدەرمان","هۆرایزن","ماریۆ کارت","زێلدا","ستاردیۆ ڤاڵی","گێنشین ئیمپاکت","ئەپێکس لیجێندز","ڕەینبۆ سکس","ڕەست","ئارک","فیفا","ئەنچارتد","تۆمب ڕایدەر","بلودبۆرن","سێكیرۆ","فۆڵ گایز","دێد بەی دایلایت","فازمۆ فۆبیا","تێراریا","دووم","باتڵفیڵد","کاونتەر سترایک","دێستنی","سیمز","بلاک دێزێرت","وۆرکڕافت","کراش","سۆنیک","نید فۆڕ سپید","فۆرگا","ئوت لاست","لیتل نایت مێرز","ئاندەرتێڵ"]},
+    food: { i:"🍕", ar:"أكلات وحلويات", ku:"خواردن و شیرینی",
+        words_ar:["بيتزا","برجر","شاورما","سوشي","تاكو","بوريتو","ناتشوز","ستيك","نودلز","باستا","لازانيا","كباب","تكة","دولمة","باجة","برياني","مقلوبة","قوزي","تشريب","فلافل","حمص بطحينة","متبل","بابا غنوج","تبولة","فتوش","كبة","بورق","سمبوسة","فطائر","مناقيش","لحم بعجين","زعتر","شيش طاووق","دجاج مشوي","كنتاكي","نغتس","بطاطا مقلية","شوربة عدس","كرواسون","بان كيك","وافل","دونات","ماكارون","تشيز كيك","تيراميسو","كنافة","بقلاوة","بسبوسة","حلاوة","ايس كريم","زلابية","عوامة","قطايف"],
+        words_ku:["پیتزا","بەرگر","شەورمە","سۆشی","تاکۆ","بۆریتۆ","ناچۆز","ستیک","نۆدڵز","مەعکەرۆنی","لازانیا","کەباب","تیکە","دۆڵمە","پاچە","بریانی","مەقلووبە","قۆزی","تەشیب","فەلافل","حمس","موتەبەل","بابا غەنوج","زەڵاتە","فەتوش","کوبە","بۆڕەک","سمبوسە","فەتایر","مەناقیش","لحم بعجین","زەعتەر","مریشکی برژاو","کەی ئێف سی","نەگێت","پەتاتەی سوورکراوە","شۆربای نیسک","کرواسان","پانکەیک","وافل","دۆنەت","ماکارۆن","چیزکەیک","تیرامیسو","کنافە","بەقلاوە","بەسوبوسە","حەلاوە","ئایس کرێم","زەلابیە","لوقمەقازی","قەتایف"]},
+    celebs: { i:"🌟", ar:"يوتيوبرز ومشاهير", ku:"ناوداران",
+        words_ar:["مستر بيست","بندريتا","ابو فلة","سيد","اوسمز","نور مار","غيث مروان","نارين بيوتي","انس واصالة","نايف حمدان","محمد عدنان","دحومي 999","سعودي ريبورترز","احمد الشقيري","عمرو دياب","تامر حسني","محمد رمضان","كريستيانو رونالدو","ميسي","نيمار","هالاند","مبابي","صلاح","شاكيرا","بيلي ايليش","تايلور سويفت","ايلون ماسك","بيل جيتس","مارك زوكربيرج","ستيف جوبز","اوبرا وينفري","ذا روك","جاكي شان","توم كروز","ويل سميث","ليوناردو دي كابريو","جوني ديب","بيونسيه","اديل","ريانا","جاستن بيبر","كانييه ويست","ايمينيم","دريك","ترافيس سكوت","كاردي بي","سيدارتا","كيم كارداشيان","مستر ليغو","بيو دي باي","سبيد","كاي سينات"],
+        words_ku:["مستر بیست","بەندەریتە","ئەبوفەلە","سەید","ئۆسمز","نور مار","غەیس مەروان","نارین بیووتی","ئەنەس و ئەساڵە","نایف حەمدان","محەمەد عەدنان","دحومي ٩٩٩","سعودی ڕیپۆرتەرز","ئەحمەد شەقێری","عەمر دیاب","تامر حوسنی","محەمەد ڕەمەزان","کریستیانۆ ڕۆناڵدۆ","مێسی","نەیمار","هالاند","مباپێ","سەڵاح","شاکیرا","بیلی ئایلیش","تایلۆر سویفت","ئیلۆن ماسک","بێڵ گەیتس","مارک زوکەربێرگ","ستێڤ جۆبس","ئۆپرا وینفری","زە ڕۆک","جاکی شان","تۆم کرووز","ویڵ سمیت","لیۆناردۆ دی کاپریۆ","جۆنی دێپ","بیۆنسێ","ئەدێڵ","ڕیانا","جاستن بیبەر","کانییە وێست","ئیمنیم","درەیک","ترافیس سکۆت","کاردی بی","سیدارتا","کیم کارداشیان","مستر لێگۆ","پیودیپای","سپید","کای سینات"]},
+    objects: { i:"🎒", ar:"أشياء وأغراض", ku:"کەلوپەل و شت",
+        words_ar:["مفتاح","محفظة","نظارة","ساعة","موبايل","شاحن","سماعة","قلم","دفتر","كتاب","حقيبة","مظلة","ولاعة","مشط","عطر","خاتم","سلسلة","كمامة","مرايا","مقص","سكين","مطرقة","برغي","مفك","مصباح يدوي","بطارية","بطاقة بنكية","هوية","جواز","سجادة صلاة","سبحة","مناديل","صابونة","فرشاة","معجون","فوطة","مخدة","لحاف","شرشف","شماعة","مكواة","مكنسة","طفاية حريق","صندوق","قفل","سلسلة مفاتيح","ميدالية","بوصلة","عدسة","خريطة","الة حاسبة"],
+        words_ku:["کلیل","جزدان","چاوێلکە","کاتژمێر","مۆبایل","شەحن","سەماعە","پێنووس","دەفتەر","کتێب","جانتا","چەتر","چەرخ","شانە","بۆن","ئەڵقە","زنجیر","کمامە","ئاوێنە","مەقەس","چەقۆ","چەکوش","بزمار","سپانە","لایت","پاتری","کارتی بانک","ناسنامە","جەواز","بەرمەوێژ","تەسبیح","دەسڕڕ","سابوون","فڵچە","مەعجوون","خاولی","سەرین","لێفە","چەرچەف","تەلاقی جل","وتوو","گسک","ئاگرکوژێنەوە","سندوق","قفڵ","زنجیری کلیل","میدالیا","قیبلەنما","عەدەسە","نەخشە","حاسیبە"]},
+    brands: { i:"🛍️", ar:"براندات", ku:"مارکەکان",
+        words_ar:["ابل","سامسونج","تيسلا","جوجل","مايكروسوفت","امازون","نتفلكس","ديزني","سوني","نايكي","اديداس","بوما","زارا","اتش اند ام","غوتشي","شانيل","لويس فيتون","ديور","برادا","روليكس","كارتييه","كوكاكولا","بيبسي","ستارباكس","ماكدونالدز","كنتاكي","برجر كنج","بيتزا هت","دومينوز","سابوي","تويوتا","مرسيدس","بي ام دبليو","فيراري","لامبورغيني","بورش","هوندا","نيسان","ايكيا","ريد بول","لوريال","سيفورا","فيزا","ماستر كارد","باي بال","فيسبوك","انستغرام","واتساب","تيك توك","تويتر","هواوي","شاومي","ديل","كانون"],
+        words_ku:["ئەپڵ","سامسۆنگ","تێسلا","گووگڵ","مایکرۆسۆفت","ئەمەزۆن","نێتفلێکس","دیزنی","سۆنی","نایکی","ئادیداس","پۆما","زارا","ئێچ ئەند ئێم","گوچی","شانێڵ","لویس ڤیتۆن","دیۆر","پرادا","ڕۆلێکس","کارتیێر","کۆکاکۆلا","پیپسی","ستارباکس","ماکدۆناڵدز","کەی ئێف سی","بەرگر کینگ","پیتزا هت","دۆمینۆز","سەبوەی","تۆیۆتا","مێرسیدس","بی ئێم دەبلیو","فێراری","لامبۆرگینی","پۆرش","هۆندا","نیسان","ئیکيا","ڕێد بوڵ","لۆریال","سێفۆرا","ڤیزا","ماستەرکارد","بای پاڵ","فەیسبووک","ئینستاگرام","واتسئەپ","تیک تۆک","تویتەر","هواوی","شاومی","دێڵ","کانۆن"]},
+    movies: { i:"🎬", ar:"أفلام ومسلسلات", ku:"فیلم و زنجیرەکان",
+        words_ar:["انترستيلار","انسبشن","تايتانيك","افاتار","الجوكر","باتمان","سبايدرمان","سوبرمان","افنجرز","هاري بوتر","سيد الخواتم","حرب النجوم","الماتريكس","العراب","سكارفيز","جيم اوف ثرونز","بريكنج باد","بيكي بلايندرز","سكويد جيم","فريندز","ستراينجر ثينجز","ناركوس","فاست اند فيريوس","مهمة مستحيلة","جيمس بوند","جون ويك","ديدبول","قراصنة الكاريبي","شريك","توي ستوري","لايون كينج","فروزن","نيمو","علاء الدين","لا لا لاند","جلاديتور","قلب شجاع","ذا بويز","لاكاسا دي بابيل","بريزون بريك","لوست","شيرلوك","جراسيك بارك","روكي","رامبو","توب جان","اكس مان","ترانسفورمرز","ذا ويتشر","فيكنجز"],
+        words_ku:["ئینتەرستێلار","ئینسێپشن","تایتانیک","ئاڤاتار","جۆکەر","باتمان","سپایدەرمان","سوپەرمان","تۆڵەسێنەرەکان","هاری پۆتەر","لۆرد ئۆف زە ڕینگز","ستار وۆرز","ماتریکس","گادفازەر","سکارفەیس","گەیم ئۆف سرۆنز","برێکینگ باد","پیکی بلایندەرز","سکوید گەیم","فرێندز","سترەینجەر سینگز","نارکۆس","فاست ئەند فیوریەس","میشن ئیمپۆسێبڵ","جەیمس بۆند","جۆن ویک","دێدپووڵ","چەتەکانی کاریبی","شرێک","تۆی ستۆری","لایۆن کینگ","فرۆزن","نیمۆ","عەلادین","لا لا لاند","گلادیاتۆر","برێیڤ هارت","زە بۆیز","لاکاسا دێ پاپێل","پریزۆن برەیک","لۆست","شێرلۆک","جوراسیک پارک","ڕۆکی","ڕامبۆ","تۆپ گەن","ئێکس مان","ترانسفۆرمەرز","زە ویتچەر","ڤایکینگز"]},
+    animals: { i:"🐶", ar:"حيوانات", ku:"ئاژەڵەکان",
+        words_ar:["اسد","نمر","فيل","زرافة","قرد","دب","ذئب","ثعلب","تمساح","ثعبان","نسر","صقر","بومة","حمامة","غراب","بطريق","نعامة","طاووس","ببغاء","قرش","حوت","دلفين","اخطبوط","سلطعون","سلحفاة","ضفدع","حصان","جمل","بقرة","خروف","ماعز","كلب","قطة","ارنب","سنجاب","قنفذ","خفاش","عنكبوت","عقرب","نحلة","نملة","فراشة","باندا","كوالا","كنغر","فهد","ضبع","حمار وحشي","غزال","راكون","هامستر","بجعة","حرباء"],
+        words_ku:["شێر","پڵنگ","فیل","زەڕافە","مەیموون","ورچ","گورگ","ڕێوی","تیمساح","مار","هەڵۆ","باز","کوندەپەپوو","کۆتر","قەلەڕەش","پەنگوین","وشترمرخ","تاوس","تووتی","قەرش","نەهەنگ","دۆلفین","ئەختەپووت","قڕژاڵ","کیسەڵ","بۆق","ئەسپ","وشتر","مانگا","مەڕ","بزن","سەگ","پشیلە","کەروێشک","سمۆرە","ژیشک","شەمشەمەکوێرە","جاڵجاڵۆکە","دووپشک","هەنگ","مێروولە","پەپوولە","پاندا","کوالا","کانگەرۆ","چیتا","کەمتیار","کەرەکێوی","ئاسک","ڕاکۆن","هامستەر","قاز","حەربا"]},
+    countries: { i:"🌎", ar:"دول", ku:"وڵاتان",
+        words_ar:["العراق","السعودية","مصر","تركيا","المانيا","امريكا","اليابان","فرنسا","اسبانيا","البرازيل","روسيا","الصين","بريطانيا","ايطاليا","كندا","استراليا","الهند","كوريا الجنوبية","المغرب","قطر","الامارات","الاردن","لبنان","سوريا","فلسطين","اليمن","تونس","الجزائر","سويسرا","السويد","النرويج","اليونان","المكسيك","الارجنتين","هولندا","بلجيكا","النمسا","البرتغال","بولندا","اوكرانيا","باكستان","اندونيسيا","ماليزيا","تايلاند","فيتنام","نيوزيلندا","فنلندا","الدنمارك","ايرلندا","كولومبيا","تشيلي","كوبا","كينيا"],
+        words_ku:["عێراق","سعودیە","میسر","تورکیا","ئەڵمانیا","ئەمریکا","ژاپۆن","فەڕەنسا","ئیسپانیا","بەڕازیل","ڕووسيا","چین","بەریتانیا","ئیتاڵیا","کەنەدا","ئوسترالیا","هیندستان","کۆریای باشوور","مەغریب","قەتەر","ئیمارات","ئوردن","لوبنان","سوریا","فەلەستین","یەمەن","تونیس","جەزائیر","سویسرا","سوید","نەرویج","یۆنان","مەکسیک","ئەرجەنتین","هۆڵەندا","بەلجیکا","نەمسا","پورتوگال","پۆڵەندا","ئۆکرانیا","پاکستان","ئەندۆنیزیا","مالیزیا","تایلاند","ڤێتنام","نیوزیلندا","فینلەندا","دانیمارک","ئیرلەندا","کۆڵۆمبیا","چیلی","کوبا","کینیا"]},
+    jobs: { i:"👨‍🚀", ar:"مهن", ku:"پیشەکان",
+        words_ar:["طبيب","مهندس","محامي","قاضي","ضابط","جندي","طيار","مضيف طيران","قبطان","رائد فضاء","عالم","باحث","مبرمج","مصمم","رسام","موسيقي","مغني","ممثل","مخرج","كاتب","صحفي","مصور","طباخ","خباز","جزار","حلاق","نجار","حداد","كهربائي","سباك","ميكانيكي","سائق","حارس","عامل نظافة","مزارع","صياد","معلم","استاذ جامعي","محاسب","مدير","سكرتير","مندوب مبيعات","صيدلي","ممرض","مسعف","اطفائي","شرطي","طبيب اسنان","طبيب بيطري","خياط","بناء","مترجم"],
+        words_ku:["پزیشک","ئەندازیار","پارێزەر","دادوەر","ئەفسەر","سەرباز","فڕۆکەوان","خانەخوێی فڕۆکە","کاپتن","گەردوونناس","زانا","توێژەر","پرۆگرامساز","دیزاینەر","وێنەکێش","مۆسیقاژەن","گۆرانیبێژ","ئەکتەر","دەرهێنەر","نووسەر","ڕۆژنامەنووس","وێنەگر","چێشتلێنەر","نەوایی","قەساب","سەرتاش","دارتاش","ئاسنگەر","کارەباچی","بۆریچی","میکانیک","شۆفێر","پاسەوان","پاککەرەوە","جوتیار","ڕاوچی","مامۆستا","پڕۆفیسۆر","ژمێریار","بەڕێوەبەر","سکرتێر","فرۆشیار","دەرمانساز","پەرستار","فریاگوزار","ئاگرکوژێنەوە","پۆلیس","دکتۆری ددان","دکتۆری ئاژەڵ","خەیات","بیناساز","وەرگێڕ"]},
+    tech: { i:"💻", ar:"تطبيقات وتكنولوجيا", ku:"ئەپ و تەکنۆلۆجیا",
+        words_ar:["واتساب","تيك توك","انستغرام","فيسبوك","تويتر","سناب شات","تلغرام","يوتيوب","نتفلكس","سبوتيفاي","زووم","اوبر","طلبات","بينترست","ديسكورد","كانفا","كاب كات","فوتوشوب","جوجل ماب","شاهد","ايفون","ايباد","ماك بوك","بلايستيشن","اكس بوكس","لابتوب","ساعة ذكية","سماعات لاسلكية","كاميرا","طائرة درون","نظارة واقع افتراضي","راوتر","باور بانك","كيبورد ميكانيكي","شاشة ذكية","لينكد ان","تندر","بوكينج","اير بي ان بي","شي ان","علي اكسبرس","دروب بوكس","ساوند كلاود","انغامي","تروكولر","سفاري","كروم","فايرفوكس","اكسيل","وورد","بريمير","شازام"],
+        words_ku:["واتسئەپ","تیک تۆک","ئینستاگرام","فەیسبووک","تویتەر","سناپ چات","تەلەگرام","یوتیوب","نێتفلێکس","سپۆتیفای","زووم","ئۆبەر","تەڵەبات","پینترێست","دیسکۆرد","کانڤا","کاپ کات","فۆتۆشۆپ","گووگڵ ماپ","شاهید","ئایفۆن","ئایپاد","ماک بووک","پلەی ستەیشن","ئێکس بۆکس","لاپتۆپ","کاتژمێری زیرەک","سەماعەی بێتەل","کامێرا","درۆن","چویلکەی ڤی ئاڕ","ڕاوتەر","پاوەر بانک","کیبۆردی میکانیکی","شاشەی زیرەک","لینکدین","تیندەر","بوکینگ","ئەیر بی ئێن بی","شی ئین","عەلی ئێکسپرێس","درۆپ بۆکس","ساوند کڵاود","ئەنگامی","تروکۆلەر","سەفاری","کرۆم","فایەرفۆکس","ئێکسڵ","وۆرد","پریمیەر","شازام"]},
+    sports: { i:"⚽", ar:"رياضة", ku:"وەرزش",
+        words_ar:["كرة القدم","كرة السلة","تنس","سباحة","ملاكمة","مصارعة","كاراتيه","جمباز","رفع اثقال","خيل","كرة طاولة","شطرنج","بلياردو","بولينج","فورمولا 1","كرة الطائرة","كرة اليد","الركبي","كرة القدم الامريكية","البيسبول","الكريكت","الجولف","الرماية","التجديف","الابحار","التزلج","تسلق الجبال","ركوب الدراجات","الدراجات النارية","الريشة الطائرة","اليوغا","كمال الاجسام","الكروس فت","السكواش","البولو","الغطس","الباركور","الباليه","الزومبا","القفز المظلي","الركمجة","الوثب العالي","الوثب الطويل","رمي الرمح","ماراثون","التاي تشي","الكيك بوكسينغ","الموي تاي","الجوجيتسو","الايكيدو","الكونغ فو","السومو"],
+        words_ku:["تۆپی پێ","تۆپی سەبەتە","تێنس","مەلەوانی","بۆکسێن","زۆرانبازی","کاراتێ","جیمناستیک","قورسایی","ئەسپسواری","تێنسی سەر مێز","شەترەنج","بلیارد","بۆڵینگ","فۆرمۆلا ١","تۆپی بالە","تۆپی دەست","ڕەگبی","تۆپی پێی ئەمریکی","بەیسبۆڵ","کریکێت","گۆڵف","نیشانەشکێنی","سەوڵلێدان","چارۆکەوانی","خلیسکێنەی سەر بەفر","شاخەوانی","پایسکیلسواری","ماتۆڕسکیلسواری","تۆپی پەڕ","یۆگا","لەشجوانی","کرۆسفیت","سکواش","پۆلۆ","غەواس","پارکۆر","بالێ","زومبا","پەڕەشووت","سەرفینگ","بازدانی بەرز","بازدانی درێژ","ڕم هاوێشتن","ماراسۆن","تای چی","کیک بۆکسێن","مۆی تای","جوجیتسۆ","ئایکیدۆ","کۆنگ فو","سۆمۆ"]},
+    home: { i:"🛋️", ar:"أدوات منزلية وملابس", ku:"کەلوپەلی ماڵ و جل",
+        words_ar:["ثلاجة","تلفزيون","غسالة","مكيف","مروحة","مدفأة","مكواة","مكنسة كهربائية","ميكروويف","فرن","خلاط","سرير","وسادة","بطانية","دولاب","طاولة","كرسي","اريكة","سجادة","ستارة","مصباح","ثريا","ساعة حائط","مرايا","لوحة","مغسلة","منشفة","صابون","شامبو","فرشاة اسنان","قدر","مقلاة","صحن","كوب","ملعقة","شوكة","سكين","سلة مهملات","قميص","بنطلون","فستان","تنورة","جاكيت","معطف","حذاء","جوارب","قبعة","نظارات","ساعة يد","حقيبة","حزام","وشاح"],
+        words_ku:["سەلاجە","تەلەفزیۆن","جلشۆر","سپلیت","پانکە","سۆپا","وتوو","گسکی کارەبایی","مایکرۆوەیڤ","فڕن","خەڵاتە","جێگای خەوتن","سەرین","بەتانی","کەنتۆر","مێز","کورسی","قەنەفە","فەرش","پەردە","گڵۆپ","سوورەيا","کاتژمێری دیوار","ئاوێنە","تابلۆ","مەغسەلە","خاولی","سابوون","شامپۆ","فڵچەی ددان","مەنجەڵ","تاوە","قاپ","پەرداخ","کەوچک","چەتاڵ","چەقۆ","تەنەکەی خۆڵ","کراس","پانتۆڵ","عەزی","تەنوورە","چاکەت","پاڵتۆ","پێڵاو","گۆرەوی","کڵاو","چاوێلکە","کاتژمێری دەست","جانتا","قاییش","ملپێچ"]},
+    cars: { i:"🏎️", ar:"سيارات ونقل", ku:"ئۆتۆمبێل و هاتوچۆ",
+        words_ar:["تويوتا","مرسيدس","بي ام دبليو","هوندا","فورد","نيسان","هيونداي","كيا","تيسلا","اودي","لكزس","شيفروليه","جيب","لاند روفر","بورش","فيراري","لامبورغيني","مازدا","ميتسوبيشي","سوبارو","فولكس فاجن","فولفو","جاغوار","بنتلي","رولز رويس","مازيراتي","كاديلاك","دودج","جي ام سي","بيجو","رينو","سيارة","دراجة هوائية","دراجة نارية","حافلة","شاحنة","قطار","مترو","طائرة","طائرة مروحية","سفينة","قارب","غواصة","يخت","تلفريك","سكوتر","سيارة اسعاف","سيارة اطفاء","سيارة شرطة","دبابة","باخرة","رافعة"],
+        words_ku:["تۆیۆتا","مێرسیدس","بی ئێم دەبلیو","هۆندا","فۆرد","نیسان","هیۆندا","کیا","تێسلا","ئۆدی","لێکسز","شیڤرۆلێت","جیپ","لاند ڕۆڤەر","پۆرش","فێراری","لامبۆرگینی","مازدا","میتسوبیشی","سوباروو","فۆڵکسواگن","فۆڵڤۆ","جاگوار","بێنتلی","ڕۆڵز ڕویس","مازێراتی","کادیلاک","دۆج","جی ئێم سی","پیجۆ","ڕینۆ","ئۆتۆمبێل","پایسکل","ماتۆڕسکیل","پاس","بارهەڵگر","شەمەندەفەر","مێترۆ","فڕۆکە","هەلیکۆپتەر","کەشتی","بەلەم","ژێردەریایی","یەخت","تەلەفریک","سکوتەر","ئەمبوڵانس","ئۆتۆمبێلی ئاگرکوژێنەوە","ئۆتۆمبێلی پۆلیس","تانک","گەمی","کرێن"]},
+    anime: { i:"🗡️", ar:"أنمي", ku:"ئەنیمێ",
+        words_ar:["ون بيس","ناروتو","دراجون بول","هجوم العمالقة","بليتش","هنتر x هنتر","مذكرة الموت","بوكيمون","كونان","ديمون سلاير","جوجوتسو كايسن","ماي هيرو اكاديميا","وان بانش مان","طوكيو غول","فول ميتال الكيميائي","كود جياس","سورد ارت اونلاين","بلاك كلوفر","جينتاما","سول ليفيلينغ","فيري تيل","سباي فاملي","دكتور ستون","جوجو","بيرسيرك","هايكيو","كوروكو نو باسكت","ديجيمون","سيلور مون","ايفانجيليون","كيبا","المحقق كونان","دراغون بول سوبر","ناروتو شيبودن","طوكيو ريفينجرز","تشينسو مان","بلاك لاغون","فايوليت ايفرغاردن","ستاينز غيت","كلايمور","اكامي جا كيل","مادوكا ماجيكا","ري زيرو"],
+        words_ku:["وەن پیس","نارۆتۆ","دراگۆن بۆڵ","هێرشی زەبەلاحەکان","بلیچ","هەنتەر","دێس نۆت","پۆکیمۆن","کۆنان","دیمۆن سلایەر","جوجوتسو کایسن","مای هیرۆ","وەن پانچ مان","تۆکیۆ غۆڵ","فول میتاڵ","کۆد گیاس","سۆرد ئارت","بلاک کلۆڤەر","جینتاما","سۆڵۆ لیڤڵینگ","فەیری تەیڵ","سپای فاملی","دکتۆر ستۆن","جۆجۆ","بێرسێرک","هایکیو","کورۆکۆ نۆ باسکێت","دیجیمۆن","سەیلۆر موون","ئیڤانجێلیۆن","کیبا","لێکۆڵەر کۆنان","دراگۆن بۆڵ سوپەر","نارۆتۆ شیپودین","تۆکیۆ ڕیڤێنجەرز","چەینسۆ مان","بلاک لاگۆن","ڤایۆلێت ئیڤەرگاردن","ستاینز گەیت","کلایمۆر","ئاکامی گا کیڵ","مادۆکا ماجیکا","ڕی زیرۆ"]},
+    history: { i:"📜", ar:"تاريخ وشخصيات", ku:"مێژوو و کەسایەتی",
+        words_ar:["الاهرامات","سور الصين","برج ايفل","هتلر","اينشتاين","نابليون","الاسكندر الاكبر","صلاح الدين","جنكيز خان","كليوباترا","الحرب العالمية","الدولة العثمانية","الفايكنج","الساموراي","كولومبوس","نيوتن","اديسون","تسلا","ابن سينا","الخوارزمي","ابن بطوطة","عمر المختار","غاندي","نيلسون مانديلا","مارتن لوثر كينج","ابراهام لينكولن","جورج واشنطن","تشرشل","يوليوس قيصر","توت عنخ امون","شكسبير","دا فينشي","فان جوخ","بيكاسو","موزارت","بيتهوفن","ارسطو","افلاطون","سقراط","ماجلان","ماركو بولو","غاليليو","ماري كوري","داروين","ستيف جوبز","محمد علي كلاي","بروس لي","مارلين مونرو","مايكل جاكسون","ام كلثوم","نزار قباني","المتنبي"],
+        words_ku:["ئەهرامەکان","شوورای چین","بورجی ئایفل","هیتلەر","ئەنیشتاین","ناپۆلیۆن","ئەلێکساندەری مەزن","سەڵاحەدین","جەنگیز خان","کلیۆپاترا","جەنگی جیهانی","دەوڵەتی عوسمانی","ڤایکینگز","سامورای","کۆڵۆمبس","نیوتن","ئەدیسۆن","تێسلا","ئیبن سینا","خوارزمی","ئیبن بەتووتە","عومەر موختار","غاندی","نێڵسۆن ماندێلا","مارتن لوسەر کینگ","ئەبراهام لینکۆڵن","جۆرج واشنتن","چێرچڵ","جولیۆس قەیسەر","توت عەنخ ئاموون","شێکسپیر","دا ڤینچی","ڤان گۆخ","پیکاسۆ","مۆزارت","بیتھۆڤن","ئەرستۆ","ئەفلاتوون","سوقرات","ماجەلان","مارکۆ پۆلۆ","گالیلیۆ","ماري کۆری","داروین","ستێڤ جۆبس","محەمەد عەلی کلەی","بروس لی","مارلین مۆنرۆ","مایکڵ جاکسۆن","ئوم کەلسوم","نزار قەبانی","موتەنەبی"]}
+};
+
+/* ==========================================================
+   تصنيفات فرعية لكل فئة — عشان الخيارات تكون منطقية
+   ========================================================== */
+const SUBCATS = {
+    food: {
+        ar: {
+            "حلويات":     ["كنافة","بقلاوة","بسبوسة","حلاوة","ايس كريم","زلابية","عوامة","قطايف","تيراميسو","تشيز كيك","ماكارون","دونات","وافل","بان كيك","كرواسون"],
+            "وجبات غربية":["بيتزا","برجر","شاورما","سوشي","تاكو","بوريتو","ناتشوز","ستيك","نودلز","باستا","لازانيا","كنتاكي","نغتس","بطاطا مقلية"],
+            "أكل عربي":   ["كباب","تكة","دولمة","باجة","برياني","مقلوبة","قوزي","تشريب","فلافل","حمص بطحينة","متبل","بابا غنوج","تبولة","فتوش","كبة","بورق","سمبوسة","فطائر","مناقيش","لحم بعجين","زعتر","شيش طاووق","دجاج مشوي","شوربة عدس"],
+        },
+        ku: {
+            "شیرینی":     ["کنافە","بەقلاوە","بەسوبوسە","حەلاوە","ئایس کرێم","زەلابیە","لوقمەقازی","قەتایف","تیرامیسو","چیزکەیک","ماکارۆن","دۆنەت","وافل","پانکەیک","کرواسان"],
+            "خواردنی ڕۆژئاڤایی":["پیتزا","بەرگر","شەورمە","سۆشی","تاکۆ","بۆریتۆ","ناچۆز","ستیک","نۆدڵز","مەعکەرۆنی","لازانیا","کەی ئێف سی","نەگێت","پەتاتەی سوورکراوە"],
+            "خواردنی عەرەبی":["کەباب","تیکە","دۆڵمە","پاچە","بریانی","مەقلووبە","قۆزی","تەشیب","فەلافل","حمس","موتەبەل","بابا غەنوج","زەڵاتە","فەتوش","کوبە","بۆڕەک","سمبوسە","فەتایر","مەناقیش","زەعتەر","مریشکی برژاو","شۆربای نیسک"],
+        }
+    },
+    cars: {
+        ar: {
+            "سيارات فاخرة":["فيراري","لامبورغيني","بورش","بنتلي","رولز رويس","مازيراتي","اودي","لكزس","جاغوار","مرسيدس","بي ام دبليو","كاديلاك"],
+            "سيارات عادية":["تويوتا","هوندا","نيسان","هيونداي","كيا","فورد","شيفروليه","مازدا","ميتسوبيشي","سوبارو","فولكس فاجن","بيجو","رينو"],
+            "مركبات ثانية": ["دراجة هوائية","دراجة نارية","حافلة","شاحنة","قطار","مترو","سكوتر","سيارة اسعاف","سيارة اطفاء","سيارة شرطة","دبابة","رافعة","طائرة","سفينة","يخت"],
+        },
+        ku: {
+            "ئۆتۆمبێلی لوکس":["فێراری","لامبۆرگینی","پۆرش","بێنتلی","ڕۆڵز ڕویس","مازێراتی","ئۆدی","لێکسز","جاگوار","مێرسیدس","بی ئێم دەبلیو","کادیلاک"],
+            "ئۆتۆمبێلی ئاسایی":["تۆیۆتا","هۆندا","نیسان","هیۆندا","کیا","فۆرد","شیڤرۆلێت","مازدا","میتسوبیشی","سوباروو","فۆڵکسواگن","پیجۆ","ڕینۆ"],
+            "ئامێری هاتوچۆی تر":["پایسکل","ماتۆڕسکیل","پاس","بارهەڵگر","شەمەندەفەر","مێترۆ","سکوتەر","ئەمبوڵانس","ئۆتۆمبێلی ئاگرکوژێنەوە","تانک","کرێن","فڕۆکە","کەشتی","یەخت"],
+        }
+    },
+    animals: {
+        ar: {
+            "حيوانات برية":["اسد","نمر","فيل","زرافة","قرد","دب","ذئب","ثعلب","فهد","ضبع","حمار وحشي","غزال","باندا","كوالا","كنغر","راكون"],
+            "حيوانات بحرية":["قرش","حوت","دلفين","اخطبوط","سلطعون","سلحفاة","ضفدع"],
+            "طيور":         ["نسر","صقر","بومة","حمامة","غراب","بطريق","نعامة","طاووس","ببغاء","بجعة"],
+            "حيوانات أليفة":["كلب","قطة","ارنب","سنجاب","قنفذ","هامستر"],
+        },
+        ku: {
+            "ئاژەڵی کێوی":["شێر","پڵنگ","فیل","زەڕافە","مەیموون","ورچ","گورگ","ڕێوی","چیتا","کەمتیار","کەرەکێوی","ئاسک","پاندا","کوالا","کانگەرۆ","ڕاکۆن"],
+            "ئاژەڵی دەریایی":["قەرش","نەهەنگ","دۆلفین","ئەختەپووت","قڕژاڵ","کیسەڵ","بۆق"],
+            "باڵندەکان":    ["هەڵۆ","باز","کوندەپەپوو","کۆتر","قەلەڕەش","پەنگوین","وشترمرخ","تاوس","تووتی","قاز"],
+            "ئاژەڵی ئاڵوز": ["سەگ","پشیلە","کەروێشک","سمۆرە","ژیشک","هامستەر"],
+        }
+    },
+    games: {
+        ar: {
+            "ألعاب إطلاق نار":["ببجي","فورتنايت","كول اوف ديوتي","فالورانت","رينبو سيكس","باتلفيلد","كاونتر سترايك","ديستني","ايبكس ليجيندز","هيلو","راست"],
+            "ألعاب مغامرة":  ["جي تي اي","ريد ديد","سبايدرمان","هورايزن","انشارتد","تومب رايدر","ايلدن رينغ","سيكيرو","بلودبورن","ويتشر","سايبر بانك","رزدنت ايفل"],
+            "ألعاب متعددة":  ["ماينكرافت","روبلوكس","امونج اس","فول جايز","فاسمو فوبيا","ديد باي دايلايت","ارك"],
+            "ألعاب رياضية":  ["فيفا","ليغ اوف ليجيندز","اوفر واتش","روكيت ليغ","تيكن","مورتال كومبات","ماريو كارت","جينشين امباكت"],
+        },
+        ku: {
+            "یاری گوللە":   ["پەبجی","فۆرتنایت","کۆل ئۆف دیوتی","ڤالۆرانت","ڕەینبۆ سکس","باتڵفیڵد","کاونتەر سترایک","دێستنی","ئەپێکس لیجێندز","هێیلۆ","ڕەست"],
+            "یاری مەسیر":   ["جی تی ئەی","ڕێد دێد","سپایدەرمان","هۆرایزن","ئەنچارتد","تۆمب ڕایدەر","ئێڵدن ڕینگ","سێكیرۆ","بلودبۆرن","ویتچەر","سایبەر پانک","ڕێزدێنت ئیڤڵ"],
+            "یاری کۆمەڵایەتی":["ماینکرافت","ڕۆبلۆکس","ئەمۆنگ ئەس","فۆڵ گایز","فازمۆ فۆبیا","دێد بەی دایلایت","ئارک"],
+            "یاری وەرزشی":  ["فیفا","لۆڵ","ئۆڤەرواتچ","ڕۆکێت لیگ","تێکن","مۆرتاڵ کۆمبات","ماریۆ کارت","گێنشین ئیمپاکت"],
+        }
+    },
+    sports: {
+        ar: {
+            "رياضات جماعية":["كرة القدم","كرة السلة","كرة الطائرة","كرة اليد","الركبي","البيسبول","الكريكت"],
+            "رياضات فردية": ["تنس","سباحة","جولف","الرماية","ماراثون","الوثب العالي","الوثب الطويل","رمي الرمح"],
+            "فنون قتالية":  ["ملاكمة","مصارعة","كاراتيه","الكيك بوكسينغ","الموي تاي","الجوجيتسو","الايكيدو","الكونغ فو","السومو"],
+            "رياضات مغامرة":["القفز المظلي","تسلق الجبال","التزلج","الباركور","الغطس","الابحار","التجديف"],
+        },
+        ku: {
+            "وەرزشی کۆمەڵایەتی":["تۆپی پێ","تۆپی سەبەتە","تۆپی بالە","تۆپی دەست","ڕەگبی","بەیسبۆڵ","کریکێت"],
+            "وەرزشی تاکەکەس":["تێنس","مەلەوانی","گۆڵف","نیشانەشکێنی","ماراسۆن","بازدانی بەرز","بازدانی درێژ","ڕم هاوێشتن"],
+            "ئەمنیازی":    ["بۆکسێن","زۆرانبازی","کاراتێ","کیک بۆکسێن","مۆی تای","جوجیتسۆ","ئایکیدۆ","کۆنگ فو","سۆمۆ"],
+            "وەرزشی مەتەرسیدار":["پەڕەشووت","شاخەوانی","خلیسکێنەی سەر بەفر","پارکۆر","غەواس","چارۆکەوانی","سەوڵلێدان"],
+        }
+    },
+    celebs: {
+        ar: {
+            "يوتيوبرز عرب":["مستر بيست","بندريتا","ابو فلة","سيد","اوسمز","نور مار","غيث مروان","نارين بيوتي","انس واصالة","نايف حمدان","محمد عدنان","دحومي 999","سعودي ريبورترز","احمد الشقيري"],
+            "رياضيين":     ["كريستيانو رونالدو","ميسي","نيمار","هالاند","مبابي","صلاح","محمد علي كلاي"],
+            "فنانين غرب":  ["شاكيرا","بيلي ايليش","تايلور سويفت","بيونسيه","اديل","ريانا","جاستن بيبر","كانييه ويست","ايمينيم","دريك","ترافيس سكوت","كاردي بي"],
+            "مشاهير تقنية":["ايلون ماسك","بيل جيتس","مارك زوكربيرج","ستيف جوبز"],
+        },
+        ku: {
+            "یوتیوبەری عەرەب":["مستر بیست","بەندەریتە","ئەبوفەلە","سەید","ئۆسمز","نور مار","غەیس مەروان","نارین بیووتی","ئەنەس و ئەساڵە","نایف حەمدان","محەمەد عەدنان","دحومي ٩٩٩","سعودی ڕیپۆرتەرز","ئەحمەد شەقێری"],
+            "وەرزشکاران":  ["کریستیانۆ ڕۆناڵدۆ","مێسی","نەیمار","هالاند","مباپێ","سەڵاح","محەمەد عەلی کەی"],
+            "هونەرمەندانی ڕۆژئاڤا":["شاکیرا","بیلی ئایلیش","تایلۆر سویفت","بیۆنسێ","ئەدێڵ","ڕیانا","جاستن بیبەر","کانییە وێست","ئیمنیم","درەیک","ترافیس سکۆت","کاردی بی"],
+            "ناوداری تەکنەلۆجیا":["ئیلۆن ماسک","بێڵ گەیتس","مارک زوکەربێرگ","ستێڤ جۆبس"],
+        }
+    },
+    objects: {
+        ar: {
+            "أغراض شخصية":["مفتاح","محفظة","نظارة","ساعة","موبايل","شاحن","سماعة","قلم","دفتر","كتاب","حقيبة","عطر","خاتم","سلسلة"],
+            "أدوات":       ["مقص","سكين","مطرقة","برغي","مفك","مصباح يدوي","بطارية","بوصلة","عدسة","خريطة","الة حاسبة"],
+            "أغراض منزلية":["مظلة","ولاعة","مشط","كمامة","مرايا","مناديل","صابونة","فرشاة","معجون","فوطة","مخدة","لحاف","شرشف","شماعة","سجادة صلاة","سبحة"],
+        },
+        ku: {
+            "کەلوپەلی کەسی":["کلیل","جزدان","چاوێلکە","کاتژمێر","مۆبایل","شەحن","سەماعە","پێنووس","دەفتەر","کتێب","جانتا","بۆن","ئەڵقە","زنجیر"],
+            "ئامێرەکان":    ["مەقەس","چەقۆ","چەکوش","بزمار","سپانە","لایت","پاتری","قیبلەنما","عەدەسە","نەخشە","حاسیبە"],
+            "کەلوپەلی ماڵ": ["چەتر","چەرخ","شانە","کمامە","ئاوێنە","دەسڕڕ","سابوون","فڵچە","مەعجوون","خاولی","سەرین","لێفە","چەرچەف","تەلاقی جل","بەرمەوێژ","تەسبیح"],
+        }
+    },
+    brands: {
+        ar: {
+            "تقنية وإلكترونيات":["ابل","سامسونج","تيسلا","جوجل","مايكروسوفت","امازون","نتفلكس","ديزني","سوني","هواوي","شاومي","ديل","كانون"],
+            "ملابس وأزياء":["نايكي","اديداس","بوما","زارا","اتش اند ام","غوتشي","شانيل","لويس فيتون","ديور","برادا"],
+            "مطاعم ومشروبات":["كوكاكولا","بيبسي","ستارباكس","ماكدونالدز","كنتاكي","برجر كنج","بيتزا هت","دومينوز","سابوي","ريد بول"],
+            "سيارات وفاخر":["تويوتا","مرسيدس","بي ام دبليو","فيراري","لامبورغيني","بورش","هوندا","نيسان","روليكس","كارتييه"],
+        },
+        ku: {
+            "تەکنۆلۆجیا":  ["ئەپڵ","سامسۆنگ","تێسلا","گووگڵ","مایکرۆسۆفت","ئەمەزۆن","نێتفلێکس","دیزنی","سۆنی","هواوی","شاومی","دێڵ","کانۆن"],
+            "جل و دیزاین": ["نایکی","ئادیداس","پۆما","زارا","ئێچ ئەند ئێم","گوچی","شانێڵ","لویس ڤیتۆن","دیۆر","پرادا"],
+            "چێشتخانە و خواردنەوە":["کۆکاکۆلا","پیپسی","ستارباکس","ماکدۆناڵدز","کەی ئێف سی","بەرگر کینگ","پیتزا هت","دۆمینۆز","سەبوەی","ڕێد بوڵ"],
+            "ئۆتۆمبێل و لوکس":["تۆیۆتا","مێرسیدس","بی ئێم دەبلیو","فێراری","لامبۆرگینی","پۆرش","هۆندا","نیسان","ڕۆلێکس","کارتیێر"],
+        }
+    },
+    movies: {
+        ar: {
+            "سوبرهيرو وخيال علمي":["باتمان","سبايدرمان","سوبرمان","افنجرز","حرب النجوم","الماتريكس","اكس مان","ترانسفورمرز","انترستيلار","افاتار"],
+            "أفلام كلاسيك":["تايتانيك","الجوكر","العراب","سكارفيز","جلاديتور","قلب شجاع","روكي","رامبو","توب جان","لا لا لاند"],
+            "مسلسلات":     ["جيم اوف ثرونز","بريكنج باد","بيكي بلايندرز","سكويد جيم","فريندز","ستراينجر ثينجز","ناركوس","ذا بويز","لاكاسا دي بابيل","بريزون بريك","لوست","شيرلوك"],
+            "أنيميشن وعائلي":["شريك","توي ستوري","لايون كينج","فروزن","نيمو","علاء الدين","هاري بوتر","سيد الخواتم","جراسيك بارك"],
+        },
+        ku: {
+            "سوپەرهیرۆ و خەیاڵی":["باتمان","سپایدەرمان","سوپەرمان","تۆڵەسێنەرەکان","ستار وۆرز","ماتریکس","ئێکس مان","ترانسفۆرمەرز","ئینتەرستێلار","ئاڤاتار"],
+            "فیلمی کلاسیک":["تایتانیک","جۆکەر","گادفازەر","سکارفەیس","گلادیاتۆر","برێیڤ هارت","ڕۆکی","ڕامبۆ","تۆپ گەن","لا لا لاند"],
+            "زنجیرەکان":   ["گەیم ئۆف سرۆنز","برێکینگ باد","پیکی بلایندەرز","سکوید گەیم","فرێندز","سترەینجەر سینگز","نارکۆس","زە بۆیز","لاکاسا دێ پاپێل","پریزۆن برەیک","لۆست","شێرلۆک"],
+            "ئەنیمەیشن":   ["شرێک","تۆی ستۆری","لایۆن کینگ","فرۆزن","نیمۆ","عەلادین","هاری پۆتەر","لۆرد ئۆف زە ڕینگز","جوراسیک پارک"],
+        }
+    },
+    jobs: {
+        ar: {
+            "مهن طبية":    ["طبيب","صيدلي","ممرض","مسعف","طبيب اسنان","طبيب بيطري"],
+            "مهن قانونية ورسمية":["محامي","قاضي","ضابط","جندي","شرطي","اطفائي"],
+            "مهن إبداعية": ["رسام","موسيقي","مغني","ممثل","مخرج","كاتب","صحفي","مصور","مصمم","مبرمج"],
+            "مهن يدوية":   ["طباخ","خباز","جزار","حلاق","نجار","حداد","كهربائي","سباك","ميكانيكي","سائق","بناء","خياط","مزارع","صياد"],
+        },
+        ku: {
+            "پیشەی پزیشکی":["پزیشک","دەرمانساز","پەرستار","فریاگوزار","دکتۆری ددان","دکتۆری ئاژەڵ"],
+            "پیشەی یاسایی": ["پارێزەر","دادوەر","ئەفسەر","سەرباز","پۆلیس","ئاگرکوژێنەوە"],
+            "پیشەی دیاریکاری":["وێنەکێش","مۆسیقاژەن","گۆرانیبێژ","ئەکتەر","دەرهێنەر","نووسەر","ڕۆژنامەنووس","وێنەگر","دیزاینەر","پرۆگرامساز"],
+            "پیشەی دەست":  ["چێشتلێنەر","نەوایی","قەساب","سەرتاش","دارتاش","ئاسنگەر","کارەباچی","بۆریچی","میکانیک","شۆفێر","بیناساز","خەیات","جوتیار","ڕاوچی"],
+        }
+    },
+    tech: {
+        ar: {
+            "تطبيقات تواصل":["واتساب","تيلغرام","انستغرام","تيك توك","سناب شات","تويتر","فيسبوك","يوتيوب","ديسكورد","لينكد ان"],
+            "تطبيقات خدمات":["جوجل ماب","اوبر","كريم","نون","امازون","نتفلكس","سبوتيفاي","ايتيونز","ابل باي","باي بال"],
+            "أجهزة":       ["ايفون","ايباد","ماك بوك","سامسونج","بلايستيشن","اكس بوكس","نينتندو","ابل ووتش","ايربودز","الكسا"],
+        },
+        ku: {
+            "ئەپی پەیوەندی":["واتسئەپ","تێلێگرام","ئینستاگرام","تیک تۆک","سنابچات","تویتەر","فەیسبووک","یوتیوب","دیسکۆرد","لینکدئین"],
+            "ئەپی خزمەتگوزاری":["گووگڵ مەپ","ئووبەر","کریم","نون","ئەمەزۆن","نێتفلێکس","سپۆتیفای","ئایتیونز","ئەپڵ پەی","بای پاڵ"],
+            "ئامێرەکان":   ["ئایفۆن","ئایپاد","مەک بووک","سامسۆنگ","پلەیستەیشن","ئێکس بۆکس","نینتێندۆ","ئەپڵ واچ","ئێربودز","ئەلێکسا"],
+        }
+    },
+    anime: {
+        ar: {
+            "شونن كلاسيك":["ون بيس","ناروتو","دراجون بول","بليتش","هنتر x هنتر","بوكيمون","كونان","فول ميتال الكيميائي","جينتاما","فيري تيل","ديجيمون"],
+            "شونن حديث":  ["هجوم العمالقة","ديمون سلاير","جوجوتسو كايسن","ماي هيرو اكاديميا","وان بانش مان","بلاك كلوفر","سول ليفيلينغ","طوكيو ريفينجرز","تشينسو مان","سباي فاملي","دكتور ستون"],
+            "انمي خاص":   ["طوكيو غول","مذكرة الموت","كود جياس","سورد ارت اونلاين","جوجو","بيرسيرك","ستاينز غيت","مادوكا ماجيكا","ري زيرو","فايوليت ايفرغاردن","ايفانجيليون","سيلور مون","هايكيو","كوروكو نو باسكت","كلايمور","اكامي جا كيل","بلاك لاغون"],
+        },
+        ku: {
+            "شونێنی کلاسیک":["وەن پیس","نارۆتۆ","دراگۆن بۆڵ","بلیچ","هەنتەر","پۆکیمۆن","کۆنان","فول میتاڵ","جینتاما","فەیری تەیڵ","دیجیمۆن"],
+            "شونێنی نوێ":  ["هێرشی زەبەلاحەکان","دیمۆن سلایەر","جوجوتسو کایسن","مای هیرۆ","وەن پانچ مان","بلاک کلۆڤەر","سۆڵۆ لیڤڵینگ","تۆکیۆ ڕیڤێنجەرز","چەینسۆ مان","سپای فاملی","دکتۆر ستۆن"],
+            "ئەنیمێی تایبەت":["تۆکیۆ غۆڵ","دێس نۆت","کۆد گیاس","سۆرد ئارت","جۆجۆ","بێرسێرک","ستاینز گەیت","مادۆکا ماجیکا","ڕی زیرۆ","ڤایۆلێت ئیڤەرگاردن","ئیڤانجێلیۆن","سەیلۆر موون","هایکیو","کورۆکۆ نۆ باسکێت","کلایمۆر","ئاکامی گا کیڵ","بلاک لاگۆن"],
+        }
+    },
+    history: {
+        ar: {
+            "شخصيات تاريخية":["هتلر","اينشتاين","نابليون","الاسكندر الاكبر","صلاح الدين","جنكيز خان","كليوباترا","كولومبوس","نيوتن","اديسون","تسلا","ابن سينا","الخوارزمي","ابن بطوطة","عمر المختار","غاندي","نيلسون مانديلا","مارتن لوثر كينج","ابراهام لينكولن","جورج واشنطن","تشرشل","يوليوس قيصر","توت عنخ امون"],
+            "فنانون وعلماء":["شكسبير","دا فينشي","فان جوخ","بيكاسو","موزارت","بيتهوفن","ارسطو","افلاطون","سقراط","غاليليو","ماري كوري","داروين","ماجلان","ماركو بولو"],
+            "أماكن وحضارات":["الاهرامات","سور الصين","برج ايفل","الدولة العثمانية","الفايكنج","الساموراي","الحرب العالمية"],
+            "مشاهير حديثين":["ستيف جوبز","محمد علي كلاي","بروس لي","مارلين مونرو","مايكل جاكسون","ام كلثوم","نزار قباني","المتنبي"],
+        },
+        ku: {
+            "کەسایەتی مێژووی":["هیتلەر","ئەنیشتاین","ناپۆلیۆن","ئەلێکساندەری مەزن","سەڵاحەدین","جەنگیز خان","کلیۆپاترا","کۆڵۆمبس","نیوتن","ئەدیسۆن","تێسلا","ئیبن سینا","خوارزمی","ئیبن بەتووتە","عومەر موختار","غاندی","نێڵسۆن ماندێلا","مارتن لوسەر کینگ","ئەبراهام لینکۆڵن","جۆرج واشنتن","چێرچڵ","جولیۆس قەیسەر","توت عەنخ ئاموون"],
+            "هونەرمەند و زانا":["شێکسپیر","دا ڤینچی","ڤان گۆخ","پیکاسۆ","مۆزارت","بیتھۆڤن","ئەرستۆ","ئەفلاتوون","سوقرات","گالیلیۆ","ماري کۆری","داروین","ماجەلان","مارکۆ پۆلۆ"],
+            "شوێن و شارستانی":["ئەهرامەکان","شوورای چین","بورجی ئایفل","دەوڵەتی عوسمانی","ڤایکینگز","سامورای","جەنگی جیهانی"],
+            "ناوداری نوێ":  ["ستێڤ جۆبس","محەمەد عەلی کەی","بروس لی","مارلین مۆنرۆ","مایکڵ جاکسۆن","ئوم کەلسوم","نزار قەبانی","موتەنەبی"],
+        }
+    },
+    home: {
+        ar: {
+            "أجهزة منزلية":["ثلاجة","تلفزيون","غسالة","مكيف","مروحة","مدفأة","مكواة","مكنسة كهربائية","ميكروويف","فرن","خلاط"],
+            "أثاث":        ["سرير","وسادة","بطانية","دولاب","طاولة","كرسي","اريكة","سجادة","ستارة","مصباح","ثريا","ساعة حائط","مرايا","لوحة"],
+            "ملابس":       ["قميص","بنطلون","فستان","تنورة","جاكيت","معطف","حذاء","جوارب","قبعة","نظارات","ساعة يد","حقيبة","حزام","وشاح"],
+            "حمام ومطبخ":  ["مغسلة","منشفة","صابون","شامبو","فرشاة اسنان","قدر","مقلاة","صحن","كوب","ملعقة","شوكة","سكين","سلة مهملات"],
+        },
+        ku: {
+            "ئامێری ماڵ":  ["سەلاجە","تەلەفزیۆن","جلشۆر","سپلیت","پانکە","سۆپا","وتوو","گسکی کارەبایی","مایکرۆوەیڤ","فڕن","خەڵاتە"],
+            "کەلوپەلی ماڵ":["جێگای خەوتن","سەرین","بەتانی","کەنتۆر","مێز","کورسی","قەنەفە","فەرش","پەردە","گڵۆپ","سوورەيا","کاتژمێری دیوار","ئاوێنە","تابلۆ"],
+            "جل":          ["کراس","پانتۆڵ","عەزی","تەنوورە","چاکەت","پاڵتۆ","پێڵاو","گۆرەوی","کڵاو","چاوێلکە","کاتژمێری دەست","جانتا","قاییش","ملپێچ"],
+            "حەمام و چێشتخانە":["مەغسەلە","خاولی","سابوون","شامپۆ","فڵچەی ددان","مەنجەڵ","تاوە","قاپ","پەرداخ","کەوچک","چەتاڵ","چەقۆ","تەنەکەی خۆڵ"],
+        }
+    },
+    countries: {
+        ar: {
+            "دول عربية":   ["العراق","السعودية","مصر","الامارات","الاردن","لبنان","سوريا","فلسطين","اليمن","تونس","الجزائر","المغرب","قطر"],
+            "دول أوروبية": ["المانيا","فرنسا","اسبانيا","بريطانيا","ايطاليا","سويسرا","السويد","النرويج","اليونان","هولندا","بلجيكا","النمسا","البرتغال","بولندا","اوكرانيا","الدنمارك","ايرلندا","فنلندا"],
+            "دول آسيوية":  ["تركيا","اليابان","الصين","الهند","كوريا الجنوبية","باكستان","اندونيسيا","ماليزيا","تايلاند","فيتنام"],
+            "دول أمريكية وأفريقية":["امريكا","البرازيل","روسيا","كندا","استراليا","المكسيك","الارجنتين","كولومبيا","تشيلي","كوبا","كينيا","نيوزيلندا"],
+        },
+        ku: {
+            "وڵاتی عەرەب": ["عێراق","سعودیە","میسر","ئیمارات","ئوردن","لوبنان","سوریا","فەلەستین","یەمەن","تونیس","جەزائیر","مەغریب","قەتەر"],
+            "وڵاتی ئەوروپا":["ئەڵمانیا","فەڕەنسا","ئیسپانیا","بەریتانیا","ئیتاڵیا","سویسرا","سوید","نەرویج","یۆنان","هۆڵەندا","بەلجیکا","نەمسا","پورتوگال","پۆڵەندا","ئۆکرانیا","دانیمارک","ئیرلەندا","فینلەندا"],
+            "وڵاتی ئاسیا":  ["تورکیا","ژاپۆن","چین","هیندستان","کۆریای باشوور","پاکستان","ئەندۆنیزیا","مالیزیا","تایلاند","ڤێتنام"],
+            "وڵاتی ئەمریکا و ئەفریقا":["ئەمریکا","بەڕازیل","ڕووسيا","کەنەدا","ئوسترالیا","مەکسیک","ئەرجەنتین","کۆڵۆمبیا","چیلی","کوبا","کینیا","نیوزیلندا"],
+        }
+    }
+};
+
+/* دالة تجيب الكلمات الصح للتخمين */
+function getGuessOptions(word, cat, lang) {
+    const isAr = lang === 'ar';
+    const langKey = isAr ? 'ar' : 'ku';
+    const subcatData = SUBCATS[cat] ? SUBCATS[cat][langKey] : null;
+
+    let sameSubcat = [];
+    let sameCategory = [];
+    let otherCategory = [];
+
+    if (subcatData) {
+        // نلاقي الفئة الفرعية للكلمة
+        let wordSubcat = null;
+        for (const [subName, words] of Object.entries(subcatData)) {
+            if (words.includes(word)) { wordSubcat = subName; break; }
+        }
+        if (wordSubcat) {
+            sameSubcat = subcatData[wordSubcat].filter(w => w !== word);
+        }
+        // باقي نفس الفئة الكبيرة
+        for (const [subName, words] of Object.entries(subcatData)) {
+            if (subName !== wordSubcat) sameCategory.push(...words);
+        }
+    } else {
+        const pool = DB[cat][isAr ? 'words_ar' : 'words_ku'];
+        sameCategory = pool.filter(w => w !== word);
+    }
+
+    // كلمات من فئات أخرى
+    Object.keys(DB).forEach(c => {
+        if (c !== cat) {
+            const pool = DB[c][isAr ? 'words_ar' : 'words_ku'];
+            otherCategory.push(...pool.slice(0, 5));
+        }
+    });
+
+    // نبني الخيارات: الكلمة + 3 من نفس الفئة الفرعية + 2 من نفس الصنف الكبير
+    let opts = [word];
+    const shuffle = arr => arr.sort(() => Math.random() - 0.5);
+
+    for (const w of shuffle(sameSubcat)) {
+        if (opts.length < 4 && !opts.includes(w)) opts.push(w);
+    }
+    // إذا ما اكتملت الـ4 من الفئة الفرعية، نكمل من نفس الفئة الكبيرة
+    for (const w of shuffle(sameCategory)) {
+        if (opts.length < 4 && !opts.includes(w)) opts.push(w);
+    }
+    // الـ2 الأخيرة من نفس الصنف الكبير (مختلفة عن الفئة الفرعية)
+    for (const w of shuffle(sameCategory)) {
+        if (opts.length < 6 && !opts.includes(w)) opts.push(w);
+    }
+    // إذا ما اكتملت ال6، نأخذ من فئات أخرى
+    for (const w of shuffle(otherCategory)) {
+        if (opts.length < 6 && !opts.includes(w)) opts.push(w);
+    }
+
+    return shuffle(opts);
+}
+let GAME = {
+    lang: 'ar', cat: null, players: [], scores: {},
+    spies: [], spyCount: 1, word: '',
+    currentIdx: 0, revealed: false,
+    voterIdx: 0, votes: {}, tempVotes: [],
+    currentSpyGuesserIdx: 0, spyWins: [],
+    questionPairs: [], currentPairIdx: 0, maxPairsToShow: 3
+};
+
+/* ==========================================================
+   وظيفة الانتقال بين الشاشات (مع أنيميشن)
+   ========================================================== */
+function show(id) {
+    const current = document.querySelector('.screen.active');
+    const next    = document.getElementById(id);
+    if (!next || next === current) return;
+
+    if (current) {
+        current.classList.add('exit');
+        setTimeout(() => {
+            current.classList.remove('active', 'exit');
+        }, 220);
+    }
+
+    setTimeout(() => {
+        next.classList.add('active');
+    }, current ? 100 : 0);
+}
+
+/* ==========================================================
+   تهيئة التطبيق
+   ========================================================== */
+function initApp(lang) {
+    GAME.lang = lang;
+    const isAr = lang === 'ar';
+
+    // بادج التثبيت — تعريب النصوص
+    document.getElementById('install-title').innerText = isAr ? 'ثبّت التطبيق! 📲' : 'ئەپەکە دامەزرێنە! 📲';
+    document.getElementById('install-sub').innerText   = isAr ? 'العب بدون إنترنت كأنه تطبيق أندرويد' : 'بێ ئینتەرنێت یاری بکە وەک ئەپی ئەندرۆید';
+    document.getElementById('install-btn').innerText   = isAr ? 'تثبيت' : 'دامەزراندن';
+
+    show('scr-setup');
+    document.getElementById('ui-cat-title').innerText  = isAr ? '🎯 اختر الصنف' : '🎯 جۆرێک هەڵبژێرە';
+    document.getElementById('ui-label-p').innerText    = isAr ? 'عدد اللاعبين:' : 'ژمارەی یاریزانان:';
+    document.getElementById('ui-label-s').innerText    = isAr ? 'عدد الجواسيس:' : 'ژمارەی جاسوسەکان:';
+    document.getElementById('btn-next').innerText      = isAr ? 'التالي ➜' : 'دواتر ➜';
+
+    const grid = document.getElementById('category-grid');
+    grid.innerHTML = '';
+    Object.keys(DB).forEach(k => {
+        const div = document.createElement('div');
+        div.className = 'cat-card';
+        div.innerHTML = `<span class="cat-emoji">${DB[k].i}</span><span class="cat-name">${isAr ? DB[k].ar : DB[k].ku}</span>`;
+        div.onclick = () => {
+            document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('selected'));
+            div.classList.add('selected');
+            GAME.cat = k;
+            sfx.pop();
+        };
+        grid.appendChild(div);
+    });
+
+    const pCount = document.getElementById('p-count');
+    pCount.innerHTML = '';
+    for (let i = 3; i <= 20; i++) pCount.add(new Option(i, i));
+    updateSpies();
+}
+
+function updateSpies() {
+    const p = parseInt(document.getElementById('p-count').value);
+    const sCount = document.getElementById('s-count');
+    sCount.innerHTML = '';
+    const max = Math.floor((p - 1) / 2);
+    for (let i = 1; i <= max; i++) sCount.add(new Option(i, i));
+}
+
+function goToNames() {
+    if (!GAME.cat) {
+        sfx.click();
+        return alert(GAME.lang === 'ar' ? 'الرجاء اختيار صنف!' : 'تکایە جۆرێک هەڵبژێرە!');
+    }
+    const isAr = GAME.lang === 'ar';
+    show('scr-names');
+    document.getElementById('ui-names-title').innerText = isAr ? '✍️ أسماء الأبطال' : '✍️ ناوی یاریزانەکان';
+    document.getElementById('btn-start').innerText      = isAr ? 'ابدأ اللعب 🎮'    : 'دەستپێکردن 🎮';
+    const list = document.getElementById('names-list');
+    list.innerHTML = '';
+    const c = parseInt(document.getElementById('p-count').value);
+    for (let i = 0; i < c; i++) {
+        const inp = document.createElement('input');
+        inp.type = 'text';
+        inp.className = 'g-input name-in';
+        inp.placeholder = (isAr ? 'لاعب ' : 'یاریزان ') + (i + 1);
+        list.appendChild(inp);
+    }
+}
+
+function startGame() {
+    const inputs = document.querySelectorAll('.name-in');
+    GAME.players = Array.from(inputs).map((v, i) =>
+        v.value.trim() || (GAME.lang === 'ar' ? 'لاعب ' : 'یاریزان ') + (i + 1)
+    );
+    GAME.players.forEach(p => { if (GAME.scores[p] === undefined) GAME.scores[p] = 0; });
+    GAME.spyCount = parseInt(document.getElementById('s-count').value);
+    setupRound();
+}
+
+/* ==========================================================
+   إعداد الجولة
+   ========================================================== */
+function setupRound() {
+    GAME.spies = [];
+    while (GAME.spies.length < GAME.spyCount) {
+        const r = Math.floor(Math.random() * GAME.players.length);
+        if (!GAME.spies.includes(r)) GAME.spies.push(r);
+    }
+    const words = DB[GAME.cat][GAME.lang === 'ar' ? 'words_ar' : 'words_ku'];
+    GAME.word = words[Math.floor(Math.random() * words.length)];
+    GAME.currentIdx = 0;
+    GAME.votes = {};
+    GAME.spyWins = [];
+    show('scr-reveal');
+    updateRevealUI();
+}
+
+function updateRevealUI() {
+    GAME.revealed = false;
+    const isAr = GAME.lang === 'ar';
+    const idx = GAME.currentIdx;
+    document.getElementById('turn-player-name').innerText = GAME.players[idx];
+    document.getElementById('reveal-progress').innerText =
+        (isAr ? `اللاعب ${idx + 1} من ${GAME.players.length}` : `یاریزان ${idx + 1} لە ${GAME.players.length}`);
+    document.getElementById('tap-msg').style.display = 'block';
+    document.getElementById('tap-msg').innerText = isAr ? '🔒 اضغط للكشف' : '🔒 بۆ بینین دایبگرە';
+    document.getElementById('secret-word-display').style.display = 'none';
+    document.getElementById('reveal-box').querySelector('div').style.display = 'block'; // lock icon
+    document.getElementById('btn-reveal-action').innerText = isAr ? 'أظهر 👁️' : 'پیشان بدە 👁️';
+}
+
+function handleReveal() {
+    const wordEl = document.getElementById('secret-word-display');
+    if (!GAME.revealed) {
+        sfx.pop();
+        GAME.revealed = true;
+        document.getElementById('tap-msg').style.display = 'none';
+        document.getElementById('reveal-box').querySelector('div').style.display = 'none';
+        wordEl.style.display = 'block';
+        wordEl.innerText = GAME.spies.includes(GAME.currentIdx)
+            ? (GAME.lang === 'ar' ? '🕵️ انت برة الموضوع!' : '🕵️ تۆ لە دەرەوەی بابەتەکەیت!')
+            : GAME.word;
+        document.getElementById('btn-reveal-action').innerText =
+            GAME.lang === 'ar' ? 'فهمت ✓' : 'تێگەیشتم ✓';
+    } else {
+        GAME.currentIdx++;
+        if (GAME.currentIdx < GAME.players.length) {
+            updateRevealUI();
+        } else {
+            buildQuestionsUI();
+        }
+    }
+}
+
+/* ==========================================================
+   مرحلة وقت الأسئلة
+   ========================================================== */
+function buildQuestionsUI() {
+    show('scr-questions');
+    const isAr = GAME.lang === 'ar';
+    document.getElementById('ui-q-title').innerText    = isAr ? 'وقت الأسئلة ❓' : 'کاتی پرسیارەکان ❓';
+    document.getElementById('ui-q-subtitle').innerText = isAr ? 'كل واحد يسأل ويُسأل!' : 'هەموو کەس دەپرسێت و پرسیار لێ دەکرێت!';
+
+    // نبني دورة كاملة: كل شخص يسأل الشخص التالي بشكل دائري
+    const shuffled = [...GAME.players].sort(() => Math.random() - 0.5);
+    GAME.questionPairs = [];
+    for (let i = 0; i < shuffled.length; i++) {
+        GAME.questionPairs.push({
+            asker: shuffled[i],
+            asked: shuffled[(i + 1) % shuffled.length]
+        });
+    }
+    GAME.currentPairIdx = 0;
+    renderQuestionPair();
+}
+
+function renderQuestionPair() {
+    const isAr  = GAME.lang === 'ar';
+    const pair  = GAME.questionPairs[GAME.currentPairIdx];
+    const el    = document.getElementById('ui-q-pair');
+    const total = GAME.questionPairs.length;
+    const cur   = GAME.currentPairIdx + 1;
+
+    el.innerHTML = isAr
+        ? `<span style="font-size:0.8rem;color:var(--text-dim);">سؤال ${cur} من ${total}</span><br>
+           <span class="q-pair-line">يا <span class="q-asker">${pair.asker}</span></span>
+           <span class="q-pair-line">اسأل <span class="q-asked">${pair.asked}</span></span>`
+        : `<span style="font-size:0.8rem;color:var(--text-dim);">پرسیار ${cur} لە ${total}</span><br>
+           <span class="q-pair-line">ئەی <span class="q-asker">${pair.asker}</span></span>
+           <span class="q-pair-line">پرسیار لە <span class="q-asked">${pair.asked}</span> بکە</span>`;
+
+    const isLast = GAME.currentPairIdx >= total - 1;
+    document.getElementById('btn-next-pair').style.display = isLast ? 'none'  : 'block';
+    document.getElementById('btn-go-vote').style.display   = isLast ? 'block' : 'none';
+    document.getElementById('btn-next-pair').innerText = isAr ? 'السؤال التالي ➜' : 'پرسیاری دواتر ➜';
+    document.getElementById('btn-go-vote').innerText   = isAr ? 'انتهى — ابدأ التصويت 🗳️' : 'تەواوبوو — دەنگدان دەستپێبکە 🗳️';
+}
+
+function nextQuestionPair() { GAME.currentPairIdx++; renderQuestionPair(); }
+function goToVoting()       { GAME.voterIdx = 0; buildVoteUI(); }
+
+/* ==========================================================
+   التصويت
+   ========================================================== */
+function buildVoteUI() {
+    show('scr-vote');
+    GAME.tempVotes = [];
+    const isAr = GAME.lang === 'ar';
+    const total = GAME.players.length;
+    document.getElementById('voter-name-display').innerText = GAME.players[GAME.voterIdx];
+    document.getElementById('vote-progress-label').innerText =
+        isAr ? `التصويت ${GAME.voterIdx + 1} من ${total}` : `دەنگدان ${GAME.voterIdx + 1} لە ${total}`;
+    updateVoteCounterUI();
+
+    const targets = document.getElementById('vote-targets');
+    targets.innerHTML = '';
+    GAME.players.forEach((p, i) => {
+        if (i === GAME.voterIdx) return;
+        const item = document.createElement('div');
+        item.className = 'vote-item';
+        item.innerHTML = `<span>${p}</span><span class="vote-icon">◽</span>`;
+        item.onclick = () => {
+            if (GAME.tempVotes.includes(i)) {
+                GAME.tempVotes = GAME.tempVotes.filter(v => v !== i);
+                item.classList.remove('selected');
+                item.querySelector('.vote-icon').innerText = '◽';
+            } else if (GAME.tempVotes.length < GAME.spyCount) {
+                GAME.tempVotes.push(i);
+                item.classList.add('selected');
+                item.querySelector('.vote-icon').innerText = '🎯';
+                sfx.click();
+            }
+            updateVoteCounterUI();
+        };
+        targets.appendChild(item);
+    });
+}
+
+function updateVoteCounterUI() {
+    const isAr = GAME.lang === 'ar';
+    const rem  = GAME.spyCount - GAME.tempVotes.length;
+    const msg  = document.getElementById('vote-instruction');
+    const btn  = document.getElementById('btn-confirm-vote');
+
+    msg.innerText = isAr
+        ? `🎯 صوّت على ${rem} ${rem === 1 ? 'شخص' : 'أشخاص'} برة الموضوع`
+        : `🎯 دەنگ لەسەر ${rem} کەس بدە کە لە دەرەوەن`;
+
+    btn.style.display = rem === 0 ? 'block' : 'none';
+    btn.innerText = isAr ? 'تأكيد التصويت ✓' : 'پشتڕاستکردنەوە ✓';
+}
+
+function confirmVote() {
+    GAME.votes[GAME.voterIdx] = [...GAME.tempVotes];
+    GAME.voterIdx++;
+    if (GAME.voterIdx < GAME.players.length) {
+        buildVoteUI();
+    } else {
+        GAME.currentSpyGuesserIdx = 0;
+        startSpyGuess();
+    }
+}
+
+/* ==========================================================
+   تخمين الجاسوس (كل جاسوس منفرد)
+   ========================================================== */
+function startSpyGuess() {
+    show('scr-guess');
+    const isAr     = GAME.lang === 'ar';
+    const spyIndex = GAME.spies[GAME.currentSpyGuesserIdx];
+    const total    = GAME.spies.length;
+
+    document.getElementById('ui-spy-guess-name').innerText =
+        GAME.players[spyIndex] + (total > 1 ? ` (${GAME.currentSpyGuesserIdx + 1}/${total})` : '');
+    document.getElementById('ui-spy-desc').innerText =
+        isAr ? 'خمّن الكلمة الصحيحة من بين الخيارات' : 'وشە ڕاستەکە لە نێوان هەڵبژاردنەکان هەڵبژێرە';
+    document.getElementById('btn-give-up').innerText =
+        isAr ? 'ما عرفتها 💀' : 'نەمزانی 💀';
+
+    const grid = document.getElementById('guess-grid');
+    grid.innerHTML = '';
+    const opts = getGuessOptions(GAME.word, GAME.cat, GAME.lang);
+    opts.forEach(w => {
+        const card = document.createElement('div');
+        card.className = 'cat-card';
+        card.innerHTML = `<b style="font-size:1rem">${w}</b>`;
+        card.onclick = () => {
+            sfx.pop();
+            nextSpyOrFinish(w === GAME.word);
+        };
+        grid.appendChild(card);
+    });
+}
+
+function nextSpyOrFinish(isCorrect) {
+    if (isCorrect) GAME.spyWins.push(GAME.spies[GAME.currentSpyGuesserIdx]);
+    GAME.currentSpyGuesserIdx++;
+    if (GAME.currentSpyGuesserIdx < GAME.spies.length) {
+        startSpyGuess();
+    } else {
+        finishGame();
+    }
+}
+
+/* ==========================================================
+   النتائج ونظام النقاط
+   ========================================================== */
+function finishGame() {
+    show('scr-results');
+    const isAr     = GAME.lang === 'ar';
+    const spyNames = GAME.spies.map(i => GAME.players[i]).join(' & ');
+
+    // --- نقاط اللاعبين العاديين ---
+    // كل صوت صحيح على جاسوس = 10 نقاط
+    GAME.players.forEach((p, idx) => {
+        if (!GAME.spies.includes(idx)) {
+            const myVotes = GAME.votes[idx] || [];
+            const correctHits = myVotes.filter(v => GAME.spies.includes(v)).length;
+            GAME.scores[p] += correctHits * 10;
+        }
+    });
+
+    // --- نقاط الجاسوس ---
+    // محد صوّت عليه = +15
+    // خمّن الكلمة (بغض النظر) = +10
+    // اتكشف ولو من شخص + ما خمّن = 0
+    GAME.spies.forEach(spyIdx => {
+        const name           = GAME.players[spyIdx];
+        const wasVotedOn     = Object.values(GAME.votes).some(vl => vl.includes(spyIdx));
+        const guessedCorrect = GAME.spyWins.includes(spyIdx);
+        if (!wasVotedOn) GAME.scores[name] += 15;
+        if (guessedCorrect) GAME.scores[name] += 10;
+    });
+
+    const anySpyWon     = GAME.spyWins.length > 0;
+    const spiesRevealed = GAME.spies.filter(idx => Object.values(GAME.votes).some(vl => vl.includes(idx))).length;
+    const spiesHidden   = GAME.spies.length - spiesRevealed;
+
+    if (anySpyWon) sfx.win();
+
+    let winMsg = '';
+    if      (spiesHidden === GAME.spies.length)                    winMsg = isAr ? '🕵️ الجواسيس ضاعوا بالكامل!'    : '🕵️ جاسوسەکان تەواوی خۆیان شارد!';
+    else if (spiesRevealed === GAME.spies.length && !anySpyWon)    winMsg = isAr ? '🎉 تم اكتشاف جميع الجواسيس!'   : '🎉 هەموو جاسوسەکان دەرکەوتن!';
+    else if (anySpyWon)                                            winMsg = isAr ? '🔥 جاسوس خمّن الموضوع!'         : '🔥 جاسوسێک بابەتەکەی تێگەیشت!';
+    else                                                           winMsg = isAr ? '🎯 بعض الجواسيس اتكشفوا!'       : '🎯 هەندێک جاسوس دەرکەوتن!';
+
+    document.getElementById('btn-new-round').innerText = isAr ? 'جولة ثانية 🔄' : 'گەڕێکی تر 🔄';
+    document.getElementById('btn-home').innerText      = isAr ? 'الرئيسية 🏠'    : 'سەرەتا 🏠';
+
+    document.getElementById('res-announcement').innerHTML = `
+        <div style="font-size:0.9rem;color:var(--text-dim);margin-bottom:6px;font-weight:800;">
+            ${isAr ? 'السالفة كانت:' : 'باسەکە ئەمە بوو:'}
+        </div>
+        <div style="font-size:2.6rem;font-weight:900;color:var(--yellow);text-shadow:0 0 20px var(--yellow-glow);margin-bottom:12px;">
+            ${GAME.word}
+        </div>
+        <div style="font-size:0.85rem;color:var(--text-dim);font-weight:800;margin-bottom:4px;">
+            ${isAr ? 'اللي كانوا برة الموضوع:' : 'ئەوانەی لە دەرەوە بوون:'}
+        </div>
+        <div style="font-size:1.4rem;color:var(--pink);font-weight:900;text-shadow:0 0 12px var(--pink-glow);margin-bottom:14px;">
+            🕵️ ${spyNames}
+        </div>
+        <div style="font-size:1.1rem;font-weight:900;color:var(--green);text-shadow:0 0 12px var(--green-glow);">
+            ${winMsg}
+        </div>
+    `;
+
+    // --- جدول النقاط ---
+    const lb = document.getElementById('leaderboard');
+    lb.innerHTML = `<h4 style="margin:0 0 12px;font-size:1rem;color:var(--text-dim);">
+        ${isAr ? '🏆 جدول النقاط' : '🏆 خشتەی خاڵەکان'}
+    </h4>`;
+
+    const ranks = ['🥇','🥈','🥉'];
+    Object.entries(GAME.scores)
+        .sort((a, b) => b[1] - a[1])
+        .forEach(([name, score], i) => {
+            const isSpy = GAME.spies.map(idx => GAME.players[idx]).includes(name);
+            const row   = document.createElement('div');
+            row.className = 'lb-row';
+            row.style.animationDelay = (i * 0.06) + 's';
+            row.innerHTML = `
+                <span class="lb-rank">${ranks[i] || (i + 1)}</span>
+                <span style="flex:1;padding:0 8px;">${name}${isSpy ? ' 🕵️' : ''}</span>
+                <span style="color:var(--blue);font-size:1.1rem;">${score} 🪙</span>
+            `;
+            lb.appendChild(row);
+        });
+
+    // --- جدول من صوّت على مين ---
+    const voteTitle = document.createElement('h4');
+    voteTitle.style.cssText = 'margin:20px 0 12px;font-size:1rem;color:var(--text-dim);';
+    voteTitle.innerText = isAr ? '🗳️ من صوّت على مين؟' : '🗳️ کێ دەنگی دا بۆ کێ؟';
+    lb.appendChild(voteTitle);
+
+    GAME.players.forEach((player, idx) => {
+        const myVotes = GAME.votes[idx] || [];
+        if (myVotes.length === 0) return;
+
+        const votedNames = myVotes.map(vi => {
+            const isSpy = GAME.spies.includes(vi);
+            return `${GAME.players[vi]}${isSpy ? ' 🕵️' : ''}`;
+        }).join('، ');
+
+        const isSpy = GAME.spies.includes(idx);
+        const row   = document.createElement('div');
+        row.className = 'lb-row';
+        row.style.cssText = 'font-size:0.85rem;padding:8px 12px;';
+        row.innerHTML = `
+            <span style="font-weight:900;color:#fff;">${player}${isSpy ? ' 🕵️' : ''}</span>
+            <span style="color:var(--text-dim);margin:0 6px;">←</span>
+            <span style="color:var(--text-dim);">${votedNames}</span>
+        `;
+        lb.appendChild(row);
+    });
+}
+
+function resetRound() { setupRound(); }
+function hardReset()  { location.reload(); }
+</script>
+</body>
+</html>
