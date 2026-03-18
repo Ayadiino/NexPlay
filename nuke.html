@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>NUKE 💣</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<style>:root{--bg:#0d0d1a;--card:#0f0f2a;--card2:#111128;--cyan:#00fff5;--pink:#ff006e;--yellow:#ffe600;--green:#39ff14;--dim:#556;--text:#e8e8ff;--border:#1e1e3f}*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;justify-content:center;overflow-x:hidden;user-select:none;background-image:linear-gradient(rgba(0,255,245,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,245,0.03) 1px,transparent 1px);background-size:20px 20px}.wrap{width:100%;max-width:460px;padding:12px;min-height:100vh;position:relative}.screen{display:none}.active{display:flex;flex-direction:column;animation:fIn .25s ease}@keyframes fIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.logo-wrap{text-align:center;padding:28px 0 12px}.logo-nuke{font-family:'Press Start 2P',monospace;font-size:3.5rem;color:var(--cyan);text-shadow:0 0 10px var(--cyan),0 0 30px var(--cyan),4px 4px 0 #005a58;display:block;letter-spacing:4px;line-height:1}.logo-bomb{font-size:3rem;display:block;animation:bFloat 2s ease-in-out infinite;margin-bottom:6px}@keyframes bFloat{0%,100%{transform:translateY(0) rotate(-8deg);filter:drop-shadow(0 6px 12px rgba(255,0,110,.5))}50%{transform:translateY(-10px) rotate(8deg);filter:drop-shadow(0 18px 22px rgba(255,0,110,.7))}}.logo-by{font-size:.45rem;letter-spacing:2px;color:var(--dim);margin-top:6px;font-family:'Press Start 2P',monospace}.pxb{background:var(--card2);border:2px solid var(--border);box-shadow:4px 4px 0 #000,inset 0 1px 0 rgba(255,255,255,.04);position:relative;overflow:hidden}.pxb::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,255,245,.15),transparent)}.card{padding:16px;margin-bottom:12px}.clabel{font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:var(--yellow);font-weight:900;margin-bottom:10px;display:flex;align-items:center;gap:6px;font-family:'Press Start 2P',monospace}.clabel::after{content:'';flex:1;height:1px;background:var(--border)}.btn{width:100%;padding:14px;border:none;font-family:'Cairo',sans-serif;font-size:1rem;font-weight:900;cursor:pointer;margin-top:8px;position:relative;transition:all .1s;letter-spacing:1px;border-radius:2px}.btn-c{background:var(--cyan);color:#000;box-shadow:0 5px 0 #007a76,0 8px 20px rgba(0,255,245,.25)}.btn-c:active{transform:translateY(4px);box-shadow:0 1px 0 #007a76}.btn-p{background:var(--pink);color:#fff;box-shadow:0 5px 0 #7a0035,0 8px 20px rgba(255,0,110,.25)}.btn-p:active{transform:translateY(4px);box-shadow:0 1px 0 #7a0035}.btn-y{background:var(--yellow);color:#000;box-shadow:0 5px 0 #7a6d00,0 8px 20px rgba(255,230,0,.25)}.btn-y:active{transform:translateY(4px);box-shadow:0 1px 0 #7a6d00}.btn-g{background:var(--green);color:#000;box-shadow:0 5px 0 #1a7a06,0 8px 20px rgba(57,255,20,.25)}.btn-g:active{transform:translateY(4px);box-shadow:0 1px 0 #1a7a06}.btn-ghost{background:transparent;color:var(--dim);border:2px solid var(--border);box-shadow:0 4px 0 rgba(0,0,0,.4)}.btn-ghost:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.4)}.btn-ghost:hover{color:var(--text)}.lang-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}.lang-btn{padding:22px 10px;background:var(--card2);border:2px solid var(--border);color:var(--text);font-family:'Cairo',sans-serif;font-weight:900;font-size:1.1rem;cursor:pointer;text-align:center;box-shadow:4px 4px 0 #000;transition:.15s;border-radius:2px}.lang-btn:active,.lang-btn.sel{border-color:var(--cyan);background:rgba(0,255,245,.1);box-shadow:2px 2px 0 #000;transform:translate(2px,2px)}.lang-sub{font-size:.7rem;color:var(--dim);display:block;margin-top:4px}.inp{width:100%;padding:11px 14px;background:rgba(0,0,0,.4);border:2px solid var(--border);color:var(--text);font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:700;text-align:center;outline:none;margin-bottom:8px;transition:border-color .2s;box-shadow:inset 0 2px 4px rgba(0,0,0,.4);border-radius:2px}.inp:focus{border-color:var(--cyan)}.counter-row{display:flex;align-items:center;justify-content:center;gap:20px}.cnt-btn{width:44px;height:44px;background:var(--card2);border:2px solid var(--border);color:var(--text);font-size:1.4rem;font-weight:900;cursor:pointer;box-shadow:3px 3px 0 #000;display:flex;align-items:center;justify-content:center;transition:.1s;font-family:'Cairo',sans-serif;border-radius:2px}.cnt-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #000;background:var(--pink)}.cnt-val{font-size:2.6rem;font-weight:900;color:var(--yellow);min-width:50px;text-align:center;font-family:'Press Start 2P',monospace}.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.cat-item{background:rgba(0,0,0,.35);border:2px solid var(--border);padding:12px 5px;text-align:center;cursor:pointer;transition:.15s;box-shadow:2px 2px 0 #000;border-radius:2px}.cat-item:active,.cat-item.sel{border-color:var(--yellow);background:rgba(255,230,0,.12);box-shadow:1px 1px 0 #000;transform:translate(1px,1px)}.cat-em{font-size:1.7rem;display:block;margin-bottom:3px}.cat-nm{font-size:.68rem;font-weight:800;line-height:1.2}.pun-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.pun-item{background:rgba(0,0,0,.35);border:2px solid var(--border);padding:13px 5px;text-align:center;cursor:pointer;transition:.15s;box-shadow:2px 2px 0 #000;font-size:.72rem;font-weight:800;border-radius:2px}.pun-item:active,.pun-item.sel{border-color:var(--pink);background:rgba(255,0,110,.15);box-shadow:1px 1px 0 #000;transform:translate(1px,1px)}.pun-em{font-size:1.5rem;display:block;margin-bottom:3px}.time-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.time-item{background:rgba(0,0,0,.35);border:2px solid var(--border);padding:11px 5px;text-align:center;cursor:pointer;transition:.15s;box-shadow:2px 2px 0 #000;font-size:.72rem;font-weight:800;border-radius:2px}.time-item.sel{border-color:var(--green);background:rgba(57,255,20,.12);box-shadow:1px 1px 0 #000;transform:translate(1px,1px)}.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0}.toggle-lbl{font-size:.85rem;font-weight:700}.toggle{position:relative;width:50px;height:26px;cursor:pointer}.toggle input{opacity:0;width:0;height:0}.slider{position:absolute;inset:0;background:#222;border:2px solid var(--border);transition:.3s;border-radius:2px}.slider::before{content:'';position:absolute;height:18px;width:18px;left:2px;top:2px;background:var(--dim);transition:.3s}input:checked+.slider{background:rgba(0,255,245,.2);border-color:var(--cyan)}input:checked+.slider::before{transform:translateX(22px);background:var(--cyan)}.announce-screen{text-align:center;padding:40px 20px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}.ann-badge{background:var(--pink);color:#fff;font-size:.55rem;font-weight:900;letter-spacing:3px;padding:4px 14px;text-transform:uppercase;font-family:'Press Start 2P',monospace}.ann-icon{font-size:4rem}.ann-title{font-size:1.8rem;font-weight:900;line-height:1.2;color:var(--cyan)}.ann-sub{color:var(--dim);font-size:.9rem;font-weight:700}.bomb-screen{gap:10px}.player-box{text-align:center;padding:12px;background:rgba(0,255,245,.06);border:2px solid rgba(0,255,245,.25);box-shadow:0 0 20px rgba(0,255,245,.08)}.p-label{font-size:.55rem;letter-spacing:3px;color:var(--dim);font-weight:700;text-transform:uppercase;font-family:'Press Start 2P',monospace}.p-name{font-size:1.8rem;font-weight:900;color:var(--yellow);line-height:1.1}.p-team{font-size:.72rem;font-weight:700;color:var(--cyan);margin-top:2px}.p-lives{font-size:1rem;margin-top:3px;letter-spacing:2px}.bomb-wrap{display:flex;justify-content:center;align-items:center;padding:8px 0}.bomb-emoji{font-size:5rem;transition:transform .1s;display:inline-block}.bomb-emoji.pulse{animation:bPulse .6s ease-in-out infinite}@keyframes bPulse{0%,100%{transform:scale(1) rotate(-5deg)}50%{transform:scale(1.08) rotate(5deg)}}.bomb-emoji.fast{animation:bFast .3s ease-in-out infinite}@keyframes bFast{0%,100%{transform:scale(1) rotate(-8deg)}50%{transform:scale(1.12) rotate(8deg)}}.bomb-emoji.ultra{animation:bUltra .15s ease-in-out infinite}@keyframes bUltra{0%,100%{transform:scale(1) rotate(-10deg);filter:drop-shadow(0 0 8px var(--pink))}50%{transform:scale(1.15) rotate(10deg);filter:drop-shadow(0 0 20px var(--pink))}}.bomb-emoji.shake{animation:bShake 0.08s ease-in-out infinite}@keyframes bShake{0%,100%{transform:translateX(-4px) scale(1.1)}50%{transform:translateX(4px) scale(1.1)}}.q-box{padding:18px;text-align:center;min-height:110px;display:flex;align-items:center;justify-content:center}.q-cat{font-size:.6rem;letter-spacing:2px;color:var(--pink);font-weight:900;text-transform:uppercase;margin-bottom:8px;font-family:'Press Start 2P',monospace}.q-text{font-size:1.2rem;font-weight:900;line-height:1.5;color:var(--text)}.q-type{font-size:.65rem;color:var(--dim);margin-top:6px;font-weight:700}.score-row{display:flex;gap:8px}.score-box{flex:1;padding:10px;text-align:center;background:rgba(0,0,0,.3);border:2px solid var(--border)}.score-team{font-size:.6rem;letter-spacing:2px;color:var(--dim);font-weight:700;text-transform:uppercase}.score-val{font-size:1.8rem;font-weight:900;font-family:'Press Start 2P',monospace}.score-a{color:var(--cyan)}.score-b{color:var(--pink)}.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}.btn-row .btn{margin-top:0}.red-flash{position:fixed;inset:0;pointer-events:none;z-index:999;border:6px solid transparent;transition:border-color .1s}.red-flash.on{animation:rFlash .5s steps(2) infinite}@keyframes rFlash{0%{border-color:rgba(255,0,110,.8)}50%{border-color:transparent}}.explode-screen{text-align:center;padding:30px 16px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(ellipse,rgba(255,0,110,.25) 0%,transparent 70%)}.exp-big{font-size:5rem;animation:eSpin .5s ease-out}@keyframes eSpin{0%{transform:scale(0) rotate(0deg)}60%{transform:scale(1.3) rotate(180deg)}100%{transform:scale(1) rotate(360deg)}}.exp-name{font-size:2rem;font-weight:900;color:var(--pink);text-shadow:0 0 20px var(--pink)}.exp-sub{font-size:1rem;color:var(--dim);font-weight:700}.exp-pts{font-size:.8rem;font-weight:700;padding:6px 14px;background:rgba(255,0,110,.15);border:2px solid rgba(255,0,110,.3);color:var(--pink)}.elim-badge{background:var(--pink);color:#fff;padding:6px 166px;font-size:.7rem;font-weight:900;letter-spacing:2px;font-family:'Press Start 2P',monospace}.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.stat-card{padding:12px;text-align:center;background:rgba(0,0,0,.3);border:2px solid var(--border)}.stat-icon{font-size:1.6rem;display:block;margin-bottom:4px}.stat-title{font-size:.6rem;color:var(--dim);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px}.stat-val{font-size:.9rem;font-weight:900;color:var(--yellow)}.team-result{padding:14px;text-align:center;margin-bottom:8px}.tr-name{font-size:.7rem;letter-spacing:2px;color:var(--dim);font-weight:700}.tr-score{font-size:2.5rem;font-weight:900;font-family:'Press Start 2P',monospace}.winner-box{padding:20px;text-align:center;background:rgba(57,255,20,.06);border:2px solid var(--green);box-shadow:0 0 30px rgba(57,255,20,.15)}.winner-crown{font-size:3rem;display:block;margin-bottom:8px}.winner-name{font-size:1.6rem;font-weight:900;color:var(--green);text-shadow:0 0 15px var(--green)}.sep{height:1px;background:var(--border);margin:8px 0}.toggle-daring{padding:12px 14px;background:rgba(255,0,110,.08);border:2px solid rgba(255,0,110,.3);margin-bottom:8px}.daring-warn{font-size:.68rem;color:var(--pink);font-weight:700;margin-top:4px}#flashOverlay{position:fixed;inset:0;background:rgba(255,0,110,.6);pointer-events:none;z-index:9999;opacity:0;transition:opacity .1s}.rounds-row{display:flex;align-items:center;gap:14px;padding:8px 0}.rounds-label{font-size:.8rem;font-weight:700;flex:1}.nq-badge{display:inline-block;padding:2px 8px;font-size:.58rem;font-weight:900;letter-spacing:1px;font-family:'Press Start 2P',monospace;border-radius:1px}.nq-double{background:var(--yellow);color:#000}.nq-boss{background:var(--pink);color:#fff}.scoreboard{margin-bottom:10px}.sb-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid var(--border)}.sb-row:last-child{border-bottom:none}.sb-name{font-size:.85rem;font-weight:800}.sb-pts{font-size:.8rem;font-weight:900;font-family:'Press Start 2P',monospace}.sb-pts.pos{color:var(--green)}.sb-pts.neg{color:var(--pink)}.round-indicator{display:flex;gap:4px;justify-content:center;margin-bottom:8px}.ri-dot{width:10px;height:10px;background:var(--border);border:1px solid #333}.ri-dot.done{background:var(--cyan)}.ri-dot.cur{background:var(--pink);animation:riPulse .8s ease-in-out infinite}@keyframes riPulse{0%,100%{opacity:1}50%{opacity:.4}}.back-btn{display:flex;align-items:center;gap:8px;background:none;border:none;color:var(--dim);font-family:'Cairo',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;padding:6px 0;margin-bottom:8px}.back-btn:hover{color:var(--text)}.score-row{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}.score-row::-webkit-scrollbar{height:3px}.score-row::-webkit-scrollbar-thumb{background:var(--border)}.home-btn{background:transparent;color:var(--dim);border:2px solid var(--border);width:100%;padding:12px;font-family:'Cairo',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;margin-top:8px;border-radius:2px}.home-btn:active{background:rgba(255,255,255,.05)}</style>
+</head>
+<body>
+<div id="flashOverlay"></div>
+<div class="red-flash" id="redFlash"></div>
+<div class="wrap">
+
+
+<div class="screen active" id="sLang">
+  <div class="logo-wrap">
+    <span class="logo-bomb">💣</span>
+    <span class="logo-nuke">NUKE</span>
+    <div class="logo-by">by Ayad M Ismail</div>
+  </div>
+  <div class="card pxb" style="margin-top:16px">
+    <div class="clabel">⚙ اختار اللغة | زمان هەڵبژێرە</div>
+    <div class="lang-grid">
+      <button class="lang-btn" onclick="setLang('ar')">
+        <strong>عربي</strong>
+        <span class="lang-sub">عراقي</span>
+      </button>
+      <button class="lang-btn" onclick="setLang('ku')">
+        <strong>کوردی</strong>
+        <span class="lang-sub">سۆرانی</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<div class="screen" id="sSetup">
+  <div class="logo-wrap" style="padding:14px 0 8px">
+    <span style="font-family:'Press Start 2P',monospace;font-size:2rem;color:var(--cyan);text-shadow:0 0 10px var(--cyan)">NUKE</span>
+  </div>
+  <button class="back-btn" onclick="goLang()">◄ <span id="txtBack"></span></button>
+
+  
+  <div class="card pxb">
+    <div class="clabel" id="lblPlayers"></div>
+    <div class="counter-row">
+      <button class="cnt-btn" onclick="adjPlayers(-1)">−</button>
+      <span class="cnt-val" id="pCount">4</span>
+      <button class="cnt-btn" onclick="adjPlayers(1)">+</button>
+    </div>
+    <div id="playerNames" style="margin-top:12px"></div>
+  </div>
+
+  
+  <div class="card pxb">
+    <div class="clabel" id="lblTeams"></div>
+    <div class="toggle-row">
+      <span class="toggle-lbl" id="txtTeamMode"></span>
+      <label class="toggle"><input type="checkbox" id="teamToggle" onchange="toggleTeams()"><span class="slider"></span></label>
+    </div>
+    <div id="teamNamesWrap" style="display:none;margin-top:10px">
+      <input class="inp" id="teamAName" placeholder="فريق A" maxlength="20">
+      <input class="inp" id="teamBName" placeholder="فريق B" maxlength="20">
+    </div>
+    <div id="pptWrap" style="display:none;align-items:center;justify-content:space-between;padding:8px 0;margin-top:4px">
+      <span class="toggle-lbl" id="lblPPT"></span>
+      <div class="counter-row" style="gap:12px">
+        <button class="cnt-btn" onclick="adjPPT(-1)" style="width:38px;height:38px">−</button>
+        <span class="cnt-val" id="pptVal" style="font-size:1.8rem;min-width:35px">2</span>
+        <button class="cnt-btn" onclick="adjPPT(1)" style="width:38px;height:38px">+</button>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="card pxb">
+    <div class="clabel" id="lblRounds"></div>
+    <div class="rounds-row">
+      <span class="rounds-label" id="txtRoundsLabel"></span>
+      <div class="counter-row" style="gap:14px">
+        <button class="cnt-btn" onclick="adjRounds(-1)">−</button>
+        <span class="cnt-val" id="rCount" style="font-size:2rem">3</span>
+        <button class="cnt-btn" onclick="adjRounds(1)">+</button>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="card pxb">
+    <div class="clabel" id="lblCats"></div>
+    <div class="cat-grid" id="catGrid"></div>
+  </div>
+
+  
+  <div class="card pxb">
+    <div class="clabel" id="lblPun"></div>
+    <div class="pun-grid" id="punGrid"></div>
+  </div>
+
+  
+  <div class="card pxb">
+    <div class="clabel" id="lblTime"></div>
+    <div class="time-grid" id="timeGrid"></div>
+  </div>
+
+  
+  <div class="card pxb toggle-daring">
+    <div class="toggle-row">
+      <span class="toggle-lbl" id="txtDaring"></span>
+      <label class="toggle"><input type="checkbox" id="daringToggle"><span class="slider"></span></label>
+    </div>
+    <div class="daring-warn" id="txtDaringWarn"></div>
+  </div>
+
+  <button class="btn btn-c" onclick="startGame()" id="btnStart"></button>
+</div>
+
+
+<div class="screen" id="sAnnounce">
+  <div class="announce-screen">
+    <div class="ann-badge" id="annBadge"></div>
+    <div class="ann-icon" id="annIcon"></div>
+    <div class="ann-title" id="annTitle"></div>
+    <div class="ann-sub" id="annSub"></div>
+    <button class="btn btn-c" id="annBtn" onclick="startRound()" style="margin-top:20px;max-width:280px"></button>
+  </div>
+</div>
+
+
+<div class="screen bomb-screen" id="sGame">
+  <div class="score-row" id="scoreRow"></div>
+  <div class="round-indicator" id="roundDots"></div>
+
+  <div class="player-box pxb">
+    <div class="p-label" id="pLabel"></div>
+    <div class="p-name" id="pName"></div>
+    <div class="p-team" id="pTeam"></div>
+    <div class="p-lives" id="pLives"></div>
+  </div>
+
+  <div class="nq-badge" id="specialBadge" style="display:none;margin:0 auto"></div>
+
+  <div class="bomb-wrap">
+    <span class="bomb-emoji" id="bombEmoji">💣</span>
+  </div>
+
+  <div class="q-box pxb">
+    <div>
+      <div class="q-cat" id="qCat"></div>
+      <div class="q-text" id="qText"></div>
+      <div class="q-answer" id="qAnswer" style="display:none;margin-top:10px;font-size:1rem;font-weight:900;color:var(--green);text-shadow:0 0 10px var(--green);padding:8px;background:rgba(57,255,20,0.1);border:1px solid var(--green);border-radius:4px;"></div>
+    </div>
+  </div>
+  <button class="btn btn-y" id="btnReveal" onclick="revealAnswer()" style="margin-top:4px;"></button>
+
+  <div class="btn-row" id="btnRowJudge" style="display:none;">
+    <button class="btn btn-p" id="btnWrong" onclick="dontKnow()"></button>
+    <button class="btn btn-c" id="btnCorrect" onclick="passQ()"></button>
+  </div>
+  <div class="btn-row" id="btnRowNormal">
+    <button class="btn btn-p" id="btnDontKnow" onclick="dontKnow()"></button>
+    <button class="btn btn-c" id="btnPass" onclick="passQ()"></button>
+  </div>
+</div>
+
+
+<div class="screen" id="sExplode">
+  <div class="explode-screen">
+    <div class="exp-big">💥</div>
+    <div class="exp-name" id="expName"></div>
+    <div class="exp-sub" id="expSub"></div>
+    <div class="exp-pts" id="expPts"></div>
+    <div class="elim-badge" id="elimBadge" style="display:none"></div>
+    <button class="btn btn-c" id="expBtn" onclick="afterExplode()" style="margin-top:16px;max-width:280px"></button>
+  </div>
+</div>
+
+
+<div class="screen" id="sRoundEnd">
+  <div style="padding:20px 0 8px;text-align:center">
+    <div style="font-family:'Press Start 2P',monospace;font-size:1rem;color:var(--cyan)" id="reTitle"></div>
+  </div>
+  <div id="reTeamScores" style="margin-bottom:8px"></div>
+  <div class="card pxb">
+    <div class="clabel" id="lblRoundScores">النقاط</div>
+    <div class="scoreboard" id="reScores"></div>
+  </div>
+  <button class="btn btn-c" id="reBtn" onclick="nextRoundAnnounce()" style="margin-bottom:8px"></button>
+  <button class="home-btn" onclick="window.location.href='../index.html'">🏠 الموقع الرئيسي | سەرەتا</button>
+</div>
+
+
+<div class="screen" id="sMidScore">
+  <div style="padding:16px 0 8px;text-align:center">
+    <div style="font-family:'Press Start 2P',monospace;font-size:1.4rem;color:var(--cyan)" id="msTitle"></div>
+  </div>
+  <div class="card pxb">
+    <div class="clabel" id="msTeamLabel"></div>
+    <div id="msTeamScores"></div>
+  </div>
+  <div class="card pxb">
+    <div class="clabel" id="msPlayerLabel"></div>
+    <div class="scoreboard" id="msPlayerScores"></div>
+  </div>
+  <button class="btn btn-c" id="msBtn" onclick="continueGame()"></button>
+</div>
+
+
+<div class="screen" id="sStats">
+  <div style="padding:14px 0 8px;text-align:center">
+    <div style="font-family:'Press Start 2P',monospace;font-size:1.2rem;color:var(--cyan);margin-bottom:4px">GAME OVER</div>
+  </div>
+  <div class="winner-box pxb" id="winnerBox">
+    <span class="winner-crown">🏆</span>
+    <div class="winner-name" id="winnerName"></div>
+    <div style="font-size:.8rem;color:var(--dim);margin-top:4px" id="winnerScore"></div>
+  </div>
+  <div style="height:8px"></div>
+  <div class="card pxb">
+    <div class="clabel" id="lblTeamFinal"></div>
+    <div id="finalTeamScores"></div>
+  </div>
+  <div class="card pxb">
+    <div class="clabel" id="lblPlayerFinal"></div>
+    <div class="scoreboard" id="finalPlayerScores"></div>
+  </div>
+  <div class="card pxb">
+    <div class="clabel" id="lblAchievements"></div>
+    <div class="stats-grid" id="achievementsGrid"></div>
+  </div>
+  <button class="btn btn-p" onclick="resetGame()" id="btnPlayAgain" style="margin-bottom:8px"></button>
+  <button class="home-btn" onclick="window.location.href='../index.html'" id="btnGoHome">🏠 الموقع الرئيسي | سەرەتا</button>
+</div>
+
+</div>
+
+<script>var L={
+ar:{
+back:"رجوع",players:"اللاعبون",teams:"الفريقين",teamMode:"وضع الفريقين",
+cats:"الأصناف",punishment:"العقوبة",timeMode:"الوقت",daring:"وضع جريء 🔥",
+daringWarn:"للكبار فقط - يضيف أسئلة محرجة 20%",start:"ابدأ اللعبة 💣",
+rounds:"عدد الجولات",roundsLabel:"جولة",
+pass:"مرّر ✓",dontKnow:"ما أعرف ✗",
+playerLabel:"دور",teamA:"فريق A",teamB:"فريق B",
+roundAnn:"الجولة",starts:"تبدأ!",normalRound:"جولة عادية",normalSub:"كل تمرير = نقطة واحدة",
+doubleRound:"جولة مضاعفة ⚡",doubleSub:"كل تمرير = نقطتين",bossRound:"سؤال رئيسي 💀",bossSub:"التمرير الناجح = 3 نقاط",
+tapStart:"اضغط للبدء",
+exploded:"💥 انفجرت عليك!",punPoints:"عقوبة: نقطة سالبة",punLives:"حياة تنقص",punElim:"طرد من اللعبة!",
+continueBtn:"كمّل",
+livesLeft:"حياة متبقية",eliminated:"مطرود!",
+punElimBadge:"🚫 خارج من اللعبة",
+nextRound:"الجولة التالية",endGame:"نهاية اللعبة",
+teamScore:"نقاط الفريقين",playerScore:"نقاط اللاعبين",
+finalTeam:"النتيجة النهائية - الفرق",finalPlayer:"النتيجة النهائية - اللاعبون",
+achievements:"الألقاب والإحصائيات",
+playAgain:"العب مرة ثانية 🔄",
+aWinner:"🏆 الفائز",aPassMost:"⬅️ الأكثر تمريراً",aExplode:"💥 المتفجر الدائم",aDontKnow:"❓ ما أعرف الأكثر",
+aFirst:"💣 أول انفجار",aLucky:"🍀 المحظوظ",aClown:"🤡 المهرج",aFast:"😬 العصبي",
+aEagle:"🦅 الصقر",aLastSec:"🎲 ابن الحظ",aFlame:"🔥 الشعلة",aHeart:"🫀 القلب القوي",
+pts:"نقاط",roundNum:"الجولة",
+cat_food:"🍔 أكل",cat_sport:"⚽ رياضة",cat_challenge:"🔥 تحديات",cat_geo:"🌍 جغرافيا",
+cat_history:"📚 تاريخ",cat_movies:"🎬 أفلام",cat_famous:"👤 شخصيات",cat_general:"🧠 عامة",
+cat_gaming:"🎮 ألعاب",cat_religion:"☪️ ديني",cat_mix:"🎰 كل شي",
+pun_elim:"طرد",pun_lives:"حيوات",pun_pts:"نقطة سالبة",
+time_random:"عشوائي",time_30:"30 ثانية",time_60:"60 ثانية",time_pressure:"ضغط",
+winnerTeam:"الفريق الفائز",noElim:"ما طُرد أحد",
+teamPlayers:"لاعبو الفريق",
+roundEndTitle:"انتهت الجولة",roundEndBtn:"الجولة التالية",
+playersPerTeam:"لاعبين بكل فريق",
+},
+ku:{
+back:"گەڕانەوە",players:"یاریزانەکان",teams:"تیمەکان",teamMode:"شێوازی تیم",
+cats:"پۆلەکان",punishment:"سزا",timeMode:"کات",daring:"شێوازی بوێری 🔥",
+daringWarn:"تەنها بۆ گەورەکان - پرسیاری شەرمەزارکەر زیاد دەکات ٢٠٪",start:"یارییەکە دەستپێبکە 💣",
+rounds:"ژمارەی خولەکان",roundsLabel:"خول",
+pass:"تێپەڕاندن ✓",dontKnow:"نازانم ✗",
+playerLabel:"نۆرەی",teamA:"تیمی A",teamB:"تیمی B",
+roundAnn:"خولی",starts:"دەستپێدەکات!",normalRound:"خولی ئاسایی",normalSub:"هەر تێپەڕاندنێک = یەک خاڵ",
+doubleRound:"خولی دووهێندە ⚡",doubleSub:"هەر تێپەڕاندنێک = دوو خاڵ",bossRound:"پرسیاری قورس 💀",bossSub:"تێپەڕاندنی سەرکەوتوو = ٣ خاڵ",
+tapStart:"کلیک بکە بۆ دەستپێکردن",
+exploded:"💥 پێتا تەقیەوە!",punPoints:"سزا: خاڵێکی نێگەتیڤ",punLives:"ژیانێک کەم دەبێتەوە",punElim:"لە یارییەکە دەرکرا!",
+continueBtn:"بەردەوام بە",
+livesLeft:"ژیانی ماوە",eliminated:"دەرکرا!",
+punElimBadge:"🚫 لە یارییەکە دەرچوو",
+nextRound:"خولی داهاتوو",endGame:"کۆتایی یارییەکە",
+teamScore:"خاڵەکانی تیم",playerScore:"خاڵەکانی یاریزان",
+finalTeam:"ئەنجامی کۆتایی - تیمەکان",finalPlayer:"ئەنجامی کۆتایی - یاریزانەکان",
+achievements:"دەستکەوتەکان و ئامارەکان",
+playAgain:"دووبارە یاری بکەوە 🔄",
+aWinner:"🏆 براوە",aPassMost:"⬅️ زۆرترین تێپەڕاندن",aExplode:"💥 هەمیشە تەقیوەتەوە",aDontKnow:"❓ زۆرترین نازانم",
+aFirst:"💣 یەکەم تەقینەوە",aLucky:"🍀 بەختەوەر",aClown:"🤡 گاڵتەجاڕ",aFast:"😬 خێرا",
+aEagle:"🦅 هەڵۆ",aLastSec:"🎲 کوڕی بەخت",aFlame:"🔥 بڵێسە",aHeart:"🫀 دڵی بەهێز",
+pts:"خاڵ",roundNum:"خولی",
+cat_food:"🍔 خواردن",cat_sport:"⚽ وەرزش",cat_challenge:"🔥 ئاڵەنگاری",cat_geo:"🌍 جوگرافیا",
+cat_history:"📚 مێژوو",cat_movies:"🎬 فیلمەکان",cat_famous:"👤 کەسایەتییەکان",cat_general:"🧠 زانیاری گشتی",
+cat_gaming:"🎮 یارییە ڤیدیۆییەکان",cat_religion:"☪️ ئایینی",cat_mix:"🎰 هەمەجۆر",
+pun_elim:"دەرکردن",pun_lives:"ژیانەکان",pun_pts:"خاڵی نێگەتیڤ",
+time_random:"هەڕەمەکی",time_30:"٣٠ چرکە",time_60:"٦٠ چرکە",time_pressure:"فشار",
+winnerTeam:"تیمی براوە",noElim:"کەس دەرنەکرا",
+teamPlayers:"یاریزانەکانی تیم",
+roundEndTitle:"خولەکە کۆتایی هات",roundEndBtn:"خولی داهاتوو",
+playersPerTeam:"یاریزان بۆ هەر تیمێک",
+}
+};
+// 700 QUESTIONS BANK
+var QB={
+food:{
+ar:[
+["ما هو المكوّن الأساسي في الكليجة العراقية؟","التمر"],
+["من أي بلد نشأت البيتزا؟","إيطاليا"],
+["ما الفرق بين الحمص والفول؟","الحمص من حبة النّوك، والفول نوع آخر"],
+["من أي نبات يُستخرج الكركم؟","من جذور نبات الكركم"],
+["ما هو الطعام العراقي المصنوع من السمك المشوي على النار؟","المسگوف"],
+["من أي مادة يُصنع الشيبس؟","البطاطا"],
+["ما هو المشروب الذي يُستخرج من حبوب البن؟","القهوة"],
+["ما اسم الخبز العراقي الرفيع جداً؟","الرقاق"],
+["من أي بلد يأتي طعام السوشي؟","اليابان"],
+["ما هو التابل الأصفر الشهير في الطبخ الهندي؟","الكركم"],
+["من أي بلد نشأت الشاورما؟","تركيا - الدولة العثمانية"],
+["ما المكوّن الرئيسي في الفلافل؟","الحمص أو الفول"],
+["ما هو الطبق العراقي المصنوع من رأس الخروف؟","الپاچه"],
+["من أي بلد يأتي طعام التاكو؟","المكسيك"],
+["ما هو الأرز المعروف بلونه الأصفر الزعفراني؟","تمن الزعفران"],
+["ما الفاكهة التي يُصنع منها زيت الزيتون؟","ثمرة الزيتون"],
+["ما هو الطعام الخليجي المعروف بأرزه ولحمه والبهارات؟","المشبوس"],
+["من أي بلد يأتي طعام الهمبرغر؟","ألمانيا - مدينة هامبورغ"],
+["ما هو الحلوى العراقية المصنوعة من دقيق القمح والسكر؟","الهريسة"],
+["ما هو مصدر الشوكولاتة الأصلي؟","حبوب الكاكاو"],
+["ما اسم الحلوى الشرقية المصنوعة من العجين والجبن؟","الكنافة"],
+["من أي بلد يأتي الكاري؟","الهند"],
+["ما هو المشروب الوطني في العراق؟","الشاي"],
+["ما هي الفاكهة التي تكون خضراء من الخارج وحمراء من الداخل؟","البطيخ"],
+["من أي بلد يأتي طعام الباستا؟","إيطاليا"],
+["ما هو المكوّن الذي يجعل الخبز يتخمر ويكبر؟","الخميرة"],
+["ما هي الفاكهة التي تحتوي على أكثر نسبة ماء؟","البطيخ - 92%"],
+["كيف يُصنع الجبن؟","بتخثير الحليب"],
+["ما هو الفرق بين الكنافة والبقلاوة؟","الكنافة من العجين الرفيع، البقلاوة من الفيلو"],
+["ما اسم المشروب الساخن المصنوع من الحليب والشوكولاتة؟","الكاكاو"],
+["كام وڵات بە دروستکردنی باشترین جۆری پەنیر بەناوبانگە؟","فەڕەنسا"],
+["پێکهاتەی سەرەکی سۆسی گواکامۆلی چییە؟","ئەڤۆکادۆ"],
+],
+ku:[
+["پێکهاتەی سەرەکی لە دروستکردنی کلیچەی عێراقیدا چییە؟","خورما"],
+["پیتزا لە چ وڵاتێکەوە سەریهەڵداوە؟","ئیتاڵیا"],
+["جیاوازی نێوان حوموس و فول چییە؟","حوموس لە نۆک دروست دەکرێت، فول لە پاقلە"],
+["زەردەچەوە لە چ ڕووەکێک دەردەهێنرێت؟","لە ڕەگی ڕووەکی زەردەچەوە"],
+["ئەو خواردنە عێراقییە چییە کە لە ماسی برژاوی سەر ئاگر دروست دەکرێت؟","ماسگوف"],
+["چپس لە چ ماددەیەک دروست دەکرێت؟","پەتاتە"],
+["ئەو خواردنەوەیە چییە کە لە دەنکە قاوە دروست دەکرێت؟","قاوە"],
+["ناوی ئەو نانە عێراقییە تەنکە چییە؟","نانی ڕەقاق (تیری)"],
+["خواردنی سوشی هی چ وڵاتێکە؟","ژاپۆن"],
+["ئەو بەهاراتە زەردە بەناوبانگە چییە کە لە چێشتی هیندیدا بەکاردێت؟","زەردەچەوە"],
+["شاوەرمە لە چ وڵاتێکەوە سەریهەڵداوە؟","تورکیا - دەوڵەتی عوسمانی"],
+["پێکهاتەی سەرەکی لە دروستکردنی فەلافلدا چییە؟","نۆک یان پاقلە"],
+["ئەو خواردنە عێراقییە چییە کە لە سەری مەڕ دروست دەکرێت؟","پاچە"],
+["خواردنی تاکۆ هی چ وڵاتێکە؟","مەکسیک"],
+["ئەو برنجە چییە کە بە ڕەنگە زەردەکەی ناسراوە؟","برنجی زەعفەران"],
+["زەیتی زەیتوون لە چ میوەیەک دروست دەکرێت؟","بەرهەمی زەیتوون"],
+["ئەو خواردنە کەنداوییە چییە کە لە برنج و گۆشت و بەهارات دروست دەکرێت؟","مەجبووس"],
+["خواردنی هەمبەرگر لە چ وڵاتێکەوە هاتووە؟","ئەڵمانیا - شاری هامبۆرگ"],
+["ئەو شیرینییە عێراقییە چییە کە لە گەنم و شەکر دروست دەکرێت؟","هەریسە"],
+["سەرچاوەی ڕەسەنی شوکولاتە چییە؟","دەنکە کاکاو"],
+["ناوی ئەو شیرینییە ڕۆژهەڵاتییە چییە کە لە هەویر و پەنیر دروست دەکرێت؟","کونافە"],
+["کاری لە چ وڵاتێکەوە هاتووە؟","هیندستان"],
+["خواردنەوەی نیشتمانی لە عێراق و کوردستاندا چییە؟","چا"],
+["ئەو میوەیە چییە کە لە دەرەوە سەوزە و لە ناوەوە سوورە؟","شووتی"],
+["خواردنی پاستا هی چ وڵاتێکە؟","ئیتاڵیا"],
+["ئەو پێکهاتەیە چییە کە وا دەکات هەویر هەڵبێت و گەورە بێت؟","خەمیرە"],
+["کام میوە زۆرترین ڕێژەی ئاوی تێدایە؟","شووتی - 92%"],
+["پەنیر چۆن دروست دەکرێت؟","بە مەیاندنی شیر"],
+["جیاوازی نێوان کونافە و باقلەوە چییە؟","کونافە لە هەویری تەنکی، باقلەوە لە گەڵای فیلو"],
+["ناوی ئەو خواردنەوە گەرمە چییە کە لە شیر و شوکولاتە دروست دەکرێت؟","کاکاو"],
+["کام وڵات بە دروستکردنی باشترین جۆری پەنیر بەناوبانگە؟","فەڕەنسا"],
+["پێکهاتەی سەرەکی سۆسی گواکامۆلی چییە؟","ئەڤۆکادۆ"],
+]
+},
+sport:{
+ar:[
+["كم لاعباً في فريق كرة القدم؟","11 لاعباً"],
+["من أي بلد ينحدر ليونيل ميسي؟","الأرجنتين"],
+["كم مرة فازت البرازيل بكأس العالم؟","5 مرات"],
+["من اخترع كرة السلة؟","جيمس نيسميث الكندي"],
+["كل كم سنة تُقام بطولة كأس العالم؟","كل 4 سنوات"],
+["من هو أسرع إنسان في التاريخ؟","أوساين بولت"],
+["من أي بلد تنحدر رياضة الكاراتيه؟","اليابان"],
+["ما هو لون قميص المنتخب الإيطالي؟","الأزرق"],
+["من أي بلد تنحدر رياضة الجودو؟","اليابان"],
+["كم لاعباً في فريق الكرة الطائرة؟","6 لاعبين"],
+["في أي مدينة أُقيمت أول دورة أولمبية حديثة؟","أثينا 1896"],
+["من هو أكثر لاعب تسجيلاً للأهداف في التاريخ؟","كريستيانو رونالدو"],
+["في أي سنة أُقيمت أول بطولة لكأس العالم؟","1930 في أوروغواي"],
+["كم جولة تتكون منها مباريات الملاكمة الاحترافية؟","12 جولة"],
+["من أي بلد ينحدر رياضة الكريكيت؟","إنجلترا"],
+["ما هي أطول مسافة في ألعاب القوى الأولمبية؟","الماراثون - 42.195 كم"],
+["كم فريقاً يشارك في نهائيات كأس العالم؟","32 فريقاً"],
+["ما هو الفريق الأكثر فوزاً بدوري أبطال أوروبا؟","ريال مدريد"],
+["في أي رياضة يُستخدم مصطلح غراند سلام؟","التنس"],
+["من هو أسرع سباح في التاريخ؟","مايكل فيلبس"],
+["كم عدد الحلقات الأولمبية ولماذا؟","5 حلقات - ترمز لقارات العالم الخمس"],
+["من أي بلد تنحدر رياضة الكونغ فو؟","الصين"],
+["كم طول ملعب كرة السلة الرسمي؟","28 متراً"],
+["في أي رياضة يُستخدم مصطلح هاتريك؟","كرة القدم"],
+["ما اسم البطولة الأمريكية لكرة القدم الأمريكية؟","سوبر بول"],
+["من هو اللاعب المعروف بـ بيليه وما جنسيته؟","إيدسون أرانتيس - برازيلي"],
+["في لعبة الشطرنج، ما هي القطعة الوحيدة التي تقفز فوق القطع الأخرى؟","الحصان"],
+["بماذا يُعرف تنس الطاولة بالاسم الآخر؟","البينغ بونغ"],
+["ما هي الدولة التي استضافت كأس العالم 2022؟","قطر"],
+["كم نقطة تساوي الرمية خلف خط القوس في كرة السلة؟","3 نقاط"],
+],
+ku:[
+["تیمی تۆپی پێ لە چەند یاریزان پێکدێت؟","11 یاریزان"],
+["لیۆنێل مێسی خەڵکی چ وڵاتێکە؟","ئەرجەنتین"],
+["بەڕازیل چەند جار جامی جیهانی بردووەتەوە؟","5 جار"],
+["کێ یاری تۆپی سەبەتەی داهێنا؟","جەیمس نیسمیسی کەنەدی"],
+["جامی جیهانی هەر چەند ساڵ جارێک ئەنجام دەدرێت؟","هەر 4 ساڵ جارێک"],
+["خێراترین مرۆڤ لە مێژوودا کێیە؟","یوسەین بۆڵت"],
+["یاری کاراتی لە چ وڵاتێکەوە سەریهەڵداوە؟","ژاپۆن"],
+["ڕەنگی درێسی هەڵبژاردەی ئیتاڵیا چییە؟","شین"],
+["یاری جودۆ لە چ وڵاتێکەوە سەریهەڵداوە؟","ژاپۆن"],
+["تیمی بالە لە چەند یاریزان پێکدێت؟","6 یاریزان"],
+["یەکەم ئۆڵۆمپیادی مۆدێرن لە چ شارێک بەڕێوەچوو؟","ئەسینا لە ساڵی 1896"],
+["گۆڵکارترین یاریزان لە مێژووی تۆپی پێدا کێیە؟","کریستیانۆ ڕۆناڵدۆ"],
+["یەکەم پاڵەوانێتی جامی جیهانی لە چ ساڵێکدا بەڕێوەچوو؟","1930 لە ئۆرۆگوای"],
+["یاری بۆکسی پیشەگەرانە لە چەند گەڕ پێکدێت؟","12 گەڕ"],
+["یاری کریکێت لە چ وڵاتێکەوە سەریهەڵداوە؟","ئینگلتەرا"],
+["درێژترین ماوەی ڕاکردن لە یارییە ئۆڵۆمپییەکاندا چییە؟","ماراسۆن - 42.195 کم"],
+["چەند تیم بەشداری لە کۆتاییەکانی جامی جیهانی دەکەن؟","32 تیم"],
+["کام تیم زۆرترین جار خولی یانە پاڵەوانەکانی ئەوروپای بردووەتەوە؟","ڕیاڵ مەدرید"],
+["زاراوەی گراند سلام لە چ وەرزشێکدا بەکاردێت؟","تێنس"],
+["خێراترین مەلەوان لە مێژوودا کێیە؟","مایکڵ فیڵپس"],
+["ژمارەی ئەڵقەکانی ئۆڵۆمپیاد چەندن و هێمان بۆ چی؟","5 ئەڵقە - هێمان بۆ پێنج کیشوەرەکەی جیهان"],
+["یاری کۆنگ فو لە چ وڵاتێکەوە سەریهەڵداوە؟","چین"],
+["درێژی فەرمی یاریگای تۆپی سەبەتە چەندە؟","28 مەتر"],
+["زاراوەی هاتریک لە چ وەرزشێکدا بەکاردێت؟","تۆپی پێ"],
+["ناوی پاڵەوانێتی تۆپی پێی ئەمریکی چییە؟","سوپەر بۆڵ"],
+["لە یاری شەترەنجدا، تەنیا کام پارچە دەتوانێت بەسەر پارچەکانی تردا باز بدات؟","ئەسپ"],
+["یاری تێنسی سەر مێز بە چ ناوێکی تر ناسراوە؟","پینگ پۆنگ"],
+["کام وڵات میوانداری جامی جیهانی 2022ی کرد؟","قەتەر"],
+["لە یاری باسکەدا، خاڵی هاویشتنی دەرەوەی هێڵی کەوانەیی چەندە؟","3 خاڵ"],
+["کام یاریزانی ئەرجەنتینی بە پێلێ ناسراوە؟","ئیدسۆن ئارانتێس (بەڕازیل)"],
+]
+},
+challenge:{
+ar:[
+["قول 5 عواصم دول عربية في 10 ثواني","تحدي"],
+["قلّد صوت 3 حيوانات مختلفة","تحدي"],
+["غنّي مقطع من أغنية عراقية مشهورة","تحدي"],
+["اذكر 5 لاعبين كرة قدم في 5 ثواني","تحدي"],
+["قول اسمك وعمرك ومدينتك بالإنجليزي","تحدي"],
+["اعمل حركة رياضة مختلفة كل 3 ثواني لمدة 15 ثانية","تحدي"],
+["قلّد 3 شخصيات كارتون بأصواتها","تحدي"],
+["اذكر 5 أكلات عراقية في 10 ثواني","تحدي"],
+["غنّي هابي بيرثدي بصوت طفل ثم بصوت عجوز","تحدي"],
+["قلّد حركة لاعب كرة قدم مشهور","تحدي"],
+["قول 5 دول آسيوية في 7 ثواني","تحدي"],
+["اقلّد طريقة مشي شخص مشهور","تحدي"],
+["قول 5 أفلام ديزني في 10 ثواني","تحدي"],
+["قلّد طريقة كلام مذيع نشرة الأخبار","تحدي"],
+["قول 5 دول أوروبية وعواصمها في 15 ثانية","تحدي"],
+["سمّ هاواياتك 3 واحدة بالإنجليزي","تحدي"],
+["عدّ من 10 إلى 1 بأسرع ما يمكن بلغة ثانية","تحدي"],
+["حاول تلمس أنفك بإبهامك الكبير بدون تحريك يدك","تحدي"],
+["تكلم لمدة 30 ثانية بدون توقف عن موضوع بلا معنى","تحدي"],
+["قف على قدم واحدة بعيون مغمضة لمدة 10 ثواني","تحدي"],
+],
+ku:[
+["ناوی 5 پایتەختی وڵاتانی عەرەبی بڵێ لە 10 چرکەدا","ئاڵەنگاری"],
+["دەنگی 3 ئاژەڵی جیاواز دەربێنە","ئاڵەنگاری"],
+["بڕگەیەک لە گۆرانییەکی بەناوبانگی کوردی یان عێراقی بڵێ","ئاڵەنگاری"],
+["ناوی 5 یاریزانی تۆپی پێ بڵێ لە 5 چرکەدا","ئاڵەنگاری"],
+["ناو و تەمەن و شارەکەی خۆت بە ئینگلیزی بڵێ","ئاڵەنگاری"],
+["بۆ ماوەی 15 چرکە، هەر 3 چرکە جارێک جوڵەیەکی وەرزشی جیاواز بکە","ئاڵەنگاری"],
+["دەنگی 3 کارەکتەری کارتۆنی دەربێنە","ئاڵەنگاری"],
+["ناوی 5 خواردنی کوردەواری یان عێراقی بڵێ لە 10 چرکەدا","ئاڵەنگاری"],
+["گۆرانی هاپی بێرسدەی بڵێ، سەرەتا بە دەنگی منداڵێک و پاشان بە دەنگی پیرەپیاوێک","ئاڵەنگاری"],
+["لاسایی جوڵەی ئاهەنگگێڕانی یاریزانێکی بەناوبانگی تۆپی پێ بکەرەوە","ئاڵەنگاری"],
+["ناوی 5 وڵاتی ئاسیا بڵێ لە 7 چرکەدا","ئاڵەنگاری"],
+["لاسایی شێوازی ڕۆیشتنی کەسایەتییەکی بەناوبانگ بکەرەوە","ئاڵەنگاری"],
+["ناوی 5 فیلمی دیزنی بڵێ لە 10 چرکەدا","ئاڵەنگاری"],
+["وەک پێشکەشکارێکی هەواڵ قسە بکە بۆ ماوەی 10 چرکە","ئاڵەنگاری"],
+["ناوی 5 وڵاتی ئەوروپی و پایتەختەکانیان بڵێ لە 15 چرکەدا","ئاڵەنگاری"],
+["ناوی 3 هاوڕێت بڵێ و بۆ هەر یەکێکیان ئاژەڵێک دابنێ کە لە کەسایەتییان دەچێت","ئاڵەنگاری"],
+["بە خێرایی و بێ وەستان تا ژمارە 10 بژمێرە بە زمانێکی تر","ئاڵەنگاری"],
+["هەوڵبدە بە پەنجەی گەورەت لووتت بگریت بێ ئەوەی دەستت بجوڵێنیت","ئاڵەنگاری"],
+["بۆ ماوەی 30 چرکە بەبێ پچڕان قسە بکە لەسەر بابەتێکی بێمانا","ئاڵەنگاری"],
+["لەسەر یەک قاچ بوەستە و چاوەکانت دابخە بۆ ماوەی 10 چرکە","ئاڵەنگاری"],
+]
+},
+geo:{
+ar:[
+["ما هي عاصمة العراق؟","بغداد"],
+["ما هي أكبر قارة في العالم؟","آسيا"],
+["كم عدد دول العالم تقريباً؟","195 دولة"],
+["ما هو أطول نهر في العالم؟","نهر النيل"],
+["ما هي أصغر دولة في العالم؟","الفاتيكان"],
+["ما هو أعلى جبل في العالم؟","إيفرست - 8849 متر"],
+["ما هو المحيط الأكبر في العالم؟","المحيط الهادي"],
+["كم عدد قارات العالم؟","7 قارات"],
+["ما هي عاصمة فرنسا؟","باريس"],
+["ما هي أكبر دولة في العالم مساحةً؟","روسيا"],
+["في أي قارة تقع مصر؟","أفريقيا"],
+["ما هي عاصمة اليابان؟","طوكيو"],
+["ما هو النهر الذي يمر في بغداد؟","نهر دجلة"],
+["كم عدد دول الخليج العربي؟","6 دول"],
+["ما هي عاصمة أستراليا؟","كانبيرا"],
+["ما هي عاصمة البرازيل؟","برازيليا"],
+["ما هو أعمق بحيرة في العالم؟","بحيرة بايكال في روسيا"],
+["ما هي عاصمة كندا؟","أوتاوا"],
+["ما هي عاصمة تركيا؟","أنقرة"],
+["في أي دولة يقع برج إيفل؟","فرنسا - باريس"],
+["ما هي أطول سلسلة جبلية في العالم؟","جبال الأنديز"],
+["ما هي عاصمة الهند؟","نيودلهي"],
+["ما اسم النهر الذي يمر بالبصرة؟","شط العرب"],
+["ما هي الدولة الأكثر كثافة سكانية في العالم؟","الهند"],
+["كم عدد دول العالم العربي؟","22 دولة"],
+["ما هو أكبر صحراء في العالم؟","صحراء الصحراء الكبرى في أفريقيا"],
+["ما هي الدولة المعروفة بـ بلد الألف بحيرة؟","فنلندا"],
+["ما هي عاصمة إقليم كردستان؟","أربيل"],
+["في أي قارة يقع نهر الأمازون؟","أمريكا الجنوبية"],
+["بين أي دولتين يقع البحر الميت؟","الأردن وفلسطين"],
+],
+ku:[
+["پایتەختی عێراق کوێیە؟","بەغدا"],
+["گەورەترین کیشوەر لە جیهاندا کامەیە؟","ئاسیا"],
+["نزیکەی چەند وڵات لە جیهاندا هەیە؟","195 وڵات"],
+["درێژترین ڕووبار لە جیهاندا کامەیە؟","ڕووباری نیل"],
+["بچووکترین وڵات لە جیهاندا کامەیە؟","ڤاتیکان"],
+["بەرزترین چیای جیهان کامەیە؟","ئێڤرێست - 8849 مەتر"],
+["گەورەترین زەریای جیهان کامەیە؟","زەریای هێمن"],
+["جیهان لە چەند کیشوەر پێکدێت؟","7 کیشوەر"],
+["پایتەختی فەڕەنسا کوێیە؟","پاریس"],
+["گەورەترین وڵاتی جیهان لە ڕووی ڕووبەرەوە کامەیە؟","ڕووسیا"],
+["میسر دەکەوێتە کام کیشوەرەوە؟","ئەفریقا"],
+["پایتەختی ژاپۆن کوێیە؟","تۆکیۆ"],
+["ئەو ڕووبارە چییە کە بە بەغدادا تێدەپەڕێت؟","ڕووباری دیجلە"],
+["وڵاتانی کەنداوی عەرەبی چەند وڵاتن؟","6 وڵات"],
+["پایتەختی ئوسترالیا کوێیە؟","کانبێرا"],
+["پایتەختی بەڕازیل کوێیە؟","بەڕازیلیا"],
+["قووڵترین دەریاچەی جیهان کامەیە؟","دەریاچەی بایکال لە ڕووسیا"],
+["پایتەختی کەنەدا کوێیە؟","ئۆتاوا"],
+["پایتەختی تورکیا کوێیە؟","ئەنقەرە"],
+["تاوەری ئیڤڵ لە چ وڵاتێکدایە؟","فەڕەنسا - پاریس"],
+["درێژترین زنجیرە چیا لە جیهاندا کامەیە؟","چیاکانی ئەندێز"],
+["پایتەختی هیندستان کوێیە؟","نیودەلهی"],
+["ئەو ڕووبارە چییە کە بە بەسرەدا تێدەپەڕێت؟","شەتەلعەرەب"],
+["چڕترین وڵاتی جیهان لە ڕووی دانیشتووانەوە کامەیە؟","هیندستان"],
+["ژمارەی وڵاتانی عەرەبی چەندە؟","22 وڵات"],
+["گەورەترین بیابانی جیهان کامەیە؟","بیابانی سەحرا لە ئەفریقا"],
+["کام وڵات بە وڵاتی هەزار دەریاچە ناسراوە؟","فینلاند"],
+["پایتەختی هەرێمی کوردستان کوێیە؟","هەولێر"],
+["ڕووباری ئەمازۆن دەکەوێتە کام کیشوەرەوە؟","ئەمەریکای باشوور"],
+["دەریای مردوو دەکەوێتە نێوان کام دوو وڵاتەوە؟","ئوردن و فەلەستین"],
+]
+},
+movies:{
+ar:[
+["من أخرج فيلم تيتانيك؟","جيمس كاميرون"],
+["من يؤدي دور آيرون مان في أفلام مارفل؟","روبرت داوني جونيور"],
+["من أي شركة صدر فيلم الأسد الملك؟","ديزني"],
+["ما هو اسم الشخصية الشريرة في فيلم ستار وورز؟","دارث فيدر"],
+["ما هو أعلى فيلم إيرادات في التاريخ؟","أفاتار"],
+["كم جزءاً يتكون منه فيلم لورد أوف ذا رينغز؟","3 أجزاء"],
+["من يؤدي دور سبايدرمان في الجزء الأحدث؟","توم هولاند"],
+["في أي سنة صدر أول فيلم هاري بوتر؟","2001"],
+["من أخرج أفلام الهوبيت؟","بيتر جاكسون"],
+["ما هو اسم الأسد في فيلم الأسد الملك؟","سيمبا"],
+["من يؤدي دور جوكر في فيلم 2019؟","واكين فينيكس"],
+["ما هو أول فيلم ديزني في التاريخ؟","سنو وايت 1937"],
+["في أي مدينة تدور أحداث فيلم باتمان؟","غوثام سيتي"],
+["من اخترع شخصية ميكي ماوس؟","والت ديزني"],
+["من يؤدي دور ثانوس في أفلام مارفل؟","جوش برولين"],
+["في أي سنة صدر فيلم تيتانيك؟","1997"],
+["ما اسم الشرير في أفلام هاري بوتر؟","لورد فولدمورت"],
+["من يؤدي دور كابتن أمريكا في مارفل؟","كريس إيفانز"],
+["كم فيلماً أنتجت مارفل في الكون السينمائي؟","أكثر من 30 فيلماً"],
+["من أخرج سلسلة Fast and Furious الأولى؟","روب كوهين"],
+["من يؤدي دور جون ويك؟","كيانو ريفز"],
+["ما اسم الفيلم الكردي للمخرج بهمن قبادي؟","كاتي مستي أسبيكان"],
+["من أخرج فيلم أوبنهايمر؟","كريستوفر نولان"],
+["ما هو دروع عائلة ستارك في مسلسل غيم أوف ثرونز؟","الذئب"],
+["كم جزءاً يتكون منه مسلسل بريكينغ باد؟","5 مواسم"],
+],
+ku:[
+["دەرهێنەری فیلمی تایتانیک کێیە؟","جەیمس کامیرۆن"],
+["کێ ڕۆڵی ئایرۆن مان دەبینێت لە فیلمەکانی مارڤڵ؟","ڕۆبەرت داونی جونیۆر"],
+["فیلمی پاشای شێر بەرهەمی کام کۆمپانیایە؟","دیزنی"],
+["ناوی کارەکتەرە خراپەکارەکە لە فیلمی ستار وۆرْز چییە؟","دارث ڤەیدەر"],
+["پڕداهاتترین فیلم لە مێژوودا کامەیە؟","ئاڤاتار"],
+["زنجیرە فیلمی شای ئەڵقەکان لە چەند بەش پێکدێت؟","3 بەش"],
+["کێ ڕۆڵی سپایدەرمان دەبینێت لە نوێترین بەشەکاندا؟","تۆم هۆڵاند"],
+["یەکەم فیلمی هاری پۆتەر لە چ ساڵێکدا بڵاوکرایەوە؟","2001"],
+["دەرهێنەری زنجیرە فیلمەکانی هۆبیت کێیە؟","پیتەر جاکسۆن"],
+["ناوی شێرەکە لە فیلمی پاشای شێردا چییە؟","سیمبا"],
+["کێ ڕۆڵی جۆکەری بینی لە فیلمی ساڵی 2019؟","واکین فینیکس"],
+["یەکەم فیلمی ئەنیمەیشنی دیزنی لە مێژوودا چییە؟","سنۆوايت 1937"],
+["ڕووداوەکانی فیلمی باتمان لە چ شارێکدا ڕوودەدەن؟","گۆثام ستی"],
+["کێ کارەکتەری میکی ماوسی داهێنا؟","واڵت دیزنی"],
+["کێ ڕۆڵی سانۆس دەبینێت لە فیلمەکانی مارڤڵ؟","جۆش برۆلین"],
+["فیلمی تایتانیک لە چ ساڵێکدا دەرچوو؟","1997"],
+["ناوی خراپەکارە سەرەکییەکە لە فیلمەکانی هاری پۆتەردا چییە؟","لۆرد ڤۆڵدمۆرت"],
+["کێ ڕۆڵی کاپتن ئەمریکا دەبینێت لە مارڤڵ؟","کریس ئیڤانز"],
+["گەردوونی سینەمایی مارڤڵ زیاتر لە چەند فیلمی بەرهەم هێناوە؟","زیاتر لە 30 فیلم"],
+["یەکەم بەشی زنجیرە فیلمی Fast and Furious کێ دەریهێناوە؟","ڕۆب کۆهین"],
+["کێ ڕۆڵی جۆن ویک دەبینێت؟","کیانو ڕیڤز"],
+["ناوی ئەو فیلمە کوردییە چییە کە دەرهێنەرەکەی بەهمەن قوبادییە؟","کاتی مەستی ئەسپەکان"],
+["کێ دەرهێنەری فیلمی ئۆپنهایمەر؟","کریستۆفەر نۆلان"],
+["دروشمی خێزانی ستارک لە زنجیرەی گەیم ئۆف سرۆنزدا چییە؟","زستان بەڕێوەیە"],
+["زنجیرەی بریکینگ باد لە چەند وەرز پێکدێت؟","5 وەرز"],
+]
+},
+famous:{
+ar:[
+["من هو مخترع الهاتف؟","ألكسندر غراهام بيل"],
+["من هو مؤسس شركة آبل؟","ستيف جوبز"],
+["من هو مؤسس شركة تسلا؟","إيلون ماسك"],
+["من هو مخترع المصباح الكهربائي؟","توماس أديسون"],
+["ما هي جنسية المطربة أم كلثوم؟","مصرية"],
+["من هو مؤسس فيسبوك؟","مارك زوكربيرغ"],
+["ما هي جنسية المطرب كاظم الساهر؟","عراقية"],
+["من هو مخترع الطائرة؟","الأخوان رايت"],
+["ماذا اكتشف إيزاك نيوتن؟","قانون الجاذبية"],
+["من هو أول إنسان وصل إلى القمر؟","نيل أرمسترونغ"],
+["ما اسم الرئيس الأمريكي الذي ألغى العبودية؟","أبراهام لينكولن"],
+["من هو مؤسس شركة مايكروسوفت؟","بيل غيتس"],
+["ما هي جنسية نيلسون مانديلا؟","جنوب أفريقية"],
+["ما اسم العالم المسلم الذي وضع أسس الجبر؟","الخوارزمي"],
+["من هو مؤسس شركة أمازون؟","جيف بيزوس"],
+["ما هي جنسية المطرب ماجد المهندس؟","عراقية - كويتية"],
+["من هو أول رئيس للولايات المتحدة؟","جورج واشنطن"],
+["ما اسم العالم المسلم الذي وضع أسس الطب؟","ابن سينا"],
+["من هو مخترع الإنترنت؟","تيم برنرز لي"],
+["ما اسم العالم الذي اكتشف البنسلين؟","ألكسندر فليمينغ"],
+["من هو أول رائد فضاء في التاريخ؟","يوري غاغارين"],
+["من هي أول امرأة تحصل على جائزة نوبل؟","ماري كوري"],
+["ما هي جنسية المطربة شاكيرا؟","كولومبية"],
+["من هو مخترع الراديو؟","غولييلمو ماركوني"],
+["ما هي جنسية العالم أينشتاين؟","ألمانية - أمريكية"],
+["من هو المطرب الكردي الشهير الملقب بملك الأغنية الكردية؟","حسن زيرك"],
+["من هو الرئيس الجنوب أفريقي الذي سجن 27 سنة؟","نيلسون مانديلا"],
+["من كتبت رواية هاري بوتر؟","جيه كيه رولينغ"],
+["من رسم لوحة الموناليزا؟","ليوناردو دافينشي"],
+["من هو الكردي الأشهر في العصور الوسطى؟","صلاح الدين الأيوبي"],
+],
+ku:[
+["داهێنەری تەلەفۆن کێیە؟","ئەلێکساندەر گراهام بێڵ"],
+["دامەزرێنەری کۆمپانیای ئەپڵ کێیە؟","ستیڤ جۆبس"],
+["دامەزرێنەری کۆمپانیای تێسلا کێیە؟","ئیلۆن ماسک"],
+["داهێنەری گڵۆپی کارەبایی کێیە؟","تۆماس ئەدیسۆن"],
+["ڕەگەزنامەی گۆرانیبێژ ئوم کەلسوم چییە؟","میسری"],
+["دامەزرێنەری فەیسبووک کێیە؟","مارک زوکەربێرگ"],
+["ڕەگەزنامەی هونەرمەند کازیم ساهیر چییە؟","عێراقی"],
+["داهێنەری فڕۆکە کێن؟","براکانی ڕایت"],
+["ئیسحاق نیوتن چی دۆزییەوە؟","یاسای هێزی کێشکردن"],
+["یەکەم مرۆڤ کە پێی خستە سەر مانگ کێیە؟","نیل ئارمسترۆنگ"],
+["ناوی ئەو سەرۆکەی ئەمریکا چییە کە کۆیلایەتی هەڵوەشاندەوە؟","ئەبراهام لینکۆڵن"],
+["دامەزرێنەری کۆمپانیای مایکرۆسۆفت کێیە؟","بێڵ گەیتس"],
+["ڕەگەزنامەی نێڵسۆن ماندێلا چییە؟","ئەفریقای باشوور"],
+["ئەو زانا موسڵمانە کێیە کە بنەماکانی زانستی جەبری دانا؟","خوارزمی"],
+["دامەزرێنەری کۆمپانیای ئەمازۆن کێیە؟","جێف بیزۆس"],
+["ڕەگەزنامەی گۆرانیبێژ ماجید موهەندیس چییە؟","عێراقی - کوەیتی"],
+["یەکەم سەرۆکی ویلایەتە یەکگرتووەکانی ئەمریکا کێ بوو؟","جۆرج واشنتۆن"],
+["ئەو زانا موسڵمانە کێیە کە بنەماکانی پزیشکی دانا؟","ئیبن سینا"],
+["داهێنەری ئینتەرنێت کێیە؟","تیم بێرنەرز لی"],
+["ئەو زانایە کێیە کە پەنسلینی دۆزییەوە؟","ئەلێکساندەر فلێمینگ"],
+["یەکەم کەشتیوانی بۆشایی ئاسمان لە مێژوودا کێیە؟","یوری گاگارین"],
+["یەکەم ئافرەت کە خەڵاتی نۆبڵی وەرگرت کێیە؟","ماری کیوری"],
+["ڕەگەزنامەی گۆرانیبێژ شاکیرا چییە؟","کۆڵۆمبی"],
+["داهێنەری ڕادیۆ کێیە؟","گوگلیێلمۆ مارکۆنی"],
+["ڕەگەزنامەی زانا ئەلبێرت ئاینشتاین چییە؟","ئەڵمانی - ئەمریکی"],
+["گۆرانیبێژی ناسراوی کورد کە بە پاشای گۆرانی کوردی دادەنرێت کێیە؟","حەسەن زیرەک"],
+["سەرۆکی پێشووی ئەفریقای باشوور کە بۆ ماوەی 27 ساڵ زیندانی کرا کێ بوو؟","نێڵسۆن ماندێلا"],
+["نووسەری ڕۆمانی هاری پۆتەر کێیە؟","جەی کەی ڕۆولینگ"],
+["نیگارکێشی تابلۆی مۆنالیزا کێیە؟","لیۆناردۆ داڤینچی"],
+["بەناوبانگترین کوردی لە سەردەمی ناوەڕاستدا کێیە؟","سەڵاحەدینی ئەییووبی"],
+]
+},
+general:{
+ar:[
+["كم كوكباً في المجموعة الشمسية؟","8 كواكب"],
+["ما هو أسرع حيوان في العالم؟","الفهد - 120 كم/ساعة"],
+["كم عظمة في جسم الإنسان؟","206 عظمة"],
+["ما هو أكبر حيوان في العالم؟","الحوت الأزرق"],
+["كم تستغرق الأرض للدوران حول الشمس؟","365.25 يوم"],
+["كم درجة يغلي الماء عند مستوى سطح البحر؟","100 درجة مئوية"],
+["ما هو أكبر عضو في جسم الإنسان؟","الجلد"],
+["ما هو أبرد مكان مسجل على الأرض؟","القطب الجنوبي - 89 درجة تحت الصفر"],
+["من أي عنصر تتكون الشمس أساساً؟","الهيدروجين والهيليوم"],
+["ما هو أسرع كوكب في دورانه حول الشمس؟","عطارد"],
+["كم تستغرق الموجة الضوئية من الشمس للوصول إلى الأرض؟","8 دقائق تقريباً"],
+["ما هو الغاز الأكثر انتشاراً في الغلاف الجوي للأرض؟","النيتروجين - 78%"],
+["كم عدد أسنان الإنسان البالغ؟","32 سناً"],
+["ما هو أعمق نقطة في المحيطات؟","خندق ماريانا"],
+["ما هو العنصر الكيميائي الأخف في الطبيعة؟","الهيدروجين"],
+["كم عام يعيش الفيل في المتوسط؟","60-70 سنة"],
+["كم عدد دقات قلب الإنسان في الدقيقة؟","60-100 دقة"],
+["ما هو أطول حيوان في العالم؟","الزرافة"],
+["كم تبلغ درجة حرارة الشمس على سطحها؟","5500 درجة مئوية"],
+["ما هو اسم العملية التي تصنع بها النباتات غذاءها؟","البناء الضوئي"],
+["كم عدد فصائل الدم الرئيسية؟","4 فصائل"],
+["كم عدد الأضلاع في جسم الإنسان؟","24 ضلعاً - 12 زوجاً"],
+["ما هو أسرع طائر في العالم؟","الشاهين الحر - 389 كم/ساعة"],
+["كم سنة يعيش النسر؟","70 سنة تقريباً"],
+["ما هو أثقل معدن في الطبيعة؟","الأوزميوم"],
+["ما معنى لون إشارة المرور الأصفر؟","الاستعداد للتوقف أو الانطلاق"],
+["ما هو الرمز الكيميائي للماء؟","H2O"],
+["من ماذا يتكون الألماس تحت ضغط شديد؟","الكربون"],
+["ما هو العضو الذي ينقي الدم في جسم الإنسان؟","الكليتان"],
+["ما هو أطول عظمة في جسم الإنسان؟","عظمة الفخذ"],
+],
+ku:[
+["سیستەمی خۆر لە چەند هەسارە پێکدێت؟","8 هەسارە"],
+["خێراترین ئاژەڵ لە جیهاندا کامەیە؟","پڵنگ (چیتا) - 120 کم/کاتژمێر"],
+["جەستەی مرۆڤ لە چەند ئێسک پێکدێت؟","206 ئێسک"],
+["گەورەترین ئاژەڵ لە جیهاندا کامەیە؟","نەهەنگی شین"],
+["زەوی چەندی پێدەچێت بۆ ئەوەی بە دەوری خۆردا بسوڕێتەوە؟","365.25 ڕۆژ"],
+["ئاو لە چەند پلەیەکدا دەکوڵێت؟","100 پلەی سەدی"],
+["گەورەترین ئەندامی جەستەی مرۆڤ چییە؟","پێست"],
+["ساردترین شوێنی تۆمارکراو لەسەر زەوی کوێیە؟","جەمسەری باشوور - 89 پلە ژێر سفر"],
+["خۆر بە شێوەیەکی سەرەکی لە چ توخمێک پێکدێت؟","هایدرۆجین و هێلیۆم"],
+["خێراترین هەسارە لە سووڕانەوە بە دەوری خۆردا کامەیە؟","عەتارید (زاوا)"],
+["تیشکی خۆر چەند کاتی پێدەچێت تا دەگاتە زەوی؟","نزیکەی 8 خولەک"],
+["زۆرترین گاز کە لە بەرگەهەوای زەویدا بڵاوە چییە؟","نایترۆجین - 78%"],
+["مرۆڤی پێگەیشتوو چەند ددانی هەیە؟","32 ددان"],
+["قووڵترین خاڵ لە زەریاکاندا کوێیە؟","خەندەقی ماریانا"],
+["سووکترین توخمی کیمیایی لە سروشتدا چییە؟","هایدرۆجین"],
+["بە تێکڕا فیل چەند ساڵ دەژی؟","60-70 ساڵ"],
+["ژمارەی لێدانەکانی دڵی مرۆڤ لە خولەکێکدا چەندە؟","60-100 لێدان"],
+["درێژترین ئاژەڵ لە جیهاندا کامەیە؟","زەڕافە"],
+["پلەی گەرمی سەر ڕووی خۆر چەندە؟","نزیکەی 5500 پلەی سەدی"],
+["ناوی ئەو پرۆسەیە چییە کە ڕووەکەکان خۆراکی تێدا دروست دەکەن؟","ڕۆشنەپێکهاتن"],
+["جۆرەکانی خوێنی مرۆڤ چەندن؟","4 جۆری سەرەکی (A, B, AB, O)"],
+["ژمارەی پەراسووەکانی جەستەی مرۆڤ چەندە؟","24 پەراسو - 12 جووت"],
+["خێراترین باڵندە لە جیهاندا کامەیە؟","هەڵۆی شاهین - 389 کم/کاتژمێر"],
+["داڵ چەند ساڵ دەژی؟","نزیکەی 70 ساڵ"],
+["قورسترین کانزا لە سروشتدا چییە؟","ئۆزمیۆم"],
+["ئەلماس لە چ توخمێکی کیمیایی دروست دەبێت؟","کاربۆن"],
+["هێمای کیمیایی بۆ ئاو چییە؟","H2O"],
+["کام ئەندامی جەستەی مرۆڤ خوێن پاك دەکاتەوە؟","گورچیلەکان"],
+["درێژترین ئێسک لە جەستەی مرۆڤدا کامەیە؟","ئێسکی ڕان"],
+["مانای ڕەنگی زەردی چراغی ترافیک چییە؟","ئامادەبوون بۆ وەستان یان ڕۆیشتن"],
+]
+},
+gaming:{
+ar:[
+["من طوّر لعبة ماينكرافت؟","نوتش - ماركوس بيرسون"],
+["ما هي الشركة المنتجة للبلايستيشن؟","سوني"],
+["ما هي أكثر لعبة مبيعاً في التاريخ؟","ماينكرافت"],
+["من طوّر لعبة فورتنايت؟","شركة Epic Games"],
+["ما هي الشركة المنتجة لإكس بوكس؟","مايكروسوفت"],
+["في أي سنة صدرت لعبة GTA V؟","2013"],
+["ما هو اسم الشخصية الرئيسية في لعبة زيلدا؟","لينك"],
+["من طوّر لعبة ليغ أوف ليجندز؟","شركة Riot Games"],
+["كم لاعباً يمكن اللعب معهم في PUBG؟","100 لاعب"],
+["ما هي أول لعبة فيديو في التاريخ؟","بونغ - 1972"],
+["ما هو اسم الشرير في لعبة ماريو؟","باوزر"],
+["ما هي الشركة المنتجة لألعاب سونيك؟","سيغا"],
+["في أي سنة صدرت لعبة بوكيمون الأولى؟","1996"],
+["ما هو اسم البطل في لعبة هيلو؟","ماستر تشيف"],
+["في أي سنة صدرت لعبة كلاش أوف كلانس؟","2012"],
+["ما هي الشركة التي تملك شخصية ماريو؟","نينتندو"],
+["ما هي أطول سلسلة ألعاب في التاريخ؟","ماريو - أكثر من 200 لعبة"],
+["من طوّر لعبة الكونترا؟","شركة Konami"],
+["في أي سنة صدر البلايستيشن 2؟","2000"],
+["ما هو اسم البطل في لعبة God of War؟","كريتوس"],
+["ما هي لعبة Among Us؟","لعبة يلعبها مجموعة وأحدهم قاتل"],
+["ما هي أقوى قطعة في الشطرنج؟","الوزير"],
+["شخصية بيكاشو سَر بِ چ زنجیرە یارییەکەیە؟","بوكيمون"],
+["لعبة روبلوكس بُنيت لأي هدف؟","لتعلم الفيزياء وبناء عوالم خيالية"],
+["من طوّر لعبة Among Us؟","شركة InnerSloth"],
+],
+ku:[
+["کێ یاری ماینکرافت پەرەپێداوە؟","نۆچ - مارکوس پێرسۆن"],
+["کۆمپانیای بەرهەمهێنەری پلەیستەیشن کامەیە؟","سۆنی"],
+["پڕفرۆشترین یاری لە مێژوودا کامەیە؟","ماینکرافت"],
+["کێ یاری فۆرتنایت پەرەپێداوە؟","کۆمپانیای ئیپیک گەیمز"],
+["کۆمپانیای بەرهەمهێنەری ئێکس بۆکس کامەیە؟","مایکرۆسۆفت"],
+["یاری GTA V لە چ ساڵێکدا دەرچوو؟","2013"],
+["ناوی کارەکتەری سەرەکی لە یاری زێلدا چییە؟","لینک"],
+["کێ یاری لیگی ئەفسانەکان پەرەپێداوە؟","ڕایۆت گەیمز"],
+["چەند یاریزان دەتوانن پێکەوە یاری پەبجی بکەن؟","100 یاریزان"],
+["یەکەم یاری ڤیدیۆیی لە مێژوودا چی بوو؟","پۆنگ - 1972"],
+["ناوی خراپەکارەکە لە یاری ماریۆ چییە؟","باوزەر"],
+["کۆمپانیای بەرهەمهێنەری یارییەکانی سۆنیک کامەیە؟","سێگا"],
+["یەکەم یاری پۆکیمۆن لە چ ساڵێکدا دەرچوو؟","1996"],
+["ناوی پاڵەوانەکە لە یاری هێیلۆ چییە؟","ماستەر تشیف"],
+["یاری کلاش ئۆف کلانس لە چ ساڵێکدا دەرچوو؟","2012"],
+["کام کۆمپانیا خاوەنی کارەکتەری ماریۆیە؟","نینتێندۆ"],
+["درێژترین زنجیرە یاری لە مێژوودا کامەیە؟","ماریۆ - زیاتر لە 200 یاری"],
+["کێ یاری کۆنترا پەرەپێداوە؟","کۆمپانیای کۆنامی"],
+["ئامێری پلەیستەیشن 2 لە چ ساڵێکدا بڵاوکرایەوە؟","ساڵی 2000"],
+["کارەکتەری سەرەکی لە یاری God of War کێیە؟","کرەیتۆس"],
+["یاری ئەمانگ ئەس چ جۆرە؟","یارییەکە کۆمەڵ یاری دەکەن و یەکێکیان کوژەرە"],
+["بەهێزترین پارچە لە یاری شەترەنجدا کامەیە؟","وەزیر (شاژن)"],
+["کارەکتەری پیکاشو سەر بە چ زنجیرە یارییەکەیە؟","پۆکیمۆن"],
+["یاری ڕۆبلۆکس بۆ چ مەبەستێک دروست کرا؟","بۆ فێربوونی فیزیا و دروستکردنی جیهانی خەیاڵی"],
+["کێ یاری ئەمانگ ئەسی پەرەپێداوە؟","کۆمپانیای ئینەرسلۆس"],
+]
+},
+religion:{
+ar:[
+["ما هو عدد أركان الإسلام؟","5 أركان"],
+["ما هو اسم الكتاب المقدس في الإسلام؟","القرآن الكريم"],
+["كم عدد الصلوات اليومية في الإسلام؟","5 صلوات"],
+["ما هو الركن الخامس في الإسلام؟","الحج"],
+["في أي مدينة وُلد النبي محمد ﷺ؟","مكة المكرمة"],
+["ما هو اسم أول سورة في القرآن الكريم؟","سورة الفاتحة"],
+["كم آية تتكون منها سورة الفاتحة؟","7 آيات"],
+["ما هي أطول سورة في القرآن الكريم؟","سورة البقرة"],
+["كم عدد سور القرآن الكريم؟","114 سورة"],
+["ما هو اسم أقصر سورة في القرآن؟","سورة الكوثر - 3 آيات"],
+["في أي ليلة نزل القرآن الكريم؟","ليلة القدر في رمضان"],
+["ما هي القبلة التي يتجه إليها المسلمون؟","الكعبة المشرفة في مكة"],
+["كم حجة أدى النبي محمد ﷺ؟","حجة واحدة - حجة الوداع"],
+["ما هو اسم النبي الذي بنى الكعبة؟","إبراهيم عليه السلام"],
+["ما هو اليوم المقدس في الإسلام؟","يوم الجمعة"],
+["كم عدد الأنبياء المذكورين في القرآن؟","25 نبياً"],
+["ما هو الشهر الذي يصوم فيه المسلمون؟","شهر رمضان"],
+["في أي سنة هاجر النبي ﷺ من مكة إلى المدينة؟","622 ميلادي"],
+["ما هو اسم جبل الوحي؟","جبل حراء"],
+["كم عدد آيات القرآن الكريم؟","6236 آية"],
+["ما هو اسم أول مسجد بُني في الإسلام؟","مسجد قباء"],
+["كم عاماً استغرق نزول القرآن؟","23 سنة"],
+["ما هي أركان الإيمان الستة؟","الله وملائكته وكتبه ورسله واليوم الآخر والقدر"],
+["من هو أول الخلفاء الراشدين؟","أبو بكر الصديق"],
+["ما الفرق بين الزكاة والصدقة؟","الزكاة واجبة بشروط، الصدقة تطوعية"],
+["ما هو اسم النبي الملقب بـ خليل الله؟","إبراهيم عليه السلام"],
+["ما هو اسم باب الجنة المخصص للصائمين؟","الريان"],
+["ما هو اسم النبي الذي ابتلعه الحوت؟","يونس عليه السلام"],
+["ما هو اسم الملاك الذي يُنزل الوحي على الأنبياء؟","جبريل عليه السلام"],
+["ما هو اسم الشهر الذي يسبق رمضان؟","شعبان"],
+],
+ku:[
+["پایەکانی ئیسلام چەندن؟","5 پایە"],
+["ناوی پەرتووکی پیرۆز لە ئیسلامدا چییە؟","قورئانی پیرۆز"],
+["ژمارەی نوێژە فەرزەکان لە ڕۆژێکدا چەندە؟","5 نوێژ"],
+["پێنجەمین پایەی ئیسلام چییە؟","حەجکردن"],
+["پێغەمبەر محەمەد (د.خ) لە چ شارێک لەدایکبووە؟","مەككەی پیرۆز"],
+["ناوی یەکەم سوورەت لە قورئانی پیرۆزدا چییە؟","سوورەتی فاتیحە"],
+["سوورەتی فاتیحە لە چەند ئایەت پێکدێت؟","7 ئایەت"],
+["درێژترین سوورەت لە قورئانی پیرۆزدا کامەیە؟","سوورەتی بەقەرە"],
+["ژمارەی سوورەتەکانی قورئانی پیرۆز چەندە؟","114 سوورەت"],
+["کورتترین سوورەت لە قورئاندا کامەیە؟","سوورەتی کەوسەر - 3 ئایەت"],
+["قورئانی پیرۆز لە چ شەوێکدا دابەزی؟","شەوی قەدر لە مانگی ڕەمەزان"],
+["ڕووگەی موسڵمانان بۆ نوێژکردن کوێیە؟","کەعبەی پیرۆز لە مەككە"],
+["پێغەمبەر محەمەد (د.خ) چەند جار حەجی کردووە؟","یەک جار - حەجی ماڵئاوایی"],
+["ناوی ئەو پێغەمبەرە چییە کە کەعبەی دروستکردووە؟","ئیبراهیم (سڵاوی خوای لێبێت)"],
+["ڕۆژی پیرۆزی هەفتە لای موسڵمانان چ ڕۆژێکە؟","ڕۆژی هەینی"],
+["چەند پێغەمبەر ناویان لە قورئاندا هاتووە؟","25 پێغەمبەر"],
+["ئەو مانگە چییە کە موسڵمانان تێیدا بەرۆژوو دەبن؟","مانگی ڕەمەزان"],
+["پێغەمبەر (د.خ) لە چ ساڵێکدا کۆچی کرد لە مەككەوە بۆ مەدینە؟","622ی زایینی"],
+["ناوی ئەو چیایە چییە کە وەحی تێدا دابەزی؟","چیای حیڕا"],
+["ژمارەی ئایەتەکانی قورئانی پیرۆز چەندە؟","6236 ئایەت"],
+["ناوی یەکەم مزگەوت کە لە ئیسلامدا دروستکرا چییە؟","مزگەوتی قوباء"],
+["دابەزینی قورئانی پیرۆز چەند ساڵی خایاند؟","23 ساڵ"],
+["پایەکانی باوەڕ کامانەن؟","باوەڕبوون بە خوا، فریشتەکانی، پەرتووکەکانی، پێغەمبەرەکانی، ڕۆژی دوایی، و قەدەر"],
+["یەکەم خەلیفەی ڕاشدین کێیە؟","ئەبوبەکری سدیق (ڕەزای خوای لێبێت)"],
+["جیاوازی نێوان زەکات و خێر چییە؟","زەکات فەرزە بە مەرجی دیاریکراو، خێرکردن ئارەزوومەندانەیە"],
+["ناوی ئەو پێغەمبەرە چییە کە بە خەلیلوڵڵا ناسراوە؟","ئیبراهیم (سڵاوی خوای لێبێت)"],
+["ناوی ئەو دەرگایەی بەهەشت چییە کە تایبەتە بە ڕۆژووەوانان؟","ڕەییان"],
+["ناوی ئەو پێغەمبەرە چییە کە حوت قووتی دا؟","یونس (سڵاوی خوای لێبێت)"],
+["ناوی ئەو فریشتەیە چییە کە وەحی دەگەیاندە پێغەمبەران؟","جوبرەئیل (سڵاوی خوای لێبێت)"],
+["مانگی پێش ڕەمەزان ناوی چییە؟","شەعبان"],
+]
+},
+daring:{
+ar:[
+["قول شيء محرج حدث معك أمام الجميع","تحدي"],
+["اعمل حركة رقص لمدة 15 ثانية","تحدي"],
+["قلّد شخص في الغرفة بدون ما تقول اسمه","تحدي"],
+["أخبر الجميع بأغرب شي فعلته في حياتك","تحدي"],
+["قول من هو أكثر شخص تحبه في الغرفة","تحدي"],
+["أخبر بأكثر شي تخاف منه","تحدي"],
+["اعمل صوت مضحك لمدة 15 ثانية","تحدي"],
+["قول من هو أكثر شخص مضحك في الغرفة","تحدي"],
+["صف الشخص على يمينك بكلمة واحدة فقط","تحدي"],
+["أخبر بأحلى ذكرى عندك","تحدي"],
+["قول شيء لم تقله لأحد من قبل","تحدي"],
+["اعمل وجه تعبيري لكل شخص في الغرفة","تحدي"],
+["قول 3 أشياء تتمنى تغييرها في نفسك","تحدي"],
+["صف شعورك الآن بحركة جسدية فقط","تحدي"],
+["قلّد طريقة أكل شخص معروف","تحدي"],
+["أعطِ موبايلك للشخص بجانبك وخلّيه يقرأ آخر رسالة بصوت عالٍ","تحدي"],
+["اتصل بشخص مش هنا وقله عندك شي مهم ثم اقطع المكالمة","تحدي"],
+["كل ما تتكلم لحظة اللعبة لازم تغني كلامك","تحدي"],
+["خلّي أحد يعدّل تسريحة شعرك وتبقى هيجي 5 دقايق","تحدي"],
+["قول للشخص قدامك شيء يزعجك من تصرفاته بصراحة","تحدي"],
+],
+ku:[
+["باس لە شتێکی شەرمەزارکەر بکە کە لەبەرچاو هەمووان بەسەرت هاتووە","ئاڵەنگاری"],
+["بۆ ماوەی 15 چرکە سەما بکە یان هەڵپەڕە","ئاڵەنگاری"],
+["لاسایی کەسێک لە ژوورەکەدا بکەرەوە بێ ئەوەی ناوی بهێنیت","ئاڵەنگاری"],
+["بە هەمووان بڵێ سەیرترین شت چییە کە لە ژیانتدا کردووتە","ئاڵەنگاری"],
+["بڵێ کێ خۆشەویستترین کەسە بەلاتەوە لەم ژوورەدا","ئاڵەنگاری"],
+["باسی ئەو شتە بکە کە زۆرترین ترست لێی هەیە","ئاڵەنگاری"],
+["دەنگێکی کۆمیدی و پێکەنیناوی دەربێنە بۆ ماوەی 15 چرکە","ئاڵەنگاری"],
+["دەستنیشانی بکە کێ کۆمیدیترین کەسە لە ژوورەکەدا","ئاڵەنگاری"],
+["ئەو کەسەی لە لای ڕاستتەوە دانیشتووە تەنها بە یەک وشە وەسف بکە","ئاڵەنگاری"],
+["خۆشترین یادگاری ژیانت بۆمان بگێڕەوە","ئاڵەنگاری"],
+["شتێک بڵێ کە پێشتر بە هیچ کەسێکت نەوتووە","ئاڵەنگاری"],
+["ڕووخسارێکی دەربڕیندار بۆ هەر کەسێک لە ژوورەکەدا بکە","ئاڵەنگاری"],
+["ناوی 3 شت بڵێ کە ئارەزوو دەکەیت لە کەسایەتی خۆتدا بیگۆڕیت","ئاڵەنگاری"],
+["هەستی ئێستات تەنها بە جوڵەی جەستە دەرببڕە بێ قسەکردن","ئاڵەنگاری"],
+["لاسایی شێوازی نانخواردنی کەسێکی بەناوبانگ یان هاوڕێیەکت بکەرەوە","ئاڵەنگاری"],
+["مۆبایلەکەت بدە بە کەسی تەنیشتت با کۆتا نامەت بە دەنگی بەرز بخوێنێتەوە","ئاڵەنگاری"],
+["پەیوەندی بە کەسێکەوە بکە و پێی بڵێ شتێکی گرینگت هەیە، بەڵام هیچ مەڵێ","ئاڵەنگاری"],
+["هەر قسەیەک دەکەیت بە ئاوازی گۆرانی بیڵێیت","ئاڵەنگاری"],
+["ڕێگە بدە یەکێک ستایلی قژت تێکبدات و 5 خولەک وا بمێنێتەوە","ئاڵەنگاری"],
+["بە کەسی بەرامبەرت بڵێ یەک شت کە بێزارت دەکات لە ڕەفتارەکانیدا","ئاڵەنگاری"],
+]
+}
+};
+
+// ===================== GAME STATE =====================
+var G={
+lang:'ar',numPlayers:4,numRounds:3,punMode:'pts',timeMode:'random',
+selectedCats:['mix'],daringOn:false,teamsOn:false,ppt:2,
+playerNames:[],scores:{},lives:{},eliminated:{},teamOf:{},
+teamScores:{A:0,B:0},teamAName:'',teamBName:'',
+activePlayers:[],currentIdx:0,currentRound:0,
+roundType:'normal',multiplier:1,
+bombTimer:null,bombTime:0,bombTotal:0,
+passCount:{},explodeCount:{},dontKnowCount:{},firstExplode:null,
+qPool:[],usedQs:[]
+};
+
+function t(k){return (L[G.lang]&&L[G.lang][k])||k;}
+
+/* ===================== SOUND & HAPTICS ===================== */
+var SFX = {
+    ctx: null,
+    init: function() {
+        if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+    },
+    play: function(freq, type, dur, vol, delay, freqEnd) {
+        try {
+            this.init();
+            var o = this.ctx.createOscillator();
+            var g = this.ctx.createGain();
+            var start = this.ctx.currentTime + (delay || 0);
+            o.type = type || 'sine';
+            o.frequency.setValueAtTime(freq, start);
+            if(freqEnd) o.frequency.exponentialRampToValueAtTime(freqEnd, start + dur);
+            g.gain.setValueAtTime(vol || 0.1, start);
+            g.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+            o.connect(g); g.connect(this.ctx.destination);
+            o.start(start); o.stop(start + dur);
+        } catch(e) {}
+    },
+    // تيك تاك عادي - نبضة هادئة
+    tick: function() {
+        this.play(440, 'sine', 0.08, 0.15);
+        this.play(880, 'sine', 0.04, 0.06, 0.05);
+    },
+    // تيك تاك سريع - أكثر حدة
+    fastTick: function() {
+        this.play(600, 'square', 0.06, 0.2);
+        this.play(1200, 'sine', 0.03, 0.08, 0.04);
+    },
+    // تيك تاك خطر - ثنائي مرعب
+    dangerTick: function() {
+        this.play(800, 'sawtooth', 0.08, 0.3);
+        this.play(400, 'square', 0.08, 0.2, 0.04);
+        this.play(1600, 'sine', 0.04, 0.1, 0.08);
+    },
+    // انفجار قوي ومركب
+    explode: function() {
+        try {
+            this.init();
+            var ctx = this.ctx;
+            // ضوضاء بيضاء - الانفجار الرئيسي
+            var dur = 1.5;
+            var buf = ctx.createBuffer(1, ctx.sampleRate * dur, ctx.sampleRate);
+            var data = buf.getChannelData(0);
+            for(var i = 0; i < data.length; i++) {
+                var t = i / ctx.sampleRate;
+                data[i] = (Math.random()*2-1) * Math.exp(-t * 3);
+            }
+            var src = ctx.createBufferSource();
+            src.buffer = buf;
+            var dist = ctx.createWaveShaper();
+            var curve = new Float32Array(256);
+            for(var i=0;i<256;i++) curve[i] = (i<128?-1:1)*Math.pow(Math.abs(i/128-1),0.3);
+            dist.curve = curve;
+            var g1 = ctx.createGain();
+            g1.gain.setValueAtTime(1.0, ctx.currentTime);
+            g1.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + dur);
+            var f = ctx.createBiquadFilter();
+            f.type='lowpass'; f.frequency.value=600;
+            src.connect(dist); dist.connect(f); f.connect(g1); g1.connect(ctx.destination);
+            src.start();
+            // نغمة ضربة عميقة
+            this.play(80, 'sine', 0.5, 0.8, 0, 30);
+            this.play(150, 'sine', 0.3, 0.5, 0.05, 50);
+            // صوت شظايا
+            this.play(2000, 'sawtooth', 0.2, 0.15, 0.1, 100);
+            this.play(1500, 'square', 0.15, 0.1, 0.15, 200);
+        } catch(e) {}
+    },
+    // تمرير ناجح - صوت إيجابي
+    pass: function() {
+        this.play(523, 'sine', 0.12, 0.2);
+        this.play(659, 'sine', 0.12, 0.2, 0.08);
+        this.play(784, 'sine', 0.15, 0.2, 0.16);
+    },
+    // كشف الجواب
+    reveal: function() {
+        this.play(440, 'sine', 0.1, 0.15);
+        this.play(550, 'sine', 0.15, 0.15, 0.06);
+    },
+    // إجابة صحيحة
+    correct: function() {
+        this.play(523, 'sine', 0.1, 0.2);
+        this.play(784, 'sine', 0.1, 0.2, 0.08);
+        this.play(1046, 'sine', 0.2, 0.2, 0.16);
+    },
+    // إجابة خاطئة
+    wrong: function() {
+        this.play(300, 'sawtooth', 0.2, 0.25);
+        this.play(200, 'sawtooth', 0.25, 0.2, 0.12);
+        this.play(150, 'square', 0.2, 0.15, 0.25);
+    },
+    // فوز
+    win: function() {
+        var notes=[523,659,784,1046];
+        notes.forEach(function(n,i){SFX.play(n,'sine',0.3,0.25,i*0.12);});
+    }
+};
+
+// اهتزاز الموبايل
+function vibrate(pattern) {
+    if (navigator.vibrate) navigator.vibrate(pattern);
+}
+
+// تيك تاك يتغير حسب الوقت
+var tickInterval = null;
+function startTickSound() {
+    stopTickSound();
+    tickInterval = setInterval(function() {
+        var pct = G.bombTime / G.bombTotal;
+        if (pct > 0.6) SFX.tick();
+        else if (pct > 0.35) SFX.fastTick();
+        else { SFX.dangerTick(); vibrate(30); }
+    }, 1000);
+}
+function stopTickSound() {
+    if (tickInterval) { clearInterval(tickInterval); tickInterval = null; }
+}
+
+function show(id){
+document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+document.getElementById(id).classList.add('active');
+}
+
+function flash(){
+var o=document.getElementById('flashOverlay');
+o.style.opacity='1';
+setTimeout(function(){o.style.opacity='0';},180);
+}
+
+// ===================== LANG SCREEN =====================
+function setLang(l){
+G.lang=l;
+document.documentElement.lang=l;
+renderSetup();
+show('sSetup');
+}
+
+function goLang(){show('sLang');}
+
+// ===================== SETUP =====================
+function renderSetup(){
+document.getElementById('txtBack').textContent=t('back');
+document.getElementById('lblPlayers').innerHTML='👥 '+t('players');
+document.getElementById('lblTeams').innerHTML='🏆 '+t('teams');
+document.getElementById('txtTeamMode').textContent=t('teamMode');
+document.getElementById('lblPPT').textContent=t('playersPerTeam');
+document.getElementById('lblRounds').innerHTML='🔄 '+t('rounds');
+document.getElementById('txtRoundsLabel').textContent=t('roundsLabel');
+document.getElementById('lblCats').innerHTML='📋 '+t('cats');
+document.getElementById('lblPun').innerHTML='💥 '+t('punishment');
+document.getElementById('lblTime').innerHTML='⏱ '+t('timeMode');
+document.getElementById('txtDaring').textContent=t('daring');
+document.getElementById('txtDaringWarn').textContent=t('daringWarn');
+document.getElementById('btnStart').textContent=t('start');
+document.getElementById('pCount').textContent=G.numPlayers;
+document.getElementById('rCount').textContent=G.numRounds;
+renderPlayerNames();renderCats();renderPuns();renderTimeGrid();
+}
+
+function renderPlayerNames(){
+var c=document.getElementById('playerNames');c.innerHTML='';
+for(var i=0;i<G.numPlayers;i++){
+var inp=document.createElement('input');
+inp.className='inp';
+inp.placeholder=(G.lang==='ar'?'اللاعب ':'یاریزان ')+(i+1);
+inp.value=G.playerNames[i]||'';
+(function(idx){inp.oninput=function(){G.playerNames[idx]=this.value;};})(i);
+c.appendChild(inp);
+}
+}
+
+function adjPlayers(d){
+G.numPlayers=Math.max(2,Math.min(10,G.numPlayers+d));
+document.getElementById('pCount').textContent=G.numPlayers;
+renderPlayerNames();
+}
+
+function toggleTeams(){
+G.teamsOn=document.getElementById('teamToggle').checked;
+document.getElementById('teamNamesWrap').style.display=G.teamsOn?'block':'none';
+document.getElementById('pptWrap').style.display=G.teamsOn?'flex':'none';
+}
+
+function adjPPT(d){
+G.ppt=Math.max(1,Math.min(5,G.ppt+d));
+document.getElementById('pptVal').textContent=G.ppt;
+}
+
+function adjRounds(d){
+G.numRounds=Math.max(1,Math.min(10,G.numRounds+d));
+document.getElementById('rCount').textContent=G.numRounds;
+}
+
+function renderCats(){
+var cats=['food','sport','challenge','geo','history','movies','famous','general','gaming','religion','mix'];
+var ems={food:'🍔',sport:'⚽',challenge:'🔥',geo:'🌍',history:'📚',movies:'🎬',famous:'👤',general:'🧠',gaming:'🎮',religion:'☪️',mix:'🎰'};
+var g=document.getElementById('catGrid');g.innerHTML='';
+cats.forEach(function(cat){
+var d=document.createElement('div');
+d.className='cat-item'+(G.selectedCats.indexOf(cat)>-1?' sel':'');
+d.innerHTML='<span class="cat-em">'+ems[cat]+'</span><span class="cat-nm">'+t('cat_'+cat).replace(/^../,'')+'</span>';
+d.onclick=(function(c){return function(){
+if(c==='mix'){G.selectedCats=['mix'];}
+else{
+var mi=G.selectedCats.indexOf('mix');if(mi>-1)G.selectedCats.splice(mi,1);
+var ci=G.selectedCats.indexOf(c);
+if(ci>-1)G.selectedCats.splice(ci,1);else G.selectedCats.push(c);
+if(G.selectedCats.length===0)G.selectedCats=['mix'];
+}
+renderCats();
+};})(cat);
+g.appendChild(d);
+});
+}
+
+function renderPuns(){
+var isAr=G.lang==='ar';
+var puns=[
+{k:'pts', e:'📉', ar:'نقطة سالبة', ku:'خاڵی نێگەتیڤ', desc_ar:'💣 الانفجار = -5 نقاط', desc_ku:'💣 تەقینەوە = -5 خاڵ'},
+{k:'lives', e:'❤️', ar:'حيوات', ku:'ژیانەکان', desc_ar:'3 حيوات — الطرد عند الصفر', desc_ku:'3 ژیان — دەرکردن لە سفرەوە'},
+{k:'elim', e:'🚫', ar:'طرد فوري', ku:'دەرکردنی فوری', desc_ar:'الانفجار = طرد من اللعبة', desc_ku:'تەقینەوە = دەرکردن لە یارییەکە'},
+];
+var g=document.getElementById('punGrid');g.innerHTML='';
+puns.forEach(function(p){
+var d=document.createElement('div');
+d.className='pun-item'+(G.punMode===p.k?' sel':'');
+d.innerHTML='<span class="pun-em">'+p.e+'</span>'+
+'<span style="font-size:.75rem;font-weight:900;display:block;margin-bottom:3px">'+(isAr?p.ar:p.ku)+'</span>'+
+'<span style="font-size:.6rem;color:var(--dim);font-weight:700">'+(isAr?p.desc_ar:p.desc_ku)+'</span>';
+d.onclick=(function(pk){return function(){G.punMode=pk;renderPuns();};})(p.k);
+g.appendChild(d);
+});
+}
+
+function renderTimeGrid(){
+var times=[{k:'random',lk:'time_random'},{k:'30',lk:'time_30'},{k:'60',lk:'time_60'},{k:'pressure',lk:'time_pressure'}];
+var g=document.getElementById('timeGrid');g.innerHTML='';
+times.forEach(function(tm){
+var d=document.createElement('div');
+d.className='time-item'+(G.timeMode===tm.k?' sel':'');
+d.textContent=t(tm.lk);
+d.onclick=(function(tk){return function(){G.timeMode=tk;renderTimeGrid();};})(tm.k);
+g.appendChild(d);
+});
+}
+
+// ===================== START GAME =====================
+function startGame(){
+var names=[];
+document.querySelectorAll('#playerNames .inp').forEach(function(inp,i){
+names.push(inp.value.trim()||((G.lang==='ar'?'لاعب ':'یاریزان ')+(i+1)));
+});
+G.playerNames=names;
+G.scores={};G.lives={};G.eliminated={};
+G.passCount={};G.explodeCount={};G.dontKnowCount={};
+G.firstExplode=null;G.teamScores={A:0,B:0};
+names.forEach(function(n){
+G.scores[n]=0;G.lives[n]=3;G.eliminated[n]=false;
+G.passCount[n]=0;G.explodeCount[n]=0;G.dontKnowCount[n]=0;
+});
+G.teamOf={};
+if(G.teamsOn){names.forEach(function(n,i){G.teamOf[n]=i%2===0?'A':'B';});}
+G.teamAName=document.getElementById('teamAName').value.trim()||t('teamA');
+G.teamBName=document.getElementById('teamBName').value.trim()||t('teamB');
+G.daringOn=document.getElementById('daringToggle').checked;
+G.currentRound=0;G.currentIdx=0;
+G.activePlayers=names.slice();G.usedQs=[];
+buildQPool();
+announceRound();
+}
+
+function buildQPool(){
+var cats=G.selectedCats.indexOf('mix')>-1
+?['food','sport','challenge','geo','history','movies','famous','general','gaming','religion']
+:G.selectedCats;
+var pool=[];
+cats.forEach(function(cat){
+if(QB[cat]&&QB[cat][G.lang]){
+QB[cat][G.lang].forEach(function(q,idx){
+// تجنب التكرار باستخدام مفتاح فريد
+var key=cat+'_'+idx;
+if(G.usedQs.indexOf(key)===-1){
+pool.push({cat:cat,q:q,key:key});
+}
+});
+}
+});
+if(G.daringOn&&QB.daring&&QB.daring[G.lang]){
+QB.daring[G.lang].forEach(function(q,idx){
+var key='daring_'+idx;
+if(G.usedQs.indexOf(key)===-1){
+pool.push({cat:'daring',q:q,key:key});
+}
+});
+}
+// إذا ما في أسئلة جديدة، صفّر الاستخدام
+if(pool.length<5){
+G.usedQs=[];
+return buildQPool();
+}
+for(var i=pool.length-1;i>0;i--){
+var j=Math.floor(Math.random()*(i+1));
+var tmp=pool[i];pool[i]=pool[j];pool[j]=tmp;
+}
+G.qPool=pool;
+}
+
+function getNextQ(){
+if(G.qPool.length===0)buildQPool();
+var q=G.qPool.pop();
+// حفظ السؤال كمستخدم
+if(q&&q.key)G.usedQs.push(q.key);
+return q;
+}
+
+// ===================== ANNOUNCE ROUND =====================
+function announceRound(){
+G.currentRound++;
+var r=Math.random();
+if(r<0.6){G.roundType='normal';G.multiplier=1;}
+else if(r<0.85){G.roundType='double';G.multiplier=2;}
+else{G.roundType='boss';G.multiplier=3;}
+document.getElementById('annBadge').textContent=t('roundAnn')+' '+G.currentRound;
+var icon,title,sub;
+if(G.roundType==='normal'){icon='💣';title=t('normalRound');sub=t('normalSub');}
+else if(G.roundType==='double'){icon='⚡';title=t('doubleRound');sub=t('doubleSub');}
+else{icon='💀';title=t('bossRound');sub=t('bossSub');}
+document.getElementById('annIcon').textContent=icon;
+document.getElementById('annTitle').textContent=title;
+document.getElementById('annSub').textContent=sub;
+document.getElementById('annBtn').textContent=t('tapStart');
+updateRoundDots();
+show('sAnnounce');
+}
+
+function updateRoundDots(){
+var dots=document.getElementById('roundDots');dots.innerHTML='';
+for(var i=0;i<G.numRounds;i++){
+var d=document.createElement('div');
+d.className='ri-dot'+(i<G.currentRound-1?' done':i===G.currentRound-1?' cur':'');
+dots.appendChild(d);
+}
+}
+
+// ===================== ROUND =====================
+function startRound(){
+G.currentIdx=0;
+show('sGame');
+updateScoreRow();
+nextPlayerTurn();
+}
+
+function getActivePlayers(){
+return G.playerNames.filter(function(n){return !G.eliminated[n];});
+}
+
+function nextPlayerTurn(){
+var active=getActivePlayers();
+if(active.length<2){endGame();return;}
+G.activePlayers=active;
+if(G.currentIdx>=active.length)G.currentIdx=0;
+var player=active[G.currentIdx];
+document.getElementById('pLabel').textContent=t('playerLabel');
+document.getElementById('pName').textContent=player;
+if(G.teamsOn&&G.teamOf[player]){
+var team=G.teamOf[player];
+document.getElementById('pTeam').textContent=team==='A'?G.teamAName:G.teamBName;
+document.getElementById('pTeam').style.color=team==='A'?'var(--cyan)':'var(--pink)';
+}else{document.getElementById('pTeam').textContent='';}
+if(G.punMode==='lives'){
+document.getElementById('pLives').textContent='❤️'.repeat(Math.max(0,G.lives[player]));
+}else{document.getElementById('pLives').textContent='';}
+var sb=document.getElementById('specialBadge');
+if(G.roundType==='double'){sb.style.display='inline-block';sb.className='nq-badge nq-double';sb.textContent='DOUBLE ⚡';}
+else if(G.roundType==='boss'){sb.style.display='inline-block';sb.className='nq-badge nq-boss';sb.textContent='BOSS 💀';}
+else{sb.style.display='none';}
+document.getElementById('bombEmoji').textContent='💣';
+document.getElementById('bombEmoji').className='bomb-emoji pulse';
+var qObj=getNextQ();G.currentQ=qObj;
+document.getElementById('qCat').textContent=t('cat_'+qObj.cat)||qObj.cat;
+document.getElementById('qText').textContent=qObj.q[0];
+// إخفاء الجواب وإظهار زر الكشف
+document.getElementById('qAnswer').style.display='none';
+document.getElementById('btnReveal').style.display='block';
+document.getElementById('btnReveal').textContent=G.lang==='ar'?'اكشف الجواب 👁️':'وەڵامەکە پیشان بدە 👁️';
+document.getElementById('btnRowNormal').style.display='grid';
+document.getElementById('btnRowJudge').style.display='none';
+document.getElementById('btnDontKnow').textContent=t('dontKnow');
+document.getElementById('btnPass').textContent=t('pass');
+startBombTimer();
+}
+
+function revealAnswer(){
+stopBombTimer();
+SFX.reveal();
+var qObj=G.currentQ;
+var answer=qObj.q[1];
+var answerEl=document.getElementById('qAnswer');
+answerEl.textContent=(G.lang==='ar'?'الجواب: ':'وەڵام: ')+answer;
+answerEl.style.display='block';
+document.getElementById('btnReveal').style.display='none';
+if(qObj.cat==='challenge'||qObj.cat==='daring'){
+document.getElementById('btnRowNormal').style.display='grid';
+document.getElementById('btnRowJudge').style.display='none';
+startBombTimer();
+}else{
+document.getElementById('btnRowNormal').style.display='none';
+document.getElementById('btnRowJudge').style.display='grid';
+document.getElementById('btnWrong').textContent=G.lang==='ar'?'❌ غلط':'❌ هەڵەیە';
+document.getElementById('btnCorrect').textContent=G.lang==='ar'?'✅ صح':'✅ ڕاستە';
+}
+}
+
+function startBombTimer(){
+stopBombTimer();
+var secs;
+if(G.timeMode==='30')secs=30;
+else if(G.timeMode==='60')secs=60;
+else secs=12+Math.floor(Math.random()*33);
+G.bombTotal=secs;G.bombTime=secs;
+var bomb=document.getElementById('bombEmoji');
+G.bombTimer=setInterval(function(){
+G.bombTime--;
+var pct=G.bombTime/G.bombTotal;
+bomb.className='bomb-emoji';
+if(pct>0.6){bomb.classList.add('pulse');SFX.tick();}
+else if(pct>0.35){bomb.classList.add('fast');SFX.fastTick();vibrate(20);}
+else if(pct>0.15){bomb.classList.add('ultra');SFX.dangerTick();vibrate([30,20]);}
+else{bomb.classList.add('shake');SFX.dangerTick();vibrate([50,30,50]);}
+if(pct<=0.15)document.getElementById('redFlash').classList.add('on');
+if(G.bombTime<=0)explodeOn(G.activePlayers[G.currentIdx],'timer');
+},1000);
+}
+
+function stopBombTimer(){
+if(G.bombTimer){clearInterval(G.bombTimer);G.bombTimer=null;}
+document.getElementById('redFlash').classList.remove('on');
+}
+
+// ===================== ACTIONS =====================
+function passQ(){
+stopBombTimer();
+SFX.correct();
+vibrate(30);
+var player=G.activePlayers[G.currentIdx];
+var pts=G.multiplier;
+G.scores[player]=(G.scores[player]||0)+pts;
+G.passCount[player]=(G.passCount[player]||0)+1;
+if(G.teamsOn&&G.teamOf[player])G.teamScores[G.teamOf[player]]=(G.teamScores[G.teamOf[player]]||0)+pts;
+updateScoreRow();
+G.currentIdx=(G.currentIdx+1)%G.activePlayers.length;
+nextPlayerTurn();
+}
+
+function dontKnow(){
+stopBombTimer();
+SFX.wrong();
+vibrate([80,40,80]);
+var player=G.activePlayers[G.currentIdx];
+G.dontKnowCount[player]=(G.dontKnowCount[player]||0)+1;
+explodeOn(player,'dontknow');
+}
+
+function explodeOn(player,reason){
+stopBombTimer();
+// صوت انفجار + اهتزاز قوي
+SFX.explode();
+vibrate([100,50,100,50,200]);
+// فلاش قوي متعدد
+var o=document.getElementById('flashOverlay');
+o.style.background='rgba(255,0,110,0.8)';
+o.style.opacity='1';
+setTimeout(function(){o.style.opacity='0.3';},100);
+setTimeout(function(){o.style.opacity='0.8';},200);
+setTimeout(function(){o.style.opacity='0.2';},300);
+setTimeout(function(){o.style.opacity='0';o.style.background='rgba(255,0,110,0.6)';},500);
+document.getElementById('bombEmoji').textContent='💥';
+if(!G.firstExplode)G.firstExplode=player;
+G.explodeCount[player]=(G.explodeCount[player]||0)+1;
+var punMsg='';var isElim=false;
+if(G.punMode==='pts'){
+G.scores[player]=(G.scores[player]||0)-5;
+if(G.teamsOn&&G.teamOf[player])G.teamScores[G.teamOf[player]]=(G.teamScores[G.teamOf[player]]||0)-5;
+punMsg=G.lang==='ar'?'💀 خسرت 5 نقاط!':'💀 5 خاڵت لەدەستدا!';
+}else if(G.punMode==='lives'){
+G.lives[player]--;
+if(G.lives[player]<=0){G.eliminated[player]=true;isElim=true;punMsg=t('punElim');}
+else punMsg=t('punLives')+' ('+G.lives[player]+' '+t('livesLeft')+')';
+}else if(G.punMode==='elim'){
+G.eliminated[player]=true;isElim=true;punMsg=t('punElim');
+}
+document.getElementById('expName').textContent=player;
+document.getElementById('expSub').textContent=t('exploded');
+document.getElementById('expPts').textContent=punMsg;
+var eb=document.getElementById('elimBadge');
+if(isElim){eb.style.display='block';eb.textContent=t('punElimBadge');}
+else eb.style.display='none';
+document.getElementById('expBtn').textContent=t('continueBtn');
+updateScoreRow();
+show('sExplode');
+}
+
+function afterExplode(){
+document.getElementById('bombEmoji').textContent='💣';
+document.getElementById('bombEmoji').className='bomb-emoji pulse';
+if(getActivePlayers().length<2){endGame();return;}
+endRound();
+}
+
+function updateScoreRow(){
+var row=document.getElementById('scoreRow');
+if(G.teamsOn){
+row.innerHTML='<div class="score-box"><div class="score-team">'+G.teamAName+'</div><div class="score-val score-a">'+(G.teamScores.A||0)+'</div></div>'+
+'<div class="score-box"><div class="score-team">'+G.teamBName+'</div><div class="score-val score-b">'+(G.teamScores.B||0)+'</div></div>';
+}else{
+var sorted=G.playerNames.slice().sort(function(a,b){return (G.scores[b]||0)-(G.scores[a]||0);});
+var colors=['score-a','score-b','score-a','score-b','score-a','score-b','score-a','score-b'];
+row.innerHTML=sorted.map(function(p,i){
+return '<div class="score-box" style="min-width:70px;flex:none"><div class="score-team" style="font-size:.5rem">'+p+'</div><div class="score-val '+(colors[i]||'score-a')+'" style="font-size:1.2rem">'+(G.scores[p]||0)+'</div></div>';
+}).join('');
+}
+}
+
+// ===================== ROUND END =====================
+function endRound(){
+document.getElementById('reTitle').textContent=t('roundEndTitle')+' '+G.currentRound;
+var rts=document.getElementById('reTeamScores');
+if(G.teamsOn){
+rts.innerHTML='<div class="teams-badge">'+
+'<div class="team-badge team-a-badge">'+G.teamAName+': '+(G.teamScores.A||0)+' '+t('pts')+'</div>'+
+'<div class="team-badge team-b-badge">'+G.teamBName+': '+(G.teamScores.B||0)+' '+t('pts')+'</div>'+
+'</div>';
+}else rts.innerHTML='';
+var sorted=G.playerNames.slice().sort(function(a,b){return (G.scores[b]||0)-(G.scores[a]||0);});
+document.getElementById('reScores').innerHTML=sorted.map(function(p){
+var pts=G.scores[p]||0;
+return '<div class="sb-row"><span class="sb-name">'+(G.eliminated[p]?'🚫 ':'')+p+'</span>'+
+'<span class="sb-pts '+(pts>=0?'pos':'neg')+'">'+pts+' '+t('pts')+'</span></div>';
+}).join('');
+var isLast=G.currentRound>=G.numRounds||getActivePlayers().length<2;
+document.getElementById('reBtn').textContent=isLast?t('endGame'):t('roundEndBtn');
+var dots=document.getElementById('roundDots');dots.innerHTML='';
+for(var i=0;i<G.numRounds;i++){
+var d=document.createElement('div');
+d.className='ri-dot'+(i<G.currentRound?' done':'');
+dots.appendChild(d);
+}
+show('sRoundEnd');
+}
+
+function nextRoundAnnounce(){
+if(G.currentRound>=G.numRounds||getActivePlayers().length<2){endGame();return;}
+if(G.numRounds>3&&G.currentRound%2===0){showMidScore();}
+else{announceRound();}
+}
+
+function showMidScore(){
+document.getElementById('msTitle').textContent=t('roundNum')+' '+G.currentRound+'/'+G.numRounds;
+var tl=document.getElementById('msTeamLabel'),ts=document.getElementById('msTeamScores');
+if(G.teamsOn){
+tl.textContent=t('teamScore');
+ts.innerHTML='<div class="teams-badge">'+
+'<div class="team-badge team-a-badge">'+G.teamAName+': '+(G.teamScores.A||0)+' '+t('pts')+'</div>'+
+'<div class="team-badge team-b-badge">'+G.teamBName+': '+(G.teamScores.B||0)+' '+t('pts')+'</div>'+
+'</div>';
+}else{tl.textContent='';ts.innerHTML='';}
+document.getElementById('msPlayerLabel').textContent=t('playerScore');
+var sorted=G.playerNames.slice().sort(function(a,b){return (G.scores[b]||0)-(G.scores[a]||0);});
+document.getElementById('msPlayerScores').innerHTML=sorted.map(function(p){
+var pts=G.scores[p]||0;
+return '<div class="sb-row"><span class="sb-name">'+(G.eliminated[p]?'🚫 ':'')+p+'</span>'+
+'<span class="sb-pts '+(pts>=0?'pos':'neg')+'">'+pts+' '+t('pts')+'</span></div>';
+}).join('');
+document.getElementById('msBtn').textContent=t('nextRound');
+show('sMidScore');
+}
+
+function continueGame(){announceRound();}
+
+// ===================== END GAME =====================
+function endGame(){
+var sorted=G.playerNames.slice().sort(function(a,b){return (G.scores[b]||0)-(G.scores[a]||0);});
+var winner=sorted[0];
+document.getElementById('winnerName').textContent='🏆 '+winner;
+document.getElementById('winnerScore').textContent=(G.scores[winner]||0)+' '+t('pts');
+var tfl=document.getElementById('lblTeamFinal'),tfs=document.getElementById('finalTeamScores');
+if(G.teamsOn){
+tfl.textContent=t('finalTeam');
+var winTeam=((G.teamScores.A||0)>=(G.teamScores.B||0))?G.teamAName:G.teamBName;
+tfs.innerHTML='<div class="teams-badge">'+
+'<div class="team-badge team-a-badge">'+G.teamAName+': '+(G.teamScores.A||0)+' '+t('pts')+'</div>'+
+'<div class="team-badge team-b-badge">'+G.teamBName+': '+(G.teamScores.B||0)+' '+t('pts')+'</div>'+
+'</div><div style="text-align:center;margin-top:8px;font-weight:900;color:var(--green)">'+t('winnerTeam')+': '+winTeam+'</div>';
+}else{tfl.textContent='';tfs.innerHTML='';}
+document.getElementById('lblPlayerFinal').textContent=t('finalPlayer');
+document.getElementById('finalPlayerScores').innerHTML=sorted.map(function(p,i){
+var pts=G.scores[p]||0;
+var medal=i===0?'🥇':i===1?'🥈':i===2?'🥉':'  ';
+return '<div class="sb-row"><span class="sb-name">'+medal+(G.eliminated[p]?' 🚫':' ')+p+'</span>'+
+'<span class="sb-pts '+(pts>=0?'pos':'neg')+'">'+pts+' '+t('pts')+'</span></div>';
+}).join('');
+document.getElementById('lblAchievements').textContent=t('achievements');
+renderAchievements(sorted);
+document.getElementById('btnPlayAgain').textContent=t('playAgain');
+show('sStats');
+}
+
+function renderAchievements(sorted){
+var ach=[];
+ach.push({icon:'🏆',title:t('aWinner'),val:sorted[0]});
+var mpName=G.playerNames.reduce(function(a,b){return (G.passCount[a]||0)>=(G.passCount[b]||0)?a:b;});
+ach.push({icon:'⬅️',title:t('aPassMost'),val:mpName+' ('+(G.passCount[mpName]||0)+')'});
+var meName=G.playerNames.reduce(function(a,b){return (G.explodeCount[a]||0)>=(G.explodeCount[b]||0)?a:b;});
+ach.push({icon:'💥',title:t('aExplode'),val:meName+' ('+(G.explodeCount[meName]||0)+')'});
+var mdkName=G.playerNames.reduce(function(a,b){return (G.dontKnowCount[a]||0)>=(G.dontKnowCount[b]||0)?a:b;});
+ach.push({icon:'❓',title:t('aDontKnow'),val:mdkName});
+if(G.firstExplode)ach.push({icon:'💣',title:t('aFirst'),val:G.firstExplode});
+var alive=G.playerNames.filter(function(p){return !G.eliminated[p];});
+if(alive.length>0){
+var lucky=alive.reduce(function(a,b){return (G.explodeCount[a]||0)<=(G.explodeCount[b]||0)?a:b;});
+ach.push({icon:'🍀',title:t('aLucky'),val:lucky});
+}
+document.getElementById('achievementsGrid').innerHTML=ach.map(function(a){
+return '<div class="stat-card pxb"><span class="stat-icon">'+a.icon+'</span>'+
+'<div class="stat-title">'+a.title+'</div>'+
+'<div class="stat-val">'+a.val+'</div></div>';
+}).join('');
+}
+
+function resetGame(){
+stopBombTimer();
+G.currentRound=0;
+show('sLang');
+}
+</script>
+</body>
+</html>
