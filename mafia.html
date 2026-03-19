@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>المافيا 🎭</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700;900&family=Scheherazade+New:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d0d0d;--ink2:#161616;--ink3:#1f1f1f;
+  --blood:#9b1c1c;--blood2:#c0392b;--blood3:#e74c3c;
+  --ash:#8a8a8a;--fog:#4a4a4a;
+  --paper:#f0ebe3;--paper2:#ddd5c8;
+  --w:#ffffff;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  font-family:'Tajawal',sans-serif;
+  background:var(--ink);color:var(--w);
+  min-height:100vh;display:flex;justify-content:center;
+  overflow-x:hidden;user-select:none;
+}
+.wrap{width:100%;max-width:440px;min-height:100vh;position:relative;overflow:hidden}
+
+/* SCREENS */
+.screen{display:none;position:absolute;inset:0;flex-direction:column;overflow-y:auto}
+.active{display:flex;animation:sceneIn .5s cubic-bezier(.16,1,.3,1) both}
+@keyframes sceneIn{from{opacity:0;transform:translateY(30px) scale(.97)}to{opacity:1;transform:none}}
+
+/* CURTAIN BG */
+.curtain{
+  position:fixed;inset:0;max-width:440px;margin:0 auto;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% -10%,rgba(155,28,28,.5) 0%,transparent 70%),
+    linear-gradient(180deg,#0d0d0d 0%,#0a0a0a 100%);
+}
+
+/* TYPOGRAPHY HERO */
+.hero{
+  position:relative;z-index:1;
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:60px 32px 40px;
+  text-align:center;
+  min-height:100vh;
+}
+.hero-mask{
+  font-size:7rem;display:block;
+  margin-bottom:8px;
+  animation:maskFloat 8s ease-in-out infinite;
+  filter:drop-shadow(0 0 40px rgba(155,28,28,.9));
+}
+@keyframes maskFloat{
+  0%,100%{transform:translateY(0) rotate(-2deg)}
+  33%{transform:translateY(-12px) rotate(1deg)}
+  66%{transform:translateY(-5px) rotate(-1deg)}
+}
+.hero-title{
+  font-family:'Scheherazade New',serif;
+  font-size:6rem;font-weight:700;
+  line-height:.85;letter-spacing:2px;
+  background:linear-gradient(170deg,#fff 0%,#bbb 60%,#555 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:6px;
+}
+.hero-sub{
+  font-size:.5rem;letter-spacing:10px;color:var(--fog);
+  text-transform:uppercase;margin-bottom:48px;
+}
+/* خيط دم */
+.blood-line{
+  width:1px;height:60px;
+  background:linear-gradient(180deg,var(--blood2),transparent);
+  margin:0 auto 32px;
+}
+
+/* GHOST BUTTONS — نص فقط بدون خلفية */
+.ghost-btn{
+  background:none;border:none;cursor:pointer;
+  font-family:'Scheherazade New',serif;
+  font-size:1.6rem;font-weight:700;
+  color:var(--w);letter-spacing:1px;
+  padding:12px 32px;
+  position:relative;transition:color .2s;
+  display:block;width:100%;text-align:center;
+  -webkit-text-fill-color:var(--w);
+}
+.ghost-btn::after{
+  content:'';position:absolute;
+  bottom:4px;left:50%;transform:translateX(-50%) scaleX(0);
+  width:40%;height:1px;background:var(--blood2);
+  transition:transform .3s cubic-bezier(.16,1,.3,1);
+}
+.ghost-btn:active::after,.ghost-btn:active{color:var(--blood3);-webkit-text-fill-color:var(--blood3)}
+.ghost-btn:active::after{transform:translateX(-50%) scaleX(1)}
+
+/* LANG GRID */
+.lang-split{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;background:var(--fog);
+  width:100%;
+}
+.lang-cell{
+  background:var(--ink);
+  padding:36px 16px;
+  text-align:center;cursor:pointer;
+  transition:background .2s;
+}
+.lang-cell:active{background:var(--blood)}
+.lang-cell-title{
+  font-family:'Scheherazade New',serif;
+  font-size:2.2rem;font-weight:700;color:var(--w);
+  display:block;
+}
+.lang-cell-sub{
+  font-size:.6rem;letter-spacing:2px;color:var(--ash);
+  display:block;margin-top:6px;text-transform:uppercase;
+}
+
+/* SCENE HEADER */
+.scene-header{
+  position:relative;z-index:1;
+  padding:48px 32px 24px;
+  text-align:center;
+}
+.scene-num{
+  font-size:.55rem;letter-spacing:6px;color:var(--blood3);
+  text-transform:uppercase;display:block;margin-bottom:12px;
+}
+.scene-title{
+  font-family:'Scheherazade New',serif;
+  font-size:2.8rem;font-weight:700;line-height:1;
+}
+.scene-sub{font-size:.85rem;color:var(--ash);margin-top:8px;line-height:1.6}
+
+/* FLOATING BACK */
+.float-back{
+  position:absolute;top:16px;right:16px;z-index:20;
+  background:none;border:none;
+  font-family:'Tajawal',sans-serif;
+  font-size:.75rem;color:var(--fog);
+  cursor:pointer;padding:8px;
+  letter-spacing:1px;
+  transition:color .2s;
+}
+.float-back:active{color:var(--w)}
+
+/* PLAYER COUNT DISPLAY */
+.count-stage{
+  display:flex;align-items:center;justify-content:center;gap:40px;
+  padding:24px 32px;position:relative;z-index:1;
+}
+.count-btn{
+  background:none;border:none;cursor:pointer;
+  color:var(--ash);font-size:2rem;font-weight:300;
+  width:48px;height:48px;
+  display:flex;align-items:center;justify-content:center;
+  transition:color .15s;
+  font-family:'Tajawal',sans-serif;
+}
+.count-btn:active{color:var(--blood3)}
+.count-big{
+  font-family:'Scheherazade New',serif;
+  font-size:6rem;font-weight:700;color:var(--w);
+  line-height:1;min-width:80px;text-align:center;
+}
+.count-label{font-size:.65rem;letter-spacing:3px;color:var(--fog);text-align:center;text-transform:uppercase;margin-top:4px}
+
+/* PLAYER NAME LIST */
+.name-list{
+  padding:0 32px;position:relative;z-index:1;
+  display:flex;flex-direction:column;gap:0;
+}
+.name-item{
+  display:flex;align-items:center;gap:12px;
+  border-bottom:1px solid var(--ink3);
+  padding:2px 0;
+}
+.name-num{
+  font-family:'Scheherazade New',serif;
+  font-size:1.4rem;color:var(--fog);width:28px;flex-shrink:0;
+}
+.name-inp{
+  flex:1;background:none;border:none;
+  color:var(--w);font-family:'Tajawal',sans-serif;
+  font-size:.95rem;padding:12px 0;outline:none;
+}
+.name-inp:focus{color:var(--w)}
+.name-inp::placeholder{color:var(--fog)}
+
+/* ROLE SECTION HEADER */
+.role-group-title{
+  font-size:.55rem;letter-spacing:5px;text-transform:uppercase;
+  color:var(--blood3);padding:20px 32px 10px;
+  font-weight:700;position:relative;z-index:1;
+}
+
+/* ROLE ROW — تايپوگرافي فقط */
+.role-line{
+  display:flex;align-items:center;gap:0;
+  padding:14px 32px;
+  border-bottom:1px solid rgba(255,255,255,.04);
+  position:relative;z-index:1;
+  cursor:pointer;transition:background .15s;
+}
+.role-line::before{
+  content:'';position:absolute;
+  right:0;top:0;bottom:0;width:0;
+  background:var(--blood2);
+  transition:width .2s;
+}
+.role-line.sel-red::before{width:2px}
+.role-line.sel-blue::before{width:2px;background:#2a6a8a}
+.role-line.sel-gold::before{width:2px;background:#a08030}
+.role-line:active{background:rgba(255,255,255,.03)}
+.role-line-icon{font-size:1.6rem;width:40px;flex-shrink:0;text-align:center;opacity:.9}
+.role-line-name{flex:1;font-size:1.05rem;font-weight:700;padding-right:8px}
+.role-line-hint{font-size:.65rem;color:var(--blood3);display:block;margin-top:2px;font-weight:400}
+.role-line-ctrl{display:flex;align-items:center;gap:0;flex-shrink:0}
+.rl-minus,.rl-plus{
+  background:none;border:none;cursor:pointer;
+  color:var(--fog);font-size:1.4rem;font-weight:300;
+  width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;
+  transition:color .15s;font-family:'Tajawal',sans-serif;
+}
+.rl-minus:active,.rl-plus:active{color:var(--blood3)}
+.rl-num{
+  font-size:1rem;font-weight:700;color:var(--w);
+  min-width:24px;text-align:center;
+}
+
+/* ROLE SUMMARY */
+.role-summary{
+  padding:16px 32px;font-size:.75rem;color:var(--fog);
+  white-space:pre-line;position:relative;z-index:1;
+  line-height:1.8;
+}
+
+/* START BTN — FULL DRAMATIC */
+.start-btn{
+  margin:24px 32px 40px;
+  background:var(--blood2);color:var(--w);
+  border:none;cursor:pointer;
+  font-family:'Scheherazade New',serif;
+  font-size:1.5rem;font-weight:700;
+  padding:20px;width:calc(100% - 64px);
+  letter-spacing:1px;
+  transition:background .15s,transform .1s;
+  position:relative;z-index:1;
+}
+.start-btn:active{background:var(--blood);transform:scale(.99)}
+
+/* SECONDARY BTN */
+.sec-btn{
+  background:none;border:none;cursor:pointer;
+  font-family:'Tajawal',sans-serif;
+  font-size:.9rem;color:var(--ash);
+  padding:14px 32px;width:100%;
+  transition:color .15s;position:relative;z-index:1;
+  text-align:center;letter-spacing:.5px;
+}
+.sec-btn:active{color:var(--w)}
+
+/* DANGER BTN */
+.danger-btn{
+  background:var(--blood2);color:var(--w);
+  border:none;cursor:pointer;
+  font-family:'Tajawal',sans-serif;
+  font-size:1rem;font-weight:700;
+  padding:18px 32px;width:100%;
+  transition:background .15s;
+  position:relative;z-index:1;letter-spacing:.5px;
+}
+.danger-btn:active{background:var(--blood)}
+
+/* REVEAL SCENE */
+.reveal-stage{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:32px;text-align:center;
+  position:relative;z-index:1;
+  gap:0;
+}
+.reveal-badge{
+  font-size:.55rem;letter-spacing:6px;text-transform:uppercase;
+  color:var(--blood3);margin-bottom:32px;
+}
+.reveal-player-name{
+  font-family:'Scheherazade New',serif;
+  font-size:2rem;font-weight:700;color:var(--w);
+  margin-bottom:40px;
+}
+.reveal-big-icon{
+  font-size:7rem;display:block;
+  filter:drop-shadow(0 0 40px rgba(155,28,28,.7));
+  margin-bottom:28px;
+}
+.reveal-role-name{
+  font-family:'Scheherazade New',serif;
+  font-size:3.2rem;font-weight:700;
+  line-height:1;margin-bottom:6px;
+}
+.reveal-team-badge{
+  font-size:.55rem;letter-spacing:4px;text-transform:uppercase;
+  color:var(--ash);margin-bottom:28px;
+}
+.reveal-desc-text{
+  font-size:.9rem;color:var(--ash);line-height:1.9;
+  max-width:320px;
+}
+/* خط فاصل رفيع */
+.thin-line{
+  width:40px;height:1px;background:var(--blood2);
+  margin:24px auto;
+}
+
+/* NIGHT TURN */
+.night-stage{
+  flex:1;position:relative;z-index:1;
+  display:flex;flex-direction:column;
+}
+.night-step-header{
+  padding:40px 32px 20px;text-align:center;
+}
+.night-step-prog{font-size:.55rem;letter-spacing:4px;color:var(--fog);text-transform:uppercase;margin-bottom:12px}
+.night-step-title{
+  font-family:'Scheherazade New',serif;
+  font-size:2.2rem;font-weight:700;line-height:1;
+}
+.night-step-sub{font-size:.85rem;color:var(--ash);margin-top:10px;line-height:1.6}
+.night-divider{width:1px;height:40px;background:linear-gradient(180deg,var(--blood2),transparent);margin:0 auto 24px}
+
+/* PLAYER CHOICE LIST */
+.choice-list{
+  display:flex;flex-direction:column;
+  padding:0 32px;gap:0;
+}
+.choice-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 0;border-bottom:1px solid rgba(255,255,255,.04);
+  cursor:pointer;transition:color .15s;
+  font-size:1rem;font-weight:500;
+  background:none;border:none;color:var(--w);
+  font-family:'Tajawal',sans-serif;
+  width:100%;text-align:right;
+}
+.choice-item:active{color:var(--blood3)}
+.choice-item.sel{color:var(--blood3)}
+.choice-item.sel::before{content:'◆';margin-left:8px;font-size:.7rem;color:var(--blood3)}
+.choice-item.dead{opacity:.25;pointer-events:none}
+.choice-skip{
+  color:var(--fog);padding:16px 0;
+  cursor:pointer;font-size:.85rem;
+  background:none;border:none;
+  font-family:'Tajawal',sans-serif;
+  width:100%;text-align:right;
+  transition:color .15s;
+}
+.choice-skip:active{color:var(--ash)}
+.choice-done-btn{
+  margin:32px 32px;background:none;border:none;cursor:pointer;
+  font-family:'Tajawal',sans-serif;
+  font-size:.85rem;color:var(--fog);
+  padding:12px 0;letter-spacing:1px;
+  width:calc(100% - 64px);text-align:center;
+  border-top:1px solid rgba(255,255,255,.06);
+  transition:color .15s;
+}
+.choice-done-btn:active{color:var(--w)}
+
+/* DAY ANNOUNCE */
+.day-stage{flex:1;position:relative;z-index:1;display:flex;flex-direction:column}
+.announce-row{
+  padding:28px 32px;
+  border-bottom:1px solid rgba(255,255,255,.04);
+  text-align:center;
+}
+.announce-row-icon{font-size:2.5rem;display:block;margin-bottom:10px}
+.announce-row-text{
+  font-family:'Scheherazade New',serif;
+  font-size:1.15rem;font-weight:700;line-height:1.6;
+}
+.announce-row-role{font-size:.8rem;color:var(--ash);margin-top:6px}
+
+/* VOTE AREA */
+.vote-header{
+  padding:32px 32px 12px;text-align:center;
+}
+.vote-title{font-size:.55rem;letter-spacing:5px;text-transform:uppercase;color:var(--blood3);margin-bottom:8px}
+.vote-sub{font-size:.8rem;color:var(--fog)}
+.vote-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 32px;
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+.vote-item-name{font-size:1rem;font-weight:700;flex:1;text-align:right}
+.vote-item-ctrl{display:flex;align-items:center;gap:0}
+.vi-btn{
+  background:none;border:none;cursor:pointer;
+  color:var(--fog);font-size:1.4rem;font-weight:300;
+  width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;
+  transition:color .15s;font-family:'Tajawal',sans-serif;
+}
+.vi-btn:active{color:var(--blood3)}
+.vi-num{
+  font-size:1rem;font-weight:700;
+  min-width:28px;text-align:center;color:var(--w);
+}
+
+/* ALIVE COUNT */
+.alive-strip{
+  display:flex;gap:24px;justify-content:center;
+  padding:8px 32px;font-size:.75rem;color:var(--ash);font-weight:700;
+}
+
+/* WIN SCREEN */
+.win-stage{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:48px 32px;text-align:center;
+  gap:0;position:relative;z-index:1;
+}
+.win-big-icon{font-size:8rem;display:block;margin-bottom:24px;animation:winFloat 3s ease-in-out infinite}
+@keyframes winFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.win-main-title{
+  font-family:'Scheherazade New',serif;
+  font-size:3.5rem;font-weight:700;line-height:1;margin-bottom:8px;
+}
+.win-desc{font-size:1rem;color:var(--ash);line-height:1.7;margin-bottom:40px}
+.roles-list{width:100%;margin-bottom:32px}
+.roles-list-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04);
+  font-size:.9rem;
+}
+.roles-list-item.dead-item{opacity:.3;text-decoration:line-through}
+
+/* OVERLAY — BOTTOM SHEET */
+#overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.92);
+  z-index:999;display:none;
+  align-items:flex-end;justify-content:center;
+}
+#overlay.show{display:flex}
+.overlay-sheet{
+  width:100%;max-width:440px;
+  background:var(--ink2);
+  padding:0 0 32px;
+  animation:sheetUp .35s cubic-bezier(.16,1,.3,1);
+  position:relative;
+}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.overlay-handle{
+  width:40px;height:3px;background:var(--fog);
+  border-radius:2px;margin:16px auto 24px;
+}
+.overlay-title{
+  font-family:'Scheherazade New',serif;
+  font-size:1.5rem;font-weight:700;
+  padding:0 32px 12px;
+}
+.overlay-text{
+  font-size:.9rem;color:var(--ash);
+  padding:0 32px 24px;
+  font-weight:400;line-height:1.9;white-space:pre-line;
+}
+#ovBtn{
+  display:block;width:calc(100% - 64px);
+  margin:0 32px 8px;
+  background:var(--blood2);color:var(--w);
+  border:none;cursor:pointer;
+  font-family:'Tajawal',sans-serif;
+  font-size:1rem;font-weight:700;
+  padding:16px;transition:background .15s;
+}
+#ovBtn:active{background:var(--blood)}
+#ovBtn2{
+  display:none;width:calc(100% - 64px);
+  margin:0 32px;
+  background:none;color:var(--ash);
+  border:none;cursor:pointer;
+  font-family:'Tajawal',sans-serif;
+  font-size:.9rem;
+  padding:14px;transition:color .15s;
+}
+#ovBtn2:active{color:var(--w)}
+
+/* PHASE / NIGHT NUM */
+.phase-indicator{padding:8px 32px;font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--fog);position:relative;z-index:1}
+.home-btn{
+  display:block;width:calc(100% - 64px);
+  margin:8px 32px 0;
+  background:none;color:var(--fog);
+  border:none;cursor:pointer;
+  font-family:'Tajawal',sans-serif;
+  font-size:.85rem;padding:14px;
+  transition:color .15s;text-align:center;
+}
+.home-btn:active{color:var(--w)}
+
+/* LEGACY COMPAT - keep these for JS references */
+.action-card{padding:0;background:none;border:none;margin:0}
+.action-title{padding:20px 32px 8px;font-size:1rem;font-weight:700;display:flex;align-items:center;gap:8px}
+.player-list{display:flex;flex-direction:column}
+.player-btn{
+  padding:16px 32px;background:none;border:none;border-bottom:1px solid rgba(255,255,255,.04);
+  color:var(--w);font-family:'Tajawal',sans-serif;
+  font-size:1rem;font-weight:500;cursor:pointer;
+  text-align:right;display:flex;align-items:center;justify-content:space-between;
+  transition:color .15s;
+}
+.player-btn:active{color:var(--blood3)}
+.player-btn.sel{color:var(--blood3)}
+.player-btn.dead{opacity:.25;pointer-events:none;text-decoration:line-through}
+.player-btn.sel-blue{color:#4a9aba}
+
+/* NIGHT RESULTS */
+.announce-box{
+  padding:24px 32px;border-bottom:1px solid rgba(255,255,255,.04);
+  text-align:center;
+}
+.announce-icon{font-size:2.5rem;display:block;margin-bottom:10px}
+.announce-text{font-family:'Scheherazade New',serif;font-size:1.1rem;font-weight:700;line-height:1.6}
+.announce-role{font-size:.8rem;color:var(--ash);margin-top:6px}
+
+.score-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 32px;border-bottom:1px solid rgba(255,255,255,.04);
+}
+.score-name{font-size:.95rem;font-weight:700}
+.sep{height:1px;background:rgba(255,255,255,.04);margin:4px 0}
+
+/* GENERIC COMPAT */
+.clabel{
+  padding:16px 32px 8px;font-size:.55rem;letter-spacing:4px;
+  text-transform:uppercase;color:var(--blood3);font-weight:700;
+  display:flex;align-items:center;gap:8px;
+}
+.clabel::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.04)}
+.card{padding:16px 32px;background:none;border:none;border-bottom:1px solid rgba(255,255,255,.04)}
+.cnt-val{font-family:'Scheherazade New',serif;font-size:5rem;font-weight:700;color:var(--w);min-width:80px;text-align:center;line-height:1}
+.cnt-btn{background:none;border:none;cursor:pointer;color:var(--fog);font-size:2rem;font-weight:300;width:52px;height:52px;display:flex;align-items:center;justify-content:center;transition:color .15s}
+.cnt-btn:active{color:var(--blood3)}
+.counter-row{display:flex;align-items:center;justify-content:center;gap:24px;padding:16px 0}
+.inp{
+  width:100%;background:none;border:none;border-bottom:1px solid rgba(255,255,255,.06);
+  color:var(--w);font-family:'Tajawal',sans-serif;
+  font-size:1rem;padding:14px 0;outline:none;
+  text-align:right;margin-bottom:2px;transition:border-color .2s;
+}
+.inp:focus{border-bottom-color:var(--blood3)}
+.inp::placeholder{color:var(--fog)}
+.btn,.btn-red,.btn-blue,.btn-gold,.btn-ghost,.btn-green{
+  display:block;width:100%;padding:18px 32px;border:none;cursor:pointer;
+  font-family:'Tajawal',sans-serif;font-size:1rem;font-weight:700;
+  transition:opacity .15s,background .15s;letter-spacing:.5px;margin:0;
+}
+.btn-red{background:var(--blood2);color:var(--w)}
+.btn-red:active{background:var(--blood)}
+.btn-blue{background:var(--ink3);color:var(--ash)}
+.btn-gold{background:var(--w);color:var(--ink);font-weight:900}
+.btn-ghost{background:transparent;color:var(--fog)}
+.btn-ghost:active{color:var(--w)}
+.btn-green{background:var(--ink3);color:#5a9}
+.alive-count{display:flex;gap:20px;justify-content:center;padding:8px 32px;font-size:.8rem;font-weight:700;color:var(--ash)}
+
+/* ROLE SECTION */
+.role-section{margin-bottom:0}
+.role-section-title{padding:16px 32px 8px;font-size:.55rem;letter-spacing:4px;text-transform:uppercase;color:var(--blood3);font-weight:700;display:flex;align-items:center;gap:8px}
+.role-section-title::before,.role-section-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.04)}
+.role-row{display:flex;flex-direction:column}
+.role-card{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 32px;
+  border-bottom:1px solid rgba(255,255,255,.04);
+  cursor:pointer;transition:background .1s;
+  position:relative;background:none;
+}
+.role-card:active{background:rgba(255,255,255,.03)}
+.role-card::before{content:'';position:absolute;right:0;top:0;bottom:0;width:0;transition:width .15s}
+.role-card.sel-red::before{width:2px;background:var(--blood3)}
+.role-card.sel-blue::before{width:2px;background:#2a6a8a}
+.role-card.sel-gold::before{width:2px;background:#a08030}
+.role-em{font-size:1.8rem;width:38px;text-align:center;flex-shrink:0;opacity:.9}
+.role-info{flex:1;text-align:right}
+.role-nm{font-size:1rem;font-weight:700;color:var(--w)}
+.role-hint{font-size:.65rem;color:var(--blood3);margin-top:2px}
+.role-counter{display:flex;align-items:center;gap:0;flex-shrink:0}
+.role-cnt-btn{background:none;border:none;cursor:pointer;color:var(--fog);font-size:1.3rem;width:32px;height:32px;display:flex;align-items:center;justify-content:center;transition:color .15s}
+.role-cnt-btn:active{color:var(--blood3)}
+.role-cnt-val{width:28px;text-align:center;font-size:1rem;font-weight:700;color:var(--w)}
+</style>
+
+
+</head>
+<body>
+<div id="overlay">
+  <div class="overlay-box">
+    <div class="overlay-title" id="ovTitle"></div>
+    <div class="overlay-text" id="ovText"></div>
+    <button class="btn btn-red" id="ovBtn"></button>
+    <button class="btn btn-ghost" id="ovBtn2" style="display:none"></button>
+  </div>
+</div>
+
+<div class="curtain"></div>
+<div class="wrap">
+
+<!-- شاشة اللغة -->
+<div class="screen active" id="sLang">
+  <div class="hero">
+    <span class="hero-mask">🎭</span>
+    <div class="hero-title">المافيا</div>
+    <div class="hero-sub">MAFIA · MAFYA</div>
+    <div class="blood-line"></div>
+    <div class="lang-split">
+      <div class="lang-cell" onclick="setLang('ar')">
+        <span class="lang-cell-title">عربي</span>
+        <span class="lang-cell-sub">عراقي 🇮🇶</span>
+      </div>
+      <div class="lang-cell" onclick="setLang('ku')">
+        <span class="lang-cell-title">کوردی</span>
+        <span class="lang-cell-sub">سۆرانی 🟡</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- شاشة الإعداد -->
+<div class="screen" id="sSetup">
+  <button class="float-back" onclick="goLang()">◄ <span id="txtBack"></span></button>
+  <div class="scene-header">
+    <span class="scene-num" id="setupTitle"></span>
+  </div>
+
+  <!-- عدد اللاعبين -->
+  <div class="clabel" id="lblPlayers"></div>
+  <div class="count-stage">
+    <button class="cnt-btn" onclick="adjPlayers(-1)">−</button>
+    <div>
+      <div class="cnt-val" id="pCount">6</div>
+      <div class="count-label" id="lblPlayersCount"></div>
+    </div>
+    <button class="cnt-btn" onclick="adjPlayers(1)">+</button>
+  </div>
+  <div id="playerNames" style="padding:0 32px 16px;position:relative;z-index:1"></div>
+
+  <!-- الأدوار -->
+  <div class="clabel" id="lblRoles"></div>
+  <div id="rolesContainer"></div>
+  <div class="role-summary" id="roleCount"></div>
+
+  <div style="margin:0 0 0;position:relative;z-index:1">
+    <button class="btn btn-red" onclick="startGame()" id="btnStart" style="margin-top:24px"></button>
+  </div>
+  <div style="height:40px"></div>
+</div>
+
+<!-- شاشة كشف الدور -->
+<div class="screen" id="sReveal">
+  <div class="reveal-stage">
+    <div class="reveal-badge" id="revealPlayerNum"></div>
+    <div class="reveal-player-name" id="revealName"></div>
+    <span class="reveal-big-icon" id="revealIcon"></span>
+    <div class="thin-line"></div>
+    <div class="reveal-team-badge" id="revealTeam"></div>
+    <div class="reveal-role-name" id="revealRole"></div>
+    <div class="reveal-desc-text" id="revealDesc"></div>
+    <div class="thin-line"></div>
+    <div id="revealHeader" style="display:none"></div>
+    <div id="revealSub" style="display:none"></div>
+    <div id="revealCardEl" style="display:none"></div>
+  </div>
+  <button class="btn btn-red" onclick="nextReveal()" id="btnNextReveal" style="margin:0 0 32px"></button>
+</div>
+
+<!-- شاشة الليل -->
+<div class="screen" id="sNight">
+  <div class="phase-indicator">🌙 <span id="nightNum"></span></div>
+  <div class="night-header" style="padding:20px 32px 8px">
+    <div class="night-title" id="nightTitle"></div>
+  </div>
+  <div class="night-divider"></div>
+  <div id="nightActions"></div>
+  <button class="btn btn-red" onclick="endNight()" id="btnEndNight" style="display:none;margin:24px 32px;width:calc(100% - 64px)"></button>
+  <div style="height:32px"></div>
+</div>
+
+<!-- شاشة النهار -->
+<div class="screen" id="sDay">
+  <div class="phase-indicator">☀️ <span id="dayNum"></span></div>
+  <div class="night-header" style="padding:20px 32px 8px">
+    <div class="night-title" id="dayTitle"></div>
+  </div>
+  <div class="alive-count" id="aliveCount"></div>
+  <div id="nightResults"></div>
+  <div class="clabel" id="lblVote" style="margin-top:8px"></div>
+  <div id="voteList"></div>
+  <div id="voteResults"></div>
+  <button class="btn btn-red" onclick="executeVote()" id="btnExecute" style="display:none;margin:16px 32px 0;width:calc(100% - 64px)"></button>
+  <button class="btn btn-ghost" onclick="skipVote()" id="btnSkipVote" style="margin:4px 32px;width:calc(100% - 64px)"></button>
+  <div style="height:40px"></div>
+</div>
+
+<!-- شاشة الفوز -->
+<div class="screen" id="sWin">
+  <div class="win-stage">
+    <span class="win-big-icon" id="winIcon"></span>
+    <div class="win-main-title" id="winTitle"></div>
+    <div class="win-desc" id="winSub"></div>
+    <div class="roles-list" id="finalRoles"></div>
+    <button class="btn btn-red" onclick="playAgain()" id="btnPlayAgain" style="margin:0 0 8px"></button>
+    <button class="home-btn" onclick="goLang()" id="btnHome"></button>
+  </div>
+</div>
+
+</div><!-- end wrap -->
+
+<!-- Overlay bottom sheet -->
+<div id="overlay">
+  <div class="overlay-sheet">
+    <div class="overlay-handle"></div>
+    <div class="overlay-title" id="ovTitle"></div>
+    <div class="overlay-text" id="ovText"></div>
+    <button id="ovBtn"></button>
+    <button id="ovBtn2" style="display:none"></button>
+  </div>
+</div>
+
+<script>
+/* ===== TRANSLATIONS ===== */
+var L={
+ar:{
+back:"رجوع",players:"👥 اللاعبون",roles:"🎭 الأدوار",
+mafia:"🔴 فريق المافيا",citizen:"🔵 فريق المواطنين",neutral:"🟡 محايد",
+start:"ابدأ اللعبة 🎭",revealHeader:"اعرف دورك",revealSub:"اعطِ الجهاز للاعب يشوف دوره وحده",
+next:"التالي ➜",startGame:"ابدأ اللعبة ◄",nightTitle:"الكل ينام 😴",dayTitle:"الصبح — وقت النقاش ☀️",
+voteTitle:"🗳️ التصويت",execute:"نفّذ الحكم ⚖️",skipVote:"بدون إعدام اليوم",endNight:"انتهى الليل ☀️",
+playAgain:"العب مرة ثانية 🔄",home:"🎭 الرئيسية",playerLabel:"اللاعب",close:"فاهمت 👍",
+mafia_win:"المافيا فازت! 🔴",citizen_win:"المواطنون فازوا! 🔵",joker_win:"الجوكر فاز! 🃏",
+night:"الليلة",day:"اليوم",dead:"مات",saved:"أُنقذ",silenced:"مسكّت",
+no_kill:"ما صار قتل الليل",vote_result:"تم إعدام",skip_result:"ما اتعدم أحد اليوم",
+alive:"أحياء",mafia_count:"مافيا",joker_executed:"🃏 الجوكر اتعدم — فاز الجوكر!",
+choose_victim:"اختار من يموت معك",hint_longpress:"اضغط مطول لرؤية الشرح"
+},
+ku:{
+back:"گەڕانەوە",players:"👥 یاریزانەکان",roles:"🎭 ڕۆڵەکان",
+mafia:"🔴 تیمی مافیا",citizen:"🔵 تیمی هاووڵاتیان",neutral:"🟡 بێلایەن",
+start:"یارییەکە دەستپێبکە 🎭",revealHeader:"ڕۆڵەکەت بزانە",revealSub:"مۆبایلەکە بدە بە یاریزانەکە",
+next:"داهاتوو ➜",startGame:"یارییەکە دەستپێبکە ◄",nightTitle:"هەموو کەس دەخەوێت 😴",dayTitle:"بەیانی — کاتی قسەکردن ☀️",
+voteTitle:"🗳️ دەنگدان",execute:"بڕیار جێبەجێ بکە ⚖️",skipVote:"ئەمڕۆ بێ دارودەق",endNight:"شەو کۆتایی هات ☀️",
+playAgain:"دووبارە یاری بکەوە 🔄",home:"🎭 سەرەتا",playerLabel:"یاریزان",close:"تێگەیشتم 👍",
+mafia_win:"مافیا برد! 🔴",citizen_win:"هاووڵاتیەکان برد! 🔵",joker_win:"جۆکەر برد! 🃏",
+night:"شەو",day:"ڕۆژ",dead:"مرد",saved:"ڕەزاند",silenced:"بێدەنگکرا",
+no_kill:"شەودا کوژراوی نەبوو",vote_result:"دارودەقکرا",skip_result:"ئەمڕۆ کەس دارودەق نەکرا",
+alive:"زیندوو",mafia_count:"مافیا",joker_executed:"🃏 جۆکەر دارودەقکرا — جۆکەر برد!",
+choose_victim:"کێ لەگەڵت بمرێت دیاری بکە",hint_longpress:"پەنجە دەگرە بۆ بینینی ڕووندکردنەوە"
+}
+};
+
+/* ===== ROLES ===== */
+var ROLES={
+mafia:{team:'mafia',em:'🔫',
+  ar:{name:'مافيا',desc:'بالليل تختار مع الفريق من تقتل. تعرف هوية فريقك كاملاً'},
+  ku:{name:'مافیا',desc:'شەودا لەگەڵ تیمت دیاری دەکەیت کێ بکوژیت. ناسنامەی تیمەکەت دەزانیت'}},
+boss:{team:'mafia',em:'👑',
+  ar:{name:'زعيم المافيا',desc:'أنت من يختار الضحية كل ليلة. أول ليلة تعرّف نفسك للفريق. لا ترى المافيا بين الخيارات — فقط المواطنين والمحايد'},
+  ku:{name:'سەرۆکی مافیا',desc:'تۆ هەر شەوێک قوربانی دیاری دەکەیت. شەوی یەکەم خۆت دەناسێنیت. مافیا لە ئارادانەکان نابینیت — تەنها هاووڵاتی و بێلایەن'}},
+bomber:{team:'mafia',em:'💣',
+  ar:{name:'الانتحاري',desc:'لو صوّتوا عليك وعدموك، تختار شخص واحد يموت معك'},
+  ku:{name:'خۆکوژ',desc:'ئەگەر دەنگیان دایت و دارودەقت کرد، کەسێک دیاری دەکەیت لەگەڵتدا بمرێت'}},
+silencer:{team:'mafia',em:'🤫',
+  ar:{name:'المسكّت',desc:'بالليل تختار أي شخص (مواطن أو مافيا) يصير مسكّت — لا يقدر يتكلم النهار التالي'},
+  ku:{name:'بێدەنگکەر',desc:'شەودا هەر کەسێک (هاووڵاتی یان مافیا) دیاری دەکەیت — نابێت ڕۆژی داهاتوو قسە بکات'}},
+citizen:{team:'citizen',em:'👤',
+  ar:{name:'مواطن',desc:'ما عندك قدرة خاصة — شارك بالنقاش وحاول تكشف المافيا بالتصويت'},
+  ku:{name:'هاووڵاتی',desc:'هیچ تواناییەکی تایبەتت نییە — بەشداری نیقاش بکە و هەوڵ بدە مافیا لەڕێی دەنگدانەوە ئاشکرا بکەیت'}},
+doctor:{team:'citizen',em:'🏥',
+  ar:{name:'الدكتور',desc:'كل ليلة تختار شخص تحميه. لو المافيا هاجمته ينجو. لا تقدر تحمي نفس الشخص ليلتين متتاليتين'},
+  ku:{name:'دکتۆر',desc:'هەر شەوێک کەسێک دیاری دەکەیت بیپارێزیت. ئەگەر مافیا پێی هێرش کرد دەژیتەوە. نابێت هەمان کەس دوو شەو لەدوای یەکتر بپارێزیت'}},
+detective:{team:'citizen',em:'🔍',
+  ar:{name:'المحقق',desc:'كل ليلة تسأل عن شخص واحد — الجهاز يخبرك إذا هو مافيا أو مواطن/محايد'},
+  ku:{name:'لێکۆڵەر',desc:'هەر شەوێک لەسەر کەسێک دەپرسیت — ئامێرەکە پێت دەڵێت مافیایە یان هاووڵاتی/بێلایەنە'}},
+sniper:{team:'citizen',em:'🎯',
+  ar:{name:'القناص',desc:'مرة وحدة بالجلسة كلها — بالليل تختار هدفاً:\n• لو المافيا: المافيا يموت، القناص ينجو\n• لو مواطن/محايد: القناص يموت، الهدف ينجو'},
+  ku:{name:'تفەنگچی',desc:'یەک جار تەنها لە ئەم یارییەدا — شەودا ئامانجێک دیاری دەکەیت:\n• ئەگەر مافیا بوو: مافیا دەمرێت، تفەنگچی دەژیتەوە\n• ئەگەر هاووڵاتی/بێلایەن بوو: تفەنگچی دەمرێت، ئامانج دەژیتەوە'}},
+informer:{team:'citizen',em:'🗣️',
+  ar:{name:'المخبر',desc:'مرة وحدة بالجلسة — قبل التصويت تكشف كرت أي شخص علناً للكل. النتيجة: كلاكما تخرجون من اللعبة سواء مافيا أو مواطن'},
+  ku:{name:'ئاگادارکەر',desc:'یەک جار تەنها لە ئەم یارییەدا — پێش دەنگدان کارتی هەر کەسێک ئاشکرا دەکەیت بۆ هەموو کەس. ئەنجام: هەردووکیان لە یارییەکە دەردەکەون چ مافیا بێت چ هاووڵاتی'}},
+mayor:{team:'citizen',em:'🏛️',
+  ar:{name:'العمدة',desc:'مرة وحدة في اللعبة — تكشف هويتك للكل علناً وتقول "أنا العمدة". في ذلك اليوم صوتك يساوي 3 أصوات'},
+  ku:{name:'قایمەقام',desc:'یەک جار لە یارییەکەدا — ناسنامەکەت بۆ هەموو کەس ئاشکرا دەکەیت و دەڵێیت "من قایمەقامم". لەو ڕۆژەدا دەنگەکەت بەرامبەری 3 دەنگ دادەنرێت'}},
+joker:{team:'neutral',em:'🃏',
+  ar:{name:'الجوكر',desc:'هدفك الوحيد أن يصوّتوا عليك ويعدموك نهاراً. لو صار، تفوز فوراً وتنتهي اللعبة! لو ما صار، تخسر مع المافيا'},
+  ku:{name:'جۆکەر',desc:'ئامانجی یەکەکەت ئەوەیە کە دەنگیان بدات و ڕۆژانە دارودەقت بکەن. ئەگەر بوو، ئەتوو دەبەیت و یارییەکە کۆتایی دێت! ئەگەر نەبوو، لەگەڵ مافیادا دەبازیت'}}
+};
+
+/* ===== STATE ===== */
+var G={
+lang:'ar',numPlayers:6,playerNames:[],roles:{},
+selectedRoles:{mafia:0,boss:0,bomber:0,silencer:0,citizen:0,doctor:0,detective:0,sniper:0,informer:0,mayor:0,joker:0},
+dead:[],silenced:[],night:0,introNightDone:false,revealIdx:0,
+nightKill:null,nightSave:null,nightSilence:null,nightSnipe:null,
+sniperUsed:false,informerUsed:false,mayorUsed:false,lastDoctorSave:null,voteTarget:null,mayorName:null
+};
+
+function t(k){return(L[G.lang]&&L[G.lang][k])||k;}
+function role(k){return ROLES[k]&&ROLES[k][G.lang]?ROLES[k][G.lang]:{name:k,desc:''};}
+function show(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});document.getElementById(id).classList.add('active');}
+
+/* ===== SOUND ===== */
+var SFX={
+ctx:null,
+init:function(){if(!this.ctx)this.ctx=new(window.AudioContext||window.webkitAudioContext)();if(this.ctx.state==='suspended')this.ctx.resume();},
+play:function(freq,type,dur,vol,delay){try{this.init();var o=this.ctx.createOscillator(),g=this.ctx.createGain(),s=this.ctx.currentTime+(delay||0);o.type=type||'sine';o.frequency.value=freq;g.gain.setValueAtTime(vol||0.1,s);g.gain.exponentialRampToValueAtTime(0.0001,s+dur);o.connect(g);g.connect(this.ctx.destination);o.start(s);o.stop(s+dur);}catch(e){}},
+click:function(){this.play(800,'sine',0.05,0.08);},
+reveal:function(){this.play(440,'sine',0.1,0.15);this.play(660,'sine',0.15,0.15,0.1);},
+night:function(){this.play(200,'sine',0.4,0.2);this.play(150,'sine',0.4,0.15,0.2);},
+day:function(){this.play(523,'sine',0.2,0.2);this.play(659,'sine',0.2,0.18,0.1);this.play(784,'sine',0.2,0.15,0.2);},
+win:function(){[523,659,784,1046].forEach(function(n,i){SFX.play(n,'sine',0.4,0.25,i*0.12);});},
+dead:function(){this.play(300,'sawtooth',0.3,0.2);this.play(200,'sawtooth',0.3,0.15,0.15);}
+};
+
+document.addEventListener('pointerdown',function(e){
+var el=e.target.closest('button,.role-card,.role-cnt-btn,.lang-btn');
+if(el){SFX.init();SFX.click();if(navigator.vibrate)navigator.vibrate(15);}
+});
+
+/* ===== OVERLAY ===== */
+function showOverlay(title,text,btnText){
+document.getElementById('ovTitle').textContent=title;
+document.getElementById('ovText').textContent=text;
+document.getElementById('ovBtn').textContent=btnText||t('close');
+document.getElementById('ovBtn').onclick=closeOverlay;
+document.getElementById('ovBtn2').style.display='none';
+document.getElementById('overlay').classList.add('show');
+}
+function closeOverlay(){document.getElementById('overlay').classList.remove('show');}
+
+/* ===== LANG ===== */
+function setLang(l){SFX.init();G.lang=l;document.documentElement.lang=l;renderSetup();show('sSetup');}
+function goLang(){show('sLang');}
+
+/* ===== SETUP ===== */
+function renderSetup(){
+var isAr=G.lang==='ar';
+document.getElementById('txtBack').textContent=t('back');
+document.getElementById('setupTitle').textContent=isAr?'المافيا':'مافیا';
+document.getElementById('lblPlayers').textContent=t('players');
+document.getElementById('lblRoles').textContent=t('roles');
+document.getElementById('btnStart').textContent=t('start');
+document.getElementById('pCount').textContent=G.numPlayers;
+renderPlayerNames();
+renderRoles();
+}
+
+function adjPlayers(d){
+G.numPlayers=Math.max(4,Math.min(12,G.numPlayers+d));
+document.getElementById('pCount').textContent=G.numPlayers;
+renderPlayerNames();
+renderRoles();
+}
+
+function renderPlayerNames(){
+var c=document.getElementById('playerNames');
+c.innerHTML='';
+var isAr=G.lang==='ar';
+for(var i=0;i<G.numPlayers;i++){
+var inp=document.createElement('input');
+inp.className='inp';
+inp.placeholder=(isAr?'اللاعب ':'یاریزان ')+(i+1);
+inp.value=G.playerNames[i]||'';
+inp.style.marginBottom='6px';
+(function(idx){inp.oninput=function(){G.playerNames[idx]=this.value;};})(i);
+c.appendChild(inp);
+}
+}
+
+function renderRoles(){
+var isAr=G.lang==='ar';
+var maxMafia=Math.floor(G.numPlayers/3);
+var container=document.getElementById('rolesContainer');
+container.innerHTML='';
+
+var groups=[
+{key:'mafia',title:t('mafia'),color:'red',keys:['mafia','boss','bomber','silencer']},
+{key:'citizen',title:t('citizen'),color:'blue',keys:['citizen','doctor','detective','sniper','informer','mayor']},
+{key:'neutral',title:t('neutral'),color:'gold',keys:['joker']}
+];
+
+var currentMafia=0;
+['mafia','boss','bomber','silencer'].forEach(function(k){currentMafia+=G.selectedRoles[k]||0;});
+
+groups.forEach(function(grp){
+var sec=document.createElement('div');
+sec.className='role-section';
+var titleEl=document.createElement('div');
+titleEl.className='role-section-title';
+titleEl.style.color=grp.color==='red'?'var(--red)':grp.color==='blue'?'var(--blue)':'var(--gold)';
+titleEl.innerHTML=grp.title+'<span></span>';
+sec.appendChild(titleEl);
+
+var row=document.createElement('div');
+row.className='role-row';
+
+grp.keys.forEach(function(k){
+var cnt=G.selectedRoles[k]||0;
+var rData=ROLES[k];
+var r=role(k);
+var isMafia=rData.team==='mafia';
+var isUnique=(k!=='mafia'&&k!=='citizen');
+
+var card=document.createElement('div');
+card.className='role-card'+(cnt>0?' sel-'+grp.color:'');
+
+// شرح عند الضغط المطول
+var pressTimer;
+card.addEventListener('pointerdown',function(){
+pressTimer=setTimeout(function(){
+showOverlay(rData.em+' '+r.name,r.desc,t('close'));
+},600);
+});
+card.addEventListener('pointerup',function(){clearTimeout(pressTimer);});
+card.addEventListener('pointercancel',function(){clearTimeout(pressTimer);});
+
+card.innerHTML=
+'<span class="role-em">'+rData.em+'</span>'+
+'<div class="role-info">'+
+  '<div class="role-nm">'+r.name+'</div>'+
+  '<div class="role-hint" style="color:'+(grp.color==='red'?'rgba(230,57,70,.7)':grp.color==='blue'?'rgba(76,201,240,.7)':'rgba(255,214,10,.7)')+'">'+
+  (isAr?t('hint_longpress'):'پەنجە دەگرە بۆ شرح')+
+  '</div>'+
+'</div>'+
+'<div class="role-counter">'+
+  '<button class="role-cnt-btn" onclick="changeRole(\''+k+'\',\''+grp.color+'\',-1,event)">−</button>'+
+  '<span class="role-cnt-val" id="cnt_'+k+'">'+cnt+'</span>'+
+  '<button class="role-cnt-btn" onclick="changeRole(\''+k+'\',\''+grp.color+'\',1,event)">+</button>'+
+'</div>';
+
+row.appendChild(card);
+});
+sec.appendChild(row);
+container.appendChild(sec);
+});
+
+updateRoleCount();
+}
+
+function changeRole(k,color,d,e){
+e.stopPropagation();
+var isMafia=ROLES[k].team==='mafia';
+var isUnique=(k!=='mafia'&&k!=='citizen');
+var maxMafia=Math.floor(G.numPlayers/3);
+var currentMafia=0;
+['mafia','boss','bomber','silencer'].forEach(function(mk){currentMafia+=G.selectedRoles[mk]||0;});
+
+var cnt=G.selectedRoles[k]||0;
+var newCnt=cnt+d;
+
+if(newCnt<0)newCnt=0;
+if(isUnique&&newCnt>1)newCnt=1;
+if(!isUnique&&newCnt>G.numPlayers)newCnt=G.numPlayers;
+
+if(d>0&&isMafia&&currentMafia>=maxMafia){
+var isAr=G.lang==='ar';
+showOverlay(isAr?'⚠️ حد المافيا':'⚠️ سنووری مافیا',
+isAr?'المافيا ما تتجاوز '+maxMafia+' لـ '+G.numPlayers+' لاعبين':'مافیا نابێت لە '+maxMafia+' زیاتر بێت بۆ '+G.numPlayers+' یاریزان',t('close'));
+return;
+}
+
+G.selectedRoles[k]=newCnt;
+document.getElementById('cnt_'+k).textContent=newCnt;
+
+// تحديث لون البطاقة
+var card=document.getElementById('cnt_'+k).closest('.role-card');
+card.className='role-card'+(newCnt>0?' sel-'+color:'');
+updateRoleCount();
+}
+
+function updateRoleCount(){
+var total=0,mafiaCount=0;
+Object.keys(G.selectedRoles).forEach(function(k){
+var cnt=G.selectedRoles[k]||0;
+total+=cnt;
+if(ROLES[k]&&ROLES[k].team==='mafia')mafiaCount+=cnt;
+});
+var maxMafia=Math.floor(G.numPlayers/3);
+var remaining=G.numPlayers-total;
+var isAr=G.lang==='ar';
+var lines=[];
+lines.push((isAr?'المجموع: ':'کۆی گشتی: ')+total+'/'+G.numPlayers);
+if(remaining>0)lines.push(isAr?'باقي '+remaining+' مواطن عادي يتوزعون تلقائياً':''+remaining+' هاووڵاتی ئاسایی بە شێوەی خۆکار دابەش دەکرێن');
+if(remaining<0)lines.push(isAr?'⚠️ الأدوار أكثر من اللاعبين!':'⚠️ ڕۆڵەکان زیاترن لە یاریزانەکان!');
+lines.push((isAr?'المافيا: ':'مافیا: ')+mafiaCount+'/'+maxMafia+' '+(isAr?'(الحد الأقصى)':'(زۆرترین)'));
+document.getElementById('roleCount').textContent=lines.join('\n');
+}
+
+/* ===== START ===== */
+function startGame(){
+var isAr=G.lang==='ar';
+var total=0;
+Object.keys(G.selectedRoles).forEach(function(k){total+=G.selectedRoles[k]||0;});
+if(total>G.numPlayers){showOverlay(isAr?'خطأ':'هەڵە',isAr?'الأدوار أكثر من اللاعبين!':'ڕۆڵەکان زیاترن لە یاریزانەکان!',t('close'));return;}
+
+var names=[];
+document.querySelectorAll('#playerNames .inp').forEach(function(inp,i){
+names.push(inp.value.trim()||(t('playerLabel')+' '+(i+1)));
+});
+G.playerNames=names;
+G.dead=[];G.silenced=[];G.night=0;G.introNightDone=false;
+G.sniperUsed=false;G.informerUsed=false;G.mayorUsed=false;G.mayorName=null;
+G.lastDoctorSave=null;G.lastSilenced=null;G.nightKill=null;G.nightSave=null;G.nightSilence=null;G.nightSnipe=null;G.voteTarget=null;G.nightQueue=[];G.nightQueueIdx=0;G.votes={};
+
+var allRoles=[];
+Object.keys(G.selectedRoles).forEach(function(k){var cnt=G.selectedRoles[k]||0;for(var i=0;i<cnt;i++)allRoles.push(k);});
+while(allRoles.length<G.numPlayers)allRoles.push('citizen');
+for(var i=allRoles.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=allRoles[i];allRoles[i]=allRoles[j];allRoles[j]=tmp;}
+G.roles={};
+names.forEach(function(n,i){G.roles[n]=allRoles[i];});
+// حفظ اسم العمدة
+names.forEach(function(n){if(G.roles[n]==='mayor')G.mayorName=n;});
+
+G.revealIdx=0;showReveal();
+}
+
+/* ===== REVEAL ===== */
+function showReveal(){
+show('sReveal');
+var isAr=G.lang==='ar';
+document.getElementById('revealHeader').textContent=t('revealHeader');
+document.getElementById('revealSub').textContent=t('revealSub');
+var player=G.playerNames[G.revealIdx];
+var roleKey=G.roles[player];
+var r=role(roleKey);
+var rData=ROLES[roleKey];
+document.getElementById('revealPlayerNum').textContent=(G.revealIdx+1)+' / '+G.playerNames.length;
+document.getElementById('revealName').textContent=player;
+document.getElementById('revealIcon').textContent=rData.em;
+document.getElementById('revealRole').textContent=r.name;
+document.getElementById('revealDesc').textContent=r.desc;
+var card=document.getElementById('revealCardEl');
+var colors={mafia:'rgba(230,57,70,.2)',citizen:'rgba(76,201,240,.15)',neutral:'rgba(255,214,10,.1)'};
+var borders={mafia:'rgba(230,57,70,.4)',citizen:'rgba(76,201,240,.3)',neutral:'rgba(255,214,10,.2)'};
+var teamNames={mafia:t('mafia'),citizen:t('citizen'),neutral:t('neutral')};
+var teamColors={mafia:'var(--red)',citizen:'var(--blue)',neutral:'var(--gold)'};
+card.style.background='linear-gradient(135deg,'+colors[rData.team]+',transparent)';
+card.style.borderColor=borders[rData.team];
+document.getElementById('revealTeam').textContent=teamNames[rData.team];
+document.getElementById('revealTeam').style.color=teamColors[rData.team];
+document.getElementById('revealIcon').style.color=teamColors[rData.team];
+document.getElementById('btnNextReveal').textContent=G.revealIdx<G.playerNames.length-1?t('next'):t('startGame');
+SFX.reveal();
+}
+function nextReveal(){G.revealIdx++;if(G.revealIdx<G.playerNames.length)showReveal();else startNight();}
+
+/* ===== NIGHT ===== */
+function startNight(){
+G.night++;G.nightKill=null;G.nightSave=null;G.nightSilence=null;G.nightSnipe=null;
+G.silenced=[]; // تصفير المسكّتين — يوم واحد فقط
+SFX.night();
+
+var isAr=G.lang==='ar';
+
+// الليلة التعريفية
+if(G.night===1&&!G.introNightDone){
+G.introNightDone=true;
+show('sNight');
+document.getElementById('nightNum').textContent=t('night')+' '+G.night;
+document.getElementById('nightTitle').textContent=t('nightTitle');
+var actions=document.getElementById('nightActions');actions.innerHTML='';
+var d=document.createElement('div');d.className='action-card';d.style.textAlign='center';
+d.innerHTML='<div style="font-size:2rem;margin-bottom:10px">🌙</div>'+
+'<div style="font-weight:900;font-size:1.1rem;margin-bottom:8px">'+(isAr?'الليلة التعريفية':'شەوی ناساندن')+'</div>'+
+'<div style="color:var(--dim);font-size:.8rem;margin-bottom:16px;line-height:1.7;white-space:pre-line">'+(isAr?'الكل ينام 😴\nالمافيا تصحى — الزعيم يعرّف نفسه للفريق\nيرجعون ينامون — ما في قتل هذه الليلة':'هەموو کەس دەخەوێت 😴\nمافیا ئاگادار دەبێت — سەرۆک خۆی دەناسێنێت\nدەگەڕێنەوە — ئەم شەوە کوژتن نییە')+'</div>'+
+'<button class="btn btn-red" onclick="endIntroNight()" style="margin-top:0">'+(isAr?'المافيا تعارفت ✅':'مافیا ناسینیان کردەوە ✅')+'</button>';
+actions.appendChild(d);
+document.getElementById('btnEndNight').style.display='none';
+return;
+}
+
+// بناء قائمة الأدوار النشطة
+var alive=getAlive();
+var queue=[];
+var hasBoss=alive.some(function(n){return G.roles[n]==='boss';});
+var hasMafia=alive.some(function(n){return G.roles[n]==='mafia'||G.roles[n]==='boss';});
+var hasSniper=alive.some(function(n){return G.roles[n]==='sniper';})&&!G.sniperUsed;
+var hasSilencer=alive.some(function(n){return G.roles[n]==='silencer';});
+var hasDoctor=alive.some(function(n){return G.roles[n]==='doctor';});
+var hasDetective=alive.some(function(n){return G.roles[n]==='detective';});
+
+if(hasMafia){
+var mafiaPlayer=alive.find(function(n){return G.roles[n]==='mafia'||G.roles[n]==='boss';});
+// الزعيم يرى فقط المواطنين والمحايد. مافيا عادي يرى الكل ماعدا المافيا وماعدا نفسه
+var killTargets=hasBoss?
+  alive.filter(function(n){return ROLES[G.roles[n]].team!=='mafia';}):
+  alive.filter(function(n){return ROLES[G.roles[n]].team!=='mafia';});
+var killTitle=hasBoss?(isAr?'👑 زعيم المافيا':'👑 سەرۆکی مافیا'):(isAr?'🔫 المافيا':'🔫 مافیا');
+var killSub=hasBoss?(isAr?'اختار ضحيتك من المواطنين والمحايد فقط':'قوربانیت هەڵبژێرە — تەنها هاووڵاتی و بێلایەن'):(isAr?'اختاروا الضحية (المواطنين والمحايد)':'قوربانی هەڵبژێرن (هاووڵاتی و بێلایەن)');
+queue.push({title:killTitle,sub:killSub,players:killTargets,type:'kill',canSkip:false});
+}
+if(hasSniper)queue.push({title:isAr?'🎯 القناص':'🎯 تفەنگچی',sub:isAr?'اطلق طلقتك الوحيدة أو تجاوز':'گوللەی یەکەمەت بڕێنە یان تێپەڕ',players:alive.filter(function(n){return G.roles[n]!=='sniper';}),type:'snipe',canSkip:true});
+if(hasSilencer){var silTargets=alive.filter(function(n){return n!==G.lastSilenced;});queue.push({title:isAr?'🤫 المسكّت':'🤫 بێدەنگکەر',sub:isAr?'اختار شخصاً تسكّته (غير الشخص السابق)':'کەسێک هەڵبژێرە (جگە لە کەسی پێشوو)',players:silTargets,type:'silence',canSkip:false});}
+if(hasDoctor){var da=alive.filter(function(n){return n!==G.lastDoctorSave;});queue.push({title:isAr?'🏥 الدكتور':'🏥 دکتۆر',sub:isAr?'اختار شخصاً تحميه من القتل الليلة':'کەسێک هەڵبژێرە بیپارێزیت لە کوژتنی ئەم شەوە',players:da,type:'save',canSkip:false});}
+if(hasDetective){var dt=alive.filter(function(n){return G.roles[n]!=='detective';});queue.push({title:isAr?'🔍 المحقق':'🔍 لێکۆڵەر',sub:isAr?'اختار شخصاً تسأل عن فريقه — مافيا أو مواطن':'کەسێک هەڵبژێرە لەبارەی تیمیەوە بپرسە',players:dt,type:'detect',canSkip:false});}
+
+G.nightQueue=queue;
+G.nightQueueIdx=0;
+showNextNightAction();
+}
+
+function showNextNightAction(){
+var isAr=G.lang==='ar';
+show('sNight');
+document.getElementById('nightNum').textContent=t('night')+' '+G.night;
+document.getElementById('nightTitle').textContent=t('nightTitle');
+var actions=document.getElementById('nightActions');actions.innerHTML='';
+document.getElementById('btnEndNight').style.display='none';
+
+if(!G.nightQueue||G.nightQueueIdx>=G.nightQueue.length){
+// كل الأدوار خلصت
+document.getElementById('btnEndNight').style.display='block';
+document.getElementById('btnEndNight').textContent=t('endNight');
+return;
+}
+
+var step=G.nightQueue[G.nightQueueIdx];
+var total=G.nightQueue.length;
+var current=G.nightQueueIdx+1;
+
+// شاشة الانتظار
+var waitDiv=document.createElement('div');
+waitDiv.className='action-card';waitDiv.id='wait_current';waitDiv.style.textAlign='center';
+waitDiv.innerHTML=
+'<div style="font-size:.65rem;color:var(--dim);font-weight:700;margin-bottom:12px">'+current+' / '+total+'</div>'+
+'<div style="font-size:2rem;margin-bottom:10px">🌙</div>'+
+'<div style="font-weight:900;font-size:1.2rem;margin-bottom:6px">'+step.title+'</div>'+
+'<div style="color:var(--dim);font-size:.8rem;margin-bottom:16px">'+(isAr?'أعطِ الجهاز لصاحب هذا الدور':'مۆبایلەکە بدە بە خاوەنی ئەم ڕۆڵە')+'</div>'+
+'<button class="btn btn-red" onclick="showCurrentAction()" style="margin-top:0">'+(isAr?'أنا جاهز 👁️':'ئامادەم 👁️')+'</button>';
+actions.appendChild(waitDiv);
+}
+
+function showCurrentAction(){
+var isAr=G.lang==='ar';
+var step=G.nightQueue[G.nightQueueIdx];
+var total=G.nightQueue.length;
+var current=G.nightQueueIdx+1;
+var actions=document.getElementById('nightActions');actions.innerHTML='';
+
+var actionDiv=document.createElement('div');actionDiv.className='action-card';
+actionDiv.innerHTML=
+'<div style="font-size:.65rem;color:var(--dim);font-weight:700;margin-bottom:8px">'+current+' / '+total+'</div>'+
+'<div class="action-title">'+step.title+'</div>'+
+'<div style="color:var(--dim);font-size:.8rem;margin-bottom:12px">'+step.sub+'</div>';
+
+var list=document.createElement('div');list.className='player-list';
+var selectedName=[null];
+
+if(step.canSkip){
+var sb=document.createElement('button');sb.className='player-btn';
+sb.textContent=isAr?'تجاوز — بدون إطلاق':'تێپەڕ — بێ گوللە';
+sb.onclick=function(){
+list.querySelectorAll('.player-btn').forEach(function(b){b.classList.remove('sel');});
+sb.classList.add('sel');selectedName[0]=null;
+};list.appendChild(sb);
+}
+
+step.players.forEach(function(name){
+var btn=document.createElement('button');btn.className='player-btn';
+btn.setAttribute('data-name',name);btn.textContent=name;
+btn.onclick=(function(n){return function(){
+// إذا محقق — اختار وانتهى، ما يقدر يغير
+if(step.type==='detect'){
+// تعطيل كل الأزرار
+list.querySelectorAll('.player-btn').forEach(function(b){b.disabled=true;b.style.opacity='0.5';});
+btn.disabled=false;btn.style.opacity='1';
+btn.classList.add('sel');selectedName[0]=n;
+var team=ROLES[G.roles[n]].team;
+var result=team==='mafia'?(isAr?'🔴 مافيا!':'🔴 مافیا!'):(isAr?'🔵 مواطن / محايد':'🔵 هاووڵاتی / بێلایەن');
+showOverlay(isAr?'🔍 نتيجة التحقيق':'🔍 ئەنجامی لێکۆڵینەوە',n+' — '+result,isAr?'فهمت — التالي ➜':'تێگەیشتم — داهاتوو ➜');
+document.getElementById('ovBtn').onclick=function(){
+closeOverlay();
+G.nightQueueIdx++;showNextNightAction();
+};
+}else{
+list.querySelectorAll('.player-btn').forEach(function(b){b.classList.remove('sel');});
+btn.classList.add('sel');selectedName[0]=n;
+}
+};})(name);
+list.appendChild(btn);
+});
+
+actionDiv.appendChild(list);
+
+var doneBtn=document.createElement('button');doneBtn.className='btn btn-ghost';doneBtn.style.marginTop='10px';
+doneBtn.textContent=isAr?'تم — التالي ➜':'تەواوبوو — داهاتوو ➜';
+doneBtn.onclick=function(){
+// احفظ الاختيار
+var chosen=selectedName[0];
+var tp=step.type;
+if(tp==='kill')G.nightKill=chosen;
+else if(tp==='save'){G.nightSave=chosen;G.lastDoctorSave=chosen;}
+else if(tp==='silence'){G.nightSilence=chosen;G.lastSilenced=chosen;}
+else if(tp==='snipe'){G.nightSnipe=chosen;if(chosen)G.sniperUsed=true;}
+// التالي
+G.nightQueueIdx++;
+showNextNightAction();
+};
+actionDiv.appendChild(doneBtn);
+actions.appendChild(actionDiv);
+}
+
+function endIntroNight(){
+SFX.day();show('sDay');
+var isAr=G.lang==='ar';
+document.getElementById('dayNum').textContent=t('day')+' 1';
+document.getElementById('dayTitle').textContent=t('dayTitle');
+document.getElementById('nightResults').innerHTML='<div class="announce-box" style="border-color:rgba(76,201,240,.3);background:rgba(76,201,240,.08)"><span class="announce-icon">🌅</span><div class="announce-text" style="color:var(--blue)">'+(isAr?'الليلة الأولى كانت تعريفية — ما في قتلى':'شەوی یەکەم ناساندن بوو — کوژراو نەبوو')+'</div></div>';
+updateAliveCount();renderVoteList();
+}
+
+function selectNight(type,name,list){
+list.querySelectorAll('.player-btn').forEach(function(b){b.classList.remove('sel','sel-blue');});
+if(name)list.querySelectorAll('.player-btn').forEach(function(b){if(b.getAttribute('data-name')===name)b.classList.add(type==='save'?'sel-blue':'sel');});
+if(type==='kill')G.nightKill=name;
+else if(type==='save'){G.nightSave=name;G.lastDoctorSave=name;}
+else if(type==='silence')G.nightSilence=name;
+else if(type==='snipe'){G.nightSnipe=name;if(name)G.sniperUsed=true;}
+}
+
+/* ===== END NIGHT ===== */
+function endNight(){
+SFX.day();show('sDay');
+var isAr=G.lang==='ar';
+document.getElementById('dayNum').textContent=t('day')+' '+G.night;
+document.getElementById('dayTitle').textContent=t('dayTitle');
+var results=document.getElementById('nightResults');results.innerHTML='';
+var killed=[],msgs=[];
+
+if(G.nightKill){
+if(G.nightSave===G.nightKill)msgs.push({icon:'🏥',text:(isAr?'محاولة اغتيال فاشلة — الدكتور أنقذ ':'هێرشی کوژتنی سەرنەکەوت — دکتۆر ڕەزاند ')+G.nightKill,color:'var(--blue)'});
+else{killed.push(G.nightKill);msgs.push({icon:'💀',text:G.nightKill+' '+t('dead'),color:'var(--red)',role:role(G.roles[G.nightKill]).name});}
+}else msgs.push({icon:'🌙',text:t('no_kill'),color:'var(--dim)'});
+
+// القناص — مواطن: القناص يموت فقط. مافيا: الهدف يموت فقط
+if(G.nightSnipe){
+var snipeTeam=ROLES[G.roles[G.nightSnipe]].team;
+if(G.nightSave===G.nightSnipe){msgs.push({icon:'🏥',text:G.nightSnipe+' '+t('saved'),color:'var(--blue)'});}
+else if(snipeTeam==='mafia'){
+// مافيا → الهدف يموت
+killed.push(G.nightSnipe);
+msgs.push({icon:'🎯',text:G.nightSnipe+' '+t('dead'),color:'var(--red)',role:role(G.roles[G.nightSnipe]).name});
+}else{
+// مواطن/محايد → القناص يموت، الهدف ينجو
+var sniperPerson=getAlive().find(function(n){return G.roles[n]==='sniper';});
+if(sniperPerson&&!killed.includes(sniperPerson)){
+killed.push(sniperPerson);
+msgs.push({icon:'🎯💀',text:sniperPerson+' '+(isAr?'(القناص) مات لأنه أصاب مواطناً':'(تفەنگچی) مرد چونکە هاووڵاتی لێدا'),color:'var(--red)',role:role(G.roles[sniperPerson]).name});
+}
+}
+}
+
+if(G.nightSilence){G.silenced.push(G.nightSilence);msgs.push({icon:'🤫',text:G.nightSilence+' '+t('silenced'),color:'var(--gold)'});}
+
+killed.forEach(function(n){if(!G.dead.includes(n))G.dead.push(n);});
+G.silenced=G.silenced.filter(function(n){return !G.dead.includes(n);});
+
+if(msgs.length>0){
+var box=document.createElement('div');box.style.marginBottom='12px';
+msgs.forEach(function(m){
+var row=document.createElement('div');row.className='announce-box';
+row.style.borderColor=m.color.replace('var(--','rgba(').replace(')',',0.3)');
+row.style.background=m.color.replace('var(--','rgba(').replace(')',',0.08)');
+row.innerHTML='<span class="announce-icon">'+m.icon+'</span><div class="announce-text" style="color:'+m.color+'">'+m.text+'</div>'+(m.role?'<div class="announce-role">'+m.role+'</div>':'');
+box.appendChild(row);
+});results.appendChild(box);
+}
+
+if(checkWin())return;
+updateAliveCount();renderVoteList();
+}
+
+function updateAliveCount(){
+var alive=getAlive();
+var mafiaAlive=alive.filter(function(n){return ROLES[G.roles[n]].team==='mafia';}).length;
+var isAr=G.lang==='ar';
+document.getElementById('aliveCount').innerHTML=
+'<span style="color:var(--blue)">'+t('alive')+': '+alive.length+'</span>'+
+'<span style="color:var(--red)">'+t('mafia_count')+': '+mafiaAlive+'</span>';
+}
+
+/* ===== DAY / VOTE ===== */
+// G.votes = {playerName: votesReceived}
+// G.votersDone = [] list of who already voted
+
+function renderVoteList(restrictTo){
+var isAr=G.lang==='ar';
+document.getElementById('lblVote').textContent=t('voteTitle');
+document.getElementById('btnSkipVote').textContent=t('skipVote');
+var alive=getAlive();
+var candidates=restrictTo||alive;
+var list=document.getElementById('voteList');
+list.innerHTML='';
+G.votes={};G.votersDone=[];
+candidates.forEach(function(n){G.votes[n]=0;});
+
+// العمدة — زر كشف الهوية
+var mayorAlive=alive.find(function(n){return G.roles[n]==='mayor'&&!G.mayorUsed;});
+if(mayorAlive&&!restrictTo){
+var mayorDiv=document.createElement('div');
+mayorDiv.style.cssText='background:rgba(45,198,83,.08);border:1px solid rgba(45,198,83,.3);border-radius:10px;padding:12px;margin-bottom:10px';
+mayorDiv.innerHTML='<div style="font-size:.75rem;color:var(--green);font-weight:900;margin-bottom:8px">🏛️ '+(isAr?'العمدة — يمكنه كشف هويته (صوته يصير 3)':'قایمەقام — دەتوانێت ناسنامەی ئاشکرا بکات (دەنگی 3 دەبێت)')+'</div>'+
+'<button class="btn" style="background:rgba(45,198,83,.2);color:var(--green);border:1px solid rgba(45,198,83,.4);margin-top:0;padding:10px" onclick="useMayor()">🏛️ '+(isAr?'أنا العمدة — كشف هويتي!':'من قایمەقامم — ناسنامەکەم ئاشکرا دەکەم!')+'</button>';
+list.appendChild(mayorDiv);
+}
+
+// المخبر
+var informerAlive=alive.some(function(n){return G.roles[n]==='informer';})&&!G.informerUsed&&!restrictTo;
+if(informerAlive){
+var infoSec=document.createElement('div');
+infoSec.style.cssText='background:rgba(255,214,10,.06);border:1px solid rgba(255,214,10,.2);border-radius:10px;padding:12px;margin-bottom:10px';
+infoSec.innerHTML='<div style="font-size:.75rem;color:var(--gold);font-weight:900;margin-bottom:8px">🗣️ '+(isAr?'المخبر — كشف كرت (الاثنان يخرجون)':'ئاگادارکەر — کارت ئاشکرا بکە (هەردووکیان دەردەکەون)')+'</div>';
+alive.forEach(function(name){
+if(G.roles[name]==='informer')return;
+var btn=document.createElement('button');btn.className='player-btn';
+btn.style.borderColor='rgba(255,214,10,.3)';btn.textContent=name+' 🗣️';
+btn.onclick=(function(n){return function(){
+var roleKey=G.roles[n];var r=role(roleKey);
+G.informerUsed=true;
+if(!G.dead.includes(n))G.dead.push(n);
+alive.forEach(function(p){if(G.roles[p]==='informer'&&!G.dead.includes(p))G.dead.push(p);});
+SFX.dead();
+var msg=(isAr?'كرت '+n+': ':'کارتی '+n+': ')+ROLES[roleKey].em+' '+r.name+'\n'+(isAr?'الاثنان خرجوا من اللعبة':'هەردووکیان دەرچوون');
+showOverlay(isAr?'🗣️ المخبر كشف!':'🗣️ ئاگادارکەر ئاشکرای کرد!',msg,t('close'));
+document.getElementById('ovBtn').onclick=function(){closeOverlay();updateAliveCount();if(!checkWin())renderVoteList();};
+};})(name);
+infoSec.appendChild(btn);
+});
+list.appendChild(infoSec);
+}
+
+var sep=document.createElement('div');sep.className='sep';list.appendChild(sep);
+
+// زر بدء التصويت الفردي
+var startVoteBtn=document.createElement('button');
+startVoteBtn.className='btn btn-blue';
+startVoteBtn.style.marginTop='0';
+startVoteBtn.textContent=isAr?'🗳️ بدء التصويت الفردي':'🗳️ دەنگدانی تاکەکانە دەستپێبکە';
+startVoteBtn.onclick=function(){
+startIndividualVoting(alive, candidates, 0);
+};
+list.appendChild(startVoteBtn);
+
+// عرض النتائج الحالية (فارغة في البداية)
+var resultsDiv=document.createElement('div');
+resultsDiv.id='voteResults';
+resultsDiv.style.marginTop='12px';
+list.appendChild(resultsDiv);
+
+document.getElementById('btnExecute').style.display='none';
+document.getElementById('btnSkipVote').style.display='block';
+}
+
+// التصويت الفردي — كل شخص بالترتيب
+function startIndividualVoting(voters, candidates, idx){
+var isAr=G.lang==='ar';
+if(idx>=voters.length){
+// كل الناس صوّتوا — أظهر النتائج
+showVoteResults(candidates);
+return;
+}
+var voter=voters[idx];
+var isMayor=G.mayorUsed&&G.mayorName===voter;
+var isSilenced=G.silenced.includes(voter);
+
+// شاشة انتظار
+var waitTitle=isAr?'🗳️ دور التصويت':'🗳️ نۆبەتی دەنگدان';
+var waitText=(isAr?'اعطِ الجهاز لـ: ':' بدە بۆ: ')+voter;
+if(isSilenced) waitText+=' 🤫'+(isAr?' (مسكّت — لا يصوت)':' (بێدەنگ — دەنگ ناداتەوە)');
+
+showOverlay(waitTitle, waitText, isAr?'أنا جاهز 👁️':'ئامادەم 👁️');
+document.getElementById('ovBtn2').style.display='none';
+document.getElementById('ovBtn').onclick=function(){
+closeOverlay();
+if(isSilenced){
+// المسكّت لا يصوت، تجاوز
+startIndividualVoting(voters, candidates, idx+1);
+return;
+}
+showSingleVote(voter, voters, candidates, idx, isMayor);
+};
+}
+
+function showSingleVote(voter, voters, candidates, idx, isMayor){
+var isAr=G.lang==='ar';
+// أظهر شاشة التصويت لهذا الشخص
+var overlay=document.getElementById('overlay');
+overlay.classList.add('show');
+var box=document.querySelector('.overlay-box');
+box.innerHTML='<div class="overlay-title">🗳️ '+(isAr?'صوّت على من تريد':'بۆ کێ دەنگت دەدەیت')+(isMayor?' 🏛️×3':'')+'</div>'+
+'<div class="overlay-text" style="font-size:.8rem;color:var(--gold)">'+(isAr?'أنت: ':'تۆ: ')+voter+'</div>'+
+'<div id="singleVoteList" style="display:flex;flex-direction:column;gap:6px;max-height:240px;overflow-y:auto;margin-bottom:10px"></div>'+
+'<button class="btn btn-ghost" id="skipMyVote">'+(isAr?'أمتنع عن التصويت':'دەنگ نادەمەوە')+'</button>';
+
+var vl=document.getElementById('singleVoteList');
+candidates.forEach(function(name){
+if(name===voter)return; // لا يصوت على نفسه
+var btn=document.createElement('button');
+btn.className='btn';
+btn.style.cssText='background:var(--card);border:1px solid var(--border);color:var(--text);margin-top:4px;padding:10px;font-family:Cairo,sans-serif;font-weight:800;border-radius:8px;cursor:pointer';
+var silTag=G.silenced.includes(name)?'🤫 ':'';
+btn.textContent=silTag+name;
+btn.onclick=function(){
+var voteWeight=isMayor?3:1;
+G.votes[name]=(G.votes[name]||0)+voteWeight;
+G.votersDone.push(voter);
+box.innerHTML=''; // نظف
+// أعد بناء overlay الأصلي
+box.innerHTML='<div class="overlay-title" id="ovTitle"></div><div class="overlay-text" id="ovText"></div><button class="btn btn-red" id="ovBtn"></button><button class="btn btn-ghost" id="ovBtn2" style="display:none"></button>';
+closeOverlay();
+startIndividualVoting(voters, candidates, idx+1);
+};
+vl.appendChild(btn);
+});
+
+document.getElementById('skipMyVote').onclick=function(){
+G.votersDone.push(voter);
+box.innerHTML='<div class="overlay-title" id="ovTitle"></div><div class="overlay-text" id="ovText"></div><button class="btn btn-red" id="ovBtn"></button><button class="btn btn-ghost" id="ovBtn2" style="display:none"></button>';
+closeOverlay();
+startIndividualVoting(voters, candidates, idx+1);
+};
+}
+
+function showVoteResults(candidates){
+var isAr=G.lang==='ar';
+// أظهر نتائج في resultsDiv
+var rd=document.getElementById('voteResults');
+if(rd){
+rd.innerHTML='<div style="font-size:.75rem;color:var(--dim);font-weight:900;margin-bottom:8px">📊 '+(isAr?'نتائج التصويت:':'ئەنجامی دەنگدان:')+'</div>';
+var sortedCandidates=candidates.slice().sort(function(a,b){return (G.votes[b]||0)-(G.votes[a]||0);});
+sortedCandidates.forEach(function(name){
+var v=G.votes[name]||0;
+var row=document.createElement('div');
+row.style.cssText='display:flex;justify-content:space-between;padding:8px 12px;background:var(--card);border-radius:6px;margin-bottom:4px;border:1px solid '+(v>0?'rgba(230,57,70,.3)':'var(--border)');
+var isMayor=G.mayorUsed&&G.mayorName===name;
+row.innerHTML='<span style="font-weight:800">'+name+(isMayor?' 🏛️':'')+'</span>'+
+'<span style="font-weight:900;color:'+(v>0?'var(--red)':'var(--dim)')+'">'+v+' '+(isAr?'صوت':'دەنگ')+'</span>';
+rd.appendChild(row);
+});
+}
+// أظهر زر التنفيذ
+document.getElementById('btnExecute').style.display='block';
+document.getElementById('btnExecute').textContent=isAr?'تنفيذ الحكم ⚖️':'بڕیار جێبەجێ بکە ⚖️';
+}
+
+function adjVote(name,d){} // unused now
+
+function executeVote(){
+var isAr=G.lang==='ar';
+if(!G.votes)return;
+var max=0;
+Object.keys(G.votes).forEach(function(n){if((G.votes[n]||0)>max)max=G.votes[n]||0;});
+if(max===0){
+showOverlay(isAr?'لا يوجد أصوات':'دەنگ نییە',isAr?'ما اتضيف أي صوت!':'هیچ دەنگێک زیاد نەکرا!',t('close'));
+return;
+}
+var leaders=Object.keys(G.votes).filter(function(n){return G.votes[n]===max;});
+
+if(leaders.length>1){
+showDefenseMinutes(leaders, 0, function(){
+renderVoteList(leaders);
+});
+return;
+}
+
+var name=leaders[0];
+var roleKey=G.roles[name];
+var msg=(isAr?'أعلى أصوات: ':'زۆرترین دەنگ: ')+name+' ('+max+' '+(isAr?'صوت':'دەنگ')+')';
+showOverlay(isAr?'⚖️ نتيجة التصويت':'⚖️ ئەنجامی دەنگدان',msg,isAr?'⚔️ تنفيذ الإعدام':'⚔️ جێبەجێکردن');
+document.getElementById('ovBtn2').style.display='block';
+document.getElementById('ovBtn2').textContent=isAr?'🕐 دقيقة دفاع':'🕐 یەک خولەک بەرگری';
+document.getElementById('ovBtn').onclick=function(){
+closeOverlay();document.getElementById('ovBtn2').style.display='none';
+doExecute(name,roleKey);
+};
+document.getElementById('ovBtn2').onclick=function(){
+closeOverlay();document.getElementById('ovBtn2').style.display='none';
+showDefenseMinutes([name], 0, function(){
+renderVoteList([name]);
+});
+};
+}
+
+function showDefenseMinutes(names, idx, onDone){
+var isAr=G.lang==='ar';
+if(idx>=names.length){ onDone(); return; }
+var current=names[idx];
+var total=names.length;
+showOverlay(
+'🕐 '+(isAr?'دقيقة الدفاع':'خولەکی بەرگری')+' ('+(idx+1)+'/'+total+')',
+current+' '+(isAr?'يتكلم الآن للدفاع عن نفسه...':'ئێستا قسە دەکات بۆ بەرگری لە خۆی...'),
+isAr?'تم — التالي ➜':'تەواوبوو — داهاتوو ➜'
+);
+document.getElementById('ovBtn2').style.display='none';
+document.getElementById('ovBtn').onclick=function(){
+showDefenseMinutes(names, idx+1, onDone);
+};
+}
+
+function doExecute(name,roleKey){
+var isAr=G.lang==='ar';
+if(roleKey==='joker'){SFX.win();showWin('joker',name);return;}
+if(roleKey==='bomber'){
+if(!G.dead.includes(name))G.dead.push(name);
+G.silenced=G.silenced.filter(function(n){return n!==name;});
+showBomberChoice(name);return;
+}
+if(!G.dead.includes(name))G.dead.push(name);
+G.silenced=G.silenced.filter(function(n){return n!==name;});
+SFX.dead();
+var msg=(isAr?'تم إعدام: ':'دارودەق کرا: ')+name+' ('+role(roleKey).name+')';
+showOverlay(isAr?'⚖️ تم الإعدام':'⚖️ دارودەق کرا',msg,t('close'));
+document.getElementById('ovBtn').onclick=function(){closeOverlay();if(!checkWin())startNight();};
+}
+
+function useMayor(){
+if(G.mayorUsed)return;
+G.mayorUsed=true;
+var isAr=G.lang==='ar';
+showOverlay('🏛️ '+(isAr?'العمدة كشف نفسه':'قایمەقام خۆی ئاشکرا کرد'),isAr?G.mayorName+' هو العمدة — صوته يساوي 3 الآن!':G.mayorName+' قایمەقامە — دەنگی ئێستا بەرامبەری 3ە!',t('close'));
+document.getElementById('ovBtn').onclick=function(){closeOverlay();renderVoteList();};
+}
+
+function showBomberChoice(bomberName){
+var isAr=G.lang==='ar';SFX.dead();
+show('sNight');
+document.getElementById('nightNum').textContent='💣';
+document.getElementById('nightTitle').textContent=bomberName+(isAr?' — اختار من يموت معك':' — کێ لەگەڵت بمرێت');
+var actions=document.getElementById('nightActions');actions.innerHTML='';
+document.getElementById('btnEndNight').style.display='none';
+var div=document.createElement('div');div.className='action-card';
+div.innerHTML='<div class="action-title">'+t('choose_victim')+'</div>';
+var list=document.createElement('div');list.className='player-list';
+getAlive().forEach(function(pname){
+var btn=document.createElement('button');btn.className='player-btn';btn.textContent=pname;
+btn.onclick=(function(v){return function(){
+if(!G.dead.includes(v))G.dead.push(v);
+var msg=bomberName+' + '+v+' '+(isAr?'ماتوا':'مردن');
+showOverlay(isAr?'💣 الانتحاري':'💣 خۆکوژ',msg,t('close'));
+document.getElementById('ovBtn').onclick=function(){closeOverlay();if(!checkWin())startNight();};
+};})(pname);
+list.appendChild(btn);
+});
+div.appendChild(list);actions.appendChild(div);
+}
+
+function skipVote(){
+G.silenced=[];
+showOverlay(G.lang==='ar'?'☀️ انتهى اليوم':'☀️ ڕۆژ کۆتایی هات',t('skip_result'),t('close'));
+document.getElementById('ovBtn').onclick=function(){closeOverlay();startNight();};
+}
+
+/* ===== WIN ===== */
+function checkWin(){
+var alive=getAlive();
+var mafiaAlive=alive.filter(function(n){return ROLES[G.roles[n]].team==='mafia';});
+var otherAlive=alive.filter(function(n){return ROLES[G.roles[n]].team!=='mafia';});
+if(mafiaAlive.length===0){SFX.win();showWin('citizen',null);return true;}
+if(mafiaAlive.length>=otherAlive.length){SFX.win();showWin('mafia',null);return true;}
+return false;
+}
+
+function showWin(winner,jokerName){
+show('sWin');var isAr=G.lang==='ar';
+var icons={mafia:'🔴',citizen:'🔵',joker:'🃏'};
+var titles={mafia:t('mafia_win'),citizen:t('citizen_win'),joker:t('joker_win')};
+var colors={mafia:'var(--red)',citizen:'var(--blue)',joker:'var(--gold)'};
+var subs={
+mafia:isAr?'المافيا قضت على المواطنين':'مافیا بەسەر هاووڵاتیەکاندا سەرکەوت',
+citizen:isAr?'تم القضاء على المافيا':'مافیا تەواو لەناوبرا',
+joker:(jokerName||'')+' '+(isAr?'فاز بالإعدام!':'بەدارودەقکردن برد!')
+};
+document.getElementById('winIcon').textContent=icons[winner];
+document.getElementById('winTitle').textContent=titles[winner];
+document.getElementById('winTitle').style.color=colors[winner];
+document.getElementById('winSub').textContent=subs[winner];
+var fr=document.getElementById('finalRoles');
+fr.innerHTML='<div style="font-size:.7rem;letter-spacing:2px;color:var(--dim);margin-bottom:8px;text-align:center">'+(isAr?'أدوار الجميع':'ڕۆڵی هەموو کەس')+'</div>';
+G.playerNames.forEach(function(name){
+var roleKey=G.roles[name];var r=role(roleKey);var isDead=G.dead.includes(name);
+var row=document.createElement('div');row.className='score-row';row.style.opacity=isDead?'0.5':'1';
+row.innerHTML='<span class="score-name">'+(isDead?'💀 ':'')+name+'</span><span>'+ROLES[roleKey].em+' '+r.name+'</span>';
+fr.appendChild(row);
+});
+document.getElementById('btnPlayAgain').textContent=t('playAgain');
+document.getElementById('btnHome').textContent=t('home');
+}
+
+function playAgain(){
+G.dead=[];G.silenced=[];G.night=0;G.introNightDone=false;
+G.sniperUsed=false;G.informerUsed=false;G.mayorUsed=false;G.mayorName=null;
+G.lastDoctorSave=null;startGame();
+}
+
+function getAlive(){return G.playerNames.filter(function(n){return !G.dead.includes(n);});}
+</script>
+</body>
+</html>
