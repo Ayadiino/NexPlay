@@ -1,0 +1,2033 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>لا تحچي</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&family=Lalezar&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════
+   CARTOON / DUMB & COLORFUL STYLE 🎨
+══════════════════════════════════════ */
+:root {
+  --bg: #1a0a2e;
+  --bg2: #0d1f3c;
+  --card: #fff;
+  --card2: #f0e6ff;
+  --border: #000;
+  --bw: 3px;
+  --red: #ff3040;
+  --blue: #0090ff;
+  --yellow: #ffe000;
+  --green: #00cc44;
+  --purple: #cc44ff;
+  --orange: #ff6600;
+  --pink: #ff44aa;
+  --cyan: #00ddff;
+  --text: #111;
+  --muted: #777;
+  --shadow: 4px 4px 0px #000;
+  --shadow-lg: 6px 6px 0px #000;
+  --rad: 20px;
+}
+
+/* ── DARK MODE ── */
+body.dark-mode {
+  --card: #1e1e2e;
+  --card2: #2a1a3e;
+  --border: #555;
+  --text: #eee;
+  --muted: #aaa;
+  --shadow: 4px 4px 0px #333;
+  --shadow-lg: 6px 6px 0px #333;
+}
+body.dark-mode .c {
+  background: #1e1e2e !important;
+  border-color: #555 !important;
+  color: #eee !important;
+}
+body.dark-mode h2 { color: #eee; }
+body.dark-mode .score-box { background: #2a2a3e !important; border-color: #555 !important; }
+body.dark-mode .score-box .score-label { color: #ccc !important; }
+body.dark-mode .vs { background: #2a2a3e !important; border-color: #555 !important; color: #eee !important; }
+body.dark-mode .timer-num { background: #2a2a3e !important; border-color: #555 !important; color: #eee; }
+body.dark-mode .timer-urgent .timer-num { background: #ff3040 !important; color: #fff; }
+body.dark-mode .mode-card { background: #2a2a3e !important; border-color: #555 !important; }
+body.dark-mode .mode-card .mode-name { color: #eee !important; }
+body.dark-mode .mode-card .mode-desc { color: #aaa !important; }
+body.dark-mode .mode-card.selected { background: var(--yellow) !important; border-color: #000 !important; }
+body.dark-mode .mode-card.selected .mode-name { color: #111 !important; }
+body.dark-mode .mode-card.selected .mode-desc { color: #333 !important; }
+body.dark-mode .chip { background: #2a2a3e !important; border-color: #555 !important; color: #aaa !important; }
+body.dark-mode .chip.on.c0 { background: #ff9f0a !important; color: #000 !important; }
+body.dark-mode .chip.on.c1 { background: var(--red) !important; color: #fff !important; }
+body.dark-mode .chip.on.c2 { background: var(--purple) !important; color: #fff !important; }
+body.dark-mode .chip.on.c3 { background: var(--green) !important; color: #000 !important; }
+body.dark-mode .chip.on.c4 { background: var(--blue) !important; color: #fff !important; }
+body.dark-mode .chip.on.c5 { background: var(--yellow) !important; color: #000 !important; }
+body.dark-mode .chip.on.c6 { background: var(--orange) !important; color: #fff !important; }
+body.dark-mode .chip.on.c7 { background: var(--cyan) !important; color: #000 !important; }
+body.dark-mode input[type=text] { background: #2a2a3e; border-color: #555; color: #eee; }
+body.dark-mode input::placeholder { color: #777; }
+body.dark-mode .round-pill { background: #2a2a3e; border-color: #555; color: #eee; }
+body.dark-mode .btn-ghost { background: #2a2a3e; color: #ccc; border-color: #555; box-shadow: 3px 3px 0 #333; }
+body.dark-mode #s-setup, body.dark-mode #s-howto {
+  background: linear-gradient(180deg, #1a1a2e 0%, #2a1a3e 100%);
+}
+body.dark-mode #s-turn-intro {
+  background: linear-gradient(160deg, #1a1a10 0%, #2a1020 100%);
+}
+body.dark-mode #s-play {
+  background: linear-gradient(180deg, #0a1020 0%, #0a1a0a 100%);
+}
+body.dark-mode #s-turn-result {
+  background: linear-gradient(160deg, #1a1000 0%, #001020 100%);
+}
+body.dark-mode .section-tag { color: #999; }
+body.dark-mode .word-hint { color: #bbb; }
+
+/* ── THEME TOGGLE BTN ── */
+.theme-btn {
+  position: absolute; top: 1rem; right: 1rem; z-index: 10;
+  background: rgba(0,0,0,.18); border: 2px solid rgba(255,255,255,.4);
+  border-radius: 30px; padding: .35rem .8rem;
+  font-size: 1rem; font-weight: 900; color: #fff;
+  cursor: pointer;
+  transition: transform .09s;
+}
+.theme-btn:active { transform: scale(.93); }
+
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html,body { height:100%; overflow:hidden; }
+body {
+  font-family:'Tajawal',sans-serif; color:var(--text);
+  display:flex; flex-direction:column;
+  background: #1a0a2e;
+}
+
+/* ── SCREENS ── */
+.screen { display:none; flex-direction:column; height:100%; overflow:hidden; }
+.screen.active { display:flex; animation:popIn .22s cubic-bezier(.34,1.56,.64,1); }
+@keyframes popIn { from{opacity:0;transform:scale(.88)} to{opacity:1;transform:scale(1)} }
+
+/* ── SCROLLABLE CONTENT ── */
+.content { flex:1; overflow-y:auto; position:relative; z-index:1; }
+
+/* ── TYPOGRAPHY ── */
+.big-title {
+  font-family:'Lalezar',sans-serif;
+  font-size: clamp(4rem,20vw,6.5rem);
+  line-height:.88;
+  -webkit-text-stroke:3px #000;
+  paint-order: stroke fill;
+}
+h2 { font-size:1.4rem; font-weight:900; color:#111; }
+
+/* ── MAIN BUTTONS — cartoon style ── */
+.btn {
+  display:block; width:100%; padding:1rem 1.2rem;
+  border: var(--bw) solid #000;
+  border-radius:50px;
+  font-family:'Tajawal',sans-serif; font-size:1.15rem; font-weight:900;
+  cursor:pointer;
+  text-align:center;
+  box-shadow: var(--shadow);
+  transition: transform .09s, box-shadow .09s;
+  letter-spacing:.01em;
+}
+.btn:active { transform:translate(3px,3px); box-shadow:1px 1px 0 #000; }
+.btn-yellow { background:var(--yellow); color:#000; }
+.btn-red    { background:var(--red);    color:#fff; }
+.btn-blue   { background:var(--blue);   color:#fff; }
+.btn-green  { background:var(--green);  color:#000; }
+.btn-ghost  { background:#fff; color:#444; border:var(--bw) solid #ccc; box-shadow:3px 3px 0 #ccc; }
+.btn-purple { background:var(--purple); color:#fff; }
+.btn-pink   { background:var(--pink);   color:#fff; }
+
+/* ── CARD ── */
+.c {
+  background:#fff;
+  border: var(--bw) solid #000;
+  border-radius:var(--rad);
+  padding:1rem 1.2rem;
+  box-shadow: var(--shadow);
+}
+
+/* ── BACK BTN ── */
+.back-btn {
+  display:flex; align-items:center; gap:.4rem;
+  padding:.8rem 1.2rem; font-size:.9rem; font-weight:800;
+  color:#fff; cursor:pointer; z-index:2; width:fit-content;
+  background:rgba(255,255,255,.15);
+  border-radius:30px; margin:.5rem;
+  border:2px solid rgba(255,255,255,.3);
+}
+.back-btn:active { opacity:.6; }
+
+/* ── LANG TOGGLE ── */
+.lang-btn {
+  position:absolute; top:1rem; left:1rem; z-index:10;
+  background:var(--yellow); border:var(--bw) solid #000;
+  border-radius:30px; padding:.35rem 1rem;
+  font-size:.82rem; font-weight:900; color:#000;
+  cursor:pointer; box-shadow:3px 3px 0 #000;
+  transition:transform .09s, box-shadow .09s;
+}
+.lang-btn:active { transform:translate(2px,2px); box-shadow:1px 1px 0 #000; }
+
+/* ── SCORE BAR ── */
+.score-bar { display:grid; grid-template-columns:1fr auto 1fr; gap:.5rem; padding:.6rem 1rem; align-items:center; }
+.score-box { border-radius:16px; padding:.5rem .6rem; text-align:center; border:var(--bw) solid #000; box-shadow:3px 3px 0 #000; }
+.score-val { font-size:2.4rem; font-weight:900; font-family:'Lalezar',sans-serif; line-height:1; }
+.score-label { font-size:.62rem; font-weight:800; margin-top:.1rem; }
+.box-red  { background:#ffe0e4; }
+.box-red .score-val  { color:var(--red); }
+.box-blue { background:#d6eeff; }
+.box-blue .score-val { color:var(--blue); }
+.vs { background:#fff; border:var(--bw) solid #000; border-radius:10px; padding:.3rem .5rem; font-size:.75rem; font-weight:900; color:#000; box-shadow:2px 2px 0 #000; }
+
+/* ── TIMER ── */
+.timer-wrap { display:flex; justify-content:center; align-items:center; padding:.6rem 0 .1rem; }
+.timer-ring { position:relative; width:110px; height:110px; }
+.timer-ring svg { transform:rotate(-90deg); }
+.timer-ring circle { fill:none; stroke-width:10; stroke-linecap:round; }
+.ring-bg { stroke:#e0e0e0; }
+.ring-fill { stroke:var(--yellow); transition:stroke-dashoffset .9s linear, stroke .4s; }
+.timer-num {
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-family:'Lalezar',sans-serif; font-size:2.8rem;
+  color:#111;
+  background:#fff; border-radius:50%; margin:8px;
+  border: var(--bw) solid #000; box-shadow: inset 0 0 0 3px rgba(0,0,0,.05);
+}
+@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12)} }
+.timer-urgent .timer-num { animation:pulse .4s infinite; background:#ff3040; color:#fff; }
+
+/* ── WORD CARD — big cartoon card ── */
+.word-card {
+  margin:0 1rem;
+  border-radius:28px;
+  padding:1.8rem 1.4rem;
+  text-align:center;
+  border: 4px solid #000;
+  box-shadow: var(--shadow-lg);
+  transition:transform .12s;
+}
+.word-card:active { transform:scale(.98); }
+.word-card-a { background:linear-gradient(135deg,#ffe0e6,#ffc0cc); }
+.word-card-b { background:linear-gradient(135deg,#d0eeff,#b0d8ff); }
+.word-category { font-size:.7rem; font-weight:800; letter-spacing:.15em; text-transform:uppercase; color:#555; margin-bottom:.5rem; }
+.word-main { font-family:'Lalezar',sans-serif; font-size:clamp(2.2rem,9vw,3.4rem); line-height:1.1; margin-bottom:.3rem; -webkit-text-stroke:1.5px #000; }
+.word-card-a .word-main { color:var(--red); }
+.word-card-b .word-main { color:var(--blue); }
+.word-hint { font-size:.85rem; font-weight:700; color:#444; }
+
+/* ── ACTION BTNS ── */
+.action-row { display:grid; grid-template-columns:1fr 1fr; gap:.65rem; padding:.5rem 1rem; }
+.act-btn {
+  border-radius:20px; padding:1.05rem;
+  border: var(--bw) solid #000;
+  font-family:'Tajawal',sans-serif; font-size:1rem; font-weight:900;
+  cursor:pointer;
+  box-shadow: var(--shadow);
+  transition:transform .09s, box-shadow .09s;
+}
+.act-btn:active { transform:translate(3px,3px); box-shadow:1px 1px 0 #000; }
+.act-correct { background:#00cc44; color:#fff; }
+.act-skip    { background:#fff; color:#333; }
+.act-skip.penalty { background:#fff0e0; color:var(--orange); }
+
+/* ── TEAM TAG ── */
+.team-tag { display:inline-flex; align-items:center; gap:.35rem; padding:.3rem .9rem; border-radius:30px; font-size:.82rem; font-weight:900; border: 2px solid #000; box-shadow:2px 2px 0 #000; }
+.tag-a { background:#ffe0e6; color:var(--red); }
+.tag-b { background:#d0eeff; color:var(--blue); }
+
+/* ── CHIPS ── */
+.chip-row { display:flex; flex-wrap:wrap; gap:.45rem; }
+.chip {
+  padding:.4rem .85rem; border-radius:30px;
+  font-size:.82rem; font-weight:900;
+  cursor:pointer; border: 2px solid #bbb;
+  background:#eee; color:#888;
+  transition:transform .09s, box-shadow .09s;
+  box-shadow:2px 2px 0 #bbb;
+}
+.chip:active { transform:translate(1px,1px); }
+.chip.on { color:#000; border-color:#000; box-shadow:3px 3px 0 #000; }
+.chip.c0 { background:#ff9f0a; }
+.chip.c1 { background:var(--red); color:#fff; }
+.chip.c2 { background:var(--purple); color:#fff; }
+.chip.c3 { background:var(--green); }
+.chip.c4 { background:var(--blue); color:#fff; }
+.chip.c5 { background:var(--yellow); }
+.chip.c6 { background:var(--orange); color:#fff; }
+.chip.c7 { background:var(--cyan); }
+
+/* ── MODE CARDS ── */
+.mode-grid { display:grid; grid-template-columns:1fr 1fr; gap:.65rem; }
+.mode-card {
+  padding:.9rem .7rem; border-radius:18px;
+  border: var(--bw) solid #ccc; background:#f5f5f5;
+  cursor:pointer; text-align:center;
+  transition:transform .09s, box-shadow .09s, border-color .1s;
+  box-shadow:3px 3px 0 #ccc;
+}
+.mode-card.selected { border-color:#000; background:var(--yellow); box-shadow: var(--shadow); }
+.mode-icon { font-size:1.9rem; margin-bottom:.3rem; }
+.mode-name { font-size:.9rem; font-weight:900; color:#111; }
+.mode-desc { font-size:.67rem; color:#555; margin-top:.2rem; line-height:1.35; font-weight:700; }
+
+/* ── ROUND PILL ── */
+.round-pill {
+  display:inline-block; background:#fff;
+  border:2px solid #000; border-radius:20px;
+  padding:.25rem .8rem; font-size:.72rem; color:#000; font-weight:800;
+  box-shadow:2px 2px 0 #000;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes burst { 0%{transform:scale(.4);opacity:0} 70%{transform:scale(1.18)} 100%{transform:scale(1);opacity:1} }
+.burst { animation:burst .35s cubic-bezier(.34,1.56,.64,1) forwards; }
+@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-12px)} 40%{transform:translateX(12px)} 60%{transform:translateX(-7px)} 80%{transform:translateX(7px)} }
+.shake { animation:shake .35s ease; }
+@keyframes wiggle { 0%,100%{transform:rotate(-3deg)} 50%{transform:rotate(3deg)} }
+@keyframes slideUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+.slide-up { animation:slideUp .3s ease; }
+
+/* ── WIN ── */
+.win-wrap { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:2rem; text-align:center; gap:1rem; }
+.trophy { font-size:5.5rem; animation:wiggle 1s ease-in-out infinite; }
+
+/* ── INPUT ── */
+input[type=text] {
+  width:100%; background:#fff;
+  border: var(--bw) solid #000; border-radius:14px;
+  padding:.85rem 1rem; color:#000;
+  font-family:'Tajawal',sans-serif; font-size:1rem; font-weight:700;
+  outline:none; box-shadow: var(--shadow);
+  transition:box-shadow .1s;
+}
+input[type=text]:focus { box-shadow:5px 5px 0 #000; }
+input::placeholder { color:#aaa; }
+
+/* ── SPACING ── */
+.p { padding:0 1.1rem; }
+.pt { padding-top:.9rem; }
+.pb { padding-bottom:max(1.1rem,env(safe-area-inset-bottom)); }
+.gap-s { height:.5rem; } .gap-m { height:.9rem; } .gap-l { height:1.4rem; }
+.section-tag { font-size:.6rem; letter-spacing:.3em; text-transform:uppercase; color:#888; margin-bottom:.3rem; font-weight:800; }
+
+/* ── FLASH ── */
+.flash-overlay { position:fixed; inset:0; z-index:999; pointer-events:none; opacity:0; transition:opacity .07s; }
+.flash-green { background:rgba(0,204,68,.25); }
+.flash-red   { background:rgba(255,48,64,.25); }
+#confetti-canvas { position:fixed; inset:0; z-index:998; pointer-events:none; }
+
+/* ── SPEED BAR ── */
+.speed-bar-wrap { margin:.4rem 1rem 0; height:8px; background:#ddd; border-radius:6px; overflow:hidden; border:2px solid #000; }
+.speed-bar-fill { height:100%; background:var(--yellow); border-radius:4px; transition:width linear; }
+
+/* ── FLOAT NOTIF ── */
+@keyframes floatUp { from{opacity:1;transform:translateY(0) translateX(-50%) scale(1)} to{opacity:0;transform:translateY(-60px) translateX(-50%) scale(1.2)} }
+.float-notif {
+  position:fixed; top:36%; left:50%;
+  z-index:1000;
+  font-family:'Lalezar',sans-serif; font-size:2rem;
+  color:#fff; background:var(--red);
+  border:3px solid #000; border-radius:40px;
+  padding:.3rem 1.2rem;
+  pointer-events:none;
+  animation:floatUp 1s ease forwards;
+  box-shadow: var(--shadow);
+}
+
+/* ── PLAY TOP ── */
+.play-top { padding:.4rem 1rem; display:flex; justify-content:space-between; align-items:center; }
+.speed-badge {
+  display:inline-flex; align-items:center; gap:.3rem;
+  background:var(--orange); border:2px solid #000;
+  border-radius:20px; padding:.2rem .7rem;
+  font-size:.7rem; font-weight:900; color:#fff;
+  box-shadow:2px 2px 0 #000;
+}
+
+/* ══ SCREEN BACKGROUNDS ══ */
+#s-home {
+  background: linear-gradient(160deg, #ff6ec7 0%, #ffe066 35%, #66eeff 65%, #a855ff 100%);
+  position:relative; overflow:hidden;
+}
+#s-home::before {
+  content:'';
+  position:absolute; inset:0;
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.3) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(255,255,255,.2) 0%, transparent 40%);
+}
+#s-setup, #s-howto {
+  background: linear-gradient(180deg, #e8f4ff 0%, #f0e6ff 100%);
+}
+#s-turn-intro {
+  background: linear-gradient(160deg, #fff9d0 0%, #ffe0f0 100%);
+}
+#s-play {
+  background: linear-gradient(180deg, #f0f8ff 0%, #e8ffe8 100%);
+}
+#s-turn-result {
+  background: linear-gradient(160deg, #fff0e0 0%, #e0f0ff 100%);
+}
+#s-win {
+  background: linear-gradient(160deg, #ffe066 0%, #ff6ec7 50%, #66eeff 100%);
+}
+
+/* ── STICKER EMOJIS ── */
+.sticker {
+  position:absolute; font-size:2.8rem;
+  animation:float 3s ease-in-out infinite;
+  pointer-events:none; z-index:0;
+  filter:drop-shadow(2px 2px 0 rgba(0,0,0,.2));
+}
+.sticker:nth-child(2) { animation-delay:.6s; font-size:2.2rem; }
+.sticker:nth-child(3) { animation-delay:1.2s; font-size:3rem; }
+.sticker:nth-child(4) { animation-delay:1.8s; font-size:2rem; }
+@keyframes float { 0%,100%{transform:translateY(0) rotate(-6deg)} 50%{transform:translateY(-14px) rotate(6deg)} }
+
+/* ── CARD OVERRIDE for dark screens ── */
+#s-turn-result .c, #s-howto .c { background:#fff; }
+body.dark-mode #s-turn-result .c, body.dark-mode #s-howto .c { background:#1e1e2e !important; }
+</style>
+</head>
+<body>
+<div class="flash-overlay" id="flash"></div>
+<canvas id="confetti-canvas"></canvas>
+
+<div class="screen active" id="s-home">
+  <div class="sticker" style="top:8%;right:10%;">🎭</div>
+  <div class="sticker" style="top:15%;left:12%;">🎉</div>
+  <div class="sticker" style="bottom:30%;right:8%;">⚡</div>
+  <div class="sticker" style="bottom:25%;left:10%;">🏆</div>
+
+  <button class="lang-btn" onclick="toggleLang()" id="lang-btn" style="background:var(--yellow);">کوردی</button>
+  <button class="theme-btn" onclick="toggleTheme()" id="theme-btn">🌙</button>
+
+  <div class="content" style="justify-content:center; align-items:center; gap:1.8rem; padding:2rem; display:flex; flex-direction:column;">
+    <div style="text-align:center; position:relative; z-index:1;">
+      <div class="big-title" id="h-title" style="color:var(--yellow);">بدون<br><span style="color:var(--red);">كلام</span></div>
+      <div style="color:#333; font-size:.95rem; margin-top:.6rem; font-weight:800; text-shadow:1px 1px 0 rgba(255,255,255,.5);" id="h-sub">لعبة الإيماء الجماعية 🎭</div>
+    </div>
+    <div style="width:100%; max-width:360px; display:flex; flex-direction:column; gap:.75rem; position:relative; z-index:1;">
+      <button class="btn btn-yellow" id="h-play" onclick="goTo('s-setup')" style="font-size:1.2rem; padding:1.1rem;">🎮 العبها الحين!</button>
+      <button class="btn btn-ghost" id="h-howto" onclick="goTo('s-howto')">📖 كيف تلعب؟</button>
+    </div>
+  </div>
+</div>
+
+<div class="screen" id="s-howto">
+  <div class="back-btn" onclick="goBack()">← <span id="ht-back">رجوع</span></div>
+  <div class="content" style="padding:0 1.2rem 1.2rem; display:flex; flex-direction:column; gap:.8rem;">
+    <div class="section-tag" id="ht-tag">تعليمات اللعبة</div>
+    <h2 id="ht-title">كيف تلعب؟</h2>
+    <div class="c"><div style="font-weight:900; margin-bottom:.4rem;" id="ht-i1">🎭 الفكرة</div><div style="color:#aaa; font-size:.88rem; line-height:1.7;" id="ht-t1"></div></div>
+    <div class="c"><div style="font-weight:900; margin-bottom:.4rem;" id="ht-i2">🔴🔵 الفريقين</div><div style="color:#aaa; font-size:.88rem; line-height:1.7;" id="ht-t2"></div></div>
+    <div class="c"><div style="font-weight:900; margin-bottom:.4rem;" id="ht-i3">🎯 مود كلاسيك</div><div style="color:#aaa; font-size:.88rem; line-height:1.7;" id="ht-t3"></div></div>
+    <div class="c"><div style="font-weight:900; margin-bottom:.4rem;" id="ht-i4">⚡ مود سرعة</div><div style="color:#aaa; font-size:.88rem; line-height:1.7;" id="ht-t4"></div></div>
+    <div class="c"><div style="font-weight:900; margin-bottom:.4rem;" id="ht-i5">🏆 الفوز</div><div style="color:#aaa; font-size:.88rem; line-height:1.7;" id="ht-t5"></div></div>
+  </div>
+  <div class="p pb pt">
+    <button class="btn btn-yellow" id="ht-ok" onclick="goBack()">فهمت! 👍</button>
+  </div>
+</div>
+
+<div class="screen" id="s-setup">
+  <div class="back-btn" onclick="goBack()">← <span id="su-back">رجوع</span></div>
+  <div class="content" style="padding:0 1.2rem 1.2rem; display:flex; flex-direction:column; gap:.85rem;">
+    <div class="section-tag" id="su-tag">الإعداد</div>
+    <h2 id="su-title">إعداد اللعبة</h2>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:.7rem;">
+      <div>
+        <div style="font-size:.72rem; color:var(--red); font-weight:800; margin-bottom:.35rem;" id="su-a-lbl">🔴 الفريق الأول</div>
+        <input type="text" id="name-a" maxlength="12">
+      </div>
+      <div>
+        <div style="font-size:.72rem; color:var(--blue); font-weight:800; margin-bottom:.35rem;" id="su-b-lbl">🔵 الفريق الثاني</div>
+        <input type="text" id="name-b" maxlength="12">
+      </div>
+    </div>
+
+    <div class="gap-s"></div>
+    <div class="section-tag" id="su-pts-lbl">نقاط الفوز</div>
+    <div class="chip-row" id="pts-row">
+      <div class="chip on c5" id="pts-5" onclick="setPts(5)">5</div>
+      <div class="chip" id="pts-10" onclick="setPts(10)">10</div>
+      <div class="chip" id="pts-15" onclick="setPts(15)">15</div>
+      <div class="chip" id="pts-20" onclick="setPts(20)">20</div>
+      <div class="chip" id="pts-30" onclick="setPts(30)">30</div>
+    </div>
+
+    <div class="gap-s"></div>
+    <div class="section-tag" id="su-time-lbl">وقت الدور</div>
+    <div class="chip-row" id="time-row">
+      <div class="chip" id="t-30" onclick="setTime(30)">30 ث</div>
+      <div class="chip" id="t-45" onclick="setTime(45)">45 ث</div>
+      <div class="chip on c5" id="t-60" onclick="setTime(60)">60 ث</div>
+      <div class="chip" id="t-90" onclick="setTime(90)">90 ث</div>
+    </div>
+
+    <div class="gap-s"></div>
+    <div class="section-tag" id="su-mode-lbl">مود اللعبة</div>
+    <div class="mode-grid">
+      <div class="mode-card selected" id="mode-classic" onclick="setMode('classic')">
+        <div class="mode-icon">🎯</div>
+        <div class="mode-name" id="su-mn">كلاسيك</div>
+        <div class="mode-desc" id="su-md">كلمة وحدة، يمثلها ويضغط صح أو خطأ</div>
+      </div>
+      <div class="mode-card" id="mode-speed" onclick="setMode('speed')">
+        <div class="mode-icon">⚡</div>
+        <div class="mode-name" id="su-sn">سرعة</div>
+        <div class="mode-desc" id="su-sd">كلمات تتغير، حاول تجيب أكثر! التخطي ينقص نقطة</div>
+      </div>
+    </div>
+
+    <div class="gap-s"></div>
+    <div class="section-tag" id="su-cats-lbl">الفئات</div>
+    <div class="chip-row" id="cat-grid"></div>
+  </div>
+
+  <div class="p pb pt" style="display:flex; flex-direction:column; gap:.6rem;">
+    <button class="btn btn-yellow" id="su-start" onclick="startGame()" style="font-size:1.15rem; padding:1.1rem;">🎮 ابدأ اللعبة!</button>
+  </div>
+</div>
+
+<div class="screen" id="s-turn-intro">
+  <div class="back-btn" onclick="quitToSetup()">← <span id="ti-back">رجوع</span></div>
+  <div class="content" style="justify-content:center; align-items:center; padding:1rem 2rem 2rem; gap:1.2rem; text-align:center; display:flex; flex-direction:column;">
+    <div class="round-pill" id="ti-round">الجولة ١</div>
+    <div id="ti-team-tag"></div>
+    <div style="font-size:5rem;" id="ti-icon">🎭</div>
+    <div>
+      <div style="font-size:1.6rem; font-weight:900; font-family:'Lalezar',sans-serif;" id="ti-msg">دور الفريق الأحمر</div>
+      <div style="color:var(--muted); font-size:.9rem; margin-top:.4rem;" id="ti-sub">من يمثّل هالجولة؟</div>
+    </div>
+    <div id="ti-mode-info" style="display:none;">
+      <div class="speed-badge">⚡ <span id="ti-mode-txt">مود السرعة</span></div>
+    </div>
+    <div class="c" style="width:100%; text-align:right;">
+      <div style="font-size:.72rem; color:var(--muted); margin-bottom:.45rem;" id="ti-score-lbl">🏆 النقاط</div>
+      <div style="display:flex; justify-content:space-between; font-weight:800; font-size:1.05rem;">
+        <span id="ti-score-a" style="color:var(--red);"></span>
+        <span id="ti-score-b" style="color:var(--blue);"></span>
+      </div>
+    </div>
+  </div>
+  <div class="p pb">
+    <button class="btn btn-yellow" id="ti-btn" onclick="startTurn()">🎬 جاهزين!</button>
+  </div>
+</div>
+
+<div class="screen" id="s-play">
+  <div class="play-top">
+    <div id="play-team-tag"></div>
+    <div style="display:flex; align-items:center; gap:.5rem;">
+      <div id="play-speed-badge" style="display:none;" class="speed-badge">⚡</div>
+      <div class="round-pill" id="play-round"></div>
+    </div>
+  </div>
+
+  <div class="score-bar">
+    <div class="score-box box-red">
+      <div class="score-val" id="ps-a" style="color:var(--red);">0</div>
+      <div class="score-label" id="ps-na">الحمر</div>
+    </div>
+    <div class="vs">VS</div>
+    <div class="score-box box-blue">
+      <div class="score-val" id="ps-b" style="color:var(--blue);">0</div>
+      <div class="score-label" id="ps-nb">الزرق</div>
+    </div>
+  </div>
+
+  <div class="timer-wrap">
+    <div class="timer-ring" id="timer-ring">
+      <svg width="110" height="110" viewBox="0 0 110 110">
+        <circle class="ring-bg" cx="55" cy="55" r="47"/>
+        <circle class="ring-fill" id="ring-fill" cx="55" cy="55" r="47" stroke-dasharray="295" stroke-dashoffset="0"/>
+      </svg>
+      <div class="timer-num" id="timer-num">60</div>
+    </div>
+  </div>
+
+  <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+    <div class="word-card" id="word-card">
+      <div class="word-category" id="wc-cat"></div>
+      <div class="word-main" id="wc-word"></div>
+      <div class="word-hint" id="wc-hint">🤫 مثّلها!</div>
+    </div>
+    <div class="speed-bar-wrap" id="speed-bar-wrap" style="display:none;">
+      <div class="speed-bar-fill" id="speed-bar-fill"></div>
+    </div>
+    <div style="text-align:center; margin-top:.5rem; font-size:.72rem; color:var(--muted);" id="words-left-info"></div>
+  </div>
+
+  <div class="action-row">
+    <button class="act-btn act-correct" id="btn-correct" onclick="correct()">✅ صح!</button>
+    <button class="act-btn act-skip" id="btn-skip" onclick="skip()">⏭️ تخطي</button>
+  </div>
+  <div class="pb" style="padding:0 1.2rem .3rem; margin-top:.3rem;">
+    <button class="btn btn-ghost" style="font-size:.78rem; padding:.55rem;" onclick="endTurnEarly()" id="btn-end-early">⏹ إنهاء الدور مبكراً</button>
+  </div>
+</div>
+
+<div class="screen" id="s-turn-result">
+  <div class="content" style="padding:1.2rem; display:flex; flex-direction:column; gap:.9rem; overflow-y:auto;">
+    <div class="section-tag" id="tr-tag">نتيجة الدور</div>
+    <div id="tr-banner" class="c burst" style="text-align:center; padding:1.4rem;">
+      <div style="font-size:3rem; margin-bottom:.3rem;" id="tr-icon">🎉</div>
+      <div style="font-family:'Lalezar',sans-serif; font-size:1.4rem;" id="tr-team"></div>
+      <div style="font-family:'Lalezar',sans-serif; font-size:2.6rem; margin:.2rem 0;" id="tr-pts"></div>
+      <div style="color:var(--muted); font-size:.82rem;" id="tr-sub"></div>
+    </div>
+
+    <div class="score-bar" style="background:var(--card); border:1px solid var(--border); border-radius:16px;">
+      <div class="score-box box-red">
+        <div class="score-val" id="tr-sa" style="color:var(--red);">0</div>
+        <div class="score-label" id="tr-na">الحمر</div>
+      </div>
+      <div class="vs">🏆</div>
+      <div class="score-box box-blue">
+        <div class="score-val" id="tr-sb" style="color:var(--blue);">0</div>
+        <div class="score-label" id="tr-nb">الزرق</div>
+      </div>
+    </div>
+
+    <div class="c">
+      <div style="font-size:.72rem; color:var(--muted); margin-bottom:.55rem;" id="tr-words-lbl">كلمات الدور</div>
+      <div id="tr-words" style="display:flex; flex-wrap:wrap; gap:.4rem;"></div>
+    </div>
+  </div>
+  <div class="p pb pt" style="display:flex; flex-direction:column; gap:.55rem;">
+    <button class="btn btn-yellow" id="tr-btn" onclick="nextTurn()">➡️ الدور التالي</button>
+    <button class="btn btn-ghost" id="tr-home" onclick="goTo('s-home')" style="font-size:.9rem; padding:.7rem;">🏠 الرئيسية</button>
+  </div>
+</div>
+
+<div class="screen" id="s-win">
+  <div class="win-wrap">
+    <div class="trophy">🏆</div>
+    <div style="font-family:'Lalezar',sans-serif; font-size:2.2rem;" id="win-title"></div>
+    <div style="color:var(--muted);" id="win-sub"></div>
+    <div class="score-bar" style="width:100%; background:var(--card); border:1px solid var(--border); border-radius:16px;">
+      <div class="score-box box-red">
+        <div class="score-val" id="win-sa" style="color:var(--red);"></div>
+        <div class="score-label" id="win-na"></div>
+      </div>
+      <div class="vs">VS</div>
+      <div class="score-box box-blue">
+        <div class="score-val" id="win-sb" style="color:var(--blue);"></div>
+        <div class="score-label" id="win-nb"></div>
+      </div>
+    </div>
+  </div>
+  <div class="p pb" style="display:flex; flex-direction:column; gap:.6rem;">
+    <button class="btn btn-yellow" id="win-new" onclick="goTo('s-setup')">🔄 لعبة جديدة</button>
+    <button class="btn btn-ghost" id="win-home" onclick="goTo('s-home')" style="margin-top:.2rem;"></button>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════
+//  LANGUAGE DATA
+// ══════════════════════════════════════════════════
+const LANG = {
+  ar: {
+    langBtn:'کوردی',
+    appTitle:'لا\nتحچي', appSub:'لعبة الإيماء الجماعية 🎭',
+    play:'🎮 العبها الحين!', howto:'📖 شلون تلعب؟',
+    back:'رجوع',
+    htTag:'تعليمات', htTitle:'شلون تلعب؟',
+    htI1:'🎭 الفكرة', htT1:'الموبايل يعرض كلمة. الممثل يمثلها بالحركات بس — بدون كلام، بدون إشارة للحروف، بدون صوت!',
+    htI2:'🔴🔵 الفريقين', htT2:'فريق أحمر وفريق أزرق يتبادلون الأدوار. واحد يمثل والباقين يخمنون.',
+    htI3:'🎯 مود كلاسيك', htT3:'كلمة وحدة تطلع. إذا فريقك جابها اضغط ✅ وتاخذ نقطة. إذا ما جابوها بالوقت يصير دور الفريق الثاني.',
+    htI4:'⚡ مود سرعة', htT4:'الكلمات تتغير بسرعة — كلما جبتوا كلمة تمشون للي وراها. كل تخطي ينقص نقطة! حاولوا تجيبون أكثر.',
+    htI5:'🏆 الفوز', htT5:'اللي يوصل أول للنقاط المحددة يفوز!',
+    htOk:'فهمنا! 👍',
+    suTag:'الإعداد', suTitle:'إعداد اللعبة',
+    suALbl:'🔴 الفريق الأول', suBLbl:'🔵 الفريق الثاني', suNamePH:'اسم الفريق',
+    suPtsLbl:'نقاط الفوز', suTimeLbl:'وقت الدور', suModeLbl:'مود اللعبة',
+    suMN:'كلاسيك', suMD:'كلمة وحدة — صح أو خطأ بيدك',
+    suSN:'سرعة', suSD:'كلمات تتغير، تخطي = -١ نقطة',
+    suCatsLbl:'الفئات',
+    suStart:'🎮 ابدأ اللعبة!',
+    tiScoreLbl:'🏆 النقاط', tiSub:'واحد يمثل والباقين يخمنون',
+    tiReady:'🎬 كلنا جاهزين!', tiModeTxt:'مود السرعة', tiRound:'الجولة',
+    btnCorrect:'✅ جابوها!', btnSkip:'⏭️ تخطي', btnEndEarly:'⏹ خلص الدور',
+    wordsLeft:'كلمة متبقية',
+    trTag:'نتيجة الدور', trWordsLbl:'كلمات الدور', trBtnNext:'➡️ الدور التالي',
+    trMsg0:'المرة الجاية راح تعدون! 💪', trMsg1:'هذا البدايه! 😄', trMsg3:'مو بطال 👍', trMsg4:'ماشالله عليكم! 🔥',
+    winTied:'تعادل! 🤝', winSub:'كانت لعبة حماسية وايد!', winTiedSub:'لعبة زيادة؟',
+    winTitle:(n) => `${n} فازوا! 🏆`,
+    winNew:'🔄 لعبة جديدة', winHome:'الرئيسية', trHome:'🏠 الرئيسية',
+    penaltyTxt:'-١ نقطة! 💀', defaultA:'الحمر', defaultB:'الزرق',
+    roundTxt:(r) => `الجولة ${r}`, turnMsg:(n) => `نوبة ${n}`,
+    pts:(n) => `+${n} نقطة`,
+    wc_hint:'🤫 مثّلها بس لا تحچي!',
+    classicGotIt:'جابوها! ✅', classicNope:'ما جابوها ❌',
+  },
+  ku: {
+    langBtn:'عربي',
+    appTitle:'قسە\nمەکە', appSub:'یاری نواندن و ئاماژەی بەکۆمەڵ 🎭',
+    play:'🎮 با یاری بکەین!', howto:'📖 چۆن یاری دەکرێت؟',
+    back:'گەڕانەوە',
+    htTag:'ڕێنماییەکان', htTitle:'چۆن یاری دەکرێت؟',
+    htI1:'🎭 بیرۆکەی یارییەکە', htT1:'مۆبایلەکە وشەیەکت نیشان دەدات. دەبێت تەنها بە جووڵە تێیان بگەیەنیت — بێ قسەکردن، بێ دەنگ، وە بێ ئاماژەکردن بۆ پیتەکان!',
+    htI2:'🔴🔵 دوو تیم', htT2:'تیمی سوور و تیمی شین نۆرە دەگۆڕنەوە. یەکێکیان جووڵە دەکات و ئەوانی تریش دەبێت بزانن وشەکە چییە.',
+    htI3:'🎯 مۆدی کلاسیک', htT3:'تەنها یەک وشە دەردەکەوێت. ئەگەر تیمەکەت زانی ✅ دابگرە و خاڵێک وەرگرە. ئەگەر کاتەکە تەواو بوو و نەیانزانی، ئەوا نۆرەی تیمی بەرامبەر دێت.',
+    htI4:'⚡ مۆدی خێرایی', htT4:'وشەکان خێرا خێرا دەگۆڕێن — ئەگەر زانیتان یەکسەر دەچێتە سەر وشەی دواتر. هەر تێپەڕاندنێک (سکیپ) خاڵێکت لێ کەم دەکاتەوە! هەوڵبدەن زۆرترین بزانن.',
+    htI5:'🏆 بردنەوە', htT5:'کێ یەکەم جار بگاتە ئەو خاڵەی دیاریکراوە، ئەو دەیباتەوە!',
+    htOk:'تێگەیشتم! 👍',
+    suTag:'ڕێکخستن', suTitle:'ڕێکخستنی یارییەکە',
+    suALbl:'🔴 تیمی یەکەم', suBLbl:'🔵 تیمی دووەم', suNamePH:'ناوی تیم',
+    suPtsLbl:'خاڵەکانی بردنەوە', suTimeLbl:'کاتی هەر نۆرەیەک', suModeLbl:'مۆدی یارییەکە',
+    suMN:'کلاسیک', suMD:'یەک وشە — بەدەستی خۆتە دەیزانن یان نا',
+    suSN:'خێرایی', suSD:'وشەکان دەگۆڕێن، تێپەڕاندن = -١ خاڵ',
+    suCatsLbl:'بەشەکان',
+    suStart:'🎮 با دەست پێبکەین!',
+    tiScoreLbl:'🏆 خاڵەکان', tiSub:'یەکێکیان دەنوێنێت و ئەوانی تریش هەوڵدەدەن بزانن',
+    tiReady:'🎬 ئامادەین!', tiModeTxt:'مۆدی خێرایی', tiRound:'جەولەی',
+    btnCorrect:'✅ زانیان!', btnSkip:'⏭️ تێپەڕاندن', btnEndEarly:'⏹ زوو تەواوی بکە',
+    wordsLeft:'وشە ماوە',
+    trTag:'ئەنجامی ئەم نۆرەیە', trWordsLbl:'وشەکانی ئەم نۆرەیە', trBtnNext:'➡️ نۆرەی داهاتوو',
+    trMsg0:'جاری داهاتوو باشتر دەبن! 💪', trMsg1:'سەرەتایەکی باشە! 😄', trMsg3:'خراپ نییە 👍', trMsg4:'بژی! 🔥 شاز بوو',
+    winTied:'یەکسان بوون! 🤝', winSub:'یارییەکی زۆر خۆش بوو!', winTiedSub:'یارییەکی تریش؟',
+    winTitle:(n) => `${n} بردیانەوە! 🏆`,
+    winNew:'🔄 یارییەکی نوێ', winHome:'پەڕەی سەرەکی', trHome:'🏠 پەڕەی سەرەکی',
+    penaltyTxt:'-١ خاڵ! 💀', defaultA:'تیمی سوور', defaultB:'تیمی شین',
+    roundTxt:(r) => `جەولەی ${r}`, turnMsg:(n) => `نۆرەی ${n}ە`,
+    pts:(n) => `+${n} خاڵ`,
+    wc_hint:'🤫 تەنها بە ئاماژە!',
+    classicGotIt:'زانیان! ✅', classicNope:'نەیانزانی ❌',
+  }
+};
+
+// ══════════════════════════════════════════════════
+//  WORD DATABASE — Arabic + Kurdish categories
+// ══════════════════════════════════════════════════
+const DB_AR = {
+  أفلام: { icon:'🎬', words:[
+    'تيتانيك','الأسد الملك','المصفوفة','جوكر','هاري بوتر',
+    'كابتن أمريكا','فروزن','أفاتار','علاء الدين','باتمان',
+    'سبايدرمان','إنتيرستيلار','ديدبول','إنسبتيون','مادغاسكر',
+    'توب غان','رامبو','شيرلوك هولمز','جيمس بوند','زوتوبيا',
+    'الرجل النملة','الغابة','كونغ فو باندا','موانا','كوكو',
+    'إنكانتو','تيرمينيتور','روكي','شريك','طرزان',
+    'النمر الوردي','لوني تونز','الحاضنة','ديناميت','الأخطبوط',
+    'بوهيميان رابسودي','بلاك بانثر','الفيل','الأميرة النائمة',
+    'بامبي','101 كلب','سنو وايت','الجميلة والوحش','سيندريلا',
+    'مولان','البحث عن نيمو','الحياة الجميلة','الجشع','الطيران',
+    'ساحر أوز','بينوكيو','دمبو','رانتانبلان','آبي الصغيرة',
+    'ليون المهني','التدريب','براعم التنين','أسرة آدامز','جاك',
+    'فورست غامب','الناجي','دراكولا','فرانكنشتاين','ميومي',
+    'إنسبيكتر گادجيت','سوبر ماريو','كاونتر','كاسبر الشبح',
+    'هاكنا ماتاتا','الحراس','ابنة النهر','الديناصور','وول إي',
+    'القراصنة','رسالة في زجاجة','النور والظلام','آلة الزمن',
+    'إندياناجونز','المومياء','الفيلسوف الحجري','جنة ونار','عمر المختار',
+    'ذا ميتريكس','ميشن إمبوسبل','ماكس مد','بلاد ما وراء النهرين',
+    'كوبرا كاي','الوصية','الخطيئة','البحر الأحمر','ظل الغول',
+    'القناع الحديدي','مونستر إنك','كارز','راتاتوي','بوكاهونتاس',
+    'هيلانة','الأجنبي','روبين هود','صفر مقابل عشرة','غضب وصمود',
+    'المبيد', 'العراب', 'صمت الحملان', 'قائمة شندلر', 'نادي القتال',
+    'سيد الخواتم', 'حرب النجوم', 'العودة إلى المستقبل', 'الحديقة الجوراسية', 'المريخي',
+    'جاكي براون', 'خيال رخيص', 'المصارع', 'قلب شجاع', 'إنقاذ الجندي رايان',
+    'الخلاص من شاوشانك', 'الطيب والشرس والقبيح', 'سيف المطر', 'حكاية لعبة', 'شركة المرعبين المحدودة',
+    'الخارقون', 'البحث عن دوري', 'جامعة المرعبين', 'هرقل', 'حورية البحر',
+    'أطلانتس', 'كوكب الكنز', 'حياة حشرة', 'سيارات', 'طائرات',
+    'الأسد الملك ٢', 'بامبي ٢', 'سندريلا ٢', 'حكاية لعبة ٢', 'حكاية لعبة ٣',
+    'شريك ٢', 'شريك ٣', 'مدغشقر ٢', 'مدغشقر ٣', 'العصر الجليدي',
+    'العصر الجليدي ٢', 'ريو', 'ريو ٢', 'كيف تروض تنينك', 'كونغ فو باندا ٢',
+    'ميغامايند', 'أنا الحقير', 'التوابع', 'الحياة السرية للحيوانات الأليفة', 'غناء',
+    'ترولز', 'بوس بيبي', 'فرديناند', 'سول', 'لوكا',
+    'رجا', 'رالف المدمر', 'الأبطال الستة', 'متشابك', 'شجاعة',
+    'فروزن ٢', 'كتاب الأدغال', 'القط ذو الحذاء', 'بيتر بان', 'أليس في بلاد العجائب',
+    'ماري بوبينز', 'صوت الموسيقى', 'ذهب مع الريح', 'كازابلانكا', 'المواطن كين',
+    'سايكو', 'الطيور', 'الدوار', 'النافذة الخلفية', 'شمالا من الشمال الغربي',
+    'لورانس العرب', 'جسر على نهر كواي', 'بن هور', 'سبارتاكوس', 'الوصايا العشر',
+    'كليوباترا', 'دكتور جيفاغو', 'الرسالة', 'الناصر صلاح الدين', 'الشيماء',
+    'الفك المفترس', 'سوبرمان', 'إي تي', 'سيد الخواتم ٢', 'سيد الخواتم ٣',
+    'ماري بوبينز تعود', 'المنتقمون: نهاية اللعبة', 'حرب النجوم: القوة تنهض', 'آيرون مان', 'ثور',
+    'كابتن مارفل', 'بلاك ويدو', 'دكتور سترينج', 'حراس المجرة', 'أكوامان',
+    'شازام', 'الفرقة الانتحارية', 'باتمان ضد سوبرمان', 'رجل من حديد', 'فرقة العدالة',
+    'السنافر', 'بين 10', 'مغامرات تان تان', 'السيف العجيب', 'حرب الكواكب'
+  ]},
+  مسلسلات: { icon:'📺', words:[
+    'بريكينغ باد','غيم أوف ثرونز','فريندز','ستريندجر ثينغز',
+    'البيت الورقي','لوسيفر','ذا أوفيس','بلاك ميرور',
+    'باب الحارة','الحشاشين','وادي الذئاب','نور','جليلة',
+    'مانداليريان','ذا كراون','ذا ويتشر','سيلكون فالي',
+    'هاوس أوف دراغون','أوبي وان','ذا فلاش','أروي','ساختور',
+    'خمسة ونص','طاش ما طاش','تشيرنوبل','نارسوس','هرولة',
+    'سيكس فيت أندر','هاوس أوف كاردز','المنتقمون','ذا بوز',
+    'بيبي ريندير','داهمر','ذا لاست أوف أس','ذا بوي','ألتر إيغو',
+    'فارغو','تريو','غلف وورلد','روزين','كيليا','ذا فول',
+    'ليمياناليا','وست ورلد','ترو بلاد','رايلز','هاوس أوف ليز',
+    'باني دينستار','مدينة الملح','نزل الأقدار','السلطانة','يلديز',
+    'ذا مينتاليست','سويت','كريمينال مايندز','دختر','كاتيف',
+    'حارة المسلسل','مريم','رعد وبرق','البندقية','ليالي الهنا',
+    'ساعة صفر','أبو عمر المصري','رشاش','وطن ع وتر',
+    'أنا القاضية','ليلة الملياردير','المختار','ذا أميزينغ ريس',
+    'فوضى','القاهرة بيت الكبير','الندم','الفخ','ذيب',
+    'نبض','الفرار','الجاسوسة','الزيبق','الاختيار',
+    'سكراتش','بيت العز','العهد','المداح','بابا المجال',
+    'ساعة التوقيف','الهيبة','لعبة نيوتن','المؤسسون',
+    'العملاق','زقاق الجن','الكابوس','أبو جبل','الدراما',
+    'الخوف','الانتقام','الحب والحرب','بين النجوم','ومضات',
+    'المتهم','العميل','الشاهد','القضية','الصمت',
+    'كيف قابلت أمكما', 'نظرية الانفجار العظيم', 'رجلان ونصف', 'عائلة سيمبسون', 'فاميلي غاي',
+    'ساوث بارك', 'ريك ومورتي', 'بوجاك هورسمان', 'آرشر', 'فيوتشوراما',
+    'حدائق ومنتزهات', 'بروكلين ناين ناين', 'المكان الجيد', 'عائلة عصرية', 'آل التنين',
+    'السهم', 'أساطير الغد', 'سوبرجيرل', 'باتومان', 'جوثام',
+    'عملاء شيلد', 'ديرديفيل', 'جيسيكا جونز', 'لوك كيج', 'القبضة الحديدية',
+    'المدافعون', 'المعاقب', 'الأولاد', 'لا تقهر', 'صانع السلام',
+    'واتشمين', 'أكاديمية المظلة', 'الساحر', 'لوكي', 'واندافيجن',
+    'فارس القمر', 'مس مارفل', 'شي هولك', 'كتاب بوبا فيت', 'أندور',
+    'حرب النجوم المتمردون', 'دكتور هو', 'شرلوك', 'لوثر', 'بيكي بلايندرز',
+    'مناورة الملكة', 'البروفيسور', 'النخبة', 'ظلام', 'لعبة الحبار',
+    'كلنا موتى', 'أليس في بورديرلاند', 'المملكة', 'فايكنج', 'المملكة الأخيرة',
+    'روما', 'تيودور', 'بورجيا', 'ديكستر', 'اختلال ضلال',
+    'من الأفضل الاتصال بسول', 'إن سي آي إس', 'سي إس آي', 'القانون والنظام', 'البيت المظلم',
+    'تشريح غراي', 'هاوس', 'طبيب جيد', 'المقيم', 'أمستردام الجديدة',
+    'شيكاغو ميد', 'شيكاغو فاير', 'شيكاغو بي دي', 'سوتس', 'ماد من',
+    'آل سوبرانو', 'السلك', 'ترو ديتكتيف', 'ناركوس', 'ناركوس مكسيك',
+    'العشق الممنوع', 'حريم السلطان', 'قيامة أرطغرل', 'المؤسس عثمان', 'سنوات الضياع',
+    'ميرنا وخليل', 'حب للإيجار', 'طائر المبكر', 'الحفرة', 'اصطدام',
+    'وادي الملوك', 'خاتم سليمان', 'الأسطورة', 'نسر الصعيد', 'كلبش'
+  ]},
+  ألعاب: { icon:'🎮', words:[
+    'ماين كرافت','فورت نايت','GTA','مورتال كومبات','ماريو',
+    'بوبجي','كول أوف ديوتي','أمونج أس','فيفا','سونيك',
+    'روبلوكس','باكمان','تتريس','زيلدا','دونكي كونغ',
+    'كلاش أوف كلانز','أنجري بيردز','هالو','ديفانس أوف ذا أنشينتز',
+    'ليغ أوف ليجندز','أوفر ووتش','سبلوون','كيربي','ديكاي',
+    'يوغي أوه','بوكيمون','فاينل فانتازي','ديفل ماي كراي','كاستلفانيا',
+    'سايلنت هيل','ريزيدنت إيفل','ميتاليك غير','بلودبورن','دارك سولز',
+    'سكايريم','فولاوت','ذا ويتشر','ريد ديد ريدمبشن','ثي لاست أوف أس',
+    'سباق السيارات','طيارة حربية','قناص','مغامر','نينجا',
+    'كانتر سترايك','فالورانت','أيبكس ليجيندز','رينبو سيكس','بابجي',
+    'ماريو كارت','سمارت بول','ذا سيمز','ستاردو فالي','أنيمال كروسينج',
+    'فيلد أوف فايتس','ميجامان','ميتروفانيوس','دانجن','لالا لاند',
+    'بلاستد ريم','ذا دراغون بورن','قلعة الوحش','برونزسطالي',
+    'لابيرنث','تاليسمان','بيرفكت داب','ثيف','ديكس إنفرنو',
+    'سبايدرو','كراش بانديكوت','جاك وداكستر','بانجو كازووي',
+    'هانتريس','كيلر إنستينكت','سترييتس أوف ريج','سوبرفارمز',
+    'ستاركرافت','وورلد أوف ووركرافت','ديابلو','بلايزارد',
+    'غود ووريور','لوست أرك','بلاك ديزيرت','ألبيون',
+    'سيمز 4','بلانيت كوستر','ريلرود تايكون','سيتيز سكاي لاينز',
+    'بلو بروتوكول','فانتازي ستار','غرانبلو','آركنايتس',
+    'بروسيل','جاجنوت','إندي كار','موتو ريسينغ','باكريسينغ',
+    'نيتشرالز','كيتن بريكر','ماير كافى','كانيون','سليبي',
+    'كووبر','بنجمن','دريمز','لوكوموشن','ستوريتيلر',
+    'سييرا','مانتيس','مرمانثوس','جلاسدور','راندور',
+    'سوبر ماريو برذرز', 'ماريو كارت 8', 'سوبر سماش برذرز', 'بوكيمون جو', 'بوكيمون سورد',
+    'رايمان', 'ستريت فايتر', 'تيكن', 'سول كاليبر', 'بايونيتا',
+    'نير أوتوماتا', 'دراجون كويست', 'بيرسونا', 'كينجدوم هارتس', 'سيكيرو',
+    'إلدن رينج', 'سايبر بانك 2077', 'أساسنز كريد', 'فار كراي', 'واتش دوجز',
+    'تومب رايدر', 'أنشارتد', 'جود أوف وار', 'هورايزون زيرو داون', 'سبايدرمان',
+    'باتمان أركام', 'جيرز أوف وار', 'دوم', 'ولفينشتاين', 'باتلفيلد',
+    'رينبو سكس سيج', 'تيراريا', 'رولر كوستر تايكون', 'إيج أوف إمبايرز', 'سيفيليزيشن',
+    'وور كرافت', 'دوتا 2', 'فاينل فانتسي 14', 'باث أوف إكزايل', 'روكيت ليج',
+    'بيس', 'إن بي إيه تو كاي', 'مادن إن إف إل', 'دبليو دبليو إي تو كاي', 'يو إف سي',
+    'جران توريزمو', 'فورزا هورايزون', 'نيد فور سبيد', 'ماريو بارتي', 'فول جايز',
+    'جاست دانس', 'غيتار هيرو', 'روك باند', 'بيت سيبر', 'سوبر الساخنة',
+    'هاف لايف', 'بورتال', 'ليفت فور ديد', 'تيم فورتريس', 'جاريز مود',
+    'شطرنج', 'طاولة زهر', 'دومينو', 'ورق اللعب', 'مونوبولي',
+    'أونو', 'تويستر', 'جينجا', 'سكرابل', 'ريسك',
+    'لعبة الغميضة', 'لعبة الكراسي', 'لعبة الحبل', 'لعبة الصحن الطائر', 'كرة المضرب'
+  ]},
+  أشياء: { icon:'🪄', words:[
+    'تلسكوب','ساعة رمل','جيتار','مرجوحة','خيمة',
+    'حبل قفز','سكيتبورد','طائرة ورقية','كرسي متحرك',
+    'مظلة','بالون','مكنسة كهربائية','حوض سمك','مدفع',
+    'ساعة حائط','مصباح قديم','قبعة سحرية','منظار','فاكسيبل',
+    'صندوق موسيقى','كاميرا قديمة','مقراض','منضدة الجراحة','حفارة',
+    'مقلاة','آلة خياطة','مكبر الصوت','ترمومتر','جهاز الحقن',
+    'نظارات كبيرة','نظارات شمسية','حذاء طويل','قفازات الملاكمة',
+    'سيف قديم','رمح','درع','مطرقة','منجل','قوس ونشاب',
+    'طبل','عود موسيقي','أكورديون','ساكسفون','كمنجة',
+    'مروحة يدوية','شمعدان','عصا سحرية','تاج ملكي','عباءة',
+    'خريطة كنز','بوصلة','مرساة','عجلة القيادة','شراع سفينة',
+    'حاسبة قديمة','هاتف قديم','التلفاز القديم','قرص موسيقي',
+    'مسدس مائي','بندقية خشبية','درجة سلم','عمود كهربائي',
+    'صحن طيار','منجنيق','دبابة','جرافة','مصيدة',
+    'شفرة حلاقة','مشط','آلة تصوير فوتوغرافي','ميزان','شبكة صيد',
+    'بخاخ رسم','دبابيس','ملاقط','إبرة خياطة','خيط بكرة',
+    'مقياس حرارة','جهاز ضغط الدم','كرسي عجلات','عكاز','جبيرة',
+    'قفاز طبي','كمامة طبية','مشرط جراحي','مشبك ورق','لاصق',
+    'مقص صغير','سلة مهملات','دلو','فرشاة طلاء','رولة طلاء',
+    'مطرقة خشبية','مسمار','مفك براغي','مفتاح ربط','خراطة',
+    'سيف من الخشب','غمد السيف','خوذة فارس','درع صدر','رمح الحرب',
+    'مفتاح', 'قفل', 'باب', 'نافذة', 'جدار',
+    'سقف', 'أرضية', 'سجادة', 'ستارة', 'أريكة',
+    'سرير', 'وسادة', 'بطانية', 'خزانة', 'درج',
+    'مرآة', 'ثريا', 'تلفزيون', 'راديو', 'كمبيوتر',
+    'لوحة مفاتيح', 'فأرة', 'شاشة', 'طابعة', 'شاحن',
+    'سماعات', 'ميكروفون', 'كاميرا', 'ساعة', 'نظارات',
+    'حقيبة', 'محفظة', 'حذاء', 'جورب', 'قميص',
+    'بنطلون', 'فستان', 'قبعة', 'قفاز', 'وشاح',
+    'حزام', 'ربطة عنق', 'خاتم', 'قلادة', 'سوار',
+    'قرط', 'عطر', 'صابون', 'شامبو', 'فرشاة أسنان',
+    'معجون أسنان', 'منشفة', 'مقص', 'سكين', 'شوكة',
+    'ملعقة', 'طبق', 'كوب', 'كأس', 'إبريق',
+    'طنجرة', 'خلاط', 'ثلاجة', 'فرن', 'ميكروويف',
+    'غسالة', 'مكواة', 'مكنسة', 'ممسحة', 'إسفنجة',
+    'قلم', 'قلم رصاص', 'ممحاة', 'مبراة', 'مسطرة',
+    'دفتر', 'كتاب', 'مجلة', 'صحيفة', 'رسالة',
+    'ظرف', 'طابع', 'صمغ', 'شريط لاصق', 'دباسة',
+    'خرامة', 'آلة حاسبة', 'حقيبة ظهر', 'سبورة', 'طبشور',
+    'مظلة شمسية', 'سرير أطفال', 'عربة أطفال', 'دراجة هوائية', 'سيارة لعبة',
+    'طائرة ورقية', 'قارب مطاطي', 'خوذة دراجة', 'مصباح يدوي', 'بطارية'
+  ]},
+  مهن: { icon:'👷', words:[
+    'طبيب أسنان','رجل إطفاء','حلاق','صياد','شيف مطعم',
+    'مصارع','مصور فوتوغرافي','لاعب سيرك','غواص','ملاكم',
+    'ساحر مسرحي','طيار','نادل مطعم','معلم صارم','بائع متجول',
+    'جراح','محامي','قاضي','شرطي','حارس أمن',
+    'مهندس معماري','بناء','حداد','نجار','صباغ',
+    'فلاح','مزارع','راعي غنم','صياد سمك','مربي خيول',
+    'رياضي محترف','حكم رياضي','مدرب كمال أجسام','راقصة باليه',
+    'مغني أوبرا','عازف بيانو','رسام كاريكاتير','نحات','خطاط',
+    'طاه في السجن','سجان','جاسوس','مخبر','مفجر قنابل',
+    'غاص تحت الماء','رائد فضاء','باحث علمي','عالم فيزياء',
+    'مدير مسرح','مخرج سينما','ممثل كوميدي','مراسل تلفزيوني',
+    'خياط','صانع أحذية','منجد','صانع عطور','بائع زهور',
+    'مربية أطفال','طبيب بيطري','ممرضة','صيدلاني','أمين مكتبة',
+    'ساعاتي','حجام','شعبذة','قارئ الفنجان','عراف',
+    'عامل مطعم وجبات سريعة','كاشير سوبرماركت','حارس متحف',
+    'مؤذن','قسيس','حاخام','داية','قابلة',
+    'مدير فندق','طاهي سفينة','مضيف طيران','قبطان سفينة',
+    'عامل مناجم','حفار آبار','مختبر جيولوجي','رسام خرائط',
+    'موزع بريد','سائق باص','سائق تاكسي','شرطي مرور',
+    'حارس سجن','محقق بوليسي','خبير متفجرات','سائق إسعاف',
+    'طبيب طوارئ','ممرض ميداني','طبيب تقليدي','بائع أعشاب',
+    'مزاد منتجات','وسيط عقارات','مستشار استثماري','محاسب',
+    'برمجي تطبيقات','مصمم جرافيك','يوتيوبر','مدون',
+    'مصوّر يوتيوب','لاعب محترف','مدرب كرة قدم','رياضي أولمبي',
+    'طبيب', 'ممرض', 'صيدلي', 'طبيب نفسي', 'مهندس',
+    'معماري', 'مبرمج', 'مطور ويب', 'محلل بيانات', 'عالم',
+    'باحث', 'أستاذ', 'معلم', 'مدير', 'موظف بنك',
+    'مسوق', 'رجل مبيعات', 'مستشار', 'محقق', 'إطفائي',
+    'جندي', 'قبطان', 'بحار', 'سائق', 'ميكانيكي',
+    'كهربائي', 'سباك', 'دهان', 'عامل نظافة', 'طباخ',
+    'خباز', 'جزار', 'نادل', 'صانع قهوة', 'كوافير',
+    'مصمم أزياء', 'عارض أزياء', 'مصور', 'رسام', 'كاتب',
+    'مؤلف', 'صحفي', 'مراسل', 'محرر', 'مترجم',
+    'ممثل', 'مخرج', 'منتج', 'موسيقي', 'مغني',
+    'عازف', 'ملحن', 'راقص', 'رياضي', 'مدرب',
+    'حكم', 'بستاني', 'مرشد سياحي', 'رجل أعمال', 'سياسي',
+    'دبلوماسي', 'عمدة', 'محافظ', 'وزير', 'رئيس',
+    'ملك', 'أمير', 'سفير', 'عالم فلك', 'عالم أحياء',
+    'عالم كيمياء', 'عالم جيولوجيا', 'خبير أرصاد', 'عالم آثار', 'مؤرخ',
+    'فيلسوف', 'عالم اجتماع', 'عالم اقتصاد', 'عالم نفس', 'طبيب عيون',
+    'طبيب أطفال', 'طبيب جلدية', 'طبيب قلب', 'طبيب أعصاب', 'مفتش',
+    'سباك محترف', 'عامل بناء', 'عامل مطبعة', 'عامل توصيل', 'طيار مدني',
+    'كابتن غواصة', 'محلل مالي', 'محامي دفاع', 'مدعي عام', 'ضابط شرطة'
+  ]},
+  أغاني: { icon:'🎵', words:[
+    'ديسباسيتو','هابي','يا ليلي','شاكيرا شاكيرا','يا طير الطاير',
+    'بيبي جاستن بيبر','روكستار','بالحجل','هلا والله',
+    'أنا مو مسافر','وقفة','عيشها','أوبس آي ديد إت أغين',
+    'ويكد غيم','بلايندينغ لايتس','ليفينغ أون أ براير',
+    'بوهيمييان رابسودي','ويه ار ذا تشامبيونز','لت إت غو',
+    'كانت ستريك ديدي','ريمكس','شيكي شيكي','شيك ووف',
+    'بورشا','أغنية السباحة','إيمي مي ناشيونال','غالا',
+    'ماتشوكا','جاهل','لولو','يا حبيبي تعا','طلعت يا محلا نورك',
+    'السلامة يا حبيب الروح','بت مي','فوق السحاب',
+    'عيد ميلاد سعيد','هابي بيرثدي','فكروني','يا نينه',
+    'راح أشوفك','يا أمي','دلعونا','مارغريتا','باقي ليا',
+    'قولوا للواشي','بعيد عنك','حمام الدوح','بيا بيا',
+    'مجنون أنا','أنا ومحتاجك','آهات','على طول عمري',
+    'شد اللحيتين','فدوه','ناعم ناعم','يا صاحبي',
+    'كلهم راحوا','نامت عيني','رب العالمين','درب السلامة',
+    'ما تكلمتش','أصحاب','الحلو','الشوق','يا ريتني',
+    'سمارة','ويهك ويهي','شمس الأصيل','فردان',
+    'راكان','تعب قلبي','وين الغلا','كل ما مشيت',
+    'ليتني ما غبت','شنو يا قلبي','يا ولد','يا بنت',
+    'عود الهوى','نار البعد','شمس الروح','ومنين أجيبك',
+    'مسافر','إيه والله','صاحبي','يا حلالي','شو يعني',
+    'شلون أنساك','أحبك وين ما رحت','صوتك أحلى',
+    'يا غالي','ما بيناتنا','لاهية قلبي','دموعي',
+    'عيوني عليك','لا تبعد','معزتك','زيد الحنين',
+    'بلاش','معاك','سر الحكاية','بدايتنا','نهايتك',
+    'شوق وشوق','ليل الصيف','يوم ربيع','فارق معي',
+    'شيلة الجمل','نجد والحجاز','بو ذقن','يا سالم',
+    'قارئة الفنجان', 'ألف ليلة وليلة', 'أنت عمري', 'الأطلال', 'لسه فاكر',
+    'يا مسهرني', 'حب إيه', 'سيرة الحب', 'فات المعاد', 'هذه ليلتي',
+    'أمل حياتي', 'رسالة من تحت الماء', 'موعود', 'جبار', 'أهواك',
+    'سواح', 'زي الهوى', 'حاول تفتكرني', 'مداح القمر', 'يا قلبي يا خالي',
+    'توبة', 'جانا الهوى', 'يا خلي القلب', 'حاجة غريبة', 'بتلوموني ليه',
+    'بلاش عتاب', 'خسارة خسارة', 'عقبالك يوم ميلادك', 'صدفة', 'أسمر يا أسمراني',
+    'على قد الشوق', 'قولوله', 'يا سيدي أمرك', 'ضحك ولعب', 'مشغول',
+    'يا واد يا تقيل', 'بمبة', 'خلي بالك من زوزو', 'يا صابر', 'أنا بعشق البحر',
+    'عيون القلب', 'أوقاتي بتحلو', 'حرمت أحبك', 'يوم ليك ويوم عليك', 'بتونس بيك',
+    'طب وأنا مالي', 'الأسامي', 'لولا الملامة', 'وحياتي عندك', 'يا حبيبتي يا مصر',
+    'سونيا', 'أنا قلبي دليلي', 'ليالي الأنس', 'يا طيور', 'امتى هتعرف',
+    'أنا هويت', 'زوروني كل سنة مرة', 'سالمة يا سلامة', 'البوسطجية', 'عطشان يا صبايا',
+    'يا حلو صبح', 'عنابي', 'ساكن قصادي', 'اللي بنى مصر', 'حلاوة شمسنا',
+    'القمح الليلة', 'الأقصر بلدنا', 'يا أغلى اسم', 'وطني حبيبي', 'أحلف بسماها',
+    'خلي السلاح صاحي', 'بالأحضان', 'صورة', 'عاشت بلادنا', 'حكاية شعب',
+    'الجيل الصاعد', 'المسئولية', 'بستان الاشتراكية', 'يا جمال يا حبيب الملايين', 'يا ريس الزعماء'
+  ]},
+  أمثال: { icon:'📜', words:[
+    'العين ما تعلى على الحاجب','يد واحدة ما تصفق','الصبر مفتاح الفرج',
+    'من يزرع الريح يحصد العاصفة','حبل الكذب قصير','الجار قبل الدار',
+    'اللي ما يعرف الصقر يشويه','الكلمة من الفضة والسكوت من الذهب',
+    'اللي يتزوج أمي يصير عمي','البعيد عن العين بعيد عن القلب',
+    'الحيطة الواطية كل يقفز عليها','كل فعلة بفاعلها','اطلب العلم من المهد للحد',
+    'اللي يحفر للناس حفرة يقع بيها','العجلة من الشيطان',
+    'ما يدري الفطر شنو الكسرة','أكل عيش','ابن آدم كله ناقص',
+    'اللي عنده التمر لا يتمر','من يسمع يتعلم','القرد بعين أمه غزال',
+    'الزين زينه والحلو حلوه','كل شرط من فاته بات','الوقت من ذهب',
+    'إذا صاحبك عسل ما تلحسه كله','الجمل ما يشوف حدبته','الغريب يشبع عين',
+    'ترى النملة تحمل ضعف وزنها','الهرة في غياب القطة تلعب','العلم نور',
+    'الشبعان ما يصدق الجيعان','اللي يحب الورد يتحمل الشوك',
+    'القليل يكثر والكثير يبور','بيدك لا بيد عمرو','قبل ما تكبر خشبة',
+    'كل جديد لذيذ','يحكي الناس قبل ما تحكي','الأمل آخر ما يموت',
+    'الأكل على قد الغطا','الجاهل يحكم والعاقل يصمت','لا تأجل عمل اليوم لبكرة',
+    'عين الرضا عن كل عيب كليلة','الله يكفيني شر اللي أنعمت عليه',
+    'طول الريادة توكل الذيادة','الفقر ليس عاراً','اعرف نفسك',
+    'ما يسوى بصلة','عقله بكرشه','كل حادثة ولها حديث',
+    'اللي بالقلب على اللسان','الطير من ريشه يطير',
+    'اشتري لك شقيق','الأرض بيد من عمرها',
+    'ما في دخان بلا نار','البعد يزيد المحبة','من بعيد زيارة',
+    'الغنى يبدأ بالقناعة','شبعان ما يفهم جيعان',
+    'الغريب له حق','من شب على شيء شاب عليه',
+    'الجمل ما يشوف حدبته','الفأل الحسن يصدق','قدرك بيدك',
+    'أعطي الخبز لخبازه','الاتحاد قوة','يد بيد تبني الجدار',
+    'الصديق وقت الضيق','ابن يومه بخير',
+    'البيت بيت أبوي والعيشة كيف ما تكون',
+    'جاك الجد ولا جاك البخت',
+    'الخير ما يجي إلا من فوق','كل من الإناء ما فيه',
+    'اللي خاف ربه ما خاف غيره','الدم ما يصير ماء',
+    'القطا لما يعجبه بكرش','أقل كلام أقل خطأ',
+    'من عايش الأيام عرف الحكمة',
+    'ابن عمك ضربك ما ذبحك',
+    'كل شاة تتعلق برجلها','خبز الصباح قبل الضحى',
+    'اللي ما يشكر الناس ما يشكر الله','الشكر نعمة تدوم',
+    'يا ما جاب الليل بالليل','الصبر والصلاة كافيين',
+    'كل فعلة بفاعلها','الخير يعود على أهله',
+    'الصح يتبع الصح','الكذب مصيره للمكذوب عليه',
+    'اللي يحب العسل يصبر على الشوك','الفائدة بالتعلم',
+    'اللي يطلع بكير يلحق بكير','الوقت من ذهب',
+    'الحاجة أم الاختراع','اللي ما تعلم في صغره شقي في كبره',
+    'اللي ينام مع الكلاب يقوم بالبراغيث',
+    'العقل السليم في الجسم السليم',
+    'الضيف أمانة','الكرم شيمة الكرام',
+    'من يزرع خيراً يحصد خيراً',
+    'خير الكلام ما قل ودل','الكلام الجميل يفتح الأبواب',
+    'قبل الرماية تملا الكنانة','الصيد في الماء',
+    'يا جبل ما يهزك ريح', 'اللي استحوا ماتوا', 'عصفور في اليد خير من عشرة على الشجرة', 'ضربني وبكى سبقني واشتكى', 'عاد بخفي حنين',
+    'ابن الوز عوام', 'القرش الأبيض ينفع في اليوم الأسود', 'طب الجرة على تمها تطلع البنت لأمها', 'في التأني السلامة وفي العجلة الندامة', 'من حفر حفرة لأخيه وقع فيها',
+    'جزاء سنمار', 'اللي إيده في الميه مش زي اللي إيده في النار', 'دوام الحال من المحال', 'الغايب عذره معاه', 'مصائب قوم عند قوم فوائد',
+    'اللي ما يشوفش من الغربال يبقى أعمى', 'الطيور على أشكالها تقع', 'وافق شن طبقة', 'رب ضارة نافعة', 'كل فتاة بأبيها معجبة',
+    'أعط القوس باريها', 'سبق السيف العذل', 'على نفسها جنت براقش', 'مكره أخاك لا بطل', 'إنك لا تجني من الشوك العنب',
+    'أول الغيث قطرة', 'بين حانا ومانا ضاعت لحانا', 'تجري الرياح بما لا تشتهي السفن', 'خالف تعرف', 'درهم وقاية خير من قنطار علاج',
+    'رجعت حليمة لعادتها القديمة', 'رمتني بدائها وانسلت', 'زاد الطين بلة', 'عذر أقبح من ذنب', 'عند الامتحان يكرم المرء أو يهان',
+    'فاقد الشيء لا يعطيه', 'في الصيف ضيعت اللبن', 'قشة قصمت ظهر البعير', 'كل الطرق تؤدي إلى روما', 'لا ناقة لي فيها ولا جمل',
+    'لكم دينكم ولي دين', 'ليس كل ما يلمع ذهبا', 'ما كل ما يتمنى المرء يدركه', 'من سار على الدرب وصل', 'من طلب العلا سهر الليالي',
+    'من يزرع الشوك يحصد الجراح', 'نوم الظالم عبادة', 'هذا الشبل من ذاك الأسد', 'وعد الحر دين عليه', 'يوم لك ويوم عليك',
+    'الوقت كالسيف إن لم تقطعه قطعك', 'النظافة من الإيمان', 'القناعة كنز لا يفنى', 'العلم في الصغر كالنقش على الحجر', 'من جد وجد ومن زرع حصد',
+    'خير جليس في الزمان كتاب', 'الرفيق قبل الطريق', 'الغريق يتعلق بقشة', 'اللي فات مات', 'اللي يخاف من العفريت يطلع له',
+    'باب النجار مخلع', 'تيتي تيتي زي ما رحتي جيتي', 'حاسبوا قبل أن تحاسبوا', 'دخول الحمام مش زي خروجه', 'سكت دهرا ونطق كفرا',
+    'علم في المتبلم يصبح ناسي', 'عمر الشقي بقي', 'غاب القط العب يا فار', 'في قلوبهم مرض فزادهم الله مرضا', 'قالوا للحرامي احلف قال جاني الفرج',
+    'كل عقدة ولها حلال', 'لسانك حصانك إن صنته صانك وإن هنته هانك', 'مراية الحب عميا', 'ناموسة تدمي مقلة الأسد', 'يموت الزمار وإيده بتلعب'
+  ]},
+  رياضة: { icon:'⚽', words:[
+    'كرة القدم','كرة السلة','سباحة','تنس','ملاكمة',
+    'تسلق جبال','ركوب أمواج','هوكي جليد','جيمناستيك',
+    'سباق سيارات','قفز بالزانة','كريكيت','كمال أجسام','يوغا',
+    'غولف','كرة الطاولة','كرة اليد','الكرة الطائرة','الريشة الطائرة',
+    'رفع الأثقال','المصارعة الرومانية','الجودو','الكاراتيه','التايكوندو',
+    'سباق الخيل','رمي الرمح','رمي القرص','الرماية بالقوس','سباق الدراجات',
+    'السباق العقبات','الثلاثي الحديدي','البياتلون','المبارزة','القنص',
+    'كرة الاسكواش','البولينغ','الرقص الرياضي','الأكروبات','الفروسية',
+    'القوارب التجديف','التجديف القياسي','الغوص الحر','سباق التزلج',
+    'التزلج على الجليد','الكيرلينغ','القفز على الحصان','بولو','السكواتش',
+    'الصالة المتعددة','لياقة بدنية','بوكسينغ تايلاندي','جوجوتسو','آيكيدو',
+    'سباق الاثنا عشر','كانو كاياك','المشي الرياضي','الماراثون','العدو',
+    'رمي الكرة الحديدية','السهام','الرياضة العقلية','الشطرنج','السنوكر',
+    'البلياردو','الدارتس','الفرسبي','تسلق الصخور','القفز المظلي',
+    'الركبي','الأمريكية الأمريكية','الهوكي على العشب','الكروكيت','البوتشا',
+    'ألعاب الشاطئ','الفولي','البيتش فوليبول','البيتش بول','كرة الرمل',
+    'ألعاب القوى','رمي القرص','القفز الطولي','القفز العالي','الوثب الثلاثي',
+    'العدو الطويل','العدو القصير','العدو المتوسط','المشي الطويل','الزحف',
+    'الكانوي','ركوب الأمواج','كايتينغ','الباراغلايدينغ','قفز الحبل',
+    'مسابقات الروبوت','الشطرنج المتسارع','الداما','الجودو للأطفال',
+    'السباحة الحرة','الزحف تحت المياه','رياضة الفنون القتالية المختلطة',
+    'الرياضة الإلكترونية','الدارتس الاحترافي','بول القدم',
+    'كرة القدم الأمريكية', 'البيسبول', 'كرة لينة', 'الهوكي', 'هوكي الحقل',
+    'لاكروس', 'كرة الماء', 'الكرة الطائرة الشاطئية', 'كرة اليد الشاطئية', 'كرة القدم الشاطئية',
+    'الإسكواش', 'الراكيت', 'البادل', 'الكرة الحديدية', 'السهام المريشة',
+    'الجمباز الإيقاعي', 'الترامبولين', 'المصارعة', 'المصارعة الحرة', 'الجوجيتسو',
+    'الكيندو', 'السامبو', 'السومو', 'الكيك بوكسينغ', 'المواي تاي',
+    'المبارزة', 'ألعاب القوى', 'العدو', 'الماراثون', 'الوثب الطويل',
+    'الوثب العالي', 'الوثب الثلاثي', 'رمي الجلة', 'رمي المطرقة', 'العشاري',
+    'السباعي', 'الخماسي الحديث', 'الترايثلون', 'السباحة المتزامنة', 'الغطس',
+    'التجديف', 'الكاياك', 'الشراع', 'التزلج على الماء', 'الغوص',
+    'قفز الحواجز', 'الترويض', 'سباق الدراجات على الطريق', 'سباق الدراجات على المضمار', 'سباق الدراجات الجبلية',
+    'بي إم إكس', 'السيارات', 'الفورمولا 1', 'الرالي', 'ناسكار',
+    'الكارتينج', 'الدراجات النارية', 'الموتو جي بي', 'الموتوكروس', 'التزلج',
+    'التزلج الفني على الجليد', 'التزلج السريع', 'التزلج على الثلوج', 'التزلج الألبي', 'التزلج الريفي',
+    'القفز التزلجي', 'تسلق الجليد', 'رالي دكار', 'التزلج اللوحي', 'باركور'
+  ]},
+  مختلط: { icon:'🎲', words:[
+    'برج إيفل','عيد ميلاد','الدكتور المجنون','القهوة الصباحية',
+    'الكمبيوتر المحمول','الجاكبوت','ملك النمل','حارس البوابة',
+    'الرمل المتحرك','التحدي الكبير','الشهرة الواسعة','الزواج السعيد','النجمة الساطعة',
+    'الأيسكريم اللذيذ','المطر الغزير','الثلج الأبيض','الصحراء القاحلة','الغابة المطيرة',
+    'الشمس والقمر','الحرارة الشديدة','البرد القارص','العواصف الرعدية',
+    'التقاعد المبكر','الامتحان الصعب','الإنترنت السريع','الهاتف الذكي','التليفزيون القديم',
+    'فوبيا الظلام','فوبيا المرتفعات','الوسواس القهري','التوتر النفسي',
+    'النوم والأحلام','الكوابيس المزعجة','السير أثناء النوم','الشخير العالي',
+    'الثروة المفاجئة','الفوز باليانصيب','الميراث الكبير',
+    'المصادفة المضحكة','الحوادث اليومية','الزلق في الشارع',
+    'المترو المزدحم','الطريق السريع','الازدحام المروري',
+    'الملعب الرياضي','الحفلة الموسيقية','المهرجان السنوي','الكرنفال الملون',
+    'المسرح الكبير','السينما المفتوحة','المكتبة العامة','الحديقة العامة','الشاطئ الرملي',
+    'الغوص في البحر','الرحلة البرية','الرحلة الجوية','الرحلة البحرية',
+    'الرحلة إلى الفضاء','المحطة الفضائية','القمر الصناعي','المريخ الأحمر',
+    'الديناصورات العملاقة','المومياء المصرية','الكنز المدفون','الخريطة السرية',
+    'المعمر الشرير','القائد العظيم','الملك والملكة','الأميرة المحبوسة',
+    'الفارس الشجاع','العفريت الأزرق','الجن الطيار','التنين الناري','الوحش المخيف',
+    'الحكيم العجوز','الساحرة الشريرة','النبي الصالح','المعجزة الكبيرة',
+    'الأب والابن','الأم والبنت','الأصدقاء المخلصون','الخائن الغدار',
+    'التفاحة الحمراء','الموزة الصفراء','البطيخ الصيفي','العنب الأخضر','المانغو اللذيذ',
+    'البيتزا الساخنة','البرغر بالجبن','السوشي الياباني','الكنتاكي المقرمش','الشاورما بالثوم',
+    'الشيشة تفاحتين','الأرجيلة المعسلة','القهوة التركية','الشاي الأخضر',
+    'الفأرة الكمبيوتر','لوحة المفاتيح','الطابعة الملونة','الشاشة المسطحة',
+    'الكاميرا الرقمية','اللعبة الإلكترونية','السماعة اللاسلكية','الجوال الجديد',
+    'الفضاء الخارجي', 'النجوم المضيئة', 'المجرات البعيدة', 'الكواكب السيارة', 'الثقوب السوداء',
+    'المذنبات السريعة', 'النيازك المشتعلة', 'السدم الفضائية', 'الجاذبية الأرضية', 'آلة الزمن',
+    'المستقبل المجهول', 'الماضي الجميل', 'التاريخ القديم', 'الحضارة الفرعونية', 'الثقافة العربية',
+    'الفن التشكيلي', 'الأدب العالمي', 'الشعر النبطي', 'الرواية البوليسية', 'المسرحية الكوميدية',
+    'اللوحة الزيتية', 'النحت على الصخر', 'الموسيقى الكلاسيكية', 'الغناء الشعبي', 'الرقص الشرقي',
+    'التصوير الفوتوغرافي', 'العلوم الطبيعية', 'الرياضيات المعقدة', 'الفيزياء الكمية', 'الكيمياء العضوية',
+    'الأحياء الدقيقة', 'الطب البديل', 'الهندسة المعمارية', 'التكنولوجيا الحديثة', 'الذكاء الاصطناعي',
+    'الروبوتات الذكية', 'الاختراعات العظيمة', 'الاكتشافات العلمية', 'الجغرافيا السياسية', 'القارات الخمس',
+    'المحيطات العميقة', 'البحار الهائجة', 'الأنهار الجارية', 'الجبال الشاهقة', 'الصحاري الرملية',
+    'الغابات الاستوائية', 'الطقس البارد', 'المناخ المعتدل', 'البيئة النظيفة', 'الطبيعة الساحرة',
+    'الحيوانات الأليفة', 'النباتات الزينة', 'الحشرات الضارة', 'الطيور المهاجرة', 'الأسماك الملونة',
+    'الزواحف السامة', 'البرمائيات اللزجة', 'الثدييات الكبيرة', 'الأساطير اليونانية', 'الخرافات الشعبية',
+    'الحكايات القديمة', 'القصص القصيرة', 'الأبطال الخارقون', 'الأشرار الماكرون', 'السحر الأسود',
+    'الخيال العلمي', 'الأحلام السعيدة', 'الأوهام البصرية', 'المشاعر الصادقة', 'الحب الأعمى',
+    'الكره الشديد', 'الفرح الغامر', 'الحزن العميق', 'الخوف الشديد', 'الغضب العارم',
+    'الشجاعة النادرة', 'الجبن والخوف', 'الصدق والأمانة', 'الكذب والنفاق', 'الخيانة الزوجية',
+    'العدل والمساواة', 'الظلم والاستبداد', 'السلام العالمي', 'الحرب الباردة', 'الحرية الشخصية'
+  ]},
+  الحيوانات: { icon:'🐾', words:[
+    'أسد','نمر','فيل','زرافة','قرد',
+    'دب','كلب','قطة','حصان','حمار',
+    'بقرة','ثور','خروف','ماعز','غزال',
+    'أرنب','ثعلب','ذئب','خنزير','تمساح',
+    'فرس النهر','وحش القرن','فهد','نمر أبيض','ضبع',
+    'كنغر','دب قطبي','باندا','كوالا','قنفذ',
+    'سنجاب','خفاش','فأر','جرذ','هامستر',
+    'عقاب','صقر','بومة','نورس','حمامة',
+    'غراب','عصفور','طاووس','نعامة','بطريق',
+    'بجعة','لقلق','ديك','دجاجة','بطة',
+    'أوزة','ثعبان','كوبرا','سحلية','حرباء',
+    'سلحفاة','تمساح','ضفدع','علجوم','سمك القرش',
+    'حوت','دلفين','أخطبوط','حبار','نجم البحر',
+    'حصان البحر','قنديل البحر','سرطان البحر','جمبري','محار',
+    'عنكبوت','عقرب','نملة','نحلة','دبور',
+    'ذبابة','بعوضة','فراشة','يعسوب','صرصور',
+    'دعسوقة','جرادة','خنفساء','يرقة','دودة',
+    'شيهم','خلد','فقمة','حصان البحر','سوطي',
+    'طائر الطنان','ببغاء','طوقان','نسر','حسون',
+    'بلبل','عندليب','سردين','تونة','سلمون',
+    'قرش أبيض','حوت أزرق','مها','وعل','غريراء',
+    'راكون','كسلان','مدرع','قندس','شامبانزي',
+    'غوريلا','إنسان الغاب','قرد المكاك','بابون','لمور',
+    'نمر ثلجي','جاغوار','وشق','سرفال','كوجر',
+    'مها عربي','ضبع مخطط','ذئب رمادي','ثعلب أحمر','فهد صياد',
+    'دب بني','دب أسود','دب أشيب','أرنب بري','شيهم',
+    'فأر الخيل','عرسة','سمور','غرير','ظربان',
+    'بومة ثلجية','بومة قرناء','صقر شاهين','عقاب أصلع','نسر ذهبي',
+    'طائر الرفراف','طائر الجنة','طائر نقار الخشب','حمامة زاجلة','طائر السمان',
+    'تمساح النيل','تمساح أمريكي','أناكوندا','أصلة','أفعى الجرس',
+    'مامبا سوداء','سحلية الإغوانا','تنين كومودو','أبو بريص','ضفدع سام',
+    'سلمندر','سمندل الماء','قرش المطرقة','قرش النمر','سمكة المهرج',
+    'سمكة الأسد','شفنين بحري','أنقليس','سمكة البيرانا','فرس النهر المائي'
+  ]},
+  'التحديات الخفيفة': { icon:'🎯', words:[
+    'ارسم دائرة بالهواء','قف على قدم واحدة','المس أنفك بلسانك','امشِ للخلف','اقفز ثلاث مرات',
+    'اضحك بدون صوت','ابكِ بدون دموع','مثل أنك تأكل سباغيتي','مثل أنك تسوق سيارة','مثل أنك تسبح بالهواء',
+    'العب غيتار هوائي','مثل أنك تنظف أسنانك','مثل أنك تغسل وجهك','مثل أنك تمشط شعرك','مثل أنك تلبس حذاء',
+    'مثل أنك تفتح باب','مثل أنك تقرأ كتاب','مثل أنك تكتب رسالة','مثل أنك تتكلم بالهاتف','مثل أنك تلتقط صورة',
+    'مثل أنك تطبخ','مثل أنك تقطع بصل','مثل أنك تشرب شاي','مثل أنك تأكل آيس كريم','مثل أنك تطفئ شمعة',
+    'مثل أنك تصطاد سمك','مثل أنك تلعب تنس','مثل أنك تلعب ملاكمة','مثل أنك تلعب كرة قدم','مثل أنك تلعب كرة سلة',
+    'مثل أنك تركض ببطء','مثل أنك تتسلق جبل','مثل أنك تتزلج','مثل أنك ترقص باليه','مثل أنك ترقص هيب هوب',
+    'مثل أنك تعزف بيانو','مثل أنك تعزف طبل','مثل أنك تغني راب','مثل أنك تغني أوبرا','مثل أنك تقود طائرة',
+    'مثل أنك تقود دراجة','مثل أنك تركب حصان','مثل أنك تمشي على حبل','مثل أنك تلعب خفة يد','مثل أنك تنوم مغناطيسياً',
+    'مثل أنك رجل آلي','مثل أنك تمثال','مثل أنك زومبي','مثل أنك نينجا','مثل أنك قرصان',
+    'مثل أنك ملك','مثل أنك طفل رضيع','مثل أنك عجوز','مثل أنك دكتور','مثل أنك شرطي',
+    'مثل أنك حرامي','مثل أنك قاضي','مثل أنك محامي','مثل أنك معلم','مثل أنك طالب',
+    'مثل أنك نائم','مثل أنك تستيقظ','مثل أنك تتثاءب','مثل أنك تعطس','مثل أنك تسعل',
+    'مثل أنك بردان','مثل أنك حران','مثل أنك خائف','مثل أنك غاضب','مثل أنك سعيد',
+    'مثل أنك حزين','مثل أنك متفاجئ','مثل أنك مشمئز','مثل أنك تفكر','مثل أنك تتذكر',
+    'مثل أنك تنسى','مثل أنك تبحث عن شيء','مثل أنك تجد شيء','مثل أنك تفقد شيء','مثل أنك ترمي شيء',
+    'مثل أنك تلتقط شيء','مثل أنك تحمل شيء ثقيل','مثل أنك تدفع شيء','مثل أنك تسحب شيء','مثل أنك تفتح صندوق',
+    'مثل أنك تغلق صندوق','مثل أنك تفتح مظلة','مثل أنك تغلق مظلة','مثل أنك تلبس معطف','مثل أنك تخلع معطف',
+    'مثل أنك تلبس قبعة','مثل أنك تخلع قبعة','مثل أنك تلبس نظارة','مثل أنك تخلع نظارة','مثل أنك تلبس قفاز',
+    'مثل أنك تخلع قفاز','مثل أنك تلبس ساعة','مثل أنك تخلع ساعة','مثل أنك تلبس خاتم','مثل أنك تخلع خاتم'
+  ]}
+};
+
+const DB_KU = {
+  فیلم: { icon:'🎬', words:[
+    'تایتانیک','شێرە پاشا','ماتریکس','جۆکەر','هاری پۆتەر',
+    'کاپتن ئەمریکا','فرۆزن','ئەڤاتار','عەلادین','باتمان',
+    'سپایدەرمان','ئینتەرستێلار','دێدپوول','ئینسێپشن','ماداگاسکار',
+    'تۆپ گەن','ڕامبۆ','زووتۆپیا','جەیمس بۆند','شێرلۆک هۆڵمز',
+    'زۆمبیلاند','بلاک هۆک داون','گلادیاتۆر','ترۆی','تۆڵەسەنەکان',
+    'پێنجی خێرا','شەوانی سلێمانی','تارمایی','خۆشەویستی مانگ','شێرە بەفرینە',
+    'کۆتایی جیھان','گەشتیاران','ترسناک','فۆڕێست گەمپ','شازادە و بۆقەکە',
+    'پیاوی ئاسنین','کۆنگ فۆ پاندا','شێتی خێرایی','شەڕی ئەستێرەکان','بەزێنەری مافیا',
+    'گەشتی ئەڵقەکە','گۆدزێلا','چیرۆکی بووکەڵەکان','ئێکس مان','پیاوی شەمشەمەکوێرە',
+    'پیاوی جاڵجاڵۆکە','سوپەرمان','شەوێکی تۆقێنەر','ونبوو','هەناسەبڕکێ',
+    'پێشمەرگە','بێکەس','کیسەڵە نینجاکان','مینۆنەکان','کچە ئازاکە',
+    'دیو و دڵبەر','شازادە نوستووەکە','سیندریلا','گوڵە مێخەک','ماڵی فڕیو',
+    'ئەلیس لە وڵاتی سەیروسەمەرە','کۆکۆ','پاسەوانانی گەردوون','ئەنیمۆ','دۆزینەوەی نیمۆ',
+    'شڕێک',
+    'یاری مانەوە', 'بەندیخانەی شاوشانک', 'تارماییەکان', 'خوێنی ڕژاو', 'مردن لەسەر نیل',
+    'شێرپەنجەی خۆشەویستی', 'گوڵی ڕەش', 'ڕۆژانی سەخت', 'کۆچی دوایی', 'هاوار لە تاریکیدا',
+    'پێکەنینی درۆینە', 'چاوی زریان', 'گەردەلوول', 'شەپۆلی شێت', 'ئاوێنەی شکاو',
+    'دڵی بەردین', 'سێبەری مەرگ', 'ڕووناکی هیوایەک', 'کۆتایی ڕێگا', 'سەرەتایەکی نوێ',
+    'بەهەشتی ونبوو', 'دۆزەخی سەر زەوی', 'پەیمانی خوێن', 'سۆزی دایک', 'فرمێسکی ئاگر',
+    'خەندەی تاڵ', 'گوڵەبەڕۆژە', 'شەوانی بێخەوی', 'ڕۆژی تۆڵە', 'مەرگی سپی',
+    'شەپۆلەکانی خەیاڵ', 'ڕێگای تاریک', 'چرای خامۆش', 'ئومێدی دواین', 'ژیانێکی تر',
+    'کۆشکی خەونەکان', 'شاری وێران', 'پردی هەڵواسراو', 'گۆڕستانی نهێنی', 'کلیلە ونبووەکە',
+    'سندوقی پەنهان', 'دەنگی بێدەنگی', 'هاواری کپ', 'سەمای مەرگ', 'ئاوازی غەمگین',
+    'تابلۆی نەوتراو', 'شیعری بێوشە', 'چیرۆکی ناتەواو', 'ڕۆمانی دڕاو', 'نامەی نەخوێندراوە',
+    'هەوری ڕەش', 'بارانی بەلێزمە', 'هەورە تریشقە', 'بومەلەرزە', 'گڕکان',
+    'لافاو', 'وشکەساڵی', 'قاتوقڕی', 'نەخۆشی کوشندە', 'پەتای گەورە',
+    'شەڕی مان ونەمان', 'ئاشتی کاتی', 'ئاگربەست', 'ڕێکەوتنی نهێنی', 'پیلانی گەورە',
+    'خیانەتی گەورە', 'تۆڵەی سەخت', 'لێخۆشبوون', 'بەخشین', 'قوربانیدان',
+    'قارەمانێتی', 'ئازایەتی', 'ترسنۆکی', 'سەرکەوتن', 'دۆڕان',
+    'هیوا', 'ناهومێدی', 'خۆشەویستی', 'ڕق', 'دڵپیسی',
+    'شەڕی جیهانی', 'تایتانیکی گەورە', 'ئیرۆن مان ٢', 'کاپتن ئەمریکا ٢', 'شەڕی ئەستێرەکان ٢'
+  ]},
+  زنجیرە: { icon:'📺', words:[
+    'برەیکینگ باد','گەمەی تەختەپاشاکان','فرێندز','سترەینجەر تینگز',
+    'ماڵی کاغەز','لوسیفەر','پریزن برەیک','بلاک میرەر',
+    'دۆڵی گورگەکان','پیتەدارەکان','ماندالۆریان','زە کراون',
+    'وێتچەر','ماڵی ئەژدیها','ئۆبی وان','زە فلاش',
+    'پەیمان','ئەو کاتەی تێدەپەڕێت','مەهەنەد و نور','فارگۆ',
+    'وێست وۆرڵد','داهمەر','لاست ئۆف ئەس','وێکینگەکان',
+    'چێرنۆبڵ','پیکای بڵایندەرز','دێکستەر','هاوس ئۆف کاردز',
+    'شێرپەنجە','سوڵتان سولەیمان','کەمال و نیهان','ڕوناکی و تاریکی',
+    'ئەشق و جەزا','تەنیا لەگەڵت','بەهار','زەردەخەنەی درۆینە','پیاوانی ڕەشپۆش',
+    'ڕۆژنامەنووس','شەوانی بەغدا','بەشی پۆلیس','هەنگاو بە هەنگاو','کوڕەکانی ئەنارکی',
+    'مردوووی گەڕۆک', 'کچانی خۆر', 'بەشداریکردن', 'شەمەندەفەری خێرا', 'ونبوو',
+    'چیرۆکی زستان', 'گەشتی هیوا', 'گەردەلولی ئەشق', 'پایزی تەمەن', 'ڕۆژانی منداڵی',
+    'هەواری خاڵی', 'ماڵی وێران', 'کۆشکی نهێنی', 'شاری تارمایی', 'ڕێگای بێگەڕانەوە',
+    'دەرگای داخراو', 'پەنجەرەی کراوە', 'ئاوێنەی ڕاستی', 'سێبەری ڕابردوو', 'داهاتووی نادیار',
+    'ژیانی هاوبەش', 'جیابوونەوە', 'تەنیایی', 'گەڕان بەدوای خۆدا', 'دۆزینەوەی حەقیقەت',
+    'شەڕی دەروونی', 'ئاشتبوونەوە لەگەڵ خۆ', 'قبوڵکردنی چارەنووس', 'هەوڵدان بۆ گۆڕانکاری', 'شکست و سەرکەوتن',
+    'ئومێد و نائومێدی', 'پێکەنین و گریان', 'خۆشی و ناخۆشی', 'بەهار و زستان', 'شەو و ڕۆژ',
+    'ڕووناکی و تاریکی', 'خێر و شەڕ', 'ئاسمان و زەوی', 'ئاو و ئاگر', 'با و گەردەلوول',
+    'چیا و دۆڵ', 'دارستان و بیابان', 'گوڵ و دڕک', 'مەل و ماسی', 'ئاژەڵ و مرۆڤ',
+    'منداڵ و گەورە', 'نێر و مێ', 'دەوڵەمەند و هەژار', 'زانست و نەزانی', 'ئایین و بێباوەڕی',
+    'سیاسەت و کۆمەڵگا', 'ئابووری و بازرگانی', 'هونەر و ئەدەب', 'وەرزش و یاری', 'تەندروستی و نەخۆشی',
+    'خۆراک و خواردنەوە', 'جلوبەرگ و مۆدە', 'تەکنەلۆژیا و ئینتەرنێت', 'گەشت و گوزار', 'مێژوو و شوێنەوار',
+    'جوگرافیا و سروشت', 'کەشناسی و ژینگە', 'گەردوونناسی و فڕین', 'بیرکاری و فیزیا', 'کیمیا و زیندەوەرناسی',
+    'پزیشکی و دەرمانسازی', 'ئەندازیاری و بیناسازی', 'کشتوکاڵ و ئاژەڵداری', 'پیشەسازی و بەرهەمهێنان', 'بازرگانی و سەرمایەگوزاری',
+    'یاسا و دادپەروەری', 'پۆلیس و ئاسایش', 'سوپا و بەرگری', 'ڕاگەیاندن و ڕۆژنامەگەری', 'پەروەردە و فێرکردن',
+    'خێزان و کۆمەڵگا', 'هاوڕێیەتی و خۆشەویستی', 'دوژمنایەتی و ڕق', 'شەڕی ناوخۆ', 'ئاشتی و تەبایی',
+    'ئەشقە قەدەغەکراوەکە', 'بەڕێز ڕۆبۆت', 'دکتۆر هوس', 'گۆتەم', 'دارک', 'یارییەکی مەترسیدار'
+  ]},
+  یاری: { icon:'🎮', words:[
+    'ماینکرافت','فۆرتنایت','جی تی ئەی','مۆڕتاڵ کۆمبات','ماریۆ',
+    'پەبجی','کۆڵ ئۆف دیوتی','ئەمۆنگ ئەس','فیفا','سۆنیک',
+    'رۆبلۆکس','پاکمان','تێتریس','زێلدا','کلاش ئۆف کلانس',
+    'ماریۆ کارت','کڕاش باندیکووت','پۆکیمۆن','ئۆڤەرواچ','لولی',
+    'بلادبۆرن','دارک سۆڵز','سکایریم','فۆڵئاوت','ڕێد دێد ڕیدێمپشن',
+    'لاست ئۆف ئەس','ئەنچارتد','گۆد ئۆف وار','هالۆ','ئێیپێکس لێجێندز',
+    'ڤالۆرانت','کاونتەر سترایک','ڕەینبۆ سیکس','کیربی','سایبەرپانک',
+    'دیڤڵ مای کرای','بایۆشۆک','بۆردەرلاندز','دیستنی','هیتمان',
+    'ئەسساسینس کرید','فار کرای','واچ دۆگز','گۆست ئۆڤ سوشیما',
+    'مۆنستەر هانتەر','نیید فۆر سپید','پێس','سیمز','تۆمب ڕایدەر',
+    'پلانێتس ڤس زۆمبی','باڵندە توڕەکان','سەبوەی سەرفەرز','تەمپڵ ڕەن','کەندی کراش',
+    'وۆرڵد ئۆف وارکرافت','دیابلۆ','مۆبایل لێجێندز','فری فایر','ڕۆکێت لیگ',
+    'مۆرتال کۆمبات ١١', 'تیکین ٧', 'ستریت فایتەر ٥', 'سوپەر ماریۆ ئۆدیسی', 'زێلدا بریس ئۆف زە وایڵد',
+    'پۆکیمۆن گۆ', 'ئەنیمەڵ کرۆسینگ', 'سۆنیک فڕۆنتایەرز', 'کڕاش تیم ڕەیسینگ', 'سپایرۆ ڕیگنایتید',
+    'ڕەیمان لێجێندز', 'دۆنکی کۆنگ کانتری', 'گراند سیفت ئۆتۆ ٤', 'زە لاس ئۆف ئەس ٢',
+    'گۆد ئۆف وار ڕاگنارۆک', 'هۆرایزن فۆربیدن وێست', 'سپایدەرمان مایلز مۆرالێس', 'باتمان ئارکام نایت', 'ئەسساسینس کرید ڤالهالا',
+    'فار کرای ٦', 'واچ دۆگز لیجن', 'سایبەرپانک ٢٠٧٧', 'ویتچەر ٣', 'دارک سۆڵز ٣',
+    'سێکیرۆ', 'ئێڵدن ڕینگ', 'دێمۆن سۆڵز', 'نیۆ', 'گۆست ئۆف تسوشیما',
+    'سێبەرەکانی مەرگ', 'دێڤڵ مای کرای ٥', 'بایۆنێتا', 'نیەر ئۆتۆماتا', 'فایناڵ فانتاسی ٧',
+    'کینگدۆم هارتس ٣', 'پێرسۆنا ٥', 'دڕاگۆن کوێست ١١', 'مۆنستەر هانتەر وۆڕڵد', 'دووم ئیتێرناڵ',
+    'وۆڵفنشتاین ٢', 'هاڵۆ ئینفینیت', 'گێرز ٥', 'کۆڵ ئۆف دیوتی وۆر زۆن', 'باتڵفیڵد ٢٠٤٢',
+    'ئۆڤەرواچ ٢', 'پەبجی مۆبایل', 'تێراریا', 'ستاردیو ڤاڵی', 'فۆڵ گایز',
+    'فیفا ٢٣', 'پێس ٢٠٢١', 'ئێن بی ئەی ٢کەی', 'مادێن ئێن ئێف ئێڵ', 'دەبڵیو دەبڵیو ئی ٢کەی',
+    'یو ئێف سی ٤', 'گراند توریزمۆ ٧', 'فۆرزا هۆرایزن ٥', 'نید فۆر سپید هیت', 'ماریۆ پارتێ',
+    'سەمای تەواو', 'گیتار هێرۆ', 'بیت سەیبەر', 'هاف لایف ئەلێکس', 'پۆرتاڵ ٢',
+    'لێفت فۆر دێد ٢', 'تیم فۆرتڕێس ٢', 'گاریز مۆد', 'پێشبڕکێی ئۆتۆمبێلەکان', 'شەڕی ئەستێرەکان جێدای',
+    'شەترەنج', 'دۆمینە', 'تاوڵە', 'خۆشاردنەوە', 'تۆپی پێ', 'پەتپەتێن'
+  ]},
+  شتەکان: { icon:'🪄', words:[
+    'تەلیسکۆب','کاتژمێری لمی','گیتار','جۆلانێ','خێمە',
+    'پەتپەتێن','سکەیتبۆرد','کۆلارە','عەرەبانەی کەمئەندام',
+    'چەتر','باڵۆن','گسکی کارەبایی','حەوزی ماسی',
+    'تۆپ','کاتژمێری دیوار','گڵۆپ','کڵاوی جادووگەر',
+    'مەنجەنیق','تفەنگ','شمشێر','ڕم','قەڵغان',
+    'کەوان و تیر','تۆپی پێ','ئۆتۆمبێل','سایسکل','پاسکیل',
+    'کتێب','دەفتەر','پێنووس','مایکرۆفۆن',
+    'تەپڵ','کەمانچە','نای','زەڕنا','دەهۆڵ',
+    'دەستکێش','چاویلکە','چاویلکەی هەتاو','پێڵاو',
+    'پاسپۆرت','ناسنامە','پاپکۆرن','مایکرۆوەیڤ','جلشۆر',
+    'سەلاجە','تەلەفزیۆن','ماتۆڕسکیل','فڕۆکە','کەشتی',
+    'ڕۆکێت','دووربین','ماوس','تەختەکلیل','لاپتۆپ','ئایپاد','مۆبایل',
+    'فلاش درایڤ','هێدفۆن','کۆنسۆڵ','جۆیستیک','کامێرا',
+    'تیشک','پێوانەی گەرمی','چەقۆی نەشتەرگەری',
+    'ترومپای ئاو','چەکوش','مێخ','پێچکەشکێش','سپلێت',
+    'پەیژە','ڕادیۆ','زۆپا','پاککەرەوە',
+    'قاپ','کەوچک','چەتاڵ','پەرداخ','فنجان',
+    'قۆری','قەندان','مەنجەڵ','تاوە','بەلەم',
+    'کێک','بیسکیت','شوکولاتە','چپس','خاولی',
+    'دەرگا', 'پەنجەرە', 'دیوار', 'سەقف', 'زەوی',
+    'فەرش', 'پەردە', 'قەنەفە', 'کورسی', 'مێز',
+    'جێگا', 'سەرین', 'بەطانی', 'دۆڵاب', 'چەکمەجە',
+    'ئاوێنە', 'سورەیا', 'ڕادیۆ', 'کۆمپیوتەر', 'کیبۆرد',
+    'شاشە', 'پرینتەر', 'شەحن', 'مایکرۆفۆن', 'کاتژمێر',
+    'جانتا', 'جزدان', 'گۆرەوی', 'کراس', 'پانتۆڵ',
+    'عەزی', 'کڵاو', 'ملپێچ', 'قاییش', 'بۆیەنباخ',
+    'مستیلە', 'ملوانکە', 'بازن', 'گوارە', 'عەتر',
+    'سابوون', 'شامپۆ', 'فڵچەی ددان', 'مەعجونی ددان', 'شانە',
+    'مەقەست', 'چەقۆ', 'کاسە', 'گۆزە', 'عەسارە',
+    'فڕن', 'ئوتو', 'مەمسەحە', 'سەتڵ', 'ئیسفەنج',
+    'تەنەکەی خۆڵ', 'قەڵەم', 'قەڵەم ڕەساس', 'مسحە', 'بڕایە',
+    'خەتکێش', 'گۆڤار', 'ڕۆژنامە', 'نامە', 'زەرف',
+    'پوول', 'چەسپ', 'لێزگە', 'کابیسە', 'کونەر',
+    'حاسیبە', 'جانتا پشتی', 'تەختەڕەش', 'تەباشیر', 'نەخشە',
+    'قیبلەنما', 'تەختەی یاری', 'زەنگی دەرگا', 'کلیلی دەرگا', 'قفڵ',
+    'سەیارەی یاری', 'تەناف', 'عەرەبانەی منداڵ',
+    'قەنەفەی ژووری میوان', 'تەلەفزیۆنی شکاو', 'پەردەی ڕەنگاوڕەنگ', 'کورسی دار', 'مێزی نانخواردن', 'سەعاتی دیواری', 'فەرشی ناو ماڵ', 'کليل و قوفڵ', 'جام و پەنجەرە', 'قاپ و کەوچک', 'مەنجەڵی گەورە', 'سۆپای دار', 'سۆپای کارەبایی', 'پانکه', 'ئاوێنەی گەورە', 'دۆڵابی جل', 'بێد و سەرین', 'پەتۆ', 'گوێزان', 'شانەی قژ', 'فڵچەی ددان', 'سابوونی بۆنخۆش', 'خاولی تەڕ', 'عەلاگەی ڕەش', 'سەتڵی خۆڵ', 'سویچی سەیارە', 'مۆبایلی شەحنکراو', 'لاپتۆپ', 'تەختە ڕەش', 'قەڵەمی ڕەساس', 'دەفتەری تێبینی', 'كتێبی كوردی', 'جانتا', 'پێڵاوی وەرزشی', 'چەتر لە باراندا', 'جامانە', 'کڵاو', 'قەمسەڵە', 'شەرواڵ و مرادخانی', 'تەسبیح', 'سەماوەر', 'پياڵە و ژێرپياڵە', 'چايەڵ', 'بەفرگر (سەلاجە)', 'غەسالە', 'فڕنی نان', 'چەرخ', 'مەقەستی کورت', 'بزمار و چەکوش', 'پەرداخی بلور', 'دەستەسڕ', 'عەتر', 'ماكياژ', 'پلاک و وایەر', 'گڵۆپی ڕەنگاوڕەنگ', 'تەلەفۆنی ماڵەوە', 'کتێبخانەی تەختە', 'کەلوپەلی چێشتخانە', 'سفرەی نانخواردن', 'پیاڵەی چا', 'قاپی فواکە', 'گوڵدان', 'تەپڵەک', 'کەوانەی جل', 'تەنووری نان', 'ڕادیۆی کۆن'
+  ]},
+  پیشە: { icon:'👷', words:[
+    'پزیشکی ددان','ئاگرکوژێنەوە','سەرتاش','ماسیگر','چێشتلێنەر',
+    'زۆرانباز','وێنەگر','یاریزانی سێرک','مەلەوان','بۆکسێنەر',
+    'جادووگەر','فڕۆکەوان','گارسۆن','مامۆستا','دەستگێڕ',
+    'جەراح','پارێزەر','دادوەر','پۆلیس','پاسەوان',
+    'ئەندازیار','وەستا','ئاسنگەر','دارتاش','بۆیەیچی',
+    'جووتیار','شوان','پەروەردەکاری ئەسپ','وەرزشەوان','ناوبژیوان',
+    'گۆرانیبێژ','ژەنیاری پیانۆ','وێنەکێش',
+    'پەیکەرتراش','خۆشنووس','زیندانەوان','سیخوڕ',
+    'کەشتیوان','ئەستێرەناس','زانای فیزیا','زانای کیمیا',
+    'دەرهێنەر','ئەکتەری کۆمیدی','پێشکەشکار','بەرگدروو',
+    'پێڵاودروو','گوڵفرۆش','پەرستار','دەرمانساز',
+    'کتێبفرۆش','کاتژمێرساز','حەجام','فالچی',
+    'کاشیەر','قورئانخوێن','مەلای مزگەوت','قەشە',
+    'ئەندازیاری کارەبا','پڕۆگرامساز','دیزاینەر','یوتوبەر',
+    'ڕۆژنامەنووس','شاعیر','نووسەر','وەرگێڕ',
+    'پزیشک', 'پزیشکی ڤێتێرنەری', 'نەشتەرگەر', 'دەروونناس', 'تەلارساز',
+    'گەشەپێدەری وێب', 'شیکەرەوەی داتا', 'زاناکار', 'توێژەر', 'مامۆستای زانکۆ',
+    'بەڕێوەبەر', 'ژمێریار', 'کارمەندی بانق', 'بازاڕکار', 'فرۆشیار',
+    'ڕاوێژکار', 'لێکۆڵەر', 'سەرباز', 'خانەخوێی فڕۆکە', 'کاپتن',
+    'دەریاوان', 'شۆفێر', 'میکانیک', 'کارەباچی', 'بۆریچی',
+    'بەننا', 'پاککەرەوە', 'نەوا', 'قەساب', 'قاوەچی',
+    'ئارایشتگەر', 'خەیات', 'دیزاینەری جلوبەرگ', 'مۆدێل', 'نیگارکێش',
+    'دانەر', 'پەیامنێر', 'سەرنووسەر', 'ئەکتەر', 'بەرھەمھێنەر',
+    'مۆسیقاژەن', 'ژەنیار', 'ئاوازدانەر', 'سەماکار', 'ڕاهێنەر',
+    'باخەوان', 'ڕاوچی', 'ڕێبەری گەشتیاری', 'بازرگان', 'سیاسەتمەدار',
+    'دیپلۆمات', 'قایمقام', 'پارێزگار', 'وەزیر', 'سەرۆک',
+    'پاشا', 'شازادە', 'باڵیۆز', 'زیندەوەرزان', 'جیۆلۆجی',
+    'کەشناس', 'شوێنەوارناس', 'مێژوونووس', 'فەیلەسوف', 'کۆمەڵناس',
+    'ئابووریناس', 'پزیشکی چاو', 'پزیشکی منداڵان', 'پزیشکی پێست', 'پزیشکی دڵ',
+    'پزیشکی دەمار', 'سەرۆک شارەوانی', 'فەرمانبەر', 'کرێکار', 'پاسەوانی کەنار دەریا',
+    'فڕۆکەوانی مەدەنی', 'پاسەوانی تایبەت', 'وەستای کۆمپیوتەر'
+  ]},
+  گۆرانی: { icon:'🎵', words:[
+    'دیسپاسیتۆ','هابی','لەیلا','شاکیرا شاکیرا',
+    'بەیبی جەستن بیبەر','رۆکستار','هەڵپەڕکێی کوردی','نازەنین',
+    'شەمامە و خاڵخاڵ','کەویار','بەناز','شێخانی',
+    'بێریڤانێ','کەژاڵێ','ئامان ئامان','هەی نار','سێڤێ',
+    'باران بارانە','کرماشان','گەوهەرێ','ئەسمەر','کەوێ',
+    'زاخۆکا دەلال','هەولێرەکەم','سڵێمانی','کەرکوک',
+    'ئەی ڕەقیب', 'شیرین تەشی دەڕێسێ', 'کابوکێ', 'هۆ یارم', 'لۆرکێ',
+    'کەنیلە', 'فاتمە', 'مریەم بوکانی', 'شەو باش', 'بەفر باری',
+    'ئای لەیلی', 'دەلالەکەم', 'شیرین گیان', 'چاوڕەش', 'گوڵەباخ'
+  ]},
+  پەندەکان: { icon:'📜', words:[
+    'قسەی هەق تاڵە', 'دەستی ماندوو لەسەر زگێکی تێرە', 'دڵ بۆ دڵ ڕێگەی هەیە',
+    'مار لە قسەی خۆش دێتە دەرەوە', 'پەلەپەل کاری شەیتانە', 'دوو گا لە دۆڵێکدا ڕەنگی یەک نەگرن خوی یەک دەگرن',
+    'بەرد لە شوێنی خۆی سەنگینە', 'گیا لەسەر بنجی خۆی دەڕوێتەوە', 'پێی خۆت بە قەد بەڕەکەی خۆت ڕابکێشە',
+    'ڕێوی لە کونی خۆی هەڵگەڕێتەوە گەڕ دەبێت', 'دار بە تەوری وت گەر کلکت لە خۆم نەبێت نامبڕیت',
+    'دۆستی ڕۆژی تەنگانە', 'هەرچی بچێنیت ئەوە دەدووریتەوە', 'ئاو بڕوات قەدری دەزانرێت',
+    'دیواری کورت هەموو کەس پێیدا هەڵدەزنێت', 'زمان گۆشتی بێ ئێسقانە بە هەموو لایەکدا دەسووڕێتەوە',
+    'کەس بە دۆی خۆی ناڵێت ترشە', 'ناسک مەگرە دەپچڕێت', 'سەری کاس مەخەرە ژێر دەهۆڵ',
+    'ماڵ لە خۆی نەبوو میوانیش ڕووی تێکرد', 'مریشک هێلکەی قازی کرد قنگی دڕا',
+    'بانێکە و دوو هەوا', 'قەل بە قەلی وت ڕووت ڕەش بێت', 'گا کەوتە سەر زەوی چەقۆکێش زۆر دەبێت',
+    'گۆشت لە نینۆک جیا نابێتەوە', 'هەتا خاوەن ماڵ دزی گرت دز خاوەن ماڵی گرت', 'هەرکەسە و بە لێفەی خۆی دەنوێت',
+    'زۆر وتن قورئانیش تاڵ دەکات', 'ئەگەر خێر لە خۆت نەبوو خێر لە خەڵکیش مەبینە', 'شەو چاوەڕێی ڕۆژە'
+  ]},
+  وەرزش: { icon:'⚽', words:[
+    'تۆپی پێ','باسکە','مەلەوان','تێنس','بۆکسێن',
+    'شاخەوانی','سەوڵلێدان','هۆکی سەهۆڵ','جیمناستیک',
+    'پێشبڕکێی ئۆتۆمبێل','بەرزایی','کریکێت','لەشجوانی','یۆگا',
+    'گۆڵف','تێنسی سەر مێز','تۆپی دەست','بالە','تۆپی پەڕ',
+    'بەرزکردنەوەی قورسایی','زۆرانبازی','جودۆ','کاراتێ','تایکواندۆ',
+    'ئەسپسواری','ڕم هاوێشتن','تیروکەوان','پاسکیلسواری',
+    'بەربەستەکان','سێقۆڵی','مبارەزە','نیشانەشکێنی',
+    'سکواش','بۆلینگ','سەمای وەرزشی','ئەکرۆبات',
+    'بەلەمسواری','غەواسی','خلیسکێنەی بەفر','کێرڵینگ',
+    'پۆلۆ','لەشڕێکی','موەی تای','جوجیتسو','ئایکیدۆ',
+    'مەراتۆن','ڕاکردن','شەترەنج','سنۆکەر','بیلیارد',
+    'تۆپی پێی ئەمریکی', 'بەیسبۆڵ', 'ڕەگبی', 'بەفرەخلیسکێنە', 'سەرکەوتن بەسەر دیوار'
+  ]},
+  تێکەڵ: { icon:'🎲', words:[
+    'بورجی ئیفێل','ڕۆژی لەدایکبوون','دکتۆری شێت','قاوەی بەیانیان',
+    'کۆمپیوتەری لاپتۆپ','خەڵاتی گەورە','پاشای مێروولە','پاسەوانی دەروازە',
+    'لمی جووڵاو','ئاڵەنگاری گەورە','ناوبانگی زۆر','هاوسەرگیری دڵخۆشکەر','ئەستێرەی گەشاوە',
+    'ئایسکرێمی بەتام','بارانی بەلێزمە','بەفری سپی','بیابانی وشک','دارستانی باراناوی',
+    'خۆر و مانگ','گەرمای زۆر','سەرمای توند','گەردەلوولی توند',
+    'خانەنشینی زوو','تاقیکردنەوەی قورس','ئینتەرنێتی خێرا','مۆبایلی زیرەک','تەلەفزیۆنی کۆن',
+    'ترس لە تاریکی','ترس لە بەرزایی','دڵەڕاوکێی زۆر','سترێسی دەروونی',
+    'خەو و خەون','خەونی ناخۆش','بەپێ ڕۆیشتن لە خەودا','پڕخەی بەرز',
+    'سامانی کتوپڕ','بردنەوەی لۆتەری','میراتی گەورە',
+    'ڕێکەوتی پێکەنیناوی','ڕووداوی ڕۆژانە','خلیسکانی شەقام',
+    'مەترۆی قەرەباڵغ','ڕێگای خێرا','قەرەباڵغی هاتوچۆ',
+    'یاریگای وەرزشی','ئاهەنگی مۆسیقا','ڤیستیڤاڵی ساڵانە','کەرنەڤاڵی ڕەنگاوڕەنگ',
+    'شانۆی گەورە','سینەمای کراوە','کتێبخانەی گشتی','باخچەی گشتی','کەناری دەریا',
+    'مەلەکردن لە دەریا','گەشتی وشکانی','گەشتی ئاسمانی','گەشتی دەریایی',
+    'گەشت بۆ بۆشایی','وێستگەی ئاسمانی','مانگی دەستکرد','مەریخی سوور',
+    'دایناسۆڕی گەورە','مۆمیای میسری','گەنجینەی شاراوە','نەخشەی نهێنی',
+    'پیاوی پیر','سەرکردەی گەورە','پاشا و شاژن','شازادەی زیندانیکراو',
+    'سوارچاکی ئازا','جنۆکەی شین','دڕندەی ئاگرین','دڕندەی ترسناک',
+    'پیاوی دانا','جادووگەری خراپ','پێغەمبەری باش','موعجیزەی گەورە',
+    'باوک و کوڕ','دایک و کچ','هاوڕێی دڵسۆز','خیانەتکاری خراپ',
+    'سێوی سوور','مۆزی زەرد','شوتی هاوین','ترێی سەوز','مانگۆی بەتام',
+    'پیتزای گەرم','بەرگری پەنیر','سوشی یابانی','کەنتاکی کریسپی','شاورمەی مریشک',
+    'نێرگەلەی سێو','قاوەی تورکی','چای سەوز','چای ڕەش',
+    'ماوسی کۆمپیوتەر','تەختەکلیل','پرینتەری ڕەنگاوڕەنگ','شاشەی تەخت',
+    'کامێرای دیجیتاڵ','یاری ئەلیکترۆنی','هێدفۆنی بێتەل','مۆبایلی نوێ',
+    'بۆشایی ئاسمان', 'ئەستێرەی ڕووناک', 'گەردوونێکی دوور', 'هەسارەی زەوی', 'کونی ڕەش',
+    'کلکداری خێرا', 'نەیزەکی ئاگرین', 'هێزی کێشکردن', 'ئامێری کات',
+    'داهاتووی نادیار', 'ڕابردووی جوان', 'مێژووی کۆن', 'شارستانیەتی کۆن', 'کلتووری کوردی',
+    'هونەری شێوەکاری', 'ئەدەبی جیهانی', 'شیعری کلاسیک', 'ڕۆمانی پۆلیسی', 'شانۆگەری کۆمیدی',
+    'تابلۆی ڕۆنی', 'پەیکەرسازی', 'مۆسیقای کلاسیک', 'گۆرانی فۆلکلۆر', 'سەمای کوردی',
+    'وێنەگرتنی فۆتۆگرافی', 'زانستی سروشتی', 'بیرکاری قورس', 'فیزیای کوانتەم', 'کیمیای ئەندامی',
+    'زیندەوەرزانی', 'پزیشکی جێگرەوە', 'ئەندازیاری تەلارسازی', 'تەکنەلۆژیای نوێ', 'ژیری دەستکرد',
+    'ڕۆبۆتی زیرەک', 'داهێنانی گەورە', 'دۆزینەوەی زانستی', 'جوگرافیای سیاسی', 'پێنج کیشوەرەکە',
+    'زەریای قووڵ', 'دەریای شین', 'ڕووباری خێرا', 'چیای بەرز', 'بیابانی لم',
+    'دارستانی چڕ', 'کەشی سارد', 'کەشی مامناوەند', 'ژینگەی پاک', 'سروشتی جوان',
+    'ئاژەڵی ماڵی', 'ڕووەکی جوانکاری', 'مێرووی زیانبەخش', 'باڵندەی کۆچەری', 'ماسی ڕەنگاوڕەنگ',
+    'خزۆکی ژەهراوی', 'ئاژەڵی گەورە', 'ئەفسانەی یۆنانی', 'چیرۆکی میللی',
+    'قارەمانی سەیر', 'کەسی خراپ', 'جادووی ڕەش', 'خەیاڵی زانستی', 'خەونی خۆش',
+    'هەستی ڕاستگۆ', 'خۆشەویستی کوێر', 'ڕقی زۆر', 'دڵخۆشی زۆر', 'خەفەتی قووڵ', 'ترسی زۆر',
+    'توڕەیی زۆر', 'ئازایەتی دەگمەن', 'ترسنۆکی', 'ڕاستگۆیی و دەستپاکی', 'درۆ و دووڕوویی',
+    'دادپەروەری و یەکسانی', 'ستەم و زۆرداری', 'ئاشتی جیهانی', 'شەڕی سارد', 'ئازادی کەسی',
+    'پیاوی دەوڵەمەند', 'سەیارەی گرانبەها', 'خانووی گەورە', 'باخی میوە', 'شاخی بەرز', 'ڕووباری خێرا', 'دەریای قووڵ', 'ئاسمانی شین', 'مانگی چواردە', 'خۆری گەرم', 'بارانی بەخوڕ', 'بەفری سپی', 'بای توند', 'هەورەبروسکە', 'جەژنی ڕەمەزان', 'سەری ساڵ', 'بازاڕی قەرەباڵغ', 'دوکانی سەوزە', 'نەخۆشخانەی گەورە', 'قوتابخانە', 'زانکۆ', 'مامۆستا لە پۆلدا', 'قوتابی زیرەک', 'نانی گەرم', 'کەبابی سلێمانی', 'دۆخی کوردی', 'ماستی هەولێر', 'برنج و شلە', 'شووتی سارد', 'ترێی ڕەش', 'سێوی سوور', 'هەنجيری شيرين', 'گوێزی هەوارامان', 'هەنگوینی چیا', 'پیاوی بەتەمەن', 'ژنێکی کارکەر', 'منداڵی لاسار', 'گەنجی وەرزشەوان', 'پۆلیسی هاتووچۆ', 'پزیشکی نەشتەرگەری', 'ئەندازیاری تەلارساز', 'وەستای خانوو', 'جووتیاری ماندوو', 'شۆفێری تەکسی', 'فڕۆکەوانی ئازا', 'سەربازی نیشتمان', 'نووسەری بەناوبانگ', 'هونەرمەندی دەنگخۆش', 'وەرزشەوانی لێهاتوو', 'گەشتی زستانە', 'سەیرانی هاوین', 'شەوی یەڵدا', 'ئاگری نەورۆز', 'کڵاوڕۆژنە', 'ماڵەو ماڵ', 'جەژنانە', 'دیاری عەسرانە', 'چای ئێوارە', 'قاوەی تاڵ', 'دۆشاو', 'ڕووبەهەنار', 'خورمای مەندەلی', 'کۆڵانە تەسکەکان', 'شەقامی پان', 'فوارەی ئاو', 'باخچەی گشتی', 'مەلەوانگەی داخراو', 'هۆڵی وەرزش'
+  ]},
+  ئاژەڵەکان: { icon:'🐾', words:[
+    'شێر','پڵنگ','فیل','زەڕافە','مەیموون',
+    'ورچ','سەگ','پشیلە','ئەسپ','گوێدرێژ',
+    'مانگا','گا','مەڕ','بزن','ئاسک',
+    'کەروێشک','ڕێوی','گورگ','بەراز','تیمساح',
+    'ئەسپی ئاوی','کەرگەدەن','چیتە','کەمتیار',
+    'کەنگەر','ورچی جەمسەری','پاندا','کوالا','ژیشک',
+    'سمۆرە','شەمشەمەکوێرە','مشک','جرج','هامستەر',
+    'هەڵۆ','داڵ','کوندەبوو','نەورەس','کۆتر',
+    'قەلەڕەش','چۆلەکە','تاوس','وشترمرخ','پەنگوین',
+    'قاز','لەقلەق','کەڵەشێر','مریشک','مراوی',
+    'مار','کۆبرا','موشەخۆرە','بوقەڵەمون',
+    'کیسەڵ','بۆق','قورباغە','کۆسە','نەهەنگ',
+    'دۆلفین','ئەختەبوت','قەندیل دەریایی','قڕژاڵ','ڕۆبیان',
+    'جاڵجاڵۆکە','دووپشک','مێروولە','هەنگ','زەردەواڵە',
+    'مێش','مێشوولە','پەپوولە','قنگرشک','قەپۆز',
+    'کیسەڵ','مارماسی','بەرخ','کارکەدەن','شەمپانزی',
+    'گۆریلا','بابون','پڵنگی بەفری','جاگوار',
+    'گورگی بۆر','ڕێویی سوور','ورچی قاوەیی',
+    'ڕیشۆڵە','سوێسکە','کەو','قەلەباچکە','هەدهەد',
+    'کونەپەپو','باز','شەهێن','سەرسیول','ڕەشمار',
+    'شێری برسی', 'فیلی زەبەلاح', 'زەڕافەی مل درێژ', 'پڵنگی خێرا', 'مەیمونێکی دەم بە پێکەنین', 'تیمساح لە گۆمدا', 'بەتریکی سەر بەفر', 'ماری ژەهراوی', 'بازی بەرزەفڕ', 'بایەقوشی شەوگەڕ', 'سمۆرەی ناو دارستان', 'ئەسپی کێوی', 'وشتر لە بیاباندا', 'گورگی برسی', 'ڕێوی فێڵباز', 'ورچی سپی', 'کەنگەری بازدەر', 'دۆلفینی زیرەک', 'نەهەنگی شین', 'هەنگی تێکۆشەر', 'پەپولەی ڕەنگاوڕەنگ', 'جاڵجاڵۆکەی ماڵ', 'کێسەڵی هێواش', 'ژوژکی دڕكاوی', 'شەوشەمەی ئەشكەوت', 'نەعامەی ڕاكەر', 'ئەسپی ئاو', 'کەرکەدەن', 'ئاسکی دەشت و دەر', 'بۆبۆغای قسەکەر', 'کەڵەشێری بەیانیان', 'پشيلەی كێوی', 'سەگی پۆلیسی', 'کەری کێوی', 'مێشی بێزارکەر', 'مێروولەی کارکەر', 'دووپشکی ڕەش', 'هەشتپێ', 'قرژاڵ', 'کۆتری سپی', 'داڵ', 'قەلەڕەش', 'کەو', 'پشیلەی ماڵی', 'کەروێشكي خێرا', 'مارمیلکە', 'هەنگەزەردە', 'سیسارک', 'تاووس', 'مەلی مرواری', 'قازی کێوی', 'مراوی ئاو', 'بەرخە کێوی', 'سەگی بێلانە', 'کەمتار', 'کەڵە کێوی', 'ماری ئاوی', 'مێروولەخۆر', 'سمۆرەی گوێزکەر', 'پڵنگی بەفر', 'شێرە شاخاوی', 'کەڵەشێری کێوی', 'مراوی سپی', 'مەیمونی شاد', 'کەناری ڕەنگاوڕەنگ', 'کوکوختی', 'قەلەموون', 'بزنە کێوی', 'کاوڕ', 'مەیمونی بچووک', 'بایەقوشی سپی', 'ڕێوی کێوی', 'گورگی سپی'
+  ]},
+  'ئاڵەنگاری سووک': { icon:'🎯', words:[
+    'بازنەیەک لە هەوادا بکێشە','لەسەر یەک قاچ بوەستە','بە زمانت لووتت دەست لێبدە','بەپێوە بۆ دواوە بڕۆ','سێ جار باز بدە',
+    'بێ دەنگ پێبکەنە','بێ فرمێسک بگری','وا نیشان بدە سپاگێتی دەخۆیت','وا نیشان بدە سەیارە لێدەخوڕیت','وا نیشان بدە لە هەوادا مەلە دەکەیت',
+    'گیتارێکی خەیاڵی لێبدە','وا نیشان بدە ددانت دەشۆیت','وا نیشان بدە دەموچاوت دەشۆیت','وا نیشان بدە قژت دادەهێنیت','وا نیشان بدە پێڵاو لەپێ دەکەیت',
+    'وا نیشان بدە دەرگایەک دەکەیتەوە','وا نیشان بدە کتێبێک دەخوێنیتەوە','وا نیشان بدە نامەیەک دەنووسیت','وا نیشان بدە بە مۆبایل قسە دەکەیت','وا نیشان بدە وێنەیەک دەگریت',
+    'وا نیشان بدە چێشت لێدەنییت','وا نیشان بدە پیاز ورد دەکەیت','وا نیشان بدە چا دەخۆیتەوە','وا نیشان بدە ئایسکرێم دەخۆیت','وا نیشان بدە مۆمێک دەکوژێنیتەوە',
+    'وا نیشان بدە ماسی دەگریت','وا نیشان بدە تێنس دەکەیت','وا نیشان بدە بۆکسێن دەکەیت','وا نیشان بدە تۆپی پێ دەکەیت','وا نیشان بدە باسکە دەکەیت',
+    'وا نیشان بدە هێواش ڕادەکەیت','وا نیشان بدە سەر شاخ دەکەویت','وا نیشان بدە خلیسکێنە دەکەیت','وا نیشان بدە سەمای بالێ دەکەیت','وا نیشان بدە سەمای هیپ هۆپ دەکەیت',
+    'وا نیشان بدە پیانۆ دەژەنی','وا نیشان بدە تەپڵ لێدەدەیت','وا نیشان بدە گۆرانی ڕاپ دەڵێیت','وا نیشان بدە فڕۆکە لێدەخوڕیت',
+    'وا نیشان بدە پاسکیل لێدەخوڕیت','وا نیشان بدە ئەسپ سواری دەکەیت','وا نیشان بدە بەسەر پەتێکدا دەڕۆیت','وا نیشان بدە یاری فێڵ دەکەیت',
+    'وا نیشان بدە ڕۆبۆتیت','وا نیشان بدە پەیکەریت','وا نیشان بدە زۆمبیت','وا نیشان بدە نینجایت','وا نیشان بدە چەتەی دەریایت',
+    'وا نیشان بدە پاشایت','وا نیشان بدە منداڵی ساوایت','وا نیشان بدە پیرەپیاویت','وا نیشان بدە دکتۆریت','وا نیشان بدە پۆلیسیت',
+    'وا نیشان بدە دزیت','وا نیشان بدە دادوەریت','وا نیشان بدە پارێزەریت','وا نیشان بدە مامۆستایت','وا نیشان بدە قوتابیت',
+    'وا نیشان بدە نوستوویت','وا نیشان بدە لە خەو هەڵدەستیت','وا نیشان بدە باوێشک دەدەیت','وا نیشان بدە پژمەت دێت','وا نیشان بدە کۆکەت دێت',
+    'وا نیشان بدە سەرماتە','وا نیشان بدە گەرماتە','وا نیشان بدە ترساویت','وا نیشان بدە تووڕەیت','وا نیشان بدە دڵخۆشیت',
+    'وا نیشان بدە خەمباریت','وا نیشان بدە سەرسامیت','وا نیشان بدە بێزاربوویت','وا نیشان بدە بیردەکەیتەوە','وا نیشان بدە شتێکت بیرکەوتەوە',
+    'وا نیشان بدە شتێکت بیرچووە','وا نیشان بدە بۆ شتێک دەگەڕێیت','وا نیشان بدە شتێکت دۆزیوەتەوە','وا نیشان بدە شتێکت ونکردووە','وا نیشان بدە شتێک فڕێدەدەیت'
+  ]}
+};
+
+// ══════════════════════════════════════════════════
+//  SOUND EFFECTS
+// ══════════════════════════════════════════════════
+class SoundManager {
+  constructor() {
+    this.audioContext = null;
+    this.masterVolume = 0.3;
+  }
+
+  init() {
+    if (!this.audioContext) {
+      this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+  }
+
+  playTone(frequency, duration, type = 'sine', volume = this.masterVolume) {
+    this.init();
+    const now = this.audioContext.currentTime;
+    const osc = this.audioContext.createOscillator();
+    const gain = this.audioContext.createGain();
+    
+    osc.connect(gain);
+    gain.connect(this.audioContext.destination);
+    
+    osc.type = type;
+    osc.frequency.value = frequency;
+    
+    gain.gain.setValueAtTime(volume, now);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + duration);
+    
+    osc.start(now);
+    osc.stop(now + duration);
+  }
+
+  // صوت صحيح (أخضر)
+  correctSound() {
+    this.playTone(523.25, 0.1); // C5
+    setTimeout(() => this.playTone(659.25, 0.15), 100); // E5
+    setTimeout(() => this.playTone(783.99, 0.2), 200); // G5
+  }
+
+  // صوت خطأ (أحمر)
+  wrongSound() {
+    this.playTone(220, 0.15); // A3
+    setTimeout(() => this.playTone(165, 0.15), 150); // E3
+  }
+
+  // صوت تنبيه (الوقت ينتهي)
+  urgentSound() {
+    this.playTone(800, 0.08);
+    setTimeout(() => this.playTone(800, 0.08), 100);
+    setTimeout(() => this.playTone(1000, 0.1), 200);
+  }
+
+  // صوت بداية الدور
+  turnStartSound() {
+    this.playTone(440, 0.1); // A4
+    setTimeout(() => this.playTone(550, 0.15), 120); // C#5
+  }
+
+  // صوت نهاية اللعبة (انتصار)
+  winSound() {
+    this.playTone(523.25, 0.15); // C5
+    setTimeout(() => this.playTone(659.25, 0.15), 160); // E5
+    setTimeout(() => this.playTone(783.99, 0.15), 320); // G5
+    setTimeout(() => this.playTone(1046.5, 0.3), 480); // C6
+  }
+
+  // صوت كلمة جديدة
+  newWordSound() {
+    this.playTone(600, 0.08, 'triangle');
+    setTimeout(() => this.playTone(700, 0.08, 'triangle'), 100);
+  }
+
+  // صوت ضغطة زر
+  clickSound() {
+    this.playTone(400, 0.05, 'square', 0.15);
+  }
+
+  // صوت غلط في السرعة (penalty)
+  penaltySound() {
+    this.playTone(300, 0.2);
+  }
+}
+
+const soundManager = new SoundManager();
+
+// ══════════════════════════════════════════════════
+//  GAME LOGIC
+// ══════════════════════════════════════════════════
+let currentLang = 'ar';
+let isDark = false;
+let DB = DB_AR;
+
+let state = {
+  teamA: '', teamB: '',
+  ptsToWin: 60, turnTime: 60, mode: 'classic',
+  cats: [],
+  scoreA: 0, scoreB: 0,
+  round: 1, currentTeam: 'A',
+  pool: [], usedWords: new Set(),
+  timer: null, timeStart: 0, timeLeft: 0,
+  turnWords: []
+};
+
+// --- INITIALIZATION ---
+function init() {
+  document.getElementById('name-a').placeholder = LANG[currentLang].suNamePH;
+  document.getElementById('name-b').placeholder = LANG[currentLang].suNamePH;
+  updateLangUI();
+  renderCats();
+}
+
+function toggleLang() {
+  currentLang = currentLang === 'ar' ? 'ku' : 'ar';
+  document.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+  DB = currentLang === 'ar' ? DB_AR : DB_KU;
+  state.cats = []; // Clear categories when switching languages
+  updateLangUI();
+  renderCats();
+}
+
+function toggleTheme() {
+  isDark = !isDark;
+  if(isDark) {
+    document.body.classList.add('dark-mode');
+    document.getElementById('theme-btn').innerText = '☀️';
+  } else {
+    document.body.classList.remove('dark-mode');
+    document.getElementById('theme-btn').innerText = '🌙';
+  }
+}
+
+function updateLangUI() {
+  const L = LANG[currentLang];
+  document.getElementById('lang-btn').innerText = L.langBtn;
+  document.getElementById('h-title').innerHTML = L.appTitle.replace('\n', '<br>');
+  document.getElementById('h-sub').innerText = L.appSub;
+  document.getElementById('h-play').innerText = L.play;
+  document.getElementById('h-howto').innerText = L.howto;
+  document.getElementById('ht-back').innerText = L.back;
+  document.getElementById('su-back').innerText = L.back;
+  document.getElementById('ti-back').innerText = L.back;
+  
+  document.getElementById('ht-tag').innerText = L.htTag;
+  document.getElementById('ht-title').innerText = L.htTitle;
+  document.getElementById('ht-i1').innerText = L.htI1; document.getElementById('ht-t1').innerText = L.htT1;
+  document.getElementById('ht-i2').innerText = L.htI2; document.getElementById('ht-t2').innerText = L.htT2;
+  document.getElementById('ht-i3').innerText = L.htI3; document.getElementById('ht-t3').innerText = L.htT3;
+  document.getElementById('ht-i4').innerText = L.htI4; document.getElementById('ht-t4').innerText = L.htT4;
+  document.getElementById('ht-i5').innerText = L.htI5; document.getElementById('ht-t5').innerText = L.htT5;
+  document.getElementById('ht-ok').innerText = L.htOk;
+
+  document.getElementById('su-tag').innerText = L.suTag;
+  document.getElementById('su-title').innerText = L.suTitle;
+  document.getElementById('su-a-lbl').innerText = L.suALbl;
+  document.getElementById('su-b-lbl').innerText = L.suBLbl;
+  document.getElementById('su-pts-lbl').innerText = L.suPtsLbl;
+  document.getElementById('su-time-lbl').innerText = L.suTimeLbl;
+  document.getElementById('su-mode-lbl').innerText = L.suModeLbl;
+  document.getElementById('su-mn').innerText = L.suMN;
+  document.getElementById('su-md').innerText = L.suMD;
+  document.getElementById('su-sn').innerText = L.suSN;
+  document.getElementById('su-sd').innerText = L.suSD;
+  document.getElementById('su-cats-lbl').innerText = L.suCatsLbl;
+  document.getElementById('su-start').innerText = L.suStart;
+
+  document.getElementById('ti-score-lbl').innerText = L.tiScoreLbl;
+  document.getElementById('ti-sub').innerText = L.tiSub;
+  document.getElementById('ti-btn').innerText = L.tiReady;
+  document.getElementById('ti-mode-txt').innerText = L.tiModeTxt;
+
+  document.getElementById('btn-correct').innerText = L.btnCorrect;
+  document.getElementById('btn-skip').innerText = L.btnSkip;
+  document.getElementById('btn-end-early').innerText = L.btnEndEarly;
+  document.getElementById('wc-hint').innerText = L.wc_hint;
+
+  document.getElementById('tr-tag').innerText = L.trTag;
+  document.getElementById('tr-words-lbl').innerText = L.trWordsLbl;
+  document.getElementById('tr-btn').innerText = L.trBtnNext;
+  document.getElementById('tr-home').innerText = L.trHome;
+  
+  document.getElementById('win-new').innerText = L.winNew;
+  document.getElementById('win-home').innerText = L.winHome;
+}
+
+function renderCats() {
+  const grid = document.getElementById('cat-grid');
+  grid.innerHTML = '';
+  let i = 0;
+  for(let cat in DB) {
+    let div = document.createElement('div');
+    div.className = `chip c${i%8}`;
+    if(state.cats.includes(cat) || state.cats.length === 0) {
+      div.classList.add('on');
+      if(state.cats.length === 0) state.cats.push(cat); 
+    }
+    div.innerText = `${DB[cat].icon} ${cat}`;
+    div.onclick = () => {
+      div.classList.toggle('on');
+      if(div.classList.contains('on')) state.cats.push(cat);
+      else state.cats = state.cats.filter(c => c !== cat);
+      if(state.cats.length===0) { state.cats.push(cat); div.classList.add('on'); } // Prevent 0 cats
+    };
+    grid.appendChild(div);
+    i++;
+  }
+}
+
+// --- NAVIGATION ---
+function goTo(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function goBack() { goTo('s-home'); }
+function quitToSetup() { goTo('s-setup'); clearInterval(state.timer); }
+
+// --- SETUP LOGIC ---
+function setPts(n) {
+  state.ptsToWin = n;
+  document.querySelectorAll('#pts-row .chip').forEach(c => c.classList.remove('on','c5'));
+  event.target.classList.add('on','c5');
+}
+function setTime(n) {
+  state.turnTime = n;
+  document.querySelectorAll('#time-row .chip').forEach(c => c.classList.remove('on','c5'));
+  event.target.classList.add('on','c5');
+}
+function setMode(m) {
+  state.mode = m;
+  document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById(`mode-${m}`).classList.add('selected');
+}
+
+// Fisher-Yates Shuffle
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+  }
+  return array;
+}
+
+function startGame() {
+  const L = LANG[currentLang];
+  state.teamA = document.getElementById('name-a').value.trim() || L.defaultA;
+  state.teamB = document.getElementById('name-b').value.trim() || L.defaultB;
+  state.scoreA = 0; state.scoreB = 0;
+  state.round = 1; state.currentTeam = 'A';
+  state.usedWords.clear();
+  
+  // Build pool
+  state.pool = [];
+  state.cats.forEach(c => {
+    DB[c].words.forEach(w => {
+      state.pool.push({ word: w, cat: c, icon: DB[c].icon });
+    });
+  });
+  shuffle(state.pool);
+  
+  setupTurnIntro();
+}
+
+function setupTurnIntro() {
+  goTo('s-turn-intro');
+  const L = LANG[currentLang];
+  let teamName = state.currentTeam === 'A' ? state.teamA : state.teamB;
+  let teamColor = state.currentTeam === 'A' ? 'var(--red)' : 'var(--blue)';
+  let tagClass = state.currentTeam === 'A' ? 'tag-a' : 'tag-b';
+  
+  document.getElementById('ti-round').innerText = L.roundTxt(state.round);
+  document.getElementById('ti-team-tag').className = `team-tag ${tagClass}`;
+  document.getElementById('ti-team-tag').innerText = teamName;
+  document.getElementById('ti-msg').innerText = `${teamName}`;
+  document.getElementById('ti-msg').style.color = teamColor;
+  
+  document.getElementById('ti-score-a').innerText = `${state.teamA} ${state.scoreA}`;
+  document.getElementById('ti-score-b').innerText = `${state.teamB} ${state.scoreB}`;
+  
+  if(state.mode === 'speed') {
+    document.getElementById('ti-mode-info').style.display = 'block';
+  } else {
+    document.getElementById('ti-mode-info').style.display = 'none';
+  }
+}
+
+// --- GAMEPLAY ---
+function startTurn() {
+  goTo('s-play');
+  state.turnWords = [];
+  
+  // Setup UI
+  let teamName = state.currentTeam === 'A' ? state.teamA : state.teamB;
+  let tagClass = state.currentTeam === 'A' ? 'tag-a' : 'tag-b';
+  document.getElementById('play-team-tag').className = `team-tag ${tagClass}`;
+  document.getElementById('play-team-tag').innerText = teamName;
+  document.getElementById('play-round').innerText = LANG[currentLang].roundTxt(state.round);
+  
+  document.getElementById('ps-a').innerText = state.scoreA;
+  document.getElementById('ps-b').innerText = state.scoreB;
+  document.getElementById('ps-na').innerText = state.teamA;
+  document.getElementById('ps-nb').innerText = state.teamB;
+  
+  let card = document.getElementById('word-card');
+  card.className = `word-card ${state.currentTeam==='A'?'word-card-a':'word-card-b'}`;
+  
+  if(state.mode === 'speed') {
+    document.getElementById('play-speed-badge').style.display = 'block';
+    document.getElementById('speed-bar-wrap').style.display = 'block';
+    document.getElementById('btn-correct').innerText = '✅';
+    document.getElementById('btn-skip').innerText = '⏭️';
+  } else {
+    document.getElementById('play-speed-badge').style.display = 'none';
+    document.getElementById('speed-bar-wrap').style.display = 'none';
+    document.getElementById('btn-correct').innerText = LANG[currentLang].classicGotIt;
+    document.getElementById('btn-skip').innerText = LANG[currentLang].classicNope;
+  }
+  
+  nextWord();
+  soundManager.turnStartSound(); // صوت بداية الدور
+  startTimer();
+}
+
+function nextWord() {
+  if(state.pool.length === 0) {
+    // Reset pool if empty - Filter to only valid categories for current language
+    state.cats.forEach(c => {
+      if(DB[c] && DB[c].words) {
+        DB[c].words.forEach(w => {
+          state.pool.push({ word: w, cat: c, icon: DB[c].icon });
+        });
+      }
+    });
+    shuffle(state.pool);
+  }
+  
+  if(state.pool.length === 0) {
+    console.error('No words available in selected categories');
+    return;
+  }
+  
+  let w = state.pool.pop();
+  document.getElementById('wc-cat').innerText = `${w.icon} ${w.cat}`;
+  document.getElementById('wc-word').innerText = w.word;
+  document.getElementById('word-card').classList.remove('burst');
+  void document.getElementById('word-card').offsetWidth; // trigger reflow
+  document.getElementById('word-card').classList.add('burst');
+  soundManager.newWordSound(); // صوت كلمة جديدة
+  
+  document.getElementById('words-left-info').innerText = `${LANG[currentLang].wordsLeft}: ${state.pool.length}`;
+}
+
+function correct() {
+  soundManager.clickSound(); // صوت الضغط على الزر
+  let w = document.getElementById('wc-word').innerText;
+  state.turnWords.push({ w: w, ok: true });
+  soundManager.correctSound(); // صوت صحيح
+  flash('green');
+  
+  if(state.currentTeam === 'A') state.scoreA++; else state.scoreB++;
+  updateLiveScore();
+  
+  if(state.mode === 'classic') {
+    endTurn();
+  } else {
+    nextWord();
+  }
+}
+
+function skip() {
+  soundManager.clickSound(); // صوت الضغط على الزر
+  let w = document.getElementById('wc-word').innerText;
+  state.turnWords.push({ w: w, ok: false });
+  soundManager.wrongSound(); // صوت خطأ
+  flash('red');
+  
+  if(state.mode === 'speed') {
+    // Penalty
+    if(state.currentTeam === 'A') state.scoreA--; else state.scoreB--;
+    soundManager.penaltySound(); // صوت penalty
+    updateLiveScore();
+    showFloatPenalty();
+    nextWord();
+  } else {
+    endTurn();
+  }
+}
+
+function updateLiveScore() {
+  document.getElementById('ps-a').innerText = state.scoreA;
+  document.getElementById('ps-b').innerText = state.scoreB;
+}
+
+function showFloatPenalty() {
+  let f = document.createElement('div');
+  f.className = 'float-notif';
+  f.innerText = LANG[currentLang].penaltyTxt;
+  document.body.appendChild(f);
+  setTimeout(() => f.remove(), 1000);
+}
+
+function flash(color) {
+  let el = document.getElementById('flash');
+  el.className = `flash-overlay flash-${color}`;
+  el.style.opacity = '1';
+  setTimeout(() => { el.style.opacity = '0'; }, 150);
+}
+
+// --- TIMER ---
+function startTimer() {
+  state.timeLeft = state.turnTime;
+  updateTimerUI();
+  clearInterval(state.timer);
+  state.timer = setInterval(() => {
+    state.timeLeft--;
+    updateTimerUI();
+    if(state.timeLeft <= 0) {
+      clearInterval(state.timer);
+      endTurn();
+    }
+  }, 1000);
+}
+
+function updateTimerUI() {
+  document.getElementById('timer-num').innerText = state.timeLeft;
+  let pct = state.timeLeft / state.turnTime;
+  let offset = 295 - (pct * 295);
+  document.getElementById('ring-fill').style.strokeDashoffset = offset;
+  
+  if(state.mode === 'speed') {
+    document.getElementById('speed-bar-fill').style.width = `${pct * 100}%`;
+  }
+  
+  let wrap = document.getElementById('timer-ring');
+  if(state.timeLeft <= 10) {
+    wrap.classList.add('timer-urgent');
+    if(state.timeLeft === 10 || state.timeLeft === 5 || state.timeLeft === 1) {
+      soundManager.urgentSound(); // صوت تنبيه
+    }
+  }
+  else wrap.classList.remove('timer-urgent');
+}
+
+function endTurnEarly() {
+  clearInterval(state.timer);
+  endTurn();
+}
+
+// --- TURN RESULT ---
+function endTurn() {
+  goTo('s-turn-result');
+  const L = LANG[currentLang];
+  let points = state.turnWords.filter(x => x.ok).length;
+  if(state.mode === 'speed') {
+    points = points - state.turnWords.filter(x => !x.ok).length;
+  }
+  
+  let msg = '';
+  if(points <= 0) msg = L.trMsg0;
+  else if(points <= 2) msg = L.trMsg1;
+  else if(points <= 4) msg = L.trMsg3;
+  else msg = L.trMsg4;
+
+  let teamName = state.currentTeam === 'A' ? state.teamA : state.teamB;
+  document.getElementById('tr-team').innerText = teamName;
+  document.getElementById('tr-team').style.color = state.currentTeam === 'A' ? 'var(--red)' : 'var(--blue)';
+  document.getElementById('tr-pts').innerText = L.pts(points > 0 ? points : 0);
+  document.getElementById('tr-sub').innerText = msg;
+  
+  document.getElementById('tr-sa').innerText = state.scoreA;
+  document.getElementById('tr-sb').innerText = state.scoreB;
+  document.getElementById('tr-na').innerText = state.teamA;
+  document.getElementById('tr-nb').innerText = state.teamB;
+  
+  let wl = document.getElementById('tr-words');
+  wl.innerHTML = '';
+  state.turnWords.forEach(tw => {
+    let p = document.createElement('div');
+    p.className = 'round-pill';
+    p.style.borderColor = tw.ok ? 'var(--green)' : 'var(--red)';
+    p.innerHTML = `${tw.ok ? '✅' : '❌'} ${tw.w}`;
+    wl.appendChild(p);
+  });
+}
+
+function nextTurn() {
+  if(state.scoreA >= state.ptsToWin || state.scoreB >= state.ptsToWin) {
+    showWin();
+    return;
+  }
+  
+  if(state.currentTeam === 'B') state.round++;
+  state.currentTeam = state.currentTeam === 'A' ? 'B' : 'A';
+  setupTurnIntro();
+}
+
+function showWin() {
+  goTo('s-win');
+  soundManager.winSound(); // صوت الانتصار
+  const L = LANG[currentLang];
+  let title = '';
+  if(state.scoreA === state.scoreB) {
+    title = L.winTied;
+    document.getElementById('win-sub').innerText = L.winTiedSub;
+  } else {
+    let winner = state.scoreA > state.scoreB ? state.teamA : state.teamB;
+    title = L.winTitle(winner);
+    document.getElementById('win-sub').innerText = L.winSub;
+    createConfetti();
+  }
+  
+  document.getElementById('win-title').innerText = title;
+  document.getElementById('win-sa').innerText = state.scoreA;
+  document.getElementById('win-sb').innerText = state.scoreB;
+  document.getElementById('win-na').innerText = state.teamA;
+  document.getElementById('win-nb').innerText = state.teamB;
+}
+
+// --- CONFETTI ---
+function createConfetti() {
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  let pieces = [];
+  for(let i=0; i<100; i++) {
+    pieces.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height - canvas.height,
+      w: Math.random() * 10 + 5,
+      h: Math.random() * 10 + 5,
+      c: `hsl(${Math.random()*360}, 100%, 50%)`,
+      sy: Math.random() * 4 + 2,
+      sx: Math.random() * 2 - 1,
+      r: Math.random() * 360,
+      rs: Math.random() * 10 - 5
+    });
+  }
+  
+  function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    let allDown = true;
+    pieces.forEach(p => {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.r * Math.PI / 180);
+      ctx.fillStyle = p.c;
+      ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      ctx.restore();
+      p.y += p.sy;
+      p.x += p.sx;
+      p.r += p.rs;
+      if(p.y < canvas.height) allDown = false;
+    });
+    if(!allDown) requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+window.onload = init;
+</script>
+</body>
+</html>
